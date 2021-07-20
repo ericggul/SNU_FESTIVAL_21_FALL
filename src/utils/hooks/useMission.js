@@ -13,7 +13,6 @@ const useMission = () => {
       dispatch(actions.fetchMissions(user));
     }
   }, [dispatch, mission, user, isAuthorized]);
-
   return mission;
 };
 export default useMission;

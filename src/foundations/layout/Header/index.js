@@ -25,8 +25,8 @@ function Header({ hamburgerColor }) {
       { menuIsOpen && (
         <Fade duration={800}>
           <S.BasicText>
-            <p>서울대학교 2021 봄축제</p>
-            <p>페스월드</p>
+            <p>서울대학교 2031 봄축제</p>
+            <p>페스트</p>
           </S.BasicText>
         </Fade>
       )}

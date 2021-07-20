@@ -5,6 +5,7 @@ import { actions } from '@/redux/user/state';
 import { actions as missionActions } from '@/redux/mission/state';
 import { actions as miniGameActions } from '@/redux/mini-game/state';
 import { actions as performanceActions } from '@/redux/performance/state';
+import { actions as pokemongoActions } from '@/redux/pokemongo/state';
 import firebase from 'firebase/app';
 import { toast } from 'react-toastify';
 
@@ -25,7 +26,7 @@ const useAuth = () => {
   }, [dispatch]);
 
   const signIn = useCallback(async () => {
-    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const provider = new firebase.auth.GoogleAuthProvider();
 
     dispatch(actions.setLoading(true));
@@ -46,6 +47,7 @@ const useAuth = () => {
       dispatch(miniGameActions.reset());
       dispatch(missionActions.reset());
       dispatch(performanceActions.reset());
+      dispatch(pokemongoActions.reset());
       dispatch(actions.setLoading(false));
     }
   }, [dispatch]);

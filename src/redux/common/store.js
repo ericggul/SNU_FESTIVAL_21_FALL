@@ -5,18 +5,21 @@ import userReducer, { userPersistConfig } from '@/redux/user/state';
 import miniGameReducer, { miniGamePersistConfig } from '@/redux/mini-game/state';
 import missionReducer, { missionPersistConfig } from '@/redux/mission/state';
 import performanceReducer, { performancePersistConfig } from '@/redux/performance/state';
+import pokemongoReducer, { pokemongoPersistConfig } from '@/redux/pokemongo/state';
 import { persistStore, persistReducer } from 'redux-persist';
 import sessionStorage from 'redux-persist/lib/storage/session';
 import { all } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
 import miniGameSaga from '@/redux/mini-game/saga';
 import missionSaga from '@/redux/mission/saga';
+import pokemongoSaga from '@/redux/pokemongo/saga';
 
 const reducer = combineReducers({
   user: persistReducer(userPersistConfig, userReducer),
   mission: persistReducer(missionPersistConfig, missionReducer),
   miniGame: persistReducer(miniGamePersistConfig, miniGameReducer),
   performanceMission: persistReducer(performancePersistConfig, performanceReducer),
+  pokemongo: persistReducer(pokemongoPersistConfig, pokemongoReducer),
 });
 
 /**
@@ -42,7 +45,7 @@ const store = createStore(
 );
 
 function* rootSaga() {
-  yield all([miniGameSaga(), missionSaga()]);
+  yield all([miniGameSaga(), missionSaga(), pokemongoSaga()]);
 }
 sagaMiddleware.run(rootSaga);
 
