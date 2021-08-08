@@ -9,17 +9,21 @@ export default function BallsCanvas() {
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100vw', height: '100vh' }}
     />
   );
 }
 
 const COLORS = [
-  { r: 45, g: 74, b: 227 },
-  { r: 250, g: 255, b: 89 },
-  { r: 255, g: 104, b: 248 },
-  { r: 44, g: 209, b: 252 },
-  { r: 54, g: 233, b: 84 },
+  { r: 9, g: 95, b: 123 },
+  { r: 55, g: 115, b: 117 },
+  { r: 13, g: 51, b: 75 },
+  { r: 28, g: 37, b: 39 },
+  { r: 13, g: 32, b: 36 },
+  { r: 6, g: 13, b: 15 },
+  { r: 6, g: 13, b: 15 },
+
+  // { r: 57, g: 27, b: 31 },
 ];
 
 class App {
@@ -33,8 +37,8 @@ class App {
 
     this.totalParticles = isMobile ? 10 : 15;
     this.particles = [];
-    this.maxRadius = 20;
-    this.minRadius = 10;
+    this.maxRadius = 1300;
+    this.minRadius = 500;
 
     if (!isMobile) {
       window.addEventListener('resize', this.resize.bind(this), false);
@@ -53,7 +57,7 @@ class App {
     this.ctx.scale(1, 1);
 
     // 그라데이션 효과
-    // this.ctx.globalCompositeOperation = 'saturation';
+    this.ctx.globalCompositeOperation = 'saturation';
 
     this.createParticles();
   }
@@ -97,8 +101,8 @@ class GlowParticle {
     this.radius = radius;
     this.rgb = rgb;
 
-    this.vx = Math.random() * 4;
-    this.vy = Math.random() * 4;
+    this.vx = Math.random() * 2;
+    this.vy = Math.random() * 2;
 
     this.sinValue = Math.random();
   }
@@ -130,19 +134,17 @@ class GlowParticle {
     ctx.beginPath();
 
     // 그라데이션 효과
-    // const g = ctx.createRadialGradient(
-    //   this.x,
-    //   this.y,
-    //   this.radius * 0.01,
-    //   this.x,
-    //   this.y,
-    //   this.radius
-    // );
-    // g.addColorStop(0, `rgba(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b}, 1)`);
-    // g.addColorStop(1, `rgba(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b}, 0)`);
-    // ctx.fillStyle = g;
-
-    ctx.fillStyle = `rgba(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b}, 1)`;
+    const g = ctx.createRadialGradient(
+      this.x,
+      this.y,
+      this.radius * 0.01,
+      this.x,
+      this.y,
+      this.radius,
+    );
+    g.addColorStop(0, `rgba(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b}, 1)`);
+    g.addColorStop(1, `rgba(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b}, 0)`);
+    ctx.fillStyle = g;
 
     if (this.radius > 0) {
       ctx.arc(this.x, this.y, this.radius, 0, PI2, false);

@@ -34,6 +34,8 @@ const questions = [
   HauntedHouseThree,
 ];
 
+const getRandom = (a, b) => Math.random() * (b - a) + a;
+
 function HauntedHouseTheme({ theme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
 
@@ -53,9 +55,20 @@ function HauntedHouseTheme({ theme }) {
       <S.Ghost src={GhostTwo} alt="유령3" width={isMobile ? 80 : 100} bottom={8} right={isMobile ? 17 : 40} index={3} duration={4.5} />
 
       <S.Bat src={BatWhite} alt="박쥐" width={isMobile ? 100 : 200} top={isMobile ? 5 : 10} left={10} duration={1} />
-      <S.Bat src={BatWhite} alt="박쥐" width={100} top={30} right={18} duration={1.1} />
+      <S.Bat src={BatWhite} alt="박쥐" width={100} top={30} right={18} duration={getRandom(0.7, 1.3)} />
       <S.Bat src={BatWhite} alt="박쥐" width={50} top={25} left={30} duration={0.9} />
       <S.Bat src={BatDark} alt="박쥐" width={200} top={35} left={13} duration={1.2} />
+      <S.Bat src={BatDark} alt="박쥐" width={getRandom(10, 300)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatDark} alt="박쥐" width={getRandom(10, 300)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatDark} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatDark} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatWhite} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
+      <S.Bat src={BatDark} alt="박쥐" width={getRandom(10, 20)} top={getRandom(30, 100)} left={getRandom(10, 100)} duration={getRandom(0.3, 3)} />
       <S.Bat src={BatDark} alt="박쥐" width={isMobile ? 80 : 120} top={isMobile ? 3 : 8} right={10} duration={1.1} />
 
       <QuestionBox answerColor="white" questions={questions} answers={answers} hints={hints} />

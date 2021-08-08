@@ -15,7 +15,14 @@ const flicker = css`
 const fluctuation = css`
   @keyframes fluctuation {
     from { transform: scale(1); }
-    to { transform: scale(1.15); }
+    to { transform: scale(${Math.random() * 0.4 + 1}); }
+  }
+`;
+
+const rotate = css`
+  @keyframes rotate {
+    from { transform: rotate(0); }
+    to { transform: rotate(${Math.random() * 40 - 20}deg); }
   }
 `;
 
@@ -52,6 +59,16 @@ export const Image = styled.img`
     animation-delay: ${props.delay || 0}s;
     animation-duration: ${props.duration || 1}s;
   `};
+
+  ${props => props.rotate && css`
+    ${rotate};
+    animation-name: fluctuation, flicker, rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+    animation-delay: ${props.delay || 0}s;
+    animation-duration: ${props.duration || 1}s;
+  `}
 `;
 
 export const Body = styled.div`

@@ -26,5 +26,7 @@ module.exports = {
         "import/no-named-default": 1,
         "no-param-reassign": 1,
         "linebreak-style": 0,
+        "prefer-const": 0,
+        "max-classes-per-file": 0,
     },
 };

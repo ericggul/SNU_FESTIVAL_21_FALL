@@ -24,7 +24,7 @@ function Explosion3({ trigger, dispatch }) {
   }, [trigger]);
 
   const Circles = useMemo(() => (
-    [...Array(10).keys()].map((i) => {
+    [...Array(100).keys()].map((i) => {
       const radius = 15 + Math.random() * 25;
       return (
         <S.Group

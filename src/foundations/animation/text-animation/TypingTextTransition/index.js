@@ -238,5 +238,6 @@ function TextAnimationTrigger(Text, intervalTime, delayTime) {
 
   resizePage();
   window.addEventListener('resize', resizePage);
+
   setTimeout(() => addText(0), delayTime);
 }

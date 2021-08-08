@@ -14,6 +14,7 @@ import PolaroidGuide from '@C/activity/mini/home/PolaroidGuide';
 import * as S from './styles';
 
 function GameSection() {
+  const getRandom = (a, b) => Math.random() * (b - a) + a;
   const miniGame = useMiniGame();
   const history = useHistory();
   const goToPage = useCallback((route) => {
@@ -25,19 +26,19 @@ function GameSection() {
     <>
       <S.StyledGameSection>
         <S.GameWrapper>
-          <S.Game onClick={() => goToPage('/activity/mini/guess-the-song')}>
+          <S.Game onClick={() => goToPage('/activity/mini/guess-the-song')} delay={getRandom(0, 1)} duration={getRandom(1, 7)}>
             <img src={GuessTheSong} alt="노래맞히기" />
             {miniGame.stage1 && <S.Complete src={Complete} alt="완료" />}
           </S.Game>
-          <S.Game onClick={() => goToPage('/activity/mini/treasure-hunt')}>
+          <S.Game onClick={() => goToPage('/activity/mini/treasure-hunt')} delay={getRandom(0, 1)} duration={getRandom(2, 7)}>
             <img src={TreasureHunt} alt="보물찾기" />
             {miniGame.stage2 && <S.Complete src={Complete} alt="완료" />}
           </S.Game>
-          <S.Game onClick={() => goToPage('/activity/mini/riddle')}>
+          <S.Game onClick={() => goToPage('/activity/mini/riddle')} delay={getRandom(0, 1)} duration={getRandom(2, 7)}>
             <img src={Riddle} alt="미궁게임" />
             {miniGame.stage3 && <S.Complete src={Complete} alt="완료" />}
           </S.Game>
-          <S.Game onClick={() => goToPage('/activity/mini/black-and-white')}>
+          <S.Game onClick={() => goToPage('/activity/mini/black-and-white')} delay={getRandom(0, 1)} duration={getRandom(2, 7)}>
             <img src={BlackAndWhite} alt="흑과백" />
             {miniGame.stage4 && <S.Complete src={Complete} alt="완료" />}
           </S.Game>

@@ -67,10 +67,10 @@ function Home({ theme }) {
 
   return (
     <>
-      <S.StyledHome height={1700 * ratio * 0.527}>
+      <S.StyledHome height={theme.windowHeight}>
         <Title />
-        <S.IslandWrapper width={1700 * ratio} height={1700 * ratio * 0.527}>
-          <S.Island src={Island} width={1700 * ratio} height={1700 * ratio * 0.527} alt="" onLoad={onLoadIsland} />
+        <S.IslandWrapper width={theme.windowWidth} height={theme.windowWidth * 0.527}>
+          <S.Island src={Island} width={theme.windowWidth} height={theme.windowWidth * 0.527} alt="" onLoad={onLoadIsland} />
           <Notice />
           <S.Landmark src={Competition} alt="공모전" top={11} right={29} width={150 * ratio} onClick={() => goToPage('/activity/competition')} />
           <S.Landmark src={GuestBook} alt="방명록" top={24} right={13} width={188 * ratio} onClick={() => goToPage('/guest-book')} />

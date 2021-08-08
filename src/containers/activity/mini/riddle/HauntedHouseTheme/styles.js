@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 
+const getRandom = (a, b) => Math.random() * (b - a) + a;
+
 export const StyledHauntedHouseTheme = styled.div`
   position: relative;
   width: 100%;
@@ -39,6 +41,13 @@ export const Moon = styled.img`
   height: 88px;
   top: 5%;
   left: 5%;
+
+  @keyframes shine{
+    0%{ opacity: 0.7; }
+    100%{ opacity: 1; }
+  }
+
+  animation: shine 1s infinite alternate;
 `;
 
 export const Cloud = styled.img`
@@ -68,7 +77,7 @@ export const Bat = styled.img`
   ${props => props.right && css`right: ${props.right}%`};
   
   @keyframes rotate {
-    0% { transform: rotate(0deg); }
+    0% { transform: rotate(${getRandom(-30, 0)}deg); }
     100% { transform: rotate(15deg); }
   }
 

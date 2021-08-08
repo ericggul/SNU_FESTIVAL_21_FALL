@@ -22,8 +22,8 @@ import { toast } from 'react-toastify';
 import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
 import * as S from './styles';
 
-function Pokemongo({ theme, user }) {
-  const { isAuthorized } = useUser();
+function Pokemongo({ theme }) {
+  const { user, isAuthorized } = useUser();
   const pokemongo = usePokemongo();
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
   const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
@@ -38,20 +38,47 @@ function Pokemongo({ theme, user }) {
 
   const handleBoxClick = useCallback((i) => {
     setIsMissionAlertOpen(true);
-    if (isAuthorized && pokemongo.isLoaded && !pokemongo.placeOne) {
-      dispatch(actions.setFirestorePokemongo(user, 'placeOne', true));
-      setIsMissionModalOpen(true);
+    if (isAuthorized && pokemongo.isLoaded) {
+      if (i === 1) {
+        if (!pokemongo.placeOne) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeOne', true));
+          setIsMissionModalOpen(true);
+        }
+      }
+      if (i === 2) {
+        if (!pokemongo.placeTwo) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeTwo', true));
+          setIsMissionModalOpen(true);
+        }
+      }
+      if (i === 3) {
+        if (!pokemongo.placeThree) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeThree', true));
+          setIsMissionModalOpen(true);
+        }
+      }
+      if (i === 4) {
+        if (!pokemongo.placeFour) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeFour', true));
+          setIsMissionModalOpen(true);
+        }
+      }
+      if (i === 5) {
+        if (!pokemongo.placeFive) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeFive', true));
+          setIsMissionModalOpen(true);
+        }
+      }
+      if (i === 6) {
+        if (!pokemongo.placeSix) {
+          dispatch(actions.setFirestorePokemongo(user, 'placeSix', true));
+          setIsMissionModalOpen(true);
+        }
+      }
     } else {
       setIsSignInModalOpen(true);
     }
   });
-
-  // useEffect(() => {
-  //   if (isAuthorized && !pokemongo.placeOne) {
-  //     dispatch(actions.setFirestorePokemongo(user, 'placeOne', true));
-  //     setIsMissionModalOpen(true);
-  //   }
-  // }, [isAuthorized, dispatch, pokemongo.isLoaded, pokemongo.placeOne, user, setIsMissionModalOpen]);
 
   console.log(pokemongo);
 
@@ -59,12 +86,12 @@ function Pokemongo({ theme, user }) {
     <>
       <HeaderContent>포켓몬고 테스트</HeaderContent>
       <S.StyledPokemongo>
-        <LocationBox cleared={pokemongo.placeOne} handleClick={() => handleBoxClick(0)} />
-        <LocationBox cleared={pokemongo.placeTwo} handleClick={() => handleBoxClick(1)} />
-        <LocationBox cleared={pokemongo.placeThree} handleClick={() => handleBoxClick(2)} />
-        <LocationBox cleared={pokemongo.placeFour} handleClick={() => handleBoxClick(3)} />
-        <LocationBox cleared={pokemongo.placeFive} handleClick={() => handleBoxClick(4)} />
-        <LocationBox cleared={pokemongo.placeSix} handleClick={() => handleBoxClick(5)} />
+        <LocationBox cleared={pokemongo.placeOne} handleClick={() => handleBoxClick(1)} />
+        <LocationBox cleared={pokemongo.placeTwo} handleClick={() => handleBoxClick(2)} />
+        <LocationBox cleared={pokemongo.placeThree} handleClick={() => handleBoxClick(3)} />
+        <LocationBox cleared={pokemongo.placeFour} handleClick={() => handleBoxClick(4)} />
+        <LocationBox cleared={pokemongo.placeFive} handleClick={() => handleBoxClick(5)} />
+        <LocationBox cleared={pokemongo.placeSix} handleClick={() => handleBoxClick(6)} />
       </S.StyledPokemongo>
       {missionModalComponent}
       {signInModalComponent}

@@ -43,6 +43,7 @@ export const LogoImage = styled.img`
 `;
 
 export const MenuButton = styled.div`
+  ${HoverStyle};
   display: flex;
   flex-direction: column;
   justify-content: space-around;

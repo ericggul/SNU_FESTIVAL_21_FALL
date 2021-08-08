@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const enlargeAnimation = css`
   @keyframes enlargeTriangle {
     0% { transform: scale(0) rotate(-15deg); }
-    100% { transform: scale(1) rotate(-15deg); }
+    100% { transform: scale(1) rotate(115deg); }
   }
   
   &.BlackTriangle.active svg {

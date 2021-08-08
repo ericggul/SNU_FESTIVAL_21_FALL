@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 import { FlexCenterStyle } from '@S/responsive/display';
 import { HoverStyle } from '@S/responsive/mouse';
@@ -35,6 +35,21 @@ export const Game = styled.div`
   img:first-of-type {
     width: 100%;
   }
+
+  @keyframes contrast{
+    from{
+      filter: contrast(1);
+    }
+    to{
+      filter: contrast(1.8);
+    }
+  }
+
+  ${props => css`
+    animation: contrast 5s infinite alternate;
+    animation-delay: ${props.delay || 0}s;
+    animation-duration: ${props.duration || 5}s;
+  `}
 `;
 
 export const Complete = styled.img`

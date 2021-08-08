@@ -1,10 +1,18 @@
 import { css } from 'styled-components';
 import media from 'styled-media-query';
 
+const getRandom = (a, b) => Math.random() * (b - a) + a;
+
 export const FlexCenterStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const RandomSetStyle = css`
+  position: absolute;
+  top: ${({ theme }) => getRandom(0, theme.windowWidth * 1)}px;
+  left: ${({ theme }) => getRandom(0, theme.windowHeight * 1)}px;
 `;
 
 export const ResponsiveWidthStyle = css`

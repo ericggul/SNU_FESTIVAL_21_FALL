@@ -82,6 +82,16 @@ export const BestLabel = styled.div`
   color: white;
   background-color: ${({ theme }) => theme.palette.PURPLE50};
   font-size: 0.8rem;
+
+  @keyframes shine{
+    0%{
+      filter: brightness(1);
+    }
+    100%{
+      filter: brightness(1.1);
+    }
+  }
+  animation: shine ${Math.random() * 2 + 1}s infinite alternate;
 `;
 
 export const Content = styled.span`

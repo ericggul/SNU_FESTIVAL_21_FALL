@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledDj = styled.div`
-
+    position: absolute;
+    height: ${({ theme }) => theme.windowHeight}px;
+    width: ${({ theme }) => theme.windowWidth}px;
+    background: black;
 `;
 
 export const SliderPad = styled.div`

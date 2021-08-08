@@ -8,8 +8,8 @@ const flickerAnimation = css`
   
   &.Flicker3.active {
     animation-name: flicker3;
-    animation-duration: 0.35s;
-    animation-iteration-count: 1;
+    animation-duration: 0.05s;
+    animation-iteration-count: 10;
   }
 `;
 

@@ -119,7 +119,7 @@ export function Comment({ user, comments, mission }) {
               ))}
             </S.ContentRow>
             <S.LastRow>
-              <S.Time>{dayjs.unix(comment.created_at.seconds).format('YYYY.MM.DD HH:mm')}</S.Time>
+              <S.Time>{dayjs.unix(comment.created_at.seconds).format('MM월 DD일 HH:mm')}</S.Time>
               <S.Likes>
                 <S.Image src={EmptyHeart} alt="likes" style={{ marginRight: 3 }} />
                 <div>{comment.likes.length}</div>
@@ -163,6 +163,8 @@ function CommentParent({ user }) {
   // 방명록 firestore
   const [comments, setComments] = useState([]);
   const [bestComments, setBestComments] = useState([]);
+
+  // Best Comments
   useEffect(() => {
     const newBestComments = comments
       .filter(comment => comment.likes.length > 0)
@@ -173,6 +175,8 @@ function CommentParent({ user }) {
     });
     setBestComments(newBestComments);
   }, [comments]);
+
+  // Other Comments
   const normalComments = useMemo(() => {
     const bestCommentIds = bestComments.map(comment => comment.id);
     return comments.filter(comment => !bestCommentIds.includes(comment.id));
