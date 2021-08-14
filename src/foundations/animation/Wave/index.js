@@ -8,7 +8,7 @@ export default function WaveCanvas() {
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100vw', height: '100vh' }}
     />
   );
 }
@@ -128,10 +128,10 @@ class Wave {
 
 class WaveGroup {
   constructor(totalPoints) {
-    this.totalWaves = 4;
+    this.totalWaves = 20;
     this.totalPoints = totalPoints;
 
-    this.color = ['rgba(255, 0, 0, 0.4)', 'rgba(255, 255, 0, 0.4)', 'rgba(0, 255, 255, 0.4)', 'rgba(147, 112, 219, 0.3)'];
+    this.color = ['rgba(9,95,123 0.4)', 'rgba(55,115,117, 0.4)', 'rgba(13,51,75, 0.4)', 'rgba(28,37,39, 0.3)', 'rgba(13,24,35, 0.3)', 'rgba(6,13,15, 0.3)'];
 
     this.waves = [];
 
@@ -139,7 +139,7 @@ class WaveGroup {
       this.waves[i] = new Wave(
         i,
         this.totalPoints,
-        this.color[i],
+        this.color[Math.floor(Math.random() * this.color.length)],
       );
     }
   }

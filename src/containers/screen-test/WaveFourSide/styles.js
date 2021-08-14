@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledScreenTest = styled.div`
+export const StyledWaveFourSide = styled.div`
     position: fixed;
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;

@@ -14,9 +14,12 @@ import * as S from './styles';
 
 function Jabti() {
   const [displayIndex, setDisplayIndex] = useState(0);
+  const [resultReady, setResultReady] = useState(false);
+  const [answerArray, setAnswerArray] = useState([]);
 
   const history = useHistory();
-  const goToResult = useCallback(() => {
+  const goToResult = () => {
+    console.log(answerArray);
     history.push(
       {
         pathname: `/jabti/${getRandomElementFromArray([
@@ -26,23 +29,20 @@ function Jabti() {
         state: { fromQuestions: true },
       },
     );
-  }, []);
+  };
 
   useEffect(() => {
-    // jabtiCollectionRef.doc('result-array').get()
-    //   .then((doc) => {
-    //     console.log(doc.data().viewCount);
-    //   })
-    //   .catch(() => (
-    //     console.log('인터넷이 불안정합니다. 다시 시도해주세요.')));
-  }, []);
+    if (resultReady) {
+      goToResult();
+    }
+  }, [resultReady]);
 
   const handleClick = (questionIndex, answerIndex) => {
+    setAnswerArray(answerArray => [...answerArray, answerIndex]);
     if (questionIndex === QuestionsData.length - 1) {
-      goToResult();
+      setResultReady(true);
     } else {
       setDisplayIndex(displayIndex => displayIndex + 1);
-      Wrong();
     }
   };
   return (

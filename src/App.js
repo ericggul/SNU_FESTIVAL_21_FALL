@@ -5,7 +5,7 @@ import GaAnalytics from '@/UserAnalytics';
 import { GA_TRACKING_KEY } from '@/config';
 import { GlobalStyle, theme } from '@S/index';
 import NotFound from '@/pages/NotFound';
-import MouseTrail from '@F/animation/MouseTrail';
+
 import Toast from '@F/Toast';
 import styled, { ThemeProvider } from 'styled-components';
 import useResize from '@U/hooks/useResize';
@@ -23,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={themeWithWindowSize}>
       <GlobalStyle />
-      <MouseTrail />
+
       <Toast />
 
       <Router>

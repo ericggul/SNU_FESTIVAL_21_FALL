@@ -12,7 +12,7 @@ const GuestBook = lazy(() => import('@/pages/GuestBook'));
 const Vote = lazy(() => import('@/pages/Vote'));
 const GoodsRouter = lazy(() => import('@/pages/goods/GoodsRouter'));
 const DjRouter = lazy(() => import('@/pages/Dj'));
-const ScreenTestRouter = lazy(() => import('@/pages/ScreenTest'));
+const ScreenTestRouter = lazy(() => import('@/pages/screen-test/ScreenTestRouter'));
 const PathMoveRouter = lazy(() => import('@/pages/PathMove'));
 
 const routes = [

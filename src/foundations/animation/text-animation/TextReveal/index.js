@@ -7,9 +7,11 @@ function TextReveal({ text }) {
   const transformText = (string, ref) => {
     const target = ref.current;
     target.innerHTML = '';
-    const stringSet = string.split('');
+    let boldPosition = string.indexOf('!');
+    let stringSet = string.split('');
+    stringSet.splice(boldPosition, 1);
 
-    stringSet.forEach((str) => {
+    stringSet.forEach((str, i) => {
       const createNode = () => {
         const n = document.createElement('span');
         n.innerText = str;
@@ -24,6 +26,9 @@ function TextReveal({ text }) {
           delay: getRandom(500, 2000),
           fill: 'backwards',
         });
+        if (i === boldPosition) {
+          n.style.textShadow = '0 0 0.5rem #E0A62F, 0 0 1rem #F9E0B2, 0 0 2rem #E0A62F, 0 0 3rem #E0A62F, 0 0 5rem #EEC05B, 0 0 7rem #E0A62F';
+        }
         target.appendChild(n);
       };
 
