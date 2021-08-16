@@ -6,6 +6,8 @@ import LightChange2 from '@/foundations/animation/ImageTransition/LightChange2';
 import Wave from '@/foundations/animation/Wave';
 import WaveFourSide from '@/foundations/animation/WaveFourSide';
 import Balls from '@/foundations/animation/Balls';
+import Firework from '@F/firework/Firework';
+import Aurora from '@F/animation/Aurora';
 import TextShine from '@/foundations/animation/text-animation/TextShine';
 import Lumination1 from '@/foundations/animation/Lumination/Lumination1';
 import Lumination2 from '@/foundations/animation/Lumination/Lumination2';
@@ -18,8 +20,10 @@ function ScreenTest({ theme }) {
       {/* <LightChange1 /> */}
       {/* <Wave /> */}
       {/* <Balls /> */}
+      {/* <Firework /> */}
+      <Aurora />
       {/* <TextShine /> */}
-      <Lumination3 />
+      {/* <Lumination3 /> */}
 
     </S.StyledScreenTest>
   );

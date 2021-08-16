@@ -28,5 +28,6 @@ module.exports = {
         "linebreak-style": 0,
         "prefer-const": 0,
         "max-classes-per-file": 0,
+        "react/no-this-in-sfc": 0,
     },
 };
