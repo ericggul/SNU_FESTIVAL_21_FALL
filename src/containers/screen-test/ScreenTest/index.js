@@ -8,7 +8,6 @@ import WaveFourSide from '@/foundations/animation/WaveFourSide';
 import Balls from '@/foundations/animation/Balls';
 import Firework from '@/foundations/animation/Firework';
 import SparklySkull from '@/foundations/animation/SparklySkull';
-import WaterThreejs from '@/foundations/animation/WaterThreejs';
 import Particle from '@/foundations/animation/Particle';
 
 import TextShine from '@/foundations/animation/text-animation/TextShine';
