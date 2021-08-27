@@ -121,16 +121,7 @@ function Menus({ setMenuIsOpen }) {
       </S.InlineMenu>
       {NaviButton('소개', '/introduction', 500)}
       {NaviButton('오늘의 타로', '/tarot', 550)}
-      <S.InlineMenu>
-        {DropDownButton('TEST', 'test', 600)}
-      </S.InlineMenu>
-      {(openedTab === 'test') && (
-        <>
-          {smallNaviButton('Pokemon Go', '/pokemongo', 0)}
-          {smallNaviButton('Stage 1', '/pokemongo/wellington-beef-steak', 100)}
 
-        </>
-      )}
     </S.OpenedMenu>
   );
 

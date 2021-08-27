@@ -3,7 +3,7 @@ import { lazy } from 'react';
 const Home = lazy(() => import('@/pages/Home'));
 const TarotRouter = lazy(() => import('@/pages/tarot/TarotRouter'));
 const JabtiRouter = lazy(() => import('@/pages/jabti/JabtiRouter'));
-const PokemongoRouter = lazy(() => import('@/pages/pokemongo/PokemongoRouter'));
+
 const ActivityRouter = lazy(() => import('@/pages/activity/ActivityRouter'));
 const PerformanceRouter = lazy(() => import('@/pages/performance/PerformanceRouter'));
 const Apply = lazy(() => import('@/pages/Apply'));
@@ -25,10 +25,7 @@ const routes = [
     path: '/tarot',
     component: TarotRouter,
   },
-  {
-    path: '/pokemongo',
-    component: PokemongoRouter,
-  },
+
   {
     path: '/jabti',
     component: JabtiRouter,

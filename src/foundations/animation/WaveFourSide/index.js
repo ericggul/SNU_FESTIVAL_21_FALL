@@ -38,8 +38,8 @@ class App {
     this.canvas.height = this.stageHeight;
 
     this.wheelSets = new WheelSets(this.stageWidth, this.stageHeight);
-    this.ctx.globalCompositeOperation = 'color-burn';
-    // this.ctx.globalCompositeOperation = 'saturation';
+    // this.ctx.globalCompositeOperation = 'color-burn';
+    this.ctx.globalCompositeOperation = 'saturation';
     this.ctx.scale(1, 1);
   }
 
@@ -88,7 +88,7 @@ class Wheel {
     this.initialRadius = getRandom(300, 400);
     this.pointRadius = 170;
     this.thetaSpeed = getRandom(0.01, 0.02);
-    this.radSpeed = this.thetaSpeed * 50;
+    this.radSpeed = this.thetaSpeed * 20;
     this.init();
   }
 
@@ -147,9 +147,12 @@ class WheelSets {
 
   init() {
     this.wheels = [];
+    const colorSet = [{r: 33, g: 21, b: 73}, {r: 36, g: 26, b: 87}];
     for (let i = 0; i < this.totalWheels; i += 1) {
       this.wheels.push(new Wheel(
-        getRandom(0, this.width), getRandom(0, this.height), { r: getRandom(150, 250), g: getRandom(150, 250), b: getRandom(150, 250) },
+        getRandom(0, this.width), getRandom(0, this.height), 
+        // { r: getRandom(33, 36), g: getRandom(21, 26), b: getRandom(73, 87) },
+        { r: getRandom(20, 36), g: getRandom(18, 26), b: getRandom(45, 87) },
       ));
     }
   }
