@@ -86,8 +86,10 @@ export function Comment({ user, comments, mission }) {
       .then(() => toast(isLiked ? '좋아요를 취소하였습니다.' : '이 방명록 글을 좋아합니다.'));
   }, [user.uid, isAuthorized, setIsSignInModalOpen]);
 
+  console.log(comments.length);
   return (
     <S.StyledComment>
+      {comments.length}
       {comments.map(comment => {
         const isMine = user.uid === comment.author;
         const isLiked = myLikesForComment.includes(comment.id);

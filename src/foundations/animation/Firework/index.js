@@ -1108,7 +1108,7 @@ export default function Firework() {
   const floralShell = (size = 1) => ({
     shellSize: size,
     spreadSize: 300 + size * 120,
-    starDensity: 0.12,
+    starDensity: 0.2,
     starLife: 500 + size * 50,
     starLifeVariation: 0.5,
     color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
