@@ -1,7 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, {
+  useState, useEffect, useCallback, useMemo,
+} from 'react';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
+import AnimatedInput from '@F/animation/text-animation/AnimatedInput';
 import { guestBookCollectionRef } from '@U/initializer/firebase';
 import useInput from '@U/hooks/useInput';
 import SignInGuide from '@F/modal/content/SignInGuide';
@@ -50,7 +53,8 @@ function WriteBox({ user }) {
   return (
     <S.StyledWriteBox>
       <S.InputBox placeholder="닉네임" {...username} onMouseDown={checkAuthority} />
-      <S.TextArea {...content} onMouseDown={checkAuthority} />
+      <AnimatedInput passedPlaceholder="내용을 여기에 쓰면 됩니다." content={content} onMouseDown={checkAuthority} />
+      {/* <S.TextArea placeholder="내용을 여기에 쓰면 됩니다." {...content} onMouseDown={checkAuthority} /> */}
       <S.Submit onClick={isAuthorized ? Submit : checkAuthority}>등록</S.Submit>
 
       {modalComponent}

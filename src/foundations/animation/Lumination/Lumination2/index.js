@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import * as S from './styles';
 
-function Lumination() {
+export default function Lumination({ width, height }) {
   useEffect(() => {
     const app = new App();
   }, []);
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '100vh' }}
+      style={{
+        width,
+        height,
+        background: '#111734',
+        zIndex: '-3',
+        position: 'absolute',
+        top: '-1.5rem',
+        overflow: 'hidden',
+      }}
     />
   );
 }
-export default Lumination;
-
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 class App {
@@ -37,7 +41,7 @@ class App {
 
     this.canvas.width = this.stageWidth;
     this.canvas.height = this.stageHeight;
-    this.starSet = new StarSet(this.stageWidth, this.stageHeight, 1, ['#F9E0B2'], [1, 3], [300, 500]);
+    this.starSet = new StarSet(this.stageWidth, this.stageHeight, 1, ['#white'], [1, 3], [300, 500]);
     this.starSet2 = new StarSet(this.stageWidth, this.stageHeight, 1, ['white'], [3, 4], [1000, 2000]);
     this.ctx.scale(1, 1);
   }
@@ -66,7 +70,6 @@ class Star {
   update() {
     this.time += 1;
     this.radius = Math.max((this.time - this.start) * (this.delta + this.start - this.time), 0) * this.targetRadius;
-    console.log(this.radius);
   }
 }
 

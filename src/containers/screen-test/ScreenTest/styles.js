@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 
 export const StyledScreenTest = styled.div`
     position: fixed;
-    width: ${({ width }) => width}px;
-    height: ${({ height }) => height}px;
+    width: 100vw;
+    height: 100vh;
     background: black;
     display: flex;
     flex-direction: column;

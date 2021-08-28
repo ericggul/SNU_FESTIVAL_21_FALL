@@ -12,12 +12,7 @@ export const StyledDescription = styled.div`
   text-align: right;
   align-self: flex-end;
   
-  color: ${({ theme }) => theme.palette.GRAY90};
-  line-height: 2;
+  color: ${({ theme }) => theme.palette.WHITE};
+  line-height: 1.8;
   word-break: keep-all;
-  font-weight: bold;
-`;
-
-export const PurpleText = styled.span`
-  color: ${({ theme }) => theme.palette.PURPLE50};
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Greeting from '@C/introduction/staff-section/Greeting';
@@ -15,7 +15,6 @@ function StaffSection({ isMobile, theme }) {
         <Description />
         <GroupPhoto />
       </S.StyledStaffSection>
-      <Bubble theme={theme} />
     </S.Wrapper>
   );
 }

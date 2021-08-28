@@ -2,6 +2,18 @@ import { createGlobalStyle } from 'styled-components';
 import media from 'styled-media-query';
 
 export const palette = {
+
+  // 관악의 밤 팔레트
+
+  DARK_PURPLE: '#111734',
+  PASTEL_PURPLE: '#9f8ec5',
+  LIGHT_PURPLE: '#c0b9db',
+
+  WHITE: '#fff',
+
+  STAR_YELLOW: '#feee96',
+
+  // 21 봄 페스월드 팔레트
   // NEWTRO
   ORANGE_NEWTRO: '#e05335',
   GRAY_NEWTRO: '#eeeeee',
@@ -71,7 +83,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     // TODO: 웹폰트가 아닌 font-face 로 변경
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    // font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-family: 'IBM Plex Sans KR', 'sans-serif';
     user-select: none;
     
     & ::selection {

@@ -13,11 +13,11 @@ function Description({ theme }) {
           <br />
           서울대 축제는 ‘학생들이 직접 만들어가는 축제’ 를 지향하며
           { theme.windowWidth > 330 && <br /> }
-          <S.PurpleText>
-            {'<'}
-            축제하는사람들
-            {'>'}
-          </S.PurpleText>
+
+          {'<'}
+          축제하는사람들
+          {'>'}
+
           은 이런 가치를 지닌 축제를 만드는 단체에요.
           <br />
           저희는 서울대 축제의 기획부터 실행까지 모두 맡고 있어요.
@@ -36,10 +36,10 @@ function Description({ theme }) {
           { theme.windowWidth > 330 && <br /> }
           축하사가
           {' '}
-          <S.PurpleText>“온라인” 축제</S.PurpleText>
+          “온라인” 축제
           로 찾아왔어요.
           <br />
-          <S.PurpleText>축제를 완성시켜 줄 주인공은 바로 “여러분”!</S.PurpleText>
+          축제를 완성시켜 줄 주인공은 바로 “여러분”!
           <br />
           축하사는 여러분을 기다립니다.
         </div>

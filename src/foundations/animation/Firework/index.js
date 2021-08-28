@@ -138,26 +138,25 @@ export default function Firework() {
         this.canvas.style.height = `${this.height}px`;
       }
 
-      // To any known illigitimate users...
-      const badDomains = ['bla' + 'ckdiam' + 'ondfirew' + 'orks' + '.de'];
-      const { hostname } = document.location;
-      if (badDomains.some(d => hostname.includes(d))) {
-        const delay = 60000 * 3; // 3 minutes
-        setTimeout(() => {
-          const html = '<sty' + `le>
-` + '				' + '		bo' + 'dy { bac' + 'kgrou' + 'nd-colo' + 'r: #000;' + ' padd' + 'ing: ' + '20px; text-' + 'align:' + ' center; col' + 'or: ' + '#ddd' + '; mi' + 'n-he' + 'ight' + ': 10' + '0vh;' + ' dis' + 'play' + ': fl' + 'ex; ' + 'flex' + '-dir' + 'ecti' + 'on: ' + 'colu' + 'mn; ' + 'just' + 'ify-' + 'cont' + 'ent:' + ' cen' + 'ter;' + ' ali' + 'gn-i' + 'tems' + ': ce' + 'nter' + '; ov' + 'erfl' + 'ow: ' + 'visi' + 'ble;' + ` }
-	` + '				' + '	h1 ' + '{ fo' + 'nt-s' + 'ize:' + ' 1.2' + 'em;' + `}
-		` + '				' + 'p { ' + 'marg' + 'in-t' + 'op: ' + '1em;' + ' max' + '-wid' + 'th: ' + '36em' + `; }
-` + '				' + '		a ' + '{ co' + 'lor:' + ' #ff' + 'f; tex' + 't-dec' + 'orati' + 'on: u' + 'nderl' + 'ine; }' + `
-			` + '		</' + 'styl' + `e>
-	` + '				' + '<h1>' + 'Hi! ' + 'Sorr' + 'y to' + ' int' + 'erru' + 'pt t' + 'he f' + 'irew' + 'orks' + '.</h' + `1>
-	` + '				' + '<p>M' + 'y na' + 'me i' + 's Ca' + 'leb.' + ' Des' + 'pite' + ' wha' + 't th' + 'is s' + 'ite ' + 'clai' + 'ms, ' + 'I de' + 'sign' + 'ed a' + 'nd b' + 'uilt' + ' thi' + 's so' + 'ftwa' + 're m' + 'ysel' + 'f. I' + '\'ve ' + 'spen' + 't a ' + 'coup' + 'le h' + 'undr' + 'ed h' + 'ours' + ' of ' + 'my o' + 'wn t' + 'ime, ' + 'over' + ' tw' + 'o ye' + 'ars, ' + 'maki' + 'ng i' + 't.</' + `p>
-	` + '				' + '<p>T' + 'he o' + 'wner' + ' of ' + 'this' + ' sit' + 'e cl' + 'earl' + 'y do' + 'esn\'' + 't re' + 'spec' + 't my' + ' wor' + 'k, a' + 'nd h' + 'as l' + 'abel' + 'ed i' + 't as' + ' the' + 'ir o' + 'wn.<' + `/p>
-` + '				' + '	<p>' + 'If y' + 'ou w' + 'ere ' + 'enjo' + 'ying' + ' the' + ' sho' + 'w, p' + 'leas' + 'e ch' + 'eck ' + 'out ' + '<a h' + 'ref=' + '"htt' + 'ps:/' + '/cod' + 'epen' + '.io/' + 'Mill' + 'erTi' + 'me/f' + 'ull/' + 'XgpN' + 'wb">' + 'my&n' + 'bsp;' + 'offi' + 'cial' + '&nbs' + 'p;ve' + 'rsio' + 'n&nb' + 'sp;h' + 'ere<' + '/a>!' + `</p>
-` + '				' + '	<p>I' + 'f you' + '\'re th' + 'e ow' + 'ner, <a' + ' href="m' + 'ailt' + 'o:cal' + 'ebdotmi' + 'ller@' + 'gmai' + 'l.co' + 'm">cont' + 'act m' + 'e</a>' + '.</p>';
-          document.body.innerHTML = html;
-        }, delay);
-      }
+//       // To any known illigitimate users...
+//       const badDomains = ['blackdiamondfireworks.de'];
+//       const { hostname } = document.location;
+//       if (badDomains.some(d => hostname.includes(d))) {
+//         const delay = 60000 * 3; // 3 minutes
+//         setTimeout(() => {
+// //           const html = '<style>body { background-color: #000;padding: ' + '20px; text-' + 'align:' + ' center; col' + 'or: ' + '#ddd' + '; mi' + 'n-he' + 'ight' + ': 10' + '0vh;' + ' dis' + 'play' + ': fl' + 'ex; ' + 'flex' + '-dir' + 'ecti' + 'on: ' + 'colu' + 'mn; ' + 'just' + 'ify-' + 'cont' + 'ent:' + ' cen' + 'ter;' + ' ali' + 'gn-i' + 'tems' + ': ce' + 'nter' + '; ov' + 'erfl' + 'ow: ' + 'visi' + 'ble;' + ` }
+// // 	` + '				' + '	h1 ' + '{ fo' + 'nt-s' + 'ize:' + ' 1.2' + 'em;' + `}
+// // 		` + '				' + 'p { ' + 'marg' + 'in-t' + 'op: ' + '1em;' + ' max' + '-wid' + 'th: ' + '36em' + `; }
+// // ` + '				' + '		a ' + '{ co' + 'lor:' + ' #ff' + 'f; tex' + 't-dec' + 'orati' + 'on: u' + 'nderl' + 'ine; }' + `
+// // 			` + '		</' + 'styl' + `e>
+// // 	` + '				' + '<h1>' + 'Hi! ' + 'Sorr' + 'y to' + ' int' + 'erru' + 'pt the fireworks.</h' + `1>
+// // 	` + '				' + '<p>M' + 'y na' + 'me i' + 's Ca' + 'leb.' + ' Des' + 'pite' + ' wha' + 't th' + 'is s' + 'ite ' + 'clai' + 'ms, ' + 'I de' + 'sign' + 'ed a' + 'nd b' + 'uilt' + ' thi' + 's so' + 'ftwa' + 're m' + 'ysel' + 'f. I' + '\'ve ' + 'spen' + 't a ' + 'coup' + 'le h' + 'undr' + 'ed h' + 'ours' + ' of ' + 'my o' + 'wn t' + 'ime, ' + 'over' + ' tw' + 'o ye' + 'ars, ' + 'maki' + 'ng i' + 't.</' + `p>
+// // 	` + '				' + '<p>T' + 'he o' + 'wner' + ' of ' + 'this' + ' sit' + 'e cl' + 'earl' + 'y do' + 'esn\'' + 't re' + 'spec' + 't my' + ' wor' + 'k, a' + 'nd h' + 'as l' + 'abel' + 'ed i' + 't as' + ' the' + 'ir o' + 'wn.<' + `/p>
+// // ` + '				' + '	<p>' + 'If y' + 'ou w' + 'ere ' + 'enjo' + 'ying' + ' the' + ' sho' + 'w, p' + 'leas' + 'e ch' + 'eck ' + 'out ' + '<a h' + 'ref=' + '"htt' + 'ps:/' + '/cod' + 'epen' + '.io/' + 'Mill' + 'erTi' + 'me/f' + 'ull/' + 'XgpN' + 'wb">' + 'my&n' + 'bsp;' + 'offi' + 'cial' + '&nbs' + 'p;ve' + 'rsio' + 'n&nb' + 'sp;h' + 'ere<' + '/a>!' + `</p>
+// // ` + '				' + '	<p>I' + 'f you' + '\'re th' + 'e ow' + 'ner, <a' + ' href="m' + 'ailt' + 'o:cal' + 'ebdotmi' + 'ller@' + 'gmai' + 'l.co' + 'm">cont' + 'act m' + 'e</a>' + '.</p>';
+// //           document.body.innerHTML = html;
+//         }, delay);
+//       }
 
       Stage.stages.push(this);
 
@@ -478,7 +477,7 @@ export default function Firework() {
   const QUALITY_HIGH = 3;
 
   const SKY_LIGHT_NONE = 0;
-  const SKY_LIGHT_DIM = 1;
+  // const SKY_LIGHT_DIM = 1;
   const SKY_LIGHT_NORMAL = 2;
 
   const COLOR = {
@@ -523,15 +522,15 @@ export default function Firework() {
   }
 
   // Attempt to toggle fullscreen mode.
-  function toggleFullscreen() {
-    if (fullscreenEnabled()) {
-      if (isFullscreen()) {
-        fscreen.exitFullscreen();
-      } else {
-        fscreen.requestFullscreen(document.documentElement);
-      }
-    }
-  }
+  // function toggleFullscreen() {
+  //   if (fullscreenEnabled()) {
+  //     if (isFullscreen()) {
+  //       fscreen.exitFullscreen();
+  //     } else {
+  //       fscreen.requestFullscreen(document.documentElement);
+  //     }
+  //   }
+  // }
 
   // Sync fullscreen changes with store. An event listener is necessary because the user can
   // toggle fullscreen mode directly through the browser, and we want to react to that.
@@ -686,7 +685,7 @@ export default function Firework() {
 
   // Map config to various properties & apply side effects
   function configDidUpdate() {
-    const { config } = store.state;
+    // const { config } = store.state;
 
     quality = qualitySelector();
     isLowQuality = quality === QUALITY_LOW;
@@ -721,61 +720,61 @@ export default function Firework() {
   console.log(store.state.config);
 
   // Help Content
-  const helpContent = {
-    shellType: {
-      header: 'Shell Type',
-      body: 'The type of firework that will be launched. Select "Random" for a nice assortment!',
-    },
-    shellSize: {
-      header: 'Shell Size',
-      body: 'The size of the fireworks. Modeled after real firework shell sizes, larger shells have bigger bursts with more stars, and sometimes more complex effects. However, larger shells also require more processing power and may cause lag.',
-    },
-    quality: {
-      header: 'Quality',
-      body: 'Overall graphics quality. If the animation is not running smoothly, try lowering the quality. High quality greatly increases the amount of sparks rendered and may cause lag.',
-    },
-    skyLighting: {
-      header: 'Sky Lighting',
-      body: 'Illuminates the background as fireworks explode. If the background looks too bright on your screen, try setting it to "Dim" or "None".',
-    },
-    scaleFactor: {
-      header: 'Scale',
-      body: 'Allows scaling the size of all fireworks, essentially moving you closer or farther away. For larger shell sizes, it can be convenient to decrease the scale a bit, especially on phones or tablets.',
-    },
-    autoLaunch: {
-      header: 'Auto Fire',
-      body: 'Launches sequences of fireworks automatically. Sit back and enjoy the show, or disable to have full control.',
-    },
-    finaleMode: {
-      header: 'Finale Mode',
-      body: 'Launches intense bursts of fireworks. May cause lag. Requires "Auto Fire" to be enabled.',
-    },
-    hideControls: {
-      header: 'Hide Controls',
-      body: 'Hides the translucent controls along the top of the screen. Useful for screenshots, or just a more seamless experience. While hidden, you can still tap the top-right corner to re-open this menu.',
-    },
-    fullscreen: {
-      header: 'Fullscreen',
-      body: 'Toggles fullscreen mode.',
-    },
-    longExposure: {
-      header: 'Open Shutter',
-      body: 'Experimental effect that preserves long streaks of light, similar to leaving a camera shutter open.',
-    },
-  };
+  // const helpContent = {
+  //   shellType: {
+  //     header: 'Shell Type',
+  //     body: 'The type of firework that will be launched. Select "Random" for a nice assortment!',
+  //   },
+  //   shellSize: {
+  //     header: 'Shell Size',
+  //     body: 'The size of the fireworks. Modeled after real firework shell sizes, larger shells have bigger bursts with more stars, and sometimes more complex effects. However, larger shells also require more processing power and may cause lag.',
+  //   },
+  //   quality: {
+  //     header: 'Quality',
+  //     body: 'Overall graphics quality. If the animation is not running smoothly, try lowering the quality. High quality greatly increases the amount of sparks rendered and may cause lag.',
+  //   },
+  //   skyLighting: {
+  //     header: 'Sky Lighting',
+  //     body: 'Illuminates the background as fireworks explode. If the background looks too bright on your screen, try setting it to "Dim" or "None".',
+  //   },
+  //   scaleFactor: {
+  //     header: 'Scale',
+  //     body: 'Allows scaling the size of all fireworks, essentially moving you closer or farther away. For larger shell sizes, it can be convenient to decrease the scale a bit, especially on phones or tablets.',
+  //   },
+  //   autoLaunch: {
+  //     header: 'Auto Fire',
+  //     body: 'Launches sequences of fireworks automatically. Sit back and enjoy the show, or disable to have full control.',
+  //   },
+  //   finaleMode: {
+  //     header: 'Finale Mode',
+  //     body: 'Launches intense bursts of fireworks. May cause lag. Requires "Auto Fire" to be enabled.',
+  //   },
+  //   hideControls: {
+  //     header: 'Hide Controls',
+  //     body: 'Hides the translucent controls along the top of the screen. Useful for screenshots, or just a more seamless experience. While hidden, you can still tap the top-right corner to re-open this menu.',
+  //   },
+  //   fullscreen: {
+  //     header: 'Fullscreen',
+  //     body: 'Toggles fullscreen mode.',
+  //   },
+  //   longExposure: {
+  //     header: 'Open Shutter',
+  //     body: 'Experimental effect that preserves long streaks of light, similar to leaving a camera shutter open.',
+  //   },
+  // };
 
-  const nodeKeyToHelpKey = {
-    shellTypeLabel: 'shellType',
-    shellSizeLabel: 'shellSize',
-    qualityLabel: 'quality',
-    skyLightingLabel: 'skyLighting',
-    scaleFactorLabel: 'scaleFactor',
-    autoLaunchLabel: 'autoLaunch',
-    finaleModeLabel: 'finaleMode',
-    hideControlsLabel: 'hideControls',
-    fullscreenLabel: 'fullscreen',
-    longExposureLabel: 'longExposure',
-  };
+  // const nodeKeyToHelpKey = {
+  //   shellTypeLabel: 'shellType',
+  //   shellSizeLabel: 'shellSize',
+  //   qualityLabel: 'quality',
+  //   skyLightingLabel: 'skyLighting',
+  //   scaleFactorLabel: 'scaleFactor',
+  //   autoLaunchLabel: 'autoLaunch',
+  //   finaleModeLabel: 'finaleMode',
+  //   hideControlsLabel: 'hideControls',
+  //   fullscreenLabel: 'fullscreen',
+  //   longExposureLabel: 'longExposure',
+  // };
 
   // Render app UI / keep in sync with state
   const appNodes = {
@@ -834,8 +833,8 @@ export default function Firework() {
   // First render is called in init()
   function renderApp(state) {
     console.log('inside renderApp');
-    const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
-    const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
+    // const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
+    // const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
     // appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
     // appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
     // appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
@@ -900,7 +899,7 @@ export default function Firework() {
     };
   }
 
-  const updateConfigNoEvent = () => updateConfig();
+  // const updateConfigNoEvent = () => updateConfig();
   // appNodes.quality.addEventListener('input', updateConfigNoEvent);
   // appNodes.shellType.addEventListener('input', updateConfigNoEvent);
   // appNodes.shellSize.addEventListener('input', updateConfigNoEvent);
@@ -937,10 +936,10 @@ export default function Firework() {
   // Invisible stars need an indentifier, even through they won't be rendered - physics still apply.
   const COLOR_CODES_W_INVIS = [...COLOR_CODES, INVISIBLE];
   // Map of color codes to their index in the array. Useful for quickly determining if a color has already been updated in a loop.
-  const COLOR_CODE_INDEXES = COLOR_CODES_W_INVIS.reduce((obj, code, i) => {
-    obj[code] = i;
-    return obj;
-  }, {});
+  // const COLOR_CODE_INDEXES = COLOR_CODES_W_INVIS.reduce((obj, code, i) => {
+  //   obj[code] = i;
+  //   return obj;
+  // }, {});
   // Tuples is a map keys by color codes (hex) with values of { r, g, b } tuples (still just objects).
   const COLOR_TUPLES = {};
   COLOR_CODES.forEach(hex => {
@@ -1029,7 +1028,7 @@ export default function Firework() {
     // Always use streamers, and sometimes a pistil
     shell.streamers = true;
     const pistil = Math.random() < 0.42;
-    const pistilColor = pistil && makePistilColor(ghostColor);
+    // const pistilColor = pistil && makePistilColor(ghostColor);
     // Ghost effect - transition from invisible to chosen color
     shell.color = INVISIBLE;
     shell.secondColor = ghostColor;
@@ -1470,13 +1469,13 @@ export default function Firework() {
   seqSmallBarrage.cooldown = 15000;
   seqSmallBarrage.lastCalled = Date.now();
 
-  const sequences = [
-    seqRandomShell,
-    seqTwoRandom,
-    seqTriple,
-    seqPyramid,
-    seqSmallBarrage,
-  ];
+  // const sequences = [
+  //   seqRandomShell,
+  //   seqTwoRandom,
+  //   seqTriple,
+  //   seqPyramid,
+  //   seqSmallBarrage,
+  // ];
 
   let isFirstSeq = true;
   const finaleCount = 32;
@@ -1530,7 +1529,7 @@ export default function Firework() {
 
   function handlePointerStart(event) {
     activePointerCount++;
-    const btnSize = 50;
+    // const btnSize = 50;
 
     // No need for pause/menu functions
     // if (event.y < btnSize) {
@@ -1563,20 +1562,20 @@ export default function Firework() {
     if (!isRunning()) return;
   }
 
-  function handleKeydown(event) {
-    // P
-    if (event.keyCode === 80) {
-      togglePause();
-    }
-    // O
-    else if (event.keyCode === 79) {
-      toggleMenu();
-    }
-    // Esc
-    else if (event.keyCode === 27) {
-      toggleMenu(false);
-    }
-  }
+  // function handleKeydown(event) {
+  //   // P
+  //   if (event.keyCode === 80) {
+  //     togglePause();
+  //   }
+  //   // O
+  //   else if (event.keyCode === 79) {
+  //     toggleMenu();
+  //   }
+  //   // Esc
+  //   else if (event.keyCode === 27) {
+  //     toggleMenu(false);
+  //   }
+  // }
 
   useEffect(() => {
     if (!DISABLE_CLICKS) {
@@ -1584,7 +1583,7 @@ export default function Firework() {
       mainStage.addEventListener('pointerend', handlePointerEnd);
       mainStage.addEventListener('pointermove', handlePointerMove);
     }
-  }, []);
+  }, [DISABLE_CLICKS, handlePointerEnd, handlePointerMove, handlePointerStart, mainStage]);
 
   // Key commands are likely unwanted when fireworks are just an overlay.
   // window.addEventListener('keydown', handleKeydown);

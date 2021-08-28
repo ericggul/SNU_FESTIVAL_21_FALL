@@ -18,4 +18,8 @@ export const StyledScrollTopButton = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 100%;
+
+  transition: opacity 0.5s;
+  opacity: ${({ scroll }) => (scroll > 300 ? 1 : 0)};
+  transform: rotate(${({ scroll }) => (scroll - 400) / 5}deg);
 `;

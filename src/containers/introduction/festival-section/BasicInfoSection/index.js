@@ -1,62 +1,49 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal/Fade';
-import SubTitle from '@I/introduction/sub_title.png';
-import Title from '@I/introduction/title.png';
-import Period from '@I/introduction/period.png';
-import MascotsInSpeechBubble1 from '@I/introduction/mascot-in-speech-bubble-1.png';
-import MascotsInSpeechBubble2 from '@I/introduction/mascot-in-speech-bubble-2.png';
-import Poster21Spring from '@I/poster/21spring.png';
-import Poster21SpringCastle from '@I/poster/21springCastle.png';
+
+import Header from '@I/introduction/header.png';
+import Poster21Fall from '@I/poster/21Fall.png';
+import TextReveal from '@F/animation/text-animation/TextRevealv2';
 import * as S from './styles';
 
 function BasicInfoSection({ isMobile }) {
+  const festivalIntro = (
+    <S.FestivalIntro isMobile={isMobile}>
+      2021 서울대학교
+      <br />
+      온라인 가을 축제
+    </S.FestivalIntro>
+  );
   const title = useMemo(() => (
-    <S.Title widths={[450, 450, 270]}>
-      <Fade left distance="40px" delay={100}>
-        <S.AbsoluteImage src={SubTitle} alt="FESWORLD" widths={[240, 240, 150]} top={1} left={1} />
-      </Fade>
-      <Fade right distance="40px" delay={200}>
-        <S.AbsoluteImage src={Title} alt="FESWORLD" widths={[230, 230, 150]} top={isMobile ? 25 : 35} right={isMobile ? -10 : -20} rotate={1} duration={0.5} />
-      </Fade>
-      <Fade bottom distance="20px" delay={100}>
-        <S.AbsoluteImage src={Period} alt="FESWORLD" widths={[140, 140, 75]} top={isMobile ? 80 : 115} right={1} />
-      </Fade>
-      <Fade bottom distance="10px" delay={300}>
-        <S.AbsoluteImage src={MascotsInSpeechBubble1} alt="FESWORLD" widths={[140, 140, 100]} top={isMobile ? 65 : 100} left={1} />
-      </Fade>
-      <Fade top distance="10px" delay={100}>
-        <S.AbsoluteImage src={MascotsInSpeechBubble2} alt="FESWORLD" widths={[140, 140, 100]} top={1} right={-1} />
-      </Fade>
+    <S.Title widths={[450, 450, 131]} heights={[240, 240, 131].map(num => num * 0.473)}>
+      <S.AbsoluteImage src={Header} alt="Header" widths={[240, 240, 131]} top={0} left={1} />
     </S.Title>
   ), [isMobile]);
 
   const mainPoster = (
     <Fade left distance="30px" delay={200}>
-      <S.PosterWrapper widths={[360, 340, 270]} heights={[360, 340, 270].map(num => num * 1.41)}>
-        <S.AbsoluteImage src={Poster21Spring} alt="21spring" widths={[360, 340, 270]} top={0} left={1} />
-        <S.AbsoluteImage src={Poster21SpringCastle} alt="21spring" widths={[360, 340, 270].map(num => num * 0.7)} top={isMobile ? 115 : 150} left={isMobile ? 40 : 50} move={1} duration={1} />
+      <S.PosterWrapper widths={[360, 340, 240]} heights={[360, 340, 240].map(num => num * 1.414)}>
+        <S.AbsoluteImage src={Poster21Fall} alt="21spring" widths={[360, 340, 240]} top={0} left={1} />
       </S.PosterWrapper>
     </Fade>
   );
   const festivalDescription = (
-    <Fade right distance="30px">
-      <S.FestivalDescription>
-        초대장을 받고 온라인 세계로 들어와 도착한 페스월드!
-        <br />
-        고릴라리온과 리오와 함께 페스월드의 이곳 저곳을 돌아다녀보자!
-        <br />
-        페스월드에서 미션들을 수행하다보면 상품을 얻을지도 모른다고…?
-        <br />
-        재밌겠다! 비대면 축제는 처음이야!
-      </S.FestivalDescription>
-    </Fade>
+    // <Fade right distance="30px" delay={1000}>
+    <S.FestivalDescription>
+      <TextReveal text="당신이 그리워하는, <split> 혹은 느껴보지 못한 학교." globalDelay={1000} />
+      <TextReveal text="밝게 빛나는 환상을 그리는 관악의 밤." globalDelay={3800} />
+      <TextReveal text="여러분들이란 빛으로 가득 채워질 <split> 서울대학교 풍산마당과" globalDelay={5200} />
+      <TextReveal text="함께할 비대면 축제 ver.2 관악의밤! 기대하시라!" globalDelay={8000} />
+    </S.FestivalDescription>
+    // </Fade>
   );
 
   return (
     <>
       {isMobile && (
         <S.MobileBasicInfo>
+          {festivalIntro}
           {title}
           {mainPoster}
           {festivalDescription}
@@ -67,7 +54,8 @@ function BasicInfoSection({ isMobile }) {
           <div>
             {mainPoster}
           </div>
-          <div>
+          <div style={{ position: 'relative' }}>
+            {festivalIntro}
             {title}
             {festivalDescription}
           </div>

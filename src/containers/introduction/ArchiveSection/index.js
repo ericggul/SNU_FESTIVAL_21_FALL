@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from '@F/carousel/Carousel';
+import Poster21Spring from '@I/poster/21spring.png';
 import Poster19Spring from '@I/poster/19spring.png';
 import Poster18Spring from '@I/poster/18spring.jpg';
 import Poster17Spring from '@I/poster/17spring.jpeg';
@@ -22,7 +23,7 @@ function ArchiveSection({ isMobile, theme }) {
           className="Carousel"
           fullHeight={isMobile ? 340 : theme.windowHeight / 1.5}
           fullWidth={isMobile ? 340 : theme.windowHeight / 1.5}
-          items={[Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring, Poster17Fall,
+          items={[Poster21Spring, Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring, Poster17Fall,
             Poster17Spring, Poster16Fall, Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring,
             Poster17Fall, Poster17Spring, Poster16Fall].map(image => (
               <S.Poster><img src={image} alt="포스터" /></S.Poster>
@@ -56,6 +57,9 @@ ArchiveSection.propTypes = {
 };
 
 const archives = [
+  {
+    time: '2021 봄 축제', name: '페스월드', image: Poster21Spring, description: '당신만의 특별한 모남이, 어디서든 볼 수 있는  매끈한 동그라미보다 더 멋지다는 것을.',
+  },
   {
     time: '2019 가을 축제', name: '내모난꿈', image: Poster19Fall, description: '당신만의 특별한 모남이, 어디서든 볼 수 있는  매끈한 동그라미보다 더 멋지다는 것을.',
   },

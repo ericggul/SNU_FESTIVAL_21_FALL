@@ -1,16 +1,31 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { ResponsiveWidthStyle, ResponsiveHeightStyle } from '@S/responsive/display';
 import media from 'styled-media-query';
 
+export const FestivalIntro = styled.div`
+  font-size: 1rem;
+  position: absolute;
+  top: ${props => (props.isMobile ? '4rem' : '-2.5rem')};
+  left: ${props => (props.isMobile ? '2rem' : '0rem')};
+  text-align: left;
+  color: white;
+`;
+
+const appear = keyframes`
+  from{ opacity: 0}
+  to{opacity: 1}
+`;
+
 export const Title = styled.div`
   ${ResponsiveWidthStyle};
+  ${ResponsiveHeightStyle};
   position: relative;
-  margin-bottom: 1rem;
+  margin: 2rem 0 3rem 0;
   
-  height: 150px;
-  ${media.lessThan('medium')`
-    height: 100px;
-  `};
+  text-align: center;
+  opacity: 0;
+  animation: ${appear} 4s infinite alternate;
+  animation-delay: 0.5s;
 `;
 
 export const PosterWrapper = styled.div`
@@ -73,12 +88,11 @@ export const BasicInfo = styled.div`
   }
 `;
 
-export const FestivalDescription = styled.p`
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  font-weight: bold;
+export const FestivalDescription = styled.div`
+  margin-top: 2.5rem;
+  font-size: 1rem;
   word-break: keep-all;
-  line-height: 2.27;
+  line-height: 1.7;
   color: white;
   text-align: center;
   

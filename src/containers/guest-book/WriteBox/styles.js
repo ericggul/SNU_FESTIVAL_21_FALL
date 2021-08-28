@@ -15,7 +15,7 @@ const InputStyle = css`
   border-radius: 0;
   outline: 0;
 
-  color: ${({ theme }) => theme.palette.PURPLE50};
+  color: ${({ theme }) => theme.palette.PASTEL_PURPLE};
   font-size: 1rem;
 `;
 
@@ -24,19 +24,19 @@ export const InputBox = styled.input`
   min-height: 1.8rem;
   box-sizing: border-box;
 
-  border-bottom: 1px solid ${({ theme }) => theme.palette.PURPLE50};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.PASTEL_PURPLE};
   transition: border .15s ease-in-out, padding .15s ease-in-out;
   &:focus{
-    border-bottom: 2px solid ${({ theme }) => theme.palette.PURPLE50};
+    border-bottom: 2px solid ${({ theme }) => theme.palette.PASTEL_PURPLE};
   }
   
   background-color: transparent;
-  font-weight: bold;
+  font-weight: normal;
   width: 6rem;
-  padding: 2px 7px;
+  padding: 0px 7px;
   
   &::placeholder {
-    color: ${({ theme }) => rgba(theme.palette.PURPLE50, 0.4)};
+    color: ${({ theme }) => theme.palette.LIGHT_PURPLE};
   }
 `;
 
@@ -45,7 +45,16 @@ export const TextArea = styled.textarea`
 
   resize: none;
   flex: 1;
-  background-color: ${({ theme }) => rgba(theme.palette.PURPLE50, 0.15)};
+  border-radius: 5px;
+  background-color: ${({ theme }) => rgba(theme.palette.PASTEL_PURPLE, 0.85)};
+  padding: 5px 7px;
+  color: ${({ theme }) => theme.palette.WHITE};
+
+  &::placeholder {
+    padding: 5px 7px;
+    font-weight: 300;
+    color: ${({ theme }) => theme.palette.WHITE};
+  }
 `;
 
 export const Submit = styled.button`
@@ -53,21 +62,40 @@ export const Submit = styled.button`
   margin: 5px 0;
 
   width: 4.5rem;
-  height: 2.25rem;
-  font-size: 0.8rem;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
 
   border: 1px solid transparent;
-  border-radius: 18px;
+  border-radius: 16px;
   outline: 0;
 
   cursor: pointer;
 
   color: ${({ theme }) => theme.palette.GRAY80};
-  background-color: ${({ theme }) => rgba(theme.palette.PURPLE50, 0.45)};
+  background-color: ${({ theme }) => rgba(theme.palette.LIGHT_PURPLE, 1)};
+  box-shadow: 
+    0 0 2px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+    0 0 5px ${({ theme }) => theme.palette.LIGHT_PURPLE};
+
+  &:after{
+    content: '';
+    box-shadow: 
+      0 0 2px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 5px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 10px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 15px ${({ theme }) => theme.palette.LIGHT_PURPLE};
+    opacity: 1;
+    // @keyframes opacity{
+    //   from{ opacity: 0; }
+    //   to{opacity: 1; }
+    // }
+    // animation: animate 2s opacity infinite reverse;
+  }
   transition: color, background-color, .15s;
   &:hover{
     color: ${({ theme }) => theme.palette.PURPLE50};
-    background-color: ${({ theme }) => rgba(theme.palette.GRAY80, 0.45)};
+    background-color: ${({ theme }) => rgba(theme.palette.LIGHT_PURPLE, 0.8)};
   }
   
   ${media.lessThan('medium')`

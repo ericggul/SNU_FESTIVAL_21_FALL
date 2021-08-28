@@ -5,7 +5,8 @@ export const StyledPublisherSection = styled.div`
   ${FlexCenterStyle};
   
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  padding: 2rem 0 3rem 0;
   
   span {
     cursor: pointer;

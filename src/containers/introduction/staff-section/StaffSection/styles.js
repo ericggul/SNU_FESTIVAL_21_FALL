@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
-import { rgba } from 'polished';
 
 export const Wrapper = styled.div`
   ${FlexCenterStyle};
   position: relative;
   background-image: linear-gradient(
-    white,
-    ${({ theme }) => rgba(theme.palette.PURPLE50, 0.3)}
-  );
+    ${({ theme }) => theme.palette.LIGHT_PURPLE}, 
+    ${({ theme }) => theme.palette.DARK_PURPLE});
+
 `;
 
 export const StyledStaffSection = styled.div`

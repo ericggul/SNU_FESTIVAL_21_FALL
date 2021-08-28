@@ -18,9 +18,9 @@ function PromotionVideoSection() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         />
       </S.VideoWrapper>
-      <S.Text>
+      {/* <S.Text>
         이제 우리 함께 페스월드로 떠나볼까?
-      </S.Text>
+      </S.Text> */}
     </S.StyledPromotionVideoSection>
   );
 }

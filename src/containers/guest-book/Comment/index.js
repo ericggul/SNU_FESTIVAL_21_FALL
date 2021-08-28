@@ -2,21 +2,21 @@ import React, {
   useCallback, useEffect, useState, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
-import mascot1 from '@I/svg/mascot/1.svg';
-import mascot2 from '@I/svg/mascot/2.svg';
-import mascot3 from '@I/svg/mascot/3.svg';
-import mascot4 from '@I/svg/mascot/4.svg';
-import mascot5 from '@I/svg/mascot/5.svg';
-import mascot10 from '@I/svg/mascot/10.svg';
-import mascot11 from '@I/svg/mascot/11.svg';
-import mascot12 from '@I/svg/mascot/12.svg';
-import mascot13 from '@I/svg/mascot/13.svg';
-import mascot14 from '@I/svg/mascot/14.svg';
+import character1 from '@I/guest-book/character1.svg';
+import character2 from '@I/guest-book/character2.svg';
+import character3 from '@I/guest-book/character3.svg';
+import character4 from '@I/guest-book/character4.svg';
+import character5 from '@I/guest-book/character5.svg';
+import character6 from '@I/guest-book/character6.svg';
+import character7 from '@I/guest-book/character7.svg';
+import character8 from '@I/guest-book/character8.svg';
+import FilledHeart from '@I/guest-book/filled-heart.svg';
+import EmptyHeart from '@I/guest-book/empty-heart.svg';
+
 import dayjs from 'dayjs';
 import { guestBookCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase/app';
-import FilledHeart from '@I/icon/filled-heart.svg';
-import EmptyHeart from '@I/icon/empty-heart.svg';
+
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
@@ -27,6 +27,15 @@ import { actions } from '@/redux/mission/state';
 import MissionGuide from '@F/modal/content/MissionGuide';
 import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
 import * as S from './styles';
+
+function Mascot({ number }) {
+  const [animate, setAnimate] = useState(0);
+  return (
+    <S.ImageWrapper>
+      <S.ProfileImage src={characters[number % characters.length]} animate={animate} onClick={() => setAnimate(Math.ceil(Math.random() * 5))} />
+    </S.ImageWrapper>
+  );
+}
 
 export function Comment({ user, comments, mission }) {
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
@@ -86,47 +95,57 @@ export function Comment({ user, comments, mission }) {
       .then(() => toast(isLiked ? '좋아요를 취소하였습니다.' : '이 방명록 글을 좋아합니다.'));
   }, [user.uid, isAuthorized, setIsSignInModalOpen]);
 
-  console.log(comments.length);
+  const getRandom = (a, b) => Math.random() * (b - a) + a;
+
   return (
     <S.StyledComment>
       {comments.length}
-      {comments.map(comment => {
+      {comments.map((comment, i) => {
         const isMine = user.uid === comment.author;
         const isLiked = myLikesForComment.includes(comment.id);
 
         return (
-          // TODO: react window
-          <S.CommentThread key={comment.id}>
-            <S.FirstRow>
-              <S.Box>
-                <S.ProfileImage src={mascots[comment.created_at.seconds % mascots.length]} />
-                <S.Id>{comment.username}</S.Id>
-              </S.Box>
-              <S.Box>
-                { isMine && (
+        // TODO: react window
+          <S.CommentThread key={comment.id} delay={i * 0.1}>
+            <Mascot number={comment.created_at.seconds} />
+            <S.CommentContent>
+              <S.FirstRow>
+                <S.Box>
+                  <S.Id>{comment.username}</S.Id>
+                  {comment.isBest && <S.BestLabel>BEST</S.BestLabel>}
+                </S.Box>
+              </S.FirstRow>
+              <S.ContentRow>
+                {comment.content.split('\n').map((line, index) => (
+                  <S.Content key={index}>
+                    {line}
+                    <br />
+                  </S.Content>
+                ))}
+              </S.ContentRow>
+              <S.LastRow>
+                <S.InfoBox>
+                  <S.Time>{dayjs.unix(comment.created_at.seconds).format('YYYY.MM.DD')}</S.Time>
+                  {
+                    comment.likes.length > 0
+                    && (
+                    <S.Likes>
+                      <S.HeartImage1 src={FilledHeart} alt="likes" style={{ marginRight: 3 }} />
+                      <S.LikesText>{comment.likes.length}</S.LikesText>
+                    </S.Likes>
+                    )
+                  }
+                </S.InfoBox>
+                <S.LikeBox>
+                  { isMine && (
                   <S.Delete onClick={() => deleteComment(comment.id)}>삭제</S.Delete>
-                )}
-                <S.LikeButton onClick={() => toggleLikeForComment(comment.id, isLiked)}>
-                  <S.Image src={isLiked ? FilledHeart : EmptyHeart} alt="like" />
-                </S.LikeButton>
-              </S.Box>
-            </S.FirstRow>
-            <S.ContentRow>
-              {comment.isBest && <S.BestLabel>BEST</S.BestLabel>}
-              {comment.content.split('\n').map((line, index) => (
-                <S.Content key={index}>
-                  {line}
-                  <br />
-                </S.Content>
-              ))}
-            </S.ContentRow>
-            <S.LastRow>
-              <S.Time>{dayjs.unix(comment.created_at.seconds).format('MM월 DD일 HH:mm')}</S.Time>
-              <S.Likes>
-                <S.Image src={EmptyHeart} alt="likes" style={{ marginRight: 3 }} />
-                <div>{comment.likes.length}</div>
-              </S.Likes>
-            </S.LastRow>
+                  )}
+                  <S.LikeButton onClick={() => toggleLikeForComment(comment.id, isLiked)}>
+                    <S.HeartImage2 src={isLiked ? FilledHeart : EmptyHeart} alt="like" />
+                  </S.LikeButton>
+                </S.LikeBox>
+              </S.LastRow>
+            </S.CommentContent>
           </S.CommentThread>
         );
       })}
@@ -157,8 +176,8 @@ Comment.propTypes = {
   }).isRequired,
 };
 
-const mascots = [
-  mascot1, mascot2, mascot3, mascot4, mascot5, mascot10, mascot11, mascot12, mascot13, mascot14,
+const characters = [
+  character1, character2, character3, character4, character5, character6, character7, character8,
 ];
 
 function CommentParent({ user }) {
@@ -195,6 +214,7 @@ function CommentParent({ user }) {
         })));
       setComments(firestoreComments);
     }), []);
+
   useEffect(() => {
     const unsubscribe = subscribeComments();
     return () => unsubscribe();

@@ -5,15 +5,18 @@ import * as S from './styles';
 
 function getRandom(a, b) { return Math.random() * (b - a) + a; }
 
-function LightChange() {
+function LightChange({image}) {
   useEffect(() => {
-    const render = new App();
+    const render = new App(image);
   }, []);
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '100vh' }}
-      background="black"
+      style={{ width: '100%',
+       height: '100%', 
+       position: 'absolute', 
+       zIndex: '3',
+       background: "black", }}
     />
   );
 }
@@ -22,10 +25,12 @@ export default LightChange;
 const BOUNCE = 0.82;
 
 class App {
-  constructor() {
+  constructor(image) {
     this.canvas = document.createElement('canvas');
     this.wrapper = document.getElementById('CanvasWrapper');
+    console.log(this.wrapper);
     this.wrapper.appendChild(this.canvas);
+    console.log(this.wrapper);
     this.ctx = this.canvas.getContext('2d');
 
     this.tmpCanvas = document.createElement('canvas');
@@ -54,7 +59,7 @@ class App {
     };
 
     this.image = new Image();
-    this.image.src = ClosingFestival;
+    this.image.src = image;
 
     this.image.onload = () => {
       this.isLoaded = true;
@@ -122,7 +127,6 @@ class App {
     );
 
     this.imageData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
-    console.log(this.imageData);
     this.drawDots();
   }
 
