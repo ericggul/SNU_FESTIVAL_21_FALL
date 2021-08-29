@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.417" height="15.013">
+    <defs>
+        <style>
+            .cls-1{fill:#fff}.cls-2{fill:#111734}
+        </style>
+    </defs>
+    <g id="댓글_아이콘" data-name="댓글 아이콘" transform="translate(-811 -4137.857)">
+        <g id="그룹_18522" data-name="그룹 18522" transform="translate(820.319 4149.062)">
+            <g id="그룹_3274" data-name="그룹 3274">
+                <path id="패스_7698" data-name="패스 7698" class="cls-1" d="M4.466 3.809V0H0z"/>
+            </g>
+        </g>
+        <g id="그룹_18523" data-name="그룹 18523" transform="translate(811 4137.857)">
+            <g id="그룹_18520" data-name="그룹 18520">
+                <rect id="사각형_23913" data-name="사각형 23913" class="cls-1" width="18.417" height="12.15" rx="3"/>
+            </g>
+            <g id="그룹_18521" data-name="그룹 18521" transform="translate(4.525 5.406)">
+                <circle id="타원_55" data-name="타원 55" class="cls-2" cx=".669" cy=".669" r=".669" transform="translate(4.014)"/>
+                <circle id="타원_56" data-name="타원 56" class="cls-2" cx=".669" cy=".669" r=".669" transform="translate(8.029)"/>
+                <circle id="타원_57" data-name="타원 57" class="cls-2" cx=".669" cy=".669" r=".669"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -9,7 +9,7 @@ import * as S from './styles';
 
 function StaffSection({ isMobile, theme }) {
   return (
-    <S.Wrapper>
+    <S.Wrapper gradient={Math.random() < 0.5}>
       <S.StyledStaffSection>
         <Greeting isMobile={isMobile} />
         <Description />

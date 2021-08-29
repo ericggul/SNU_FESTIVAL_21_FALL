@@ -71,6 +71,7 @@ export const Submit = styled.button`
   outline: 0;
 
   cursor: pointer;
+  position: relative;
 
   color: ${({ theme }) => theme.palette.GRAY80};
   background-color: ${({ theme }) => rgba(theme.palette.LIGHT_PURPLE, 1)};
@@ -80,22 +81,36 @@ export const Submit = styled.button`
 
   &:after{
     content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
     box-shadow: 
       0 0 2px ${({ theme }) => theme.palette.LIGHT_PURPLE},
       0 0 5px ${({ theme }) => theme.palette.LIGHT_PURPLE},
       0 0 10px ${({ theme }) => theme.palette.LIGHT_PURPLE},
       0 0 15px ${({ theme }) => theme.palette.LIGHT_PURPLE};
-    opacity: 1;
-    // @keyframes opacity{
-    //   from{ opacity: 0; }
-    //   to{opacity: 1; }
-    // }
-    // animation: animate 2s opacity infinite reverse;
+    opacity: 0;
+    @keyframes opacity{
+      from{ opacity: 0; }
+      to{opacity: 1; }
+    }
+    animation: opacity 2s infinite alternate;
   }
   transition: color, background-color, .15s;
   &:hover{
     color: ${({ theme }) => theme.palette.PURPLE50};
-    background-color: ${({ theme }) => rgba(theme.palette.LIGHT_PURPLE, 0.8)};
+    &:after{
+      box-shadow: 
+      0 0 2px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 5px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 10px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 15px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 20px ${({ theme }) => theme.palette.LIGHT_PURPLE},
+      0 0 25px ${({ theme }) => theme.palette.LIGHT_PURPLE};
+    }
   }
   
   ${media.lessThan('medium')`

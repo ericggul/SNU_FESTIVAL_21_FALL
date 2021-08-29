@@ -2,6 +2,7 @@ import React, {
   useCallback, useEffect, useState, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
+import NumberIncrement from '@F/animation/text-animation/NumberIncrement';
 import character1 from '@I/guest-book/character1.svg';
 import character2 from '@I/guest-book/character2.svg';
 import character3 from '@I/guest-book/character3.svg';
@@ -28,6 +29,7 @@ import MissionGuide from '@F/modal/content/MissionGuide';
 import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
 import * as S from './styles';
 
+
 function Mascot({ number }) {
   const [animate, setAnimate] = useState(0);
   return (
@@ -37,7 +39,7 @@ function Mascot({ number }) {
   );
 }
 
-export function Comment({ user, comments, mission }) {
+export function Comment({ user, comments, mission, handleHeartClick }) {
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
   const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
     name: '방명록',
@@ -81,6 +83,9 @@ export function Comment({ user, comments, mission }) {
   }, []);
 
   const toggleLikeForComment = useCallback((commentId, isLiked) => {
+    if(!isLiked){
+      handleHeartClick();
+    } 
     if (!isAuthorized) {
       setIsSignInModalOpen(true);
       return;
@@ -99,7 +104,7 @@ export function Comment({ user, comments, mission }) {
 
   return (
     <S.StyledComment>
-      {comments.length}
+      <NumberIncrement number={25} />
       {comments.map((comment, i) => {
         const isMine = user.uid === comment.author;
         const isLiked = myLikesForComment.includes(comment.id);
@@ -180,7 +185,7 @@ const characters = [
   character1, character2, character3, character4, character5, character6, character7, character8,
 ];
 
-function CommentParent({ user }) {
+function CommentParent({ user, handleHeartClick }) {
   // 방명록 firestore
   const [comments, setComments] = useState([]);
   const [bestComments, setBestComments] = useState([]);
@@ -223,7 +228,7 @@ function CommentParent({ user }) {
   // mission redux
   const mission = useMission();
 
-  return <Comment comments={[...bestComments, ...normalComments]} user={user} mission={mission} />;
+  return <Comment comments={[...bestComments, ...normalComments]} user={user} mission={mission} handleHeartClick={handleHeartClick} />;
 }
 export default CommentParent;
 

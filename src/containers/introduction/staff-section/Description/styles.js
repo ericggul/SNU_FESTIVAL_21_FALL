@@ -11,8 +11,9 @@ export const StyledDescription = styled.div`
   
   text-align: right;
   align-self: flex-end;
+  font-size: 0.9rem;
   
   color: ${({ theme }) => theme.palette.WHITE};
-  line-height: 1.8;
+  line-height: 1.7;
   word-break: keep-all;
 `;

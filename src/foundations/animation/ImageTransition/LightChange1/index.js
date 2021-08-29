@@ -11,12 +11,12 @@ function LightChange({image}) {
   }, []);
   return (
     <div
-      id="CanvasWrapper"
+      id="Wrapper"
       style={{ width: '100%',
        height: '100%', 
        position: 'absolute', 
        zIndex: '3',
-       background: "black", }}
+       background: `transparent`, }}
     />
   );
 }
@@ -27,27 +27,24 @@ const BOUNCE = 0.82;
 class App {
   constructor(image) {
     this.canvas = document.createElement('canvas');
-    this.wrapper = document.getElementById('CanvasWrapper');
-    console.log(this.wrapper);
+    this.wrapper = document.getElementById('Wrapper');
     this.wrapper.appendChild(this.canvas);
-    console.log(this.wrapper);
+
     this.ctx = this.canvas.getContext('2d');
 
     this.tmpCanvas = document.createElement('canvas');
-    // this.tmpCanvas.setAttribute(
-    //   'style', 'position: absolute; top: 0; left: 0;',
-    // );
+    this.tmpCanvas.setAttribute(
+      'style', 'opacity:0',
+    );
     this.wrapper.appendChild(this.tmpCanvas);
     this.tmpCtx = this.tmpCanvas.getContext('2d');
 
-    this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+    this.pixelRatio = 1
     this.ripple = new Ripple();
 
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
 
-    this.radius = 6;
-    this.pixelSize = 18;
     this.dots = [];
 
     this.isLoaded = false;
@@ -82,6 +79,11 @@ class App {
     this.tmpCanvas.width = this.stageWidth;
     this.tmpCanvas.height = this.stageHeight;
 
+    
+    
+    this.pixelSize = this.stageWidth<400 ? 6 : 12;
+    this.radius = this.stageWidth<400 ? 2 : 5;
+
     this.ripple.resize(this.stageWidth, this.stageHeight);
     if (this.isLoaded) {
       this.drawImage();
@@ -93,6 +95,7 @@ class App {
     const imgRatio = this.image.width / this.image.height;
     this.imgPos.width = this.stageWidth;
     this.imgPos.height = this.stageHeight;
+
 
     if (imgRatio < stageRatio) {
       this.imgPos.width = Math.round(
@@ -114,11 +117,16 @@ class App {
       this.imgPos.x = 0;
     }
 
+    console.log(this.imgPos);
+
     this.ctx.drawImage(
       this.image,
       0, 0, this.image.width, this.image.height,
       this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,
     );
+
+    console.log(0, 0, this.image.width, this.image.height,
+      this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,);
 
     this.tmpCtx.drawImage(
       this.image,
@@ -127,29 +135,31 @@ class App {
     );
 
     this.imageData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
-    this.drawDots();
+    
   }
 
   drawDots() {
     this.dots = [];
 
-    this.columns = Math.ceil(this.stageWidth / this.pixelSize);
-    this.rows = Math.ceil(this.stageHeight / this.pixelSize);
+    this.columns = Math.ceil(this.imgPos.width / this.pixelSize);
+    this.rows = Math.ceil(this.imgPos.height / this.pixelSize);
+
 
     for (let i = 0; i < this.rows; i += 1) {
       const y = (i + 0.5) * this.pixelSize;
-      const pixelY = Math.max(Math.min(y, this.stageHeight), 0);
+      const pixelY = Math.max(Math.min(y, this.imgPos.height), 0) + this.imgPos.y;
       for (let j = 0; j < this.columns; j += 1) {
         const x = (j + 0.5) * this.pixelSize;
-        const pixelX = Math.max(Math.min(x, this.stageWidth), 0);
+        const pixelX = Math.max(Math.min(x, this.imgPos.width), 0) + this.imgPos.x;
 
-        const pixelIndex = (pixelX + pixelY * this.stageWidth) * 4;
+ 
+        const pixelIndex = (pixelX + pixelY * this.imgPos.width) * 4;
         const red = this.imageData.data[pixelIndex + 0];
         const green = this.imageData.data[pixelIndex + 1];
         const blue = this.imageData.data[pixelIndex + 2];
 
         const dot = new Dot(
-          x, y,
+          x + this.imgPos.x, y + this.imgPos.y,
           this.radius,
           this.pixelSize,
           red, green, blue,
@@ -171,6 +181,7 @@ class App {
   }
 
   onClick(e) {
+    this.drawDots();
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
 
     for (let i = 0; i < this.dots.length; i += 1) {
@@ -218,12 +229,12 @@ class Dot {
 
   animate(ctx) {
     ctx.beginPath();
-    ctx.fillStyle = '#000';
-    ctx.fillRect(
-      this.x - this.pixelSizeHalf,
-      this.y - this.pixelSizeHalf,
-      this.pixelSize, this.pixelSize,
-    );
+    // ctx.fillStyle = `transparent`;
+    // ctx.fillRect(
+    //   this.x - this.pixelSizeHalf,
+    //   this.y - this.pixelSizeHalf,
+    //   this.pixelSize, this.pixelSize,
+    // );
 
     const accel = (this.targetRadius - this.radius) / 2;
     const deaccel = (this.radius) / 2;
@@ -237,7 +248,7 @@ class Dot {
 
     ctx.beginPath();
 
-    ctx.fillStyle = `rgba(${this.red * 0.1 + 220},${this.green * 0.3 + 180},${this.blue * 0.6 + 90})`;
+    ctx.fillStyle = `rgba(${this.red},${this.green},${this.blue})`;
     ctx.arc(this.x, this.y, Math.abs(this.radius), 0, Math.PI * 2, false);
     ctx.fill();
   }

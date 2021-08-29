@@ -4,8 +4,13 @@ export const StyledGroupPhoto = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  width: 80vw;
-  height: 30vh;
+  width: calc(80vw );
+  height: calc((80vw ) * 0.5625);
+
+  @media (min-width: 1000px){
+    width: 800px;
+    height: 450px;
+  }
 `;
 
 export const Image = styled.img`

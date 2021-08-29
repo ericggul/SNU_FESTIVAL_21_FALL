@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Comments from '@C/guest-book/Comment';
 import WriteBox from '@C/guest-book/WriteBox';
+import Heart from '@C/guest-book/Heart';
 import withUser from '@U/hoc/withUser';
 import { HeaderContent } from '@F/layout/Header';
 import * as S from './styles';
 
 function GuestBook({ user }) {
+  const [heartAnimate, setHeartAnimate] = useState(false);
+  const heartAnimateToggle = useCallback(() => {
+    setHeartAnimate(true)
+    setTimeout(()=>{
+      setHeartAnimate(false)
+    }, 520)
+  }, []);
   return (
     <S.StyledGuestBook>
       <HeaderContent>방명록</HeaderContent>
@@ -15,9 +23,10 @@ function GuestBook({ user }) {
           <WriteBox user={user} />
         </S.WriteBoxWrapper>
         <S.CommentsWrapper>
-          <Comments user={user} />
+          <Comments user={user} handleHeartClick={heartAnimateToggle}/>
         </S.CommentsWrapper>
       </S.Body>
+      <Heart heartAnimate={heartAnimate}/>
     </S.StyledGuestBook>
   );
 }
