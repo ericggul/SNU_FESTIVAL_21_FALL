@@ -6,35 +6,21 @@ const appear = keyframes`
   to{ opacity: 1; }
 `;
 
-export const CommentsNumber = styled.div`
-  color: white;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  animation: ${appear} 1s forwards;
-  animation-delay: 1s;
-`;
-
-export const CommentImage = styled.img`
-  width: auto;
-  height: 0.8rem;
-  margin-right: 0.5rem;
-`;
-
 export const StyledComment = styled.div`
   overflow: auto;
 
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% + 2rem);
   height: 100%;
-
-  padding: 0.5rem;
+  margin-left: -1rem;
+  padding: 1rem;
   box-sizing: border-box;
 `;
 
 export const CommentThread = styled.div`
   border-top: 1px solid ${({ theme }) => theme.palette.PASTEL_PURPLE};
-  padding: 0.4rem;
+  padding: 0.4rem 0;
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -49,56 +35,8 @@ export const CommentThread = styled.div`
   animation-delay: ${({ delay }) => delay}s;
 `;
 
-export const ImageWrapper = styled.div`
-  width: 2rem;
-  height: 2rem;
-  position: relative;
-  margin-right: 5px;
-`;
-
-export const ProfileImage = styled.img`
-  position: absolute;
-  max-width: 2rem;
-  max-height: 2rem;
-  top: 0;
-  bottom: 0;
-  margin: auto;
- 
-  cursor: pointer;
-  perspective: 100px;
-  filter: drop-shadow(0 0 0.5rem ${({ theme }) => theme.palette.STAR_YELLOW});
-
-  @keyframes animateCharacter1{
-    from{transform: rotateY(0deg)}
-    to{transform: rotateY(720deg)}
-  }
-
-  @keyframes animateCharacter2{
-    0%{filter: brightness(1)}
-    50%{filter: brightness(1.4)}
-  }
-
-  @keyframes animateCharacter3{
-    0%{transform: rotateX(0deg)}
-    50%{transform: rotateX(720deg)}
-  }
-
-  @keyframes animateCharacter4{
-    from{transform: rotateY(0deg)}
-    to{transform: rotateY(720deg)}
-  }
-
-  @keyframes animateCharacter5{
-    from{transform: rotate(0)}
-    to{transform: rotate(1080deg)}
-  }
-
-  animation-name: ${props => (props.animate === 0 ? '' : `animateCharacter${props.animate}`)};
-  animation-duration: 2s;
-`;
-
 export const CommentContent = styled.div`
-  width: 100%;
+  width: calc(100% - 4rem);
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.palette.WHITE};
@@ -117,7 +55,6 @@ export const BestLabel = styled.div`
   height: 1rem;
   margin-left: 1rem;
 
-  // border-radius: 1rem;
   color: white;
   background-color: ${({ theme }) => theme.palette.PASTEL_PURPLE};
   font-size: 5px;

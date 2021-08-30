@@ -8,10 +8,13 @@ export const palette = {
   DARK_PURPLE: '#111734',
   PASTEL_PURPLE: '#9f8ec5',
   LIGHT_PURPLE: '#c0b9db',
-
+  TEXT_PURPLE: '#b975e6',
+  BORDER_PRUPLE: `#dbddef`,
+  
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',
+
 
   // 21 봄 페스월드 팔레트
   // NEWTRO

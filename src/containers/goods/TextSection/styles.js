@@ -4,8 +4,19 @@ export const StyledTextSection = styled.div`
 
 `;
 
+export const YellowText = styled.span`
+color: ${({ theme }) => theme.palette.STAR_YELLOW};
+font-weight: 600;
+`;
+
 export const PurpleText = styled.span`
-  color: ${({ theme }) => theme.palette.PURPLE50};
+  color: ${({ theme }) => theme.palette.TEXT_PURPLE};
+  font-weight: 600;
+`;
+
+export const PurpleTitle = styled.span`
+  color: ${({ theme }) => theme.palette.TEXT_PURPLE};
+  font-weight: bold;
 `;
 
 export const Title = styled.p`

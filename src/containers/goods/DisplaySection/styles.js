@@ -25,14 +25,15 @@ export const Item = styled.div`
   
   cursor: pointer;
   transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.05);
-  }
+  // &:hover {
+  //   transform: scale(1.05);
+  // }
 `;
 
 export const Window = styled.div`
   width: 100%;
   height: auto;
+  border: 3px solid ${({ theme }) => theme.palette.BORDER_PRUPLE};
 `;
 
 export const Texts = styled.div`
@@ -42,5 +43,17 @@ export const Texts = styled.div`
   align-items: center;
   
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 600;
+`;
+
+export const Left = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+export const Name = styled.div`
+  margin-left: 0.5rem;
 `;

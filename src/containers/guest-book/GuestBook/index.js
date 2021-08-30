@@ -10,10 +10,10 @@ import * as S from './styles';
 function GuestBook({ user }) {
   const [heartAnimate, setHeartAnimate] = useState(false);
   const heartAnimateToggle = useCallback(() => {
-    setHeartAnimate(true)
-    setTimeout(()=>{
-      setHeartAnimate(false)
-    }, 520)
+    setHeartAnimate(true);
+    setTimeout(() => {
+      setHeartAnimate(false);
+    }, 520);
   }, []);
   return (
     <S.StyledGuestBook>
@@ -23,10 +23,10 @@ function GuestBook({ user }) {
           <WriteBox user={user} />
         </S.WriteBoxWrapper>
         <S.CommentsWrapper>
-          <Comments user={user} handleHeartClick={heartAnimateToggle}/>
+          <Comments user={user} handleHeartClick={heartAnimateToggle} />
         </S.CommentsWrapper>
       </S.Body>
-      <Heart heartAnimate={heartAnimate}/>
+      <Heart heartAnimate={heartAnimate} />
     </S.StyledGuestBook>
   );
 }

@@ -117,7 +117,6 @@ class App {
       this.imgPos.x = 0;
     }
 
-    console.log(this.imgPos);
 
     this.ctx.drawImage(
       this.image,
@@ -125,8 +124,6 @@ class App {
       this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,
     );
 
-    console.log(0, 0, this.image.width, this.image.height,
-      this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,);
 
     this.tmpCtx.drawImage(
       this.image,

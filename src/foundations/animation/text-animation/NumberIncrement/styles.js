@@ -14,7 +14,8 @@ export const CommentsNumber = styled.div`
 `;
 
 export const CommentImage = styled.img`
-  width: auto;
-  height: 0.8rem;
-  margin-right: 0.5rem;
+  max-width: 2rem;
+  max-height: 2rem;
+
+  margin-right: 0.9rem;
 `;

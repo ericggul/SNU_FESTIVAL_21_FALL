@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 
-const purple = ({ theme }) => theme.palette.LIGHT_PURPLE;
-console.log(purple);
-
 export const Wrapper = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   position: relative;
-  ${({gradient}) => !gradient &&
-    `background: #c0b9db` 
-  }
-  ${({gradient}) => gradient &&
-    `background-image: linear-gradient(#c0b9db,#111734)` 
-  }
+  ${({ gradient }) => !gradient
+    && 'background: #c0b9db'
+}
+  ${({ gradient }) => gradient
+    && 'background-image: linear-gradient(#c0b9db,#111734)'
+}
 
 
 `;

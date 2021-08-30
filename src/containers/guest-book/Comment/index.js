@@ -3,17 +3,9 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import NumberIncrement from '@F/animation/text-animation/NumberIncrement';
-import character1 from '@I/guest-book/character1.svg';
-import character2 from '@I/guest-book/character2.svg';
-import character3 from '@I/guest-book/character3.svg';
-import character4 from '@I/guest-book/character4.svg';
-import character5 from '@I/guest-book/character5.svg';
-import character6 from '@I/guest-book/character6.svg';
-import character7 from '@I/guest-book/character7.svg';
-import character8 from '@I/guest-book/character8.svg';
 import FilledHeart from '@I/guest-book/filled-heart.svg';
 import EmptyHeart from '@I/guest-book/empty-heart.svg';
-
+import MoonCharacter from '@F/MoonCharacter';
 import dayjs from 'dayjs';
 import { guestBookCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase/app';
@@ -29,17 +21,9 @@ import MissionGuide from '@F/modal/content/MissionGuide';
 import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
 import * as S from './styles';
 
-
-function Mascot({ number }) {
-  const [animate, setAnimate] = useState(0);
-  return (
-    <S.ImageWrapper>
-      <S.ProfileImage src={characters[number % characters.length]} animate={animate} onClick={() => setAnimate(Math.ceil(Math.random() * 5))} />
-    </S.ImageWrapper>
-  );
-}
-
-export function Comment({ user, comments, mission, handleHeartClick }) {
+export function Comment({
+  user, comments, mission, handleHeartClick,
+}) {
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
   const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
     name: '방명록',
@@ -83,9 +67,9 @@ export function Comment({ user, comments, mission, handleHeartClick }) {
   }, []);
 
   const toggleLikeForComment = useCallback((commentId, isLiked) => {
-    if(!isLiked){
+    if (!isLiked) {
       handleHeartClick();
-    } 
+    }
     if (!isAuthorized) {
       setIsSignInModalOpen(true);
       return;
@@ -112,7 +96,7 @@ export function Comment({ user, comments, mission, handleHeartClick }) {
         return (
         // TODO: react window
           <S.CommentThread key={comment.id} delay={i * 0.1}>
-            <Mascot number={comment.created_at.seconds} />
+            <MoonCharacter number={comment.created_at.seconds} boxShadow />
             <S.CommentContent>
               <S.FirstRow>
                 <S.Box>
@@ -180,10 +164,6 @@ Comment.propTypes = {
     guestBook: PropTypes.bool,
   }).isRequired,
 };
-
-const characters = [
-  character1, character2, character3, character4, character5, character6, character7, character8,
-];
 
 function CommentParent({ user, handleHeartClick }) {
   // 방명록 firestore

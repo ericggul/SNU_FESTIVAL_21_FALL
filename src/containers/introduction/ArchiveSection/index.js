@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from '@F/carousel/Carousel';
+import VHLines from '@F/animation/VhLines';
 import Poster21Spring from '@I/poster/21spring.png';
 import Poster19Spring from '@I/poster/19spring.png';
 import Poster18Spring from '@I/poster/18spring.jpg';
@@ -18,6 +19,7 @@ function ArchiveSection({ isMobile, theme }) {
   return (
     <S.Wrapper>
       <S.StyledArchiveSection>
+        <VHLines width="100%" height="100vh" />
         <S.Title>역대 축제 모아보기</S.Title>
         <Carousel
           className="Carousel"

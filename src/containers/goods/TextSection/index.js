@@ -6,14 +6,20 @@ function TextSection() {
   return (
     <S.StyledTextSection>
       <S.Title>
-        <S.PurpleText>축하사</S.PurpleText>
+        <S.PurpleTitle>축하사</S.PurpleTitle>
         <br />
         <span>공식</span>
         {' '}
-        <S.PurpleText>굿-즈</S.PurpleText>
+        <S.PurpleTitle>굿즈</S.PurpleTitle>
       </S.Title>
       <S.Description>
-        <span>1. 판매금은 전액 기부됩니다.</span>
+        <span>
+          1. 판매금은
+          {' '}
+          <S.PurpleText>전액 기부</S.PurpleText>
+          {' '}
+          됩니다.
+        </span>
         <br />
         <span>
           2. 굿즈
@@ -21,7 +27,7 @@ function TextSection() {
           <S.PurpleText>신청</S.PurpleText>
           은
           {' '}
-          <S.PurpleText>구글독스</S.PurpleText>
+          <S.YellowText>구글독스</S.YellowText>
           로 가능하며,
         </span>
         <br />
@@ -32,11 +38,11 @@ function TextSection() {
           <S.PurpleText>수령</S.PurpleText>
           은
           {' '}
-          <S.PurpleText>학교 방문</S.PurpleText>
+          <S.YellowText>학교 방문</S.YellowText>
           {' '}
           또는
           {' '}
-          <S.PurpleText>택배 수령</S.PurpleText>
+          <S.YellowText>택배 수령</S.YellowText>
           {' '}
           중 선택 가능합니다.
         </span>
