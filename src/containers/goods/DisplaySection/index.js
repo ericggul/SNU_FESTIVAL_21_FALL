@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Glass from '@I/goods/glass.jpg';
 import SealSticker from '@I/goods/seal-sticker.png';
 import Calendar from '@I/goods/calendar.png';
 import StickerPack from '@I/goods/sticker-pack.png';
 import GoodsBox from '@C/goods/GoodsBox';
 import { useHistory } from 'react-router';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import * as S from './styles';
+
+export const transition = { duration: 1.5, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function DisplaySection() {
   const history = useHistory();
+  const [selected, setSelected] = useState(null);
+
+  const handleClick = (url, i) => {
+    console.log(url);
+    history.push(`/goods/${url}`);
+    setSelected(i);
+  };
 
   const Item = (url, image, name, price, i) => (
-    <S.Item onClick={() => history.push(`/goods/${url}`)}>
+    <S.Item
+      onClick={() => handleClick(url, i)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: selected === i ? 1 : 0,
+
+      }}
+      transition={{
+        ...transition,
+        delay: (i + 1) * 0.3,
+      }}
+    >
       <GoodsBox image={image} name={name} price={price} i={i} />
     </S.Item>
   );

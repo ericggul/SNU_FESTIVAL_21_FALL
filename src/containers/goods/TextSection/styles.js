@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const StyledTextSection = styled.div`
+export const StyledTextSection = styled(motion.div)`
 
 `;
 

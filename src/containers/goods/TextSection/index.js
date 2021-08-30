@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { transition } from '@C/goods/DisplaySection';
 import * as S from './styles';
 
 function TextSection() {
   return (
-    <S.StyledTextSection>
+    <S.StyledTextSection
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={transition}
+    >
       <S.Title>
         <S.YellowTitle>축하사</S.YellowTitle>
         <br />

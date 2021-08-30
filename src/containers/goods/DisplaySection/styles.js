@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 
 export const StyledDisplaySection = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ export const StyledDisplaySection = styled.div`
   padding-top: 2rem;
 `;
 
-export const Item = styled.div`
+export const Item = styled(motion.div)`
   position: relative;
   width: 100%;
   margin-bottom: 3rem;
@@ -28,31 +29,4 @@ export const Item = styled.div`
   // &:hover {
   //   transform: scale(1.05);
   // }
-`;
-
-export const Window = styled.div`
-  width: 100%;
-  height: auto;
-`;
-
-export const Texts = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-  font-size: 1.5rem;
-  font-weight: 600;
-`;
-
-export const Left = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-  font-size: 1.5rem;
-  font-weight: 600;
-`;
-export const Name = styled.div`
-  margin-left: 0.5rem;
 `;

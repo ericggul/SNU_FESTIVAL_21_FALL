@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledGoodsDetail = styled.div`
@@ -23,7 +24,7 @@ export const Body = styled.div`
   align-items: center;
 `;
 
-export const BasicSection = styled.div`
+export const BasicSection = styled(motion.div)`
   margin-top: 1.5rem;
   padding: 0 2rem;
   box-sizing: border-box;
@@ -78,7 +79,7 @@ export const Name = styled.div`
   margin-left: 0.5rem;
 `;
 
-export const Image = styled.div`
+export const Image = styled(motion.div)`
   width: 100%;
   ${media.lessThan('medium')`
     margin-bottom: 1rem;
@@ -91,7 +92,7 @@ export const Hr = styled.hr`
   margin: 2rem 0;
 `;
 
-export const Button = styled.div`
+export const Button = styled(motion.div)`
   position: fixed;
   bottom: 0;  
   height: 5rem;

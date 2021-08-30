@@ -5,6 +5,7 @@ import Image from '@/foundations/images/Image';
 import GoodsBox from '@C/goods/GoodsBox';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
+import { transition } from '@C/goods/DisplaySection';
 import * as S from './styles';
 
 function GoodsDetail({
@@ -21,13 +22,35 @@ function GoodsDetail({
       <S.Body>
         <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
 
-        <S.BasicSection>
+        <S.BasicSection
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={transition}
+        >
           <GoodsBox image={image} name={information.name} price={information.price} i={information.index} />
         </S.BasicSection>
         <S.Hr />
-        <S.Image><Image src={longImage} alt="굿즈" /></S.Image>
+        <S.Image
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ ...transition, delay: 1 }}
+        >
+          <Image src={longImage} alt="굿즈" />
 
-        <S.Button onClick={goToForm}>굿즈 신청하러 가기</S.Button>
+        </S.Image>
+
+        <S.Button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ ...transition, delay: 2 }}
+          onClick={goToForm}
+        >
+          굿즈 신청하러 가기
+
+        </S.Button>
       </S.Body>
     </S.StyledGoodsDetail>
   );
