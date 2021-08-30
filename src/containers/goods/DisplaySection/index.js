@@ -3,9 +3,8 @@ import Glass from '@I/goods/glass.jpg';
 import SealSticker from '@I/goods/seal-sticker.png';
 import Calendar from '@I/goods/calendar.png';
 import StickerPack from '@I/goods/sticker-pack.png';
-import MoonCharacter from '@F/MoonCharacter';
+import GoodsBox from '@C/goods/GoodsBox';
 import { useHistory } from 'react-router';
-import Image from '@F/Image';
 import * as S from './styles';
 
 function DisplaySection() {
@@ -13,14 +12,7 @@ function DisplaySection() {
 
   const Item = (url, image, name, price, i) => (
     <S.Item onClick={() => history.push(`/goods/${url}`)}>
-      <S.Window><Image src={image} alt="창" borderRadius="15px" /></S.Window>
-      <S.Texts>
-        <S.Left>
-          <MoonCharacter number={i} boxShadow={false} />
-          <S.Name>{name}</S.Name>
-        </S.Left>
-        <p>{price}</p>
-      </S.Texts>
+      <GoodsBox image={image} name={name} price={price} i={i} />
     </S.Item>
   );
 

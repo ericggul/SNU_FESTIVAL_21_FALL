@@ -12,6 +12,7 @@ import SignInGuide from '@F/modal/content/SignInGuide';
 import TreasureGuide from '@C/activity/mini/treasure-hunt/TreasureGuide';
 import { actions } from '@/redux/mini-game/state';
 import withUser from '@U/hoc/withUser';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import { Balloon } from '@C/activity/group/Group/styles';
 import GreenBalloon from '@I/activity/treasure-hunt/balloon-green.png';
 import * as S from './styles';
@@ -42,6 +43,7 @@ function Goods() {
   return (
     <S.StyledGoods>
       <HeaderContent>굿즈</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <S.Body>
         <TextSection />
         <DisplaySection />

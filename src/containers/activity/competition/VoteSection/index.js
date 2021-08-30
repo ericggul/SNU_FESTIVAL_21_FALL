@@ -17,7 +17,7 @@ import SignInGuide from '@F/modal/content/SignInGuide';
 import { competitionCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase';
 import LoadingMascot from '@F/loading/LoadingMascot';
-import Image from '@F/Image';
+import Image from '@/foundations/images/Image';
 import * as S from './styles';
 
 function VoteSection({

@@ -6,7 +6,7 @@ function TextSection() {
   return (
     <S.StyledTextSection>
       <S.Title>
-        <S.PurpleTitle>축하사</S.PurpleTitle>
+        <S.YellowTitle>축하사</S.YellowTitle>
         <br />
         <span>공식</span>
         {' '}

@@ -7,7 +7,7 @@ import CloudTemplarSmall from '@I/performance/cloud-templar-small.png';
 import Guide from '@C/performance/common/Guide';
 import Bubble from '@C/introduction/staff-section/Bubble';
 import MascotForMission from '@C/performance/common/MascotForMission';
-import Image from '@F/Image';
+import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import * as S from '../common/styles';

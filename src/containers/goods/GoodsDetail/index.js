@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
-import Image from '@F/Image';
+import Image from '@/foundations/images/Image';
+import GoodsBox from '@C/goods/GoodsBox';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import * as S from './styles';
 
 function GoodsDetail({
@@ -17,12 +19,10 @@ function GoodsDetail({
     <S.StyledGoodsDetail>
       <HeaderContent>굿즈</HeaderContent>
       <S.Body>
+        <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
+
         <S.BasicSection>
-          <S.Image><Image src={image} alt="굿즈" /></S.Image>
-          <div>
-            <p>{information.name}</p>
-            <p>{information.price}</p>
-          </div>
+          <GoodsBox image={image} name={information.name} price={information.price} i={information.index} />
         </S.BasicSection>
         <S.Hr />
         <S.Image><Image src={longImage} alt="굿즈" /></S.Image>
@@ -38,6 +38,7 @@ GoodsDetail.propTypes = {
   information: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.number,
+    index: PropTypes.number,
   }).isRequired,
   image: PropTypes.string.isRequired,
   longImage: PropTypes.string.isRequired,

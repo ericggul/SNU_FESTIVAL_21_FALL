@@ -9,6 +9,11 @@ color: ${({ theme }) => theme.palette.STAR_YELLOW};
 font-weight: 600;
 `;
 
+export const YellowTitle = styled.span`
+  color: ${({ theme }) => theme.palette.STAR_YELLOW};
+  font-weight: bold;
+`;
+
 export const PurpleText = styled.span`
   color: ${({ theme }) => theme.palette.TEXT_PURPLE};
   font-weight: 600;

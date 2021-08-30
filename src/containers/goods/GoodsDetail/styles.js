@@ -6,6 +6,7 @@ export const StyledGoodsDetail = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
 export const Body = styled.div`
@@ -13,7 +14,7 @@ export const Body = styled.div`
   height: 100%;
 
   max-width: 750px;
-  color: ${({ theme }) => theme.palette.GRAY80};
+  color: ${({ theme }) => theme.palette.WHITE};
   padding: 1rem 0;
   box-sizing: border-box;
   
@@ -31,7 +32,7 @@ export const BasicSection = styled.div`
   flex-direction: column;
   width: 100%;
 
-  color: ${({ theme }) => theme.palette.GRAY80};
+  color: ${({ theme }) => theme.palette.WHITE};
   font-weight: bold;
 
   div:nth-of-type(2) {
@@ -41,13 +42,40 @@ export const BasicSection = styled.div`
     p:first-of-type {
       margin: 1.5rem 0;
       font-size: 1.8rem;
-      color: ${({ theme }) => theme.palette.PURPLE70};
+      color: ${({ theme }) => theme.palette.WHITE};
     }
     p:last-of-type {
       margin: 1.5rem 0;
       font-size: 1.3rem;
     }
   }
+`;
+
+export const Window = styled.div`
+  width: 100%;
+  height: auto;
+`;
+
+export const Texts = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
+export const Left = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+export const Name = styled.div`
+  margin-left: 0.5rem;
 `;
 
 export const Image = styled.div`
@@ -58,26 +86,22 @@ export const Image = styled.div`
 `;
 
 export const Hr = styled.hr`
-  color: ${({ theme }) => theme.palette.GRAY80};
+  color: ${({ theme }) => theme.palette.WHITE};
   opacity: 0.5;
   margin: 2rem 0;
 `;
 
 export const Button = styled.div`
   position: fixed;
-  bottom: 1.5rem;
-  
-  height: 4.5rem;
-  width: calc(100% - 4rem);
-  max-width: calc(750px - 4rem);
+  bottom: 0;  
+  height: 5rem;
+  width: 100%;
   ${FlexCenterStyle};
   
   font-size: 1.6rem;
   font-weight: bold;
   color: white;
-  background-color: ${({ theme }) => theme.palette.PURPLE50};
+  background-color: ${({ theme }) => theme.palette.LIGHT_PURPLE};
   
   cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 `;

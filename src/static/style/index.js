@@ -9,7 +9,7 @@ export const palette = {
   PASTEL_PURPLE: '#9f8ec5',
   LIGHT_PURPLE: '#c0b9db',
   TEXT_PURPLE: '#b975e6',
-  BORDER_PRUPLE: `#dbddef`,
+  BORDER_PURPLE: `#dbddef`,
   
   WHITE: '#fff',
 

@@ -4,7 +4,7 @@ export const StyledGoods = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: ${({ theme }) => theme.palette.DARK_PURPLE};
+  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
 export const Body = styled.div`
@@ -15,6 +15,7 @@ export const Body = styled.div`
   color: ${({ theme }) => theme.palette.WHITE};
   padding: 1rem 2rem;
   box-sizing: border-box;
+  position: relative;
 `;
 
 export const FakeButton = styled.div`

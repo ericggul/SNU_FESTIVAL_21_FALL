@@ -33,7 +33,6 @@ export const Item = styled.div`
 export const Window = styled.div`
   width: 100%;
   height: auto;
-  border: 3px solid ${({ theme }) => theme.palette.BORDER_PRUPLE};
 `;
 
 export const Texts = styled.div`

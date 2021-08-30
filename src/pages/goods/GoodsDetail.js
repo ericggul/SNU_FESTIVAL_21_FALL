@@ -39,7 +39,7 @@ GoodsDetail.propTypes = {
 
 export const Glass = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '축제이즈백 소주잔', price: 7000 }}
+    information={{ name: '축제이즈백 소주잔', price: 7000, index: 0 }}
     image={GlassImage}
     longImage={GlassDetail}
   />
@@ -47,7 +47,7 @@ export const Glass = withMountEvent(() => (
 
 export const SealSticker = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '씰스티커', price: 1500 }}
+    information={{ name: '씰스티커', price: 1500, index: 1 }}
     image={SealStickerImage}
     longImage={SealStickerDetail}
   />
@@ -55,7 +55,7 @@ export const SealSticker = withMountEvent(() => (
 
 export const Calendar = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '사계절 엽서 세트', price: 2000 }}
+    information={{ name: '사계절 엽서 세트', price: 2000, index: 2 }}
     image={CalendarImage}
     longImage={CalendarDetail}
   />
@@ -63,7 +63,7 @@ export const Calendar = withMountEvent(() => (
 
 export const StickerPack = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '스티커팩', price: 1500 }}
+    information={{ name: '스티커팩', price: 1500, index: 3 }}
     image={StickerPackImage}
     longImage={StickerPackDetail}
   />

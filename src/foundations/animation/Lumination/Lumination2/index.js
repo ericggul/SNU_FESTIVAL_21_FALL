@@ -12,7 +12,7 @@ export default function Lumination({ width, height }) {
         height,
         background: '#111734',
         zIndex: '-3',
-        position: 'absolute',
+        position: 'fixed',
         top: '-1.5rem',
         overflow: 'hidden',
       }}

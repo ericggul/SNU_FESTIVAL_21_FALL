@@ -6,7 +6,7 @@ import Guide from '@C/performance/common/Guide';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 import MascotForMission from '@C/performance/common/MascotForMission';
-import Image from '@F/Image';
+import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import * as S from '../common/styles';
