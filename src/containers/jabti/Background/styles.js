@@ -6,6 +6,6 @@ export const StyledBackground = styled.div`
   left: 0;
   width: ${({ theme }) => theme.windowWidth * 1.2}px;
   height: ${({ theme }) => theme.windowHeight * 1.2}px;
-  background: black;
+  background: ${({ theme }) => theme.palette.DARK_PURPLE};
   z-index: -5;
 `;

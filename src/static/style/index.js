@@ -14,7 +14,8 @@ export const palette = {
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',
-
+  WHITE_YELLOW: '#ffffe5',
+  NEON_YELLOW: '#f6f8c0',
 
   // 21 봄 페스월드 팔레트
   // NEWTRO

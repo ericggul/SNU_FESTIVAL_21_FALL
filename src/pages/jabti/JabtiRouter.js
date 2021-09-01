@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import NotFound from '@/pages/NotFound';
 import PropTypes from 'prop-types';
 import {
-  Achieve, Calm, Delight, Harmony, Improvement, Passion,
-  Pleasure, Precious, Refresh, Romance, StressFree, Sympathy,
+  SYBG, SYBT, SYGG, SYGT, SWBG, SWBT, SWGG, SWGT,
+  PYBG, PYBT, PYGG, PYGT, PWBG, PWBT, PWGG, PWGT,
 } from '@/pages/jabti/JabtiDetail';
 
 function JabtiRouter({ match }) {
@@ -52,53 +52,70 @@ const jabtiRoutes = [
     component: Jabti,
     children: [
       {
-        path: '/achieve',
-        component: Achieve,
+        path: '/sybg',
+        component: SYBG,
       },
       {
-        path: '/calm',
-        component: Calm,
+        path: '/sybt',
+        component: SYBT,
       },
       {
-        path: '/delight',
-        component: Delight,
+        path: '/sygg',
+        component: SYGG,
       },
       {
-        path: '/harmony',
-        component: Harmony,
+        path: '/sygt',
+        component: SYGT,
       },
       {
-        path: '/improvement',
-        component: Improvement,
+        path: '/swbg',
+        component: SWBG,
       },
       {
-        path: '/passion',
-        component: Passion,
+        path: '/swbt',
+        component: SWBT,
       },
       {
-        path: '/pleasure',
-        component: Pleasure,
+        path: '/swgg',
+        component: SWGG,
       },
       {
-        path: '/precious',
-        component: Precious,
+        path: '/swgt',
+        component: SWGT,
       },
       {
-        path: '/refresh',
-        component: Refresh,
+        path: '/pybg',
+        component: PYBG,
       },
       {
-        path: '/romance',
-        component: Romance,
+        path: '/pybt',
+        component: PYBT,
       },
       {
-        path: '/stress-free',
-        component: StressFree,
+        path: '/pygg',
+        component: PYGG,
       },
       {
-        path: '/sympathy',
-        component: Sympathy,
+        path: '/pygt',
+        component: PYGT,
       },
+      {
+        path: '/pwbg',
+        component: PWBG,
+      },
+      {
+        path: '/pwbt',
+        component: PWBT,
+      },
+      {
+        path: '/pwgg',
+        component: PWGG,
+      },
+      {
+        path: '/pwgt',
+        component: PWGT,
+      },
+
     ],
   },
 ];

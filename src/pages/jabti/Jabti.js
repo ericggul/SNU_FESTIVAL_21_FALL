@@ -6,7 +6,6 @@ import withMountEvent from '@U/hoc/withMountEvent';
 function Jabti() {
   return (
     <>
-      <Header />
       <JabtiContainer />
     </>
   );

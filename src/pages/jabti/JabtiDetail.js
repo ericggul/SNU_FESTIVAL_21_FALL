@@ -4,29 +4,53 @@ import Header from '@F/layout/Header';
 import withMountEvent from '@U/hoc/withMountEvent';
 import JabtiDetailContainer from '@C/jabti/JabtiDetail';
 import ResultAchieve from '@I/tarot/result/achieve.png';
-import ResultCalm from '@I/tarot/result/calm.png';
-import ResultDelight from '@I/tarot/result/delight.png';
-import ResultHarmony from '@I/tarot/result/harmony.png';
-import ResultImprovement from '@I/tarot/result/improvement.png';
-import ResultPassion from '@I/tarot/result/passion.png';
-import ResultPleasure from '@I/tarot/result/pleasure.png';
-import ResultPrecious from '@I/tarot/result/precious.png';
-import ResultRefresh from '@I/tarot/result/refresh.png';
-import ResultRomance from '@I/tarot/result/romance.png';
-import ResultStressFree from '@I/tarot/result/stress-free.png';
-import ResultSympathy from '@I/tarot/result/sympathy.png';
+
+import Result1 from '@I/jabti/result/image/1.png';
+import Result2 from '@I/jabti/result/image/2.png';
+import Result3 from '@I/jabti/result/image/3.png';
+import Result4 from '@I/jabti/result/image/4.png';
+import Result5 from '@I/jabti/result/image/5.png';
+import Result6 from '@I/jabti/result/image/6.png';
+import Result7 from '@I/jabti/result/image/7.png';
+import Result8 from '@I/jabti/result/image/8.png';
+import Result9 from '@I/jabti/result/image/9.png';
+import Result10 from '@I/jabti/result/image/10.png';
+import Result11 from '@I/jabti/result/image/11.png';
+import Result12 from '@I/jabti/result/image/12.png';
+import Result13 from '@I/jabti/result/image/13.png';
+import Result14 from '@I/jabti/result/image/14.png';
+import Result15 from '@I/jabti/result/image/15.png';
+import Result16 from '@I/jabti/result/image/16.png';
+
+import ResultText1 from '@I/jabti/result/text/1.png';
+import ResultText2 from '@I/jabti/result/text/2.png';
+import ResultText3 from '@I/jabti/result/text/3.png';
+import ResultText4 from '@I/jabti/result/text/4.png';
+import ResultText5 from '@I/jabti/result/text/5.png';
+import ResultText6 from '@I/jabti/result/text/6.png';
+import ResultText7 from '@I/jabti/result/text/7.png';
+import ResultText8 from '@I/jabti/result/text/8.png';
+import ResultText9 from '@I/jabti/result/text/9.png';
+import ResultText10 from '@I/jabti/result/text/10.png';
+import ResultText11 from '@I/jabti/result/text/11.png';
+import ResultText12 from '@I/jabti/result/text/12.png';
+import ResultText13 from '@I/jabti/result/text/13.png';
+import ResultText14 from '@I/jabti/result/text/14.png';
+import ResultText15 from '@I/jabti/result/text/15.png';
+import ResultText16 from '@I/jabti/result/text/16.png';
 
 function JabtiDetail({
-  resultImage, result, links, color, index,
+  resultImage, resultTextImage, result, spot, colorCode, colorName, index,
 }) {
   return (
     <>
-      <Header />
       <JabtiDetailContainer
         resultImage={resultImage}
+        resultTextImage={resultTextImage}
         result={result}
-        links={links}
-        color={color}
+        spot={spot}
+        colorCode={colorCode}
+        colorName={colorName}
         index={index}
       />
     </>
@@ -37,164 +61,263 @@ export default withMountEvent(JabtiDetail);
 JabtiDetail.propTypes = {
   resultImage: PropTypes.string.isRequired,
   result: PropTypes.string.isRequired,
-  links: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
-export const Achieve = () => (
+const spots = [
+  '테니스장',
+  '비비큐 카페',
+  '관정 도서관',
+  '서울대 정문',
+  '제 1 공학관',
+  '라운지오',
+  '예술계 식당',
+  '자하연',
+  '운동장',
+  '학생 회관',
+  '규장각',
+  '총장 잔디',
+  '농생대',
+  '기숙사',
+  '사범대',
+  '버들골',
+];
+
+const capitalizedColorCodes = [
+  '#CCFF00',
+  '#B31B1B',
+  '#DFB376',
+  '#C4C3D0',
+  '#C19A6B',
+  '#9678B6',
+  '#FFB7C5',
+  '#0ABAB5',
+  '#F64A8A',
+  '#FFDDCA',
+  '#FADA5E',
+  '#50C878',
+  '#004225',
+  '#FF8243',
+  '#DF00FF',
+  '#93C572',
+];
+console.log(capitalizedColorCodes);
+const convert = (givenArray) => {
+  let result = [];
+  givenArray.map((e, i) => {
+    result.push(e.toLowerCase());
+  });
+  return result;
+};
+
+const colorCodes = convert(capitalizedColorCodes);
+console.log(colorCodes[0]);
+const colorNames = [
+  'Electric Lime',
+  'Cornell Red',
+  'Gwanjeong Brown',
+  'Lavender Gray',
+  'Desert',
+  'Purple Mountain Majesty',
+  'Cherry Blossom Pink',
+  'Tiffany Blue',
+  'French Rose',
+  'Unbleached Silk',
+  'Royal Yellow',
+  'Emerald',
+  'British Racing Green',
+  'Mango Tango',
+  'Phlox',
+  'Pistachio',
+];
+
+export const SYBG = () => (
   <JabtiDetail
-    resultImage={ResultAchieve}
-    result="achieve"
-    links={{
-      name: '인스타그램',
-      url: 'instagram',
-    }}
-    color="red"
+    resultImage={Result1}
+    resultTextImage={ResultText1}
+    result="sybg"
+    spot={spots[0]}
+    colorCode={colorCodes[0]}
+    colorName={colorNames[0]}
     index={0}
   />
 );
 
-export const Calm = () => (
+export const SYBT = () => (
   <JabtiDetail
-    resultImage={ResultCalm}
-    result="calm"
-    links={{
-      name: '보물찾기',
-      url: '/activity/mini/treasure-hunt',
-    }}
-    color="rgb(24,170,100)"
+    resultImage={Result2}
+    resultTextImage={ResultText2}
+    result="sybt"
+    spot={spots[1]}
+    colorCode={colorCodes[1]}
+    colorName={colorNames[1]}
     index={1}
   />
 );
 
-export const Delight = () => (
+export const SYGG = () => (
   <JabtiDetail
-    resultImage={ResultDelight}
-    result="delight"
-    links={{
-      name: '공연',
-      url: '/performance/phone-cert',
-    }}
-    color="rgb(124,70,100)"
+    resultImage={Result3}
+    resultTextImage={ResultText3}
+    result="sygg"
+    spot={spots[2]}
+    colorCode={colorCodes[2]}
+    colorName={colorNames[2]}
     index={2}
   />
 );
 
-export const Harmony = () => (
+export const SYGT = () => (
   <JabtiDetail
-    resultImage={ResultHarmony}
-    result="harmony"
-    links={{
-      name: '미니게임',
-      url: '/activity/mini',
-    }}
-    color="rgb(124,170,200)"
+    resultImage={Result4}
+    resultTextImage={ResultText4}
+    result="sygt"
+    spot={spots[3]}
+    colorCode={colorCodes[3]}
+    colorName={colorNames[3]}
     index={3}
   />
 );
 
-export const Improvement = () => (
+export const SWBG = () => (
   <JabtiDetail
-    resultImage={ResultImprovement}
-    result="improvement"
-    links={{
-      name: '미궁게임',
-      url: '/activity/mini/riddle',
-    }}
-    color="rgb(200,170,100)"
+    resultImage={Result5}
+    resultTextImage={ResultText5}
+    result="swbg"
+    spot={spots[4]}
+    colorCode={colorCodes[4]}
+    colorName={colorNames[4]}
     index={4}
   />
 );
 
-export const Passion = () => (
+export const SWBT = () => (
   <JabtiDetail
-    resultImage={ResultPassion}
-    result="passion"
-    links={{
-      name: '미궁게임',
-      url: '/activity/mini/riddle',
-    }}
-    color="rgb(154,200,200)"
+    resultImage={Result6}
+    resultTextImage={ResultText6}
+    result="swbt"
+    spot={spots[5]}
+    colorCode={colorCodes[5]}
+    colorName={colorNames[5]}
     index={5}
   />
 );
 
-export const Pleasure = () => (
+export const SWGG = () => (
   <JabtiDetail
-    resultImage={ResultPleasure}
-    result="pleasure"
-    links={{
-      name: '인스타그램',
-      url: 'instagram',
-    }}
-    color="rgb(124,100,230)"
+    resultImage={Result7}
+    resultTextImage={ResultText7}
+    result="swgg"
+    spot={spots[6]}
+    colorCode={colorCodes[6]}
+    colorName={colorNames[6]}
     index={6}
   />
 );
 
-export const Precious = () => (
+export const SWGT = () => (
   <JabtiDetail
-    resultImage={ResultPrecious}
-    result="precious"
-    links={{
-      name: '공연',
-      url: '/performance/phone-cert',
-    }}
-    color="rgb(214,200,100)"
+    resultImage={Result8}
+    resultTextImage={ResultText8}
+    result="swgt"
+    spot={spots[7]}
+    colorCode={colorCodes[7]}
+    colorName={colorNames[7]}
     index={7}
   />
 );
 
-export const Refresh = () => (
+export const PYBG = () => (
   <JabtiDetail
-    resultImage={ResultRefresh}
-    result="refresh"
-    links={{
-      name: '방명록',
-      url: '/guest-book',
-    }}
-    color="rgb(50,100,200)"
+    resultImage={Result9}
+    resultTextImage={ResultText9}
+    result="pybg"
+    spot={spots[8]}
+    colorCode={colorCodes[8]}
+    colorName={colorNames[8]}
     index={8}
   />
 );
 
-export const Romance = () => (
+export const PYBT = () => (
   <JabtiDetail
-    resultImage={ResultRomance}
-    result="romance"
-    links={{
-      name: '단체게임',
-      url: '/activity/group',
-    }}
-    color="rgb(224,70,190)"
+    resultImage={Result10}
+    resultTextImage={ResultText10}
+    result="pybt"
+    spot={spots[9]}
+    colorCode={colorCodes[9]}
+    colorName={colorNames[9]}
     index={9}
   />
 );
 
-export const StressFree = () => (
+export const PYGG = () => (
   <JabtiDetail
-    resultImage={ResultStressFree}
-    result="stress-free"
-    links={{
-      name: '관악게임토너먼트',
-      url: '/performance/game-tournament',
-    }}
-    color="rgb(241,140,100)"
+    resultImage={Result11}
+    resultTextImage={ResultText11}
+    result="pygg"
+    spot={spots[10]}
+    colorCode={colorCodes[10]}
+    colorName={colorNames[10]}
     index={10}
   />
 );
 
-export const Sympathy = () => (
+export const PYGT = () => (
   <JabtiDetail
-    resultImage={ResultSympathy}
-    result="sympathy"
-    links={{
-      name: '고릴라디오',
-      url: '/activity/radio',
-    }}
-    color="rgb(24,170,210)"
+    resultImage={Result12}
+    resultTextImage={ResultText12}
+    result="pygt"
+    spot={spots[11]}
+    colorCode={colorCodes[11]}
+    colorName={colorNames[11]}
     index={11}
+  />
+);
+
+export const PWBG = () => (
+  <JabtiDetail
+    resultImage={Result13}
+    resultTextImage={ResultText13}
+    result="pwbg"
+    spot={spots[12]}
+    colorCode={colorCodes[12]}
+    colorName={colorNames[12]}
+    index={12}
+  />
+);
+
+export const PWBT = () => (
+  <JabtiDetail
+    resultImage={Result14}
+    resultTextImage={ResultText14}
+    result="pwbt"
+    spot={spots[13]}
+    colorCode={colorCodes[13]}
+    colorName={colorNames[13]}
+    index={13}
+  />
+);
+
+export const PWGG = () => (
+  <JabtiDetail
+    resultImage={Result15}
+    resultTextImage={ResultText15}
+    result="pwgg"
+    spot={spots[14]}
+    colorCode={colorCodes[14]}
+    colorName={colorNames[14]}
+    index={14}
+  />
+);
+
+export const PWGT = () => (
+  <JabtiDetail
+    resultImage={Result16}
+    resultTextImage={ResultText16}
+    result="pwgt"
+    spot={spots[15]}
+    colorCode={colorCodes[15]}
+    colorName={colorNames[15]}
+    index={15}
   />
 );

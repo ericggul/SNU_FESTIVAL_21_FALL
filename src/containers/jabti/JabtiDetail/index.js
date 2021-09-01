@@ -66,7 +66,7 @@ function JabtiDetail({
       });
     }
     new ClipboardJS('.clipboard');
-    setTimeout(() => setIsLoading(false), 3000);
+    setTimeout(() => setIsLoading(false), 3);
   }, [index, fromQuestion, location, history]);
 
   useEffect(() => {
@@ -98,12 +98,13 @@ function JabtiDetail({
       templateId: 53192,
       templateArgs: {
         result,
-        imageUrl: `https://snufestival.com/images/${result}-card.png`,
+        imageUrl: `https://snufestival.com/images/achieve-card.png`,
+        // imageUrl: `https://snufestival.com/images/${result}-card.png`,
       },
     });
     // EventBehavior('Tarot', 'Click Tarot Kakao Share', `share ${result} by kakao`);
   }, [result]);
-
+console.log(color);
   return (
     <>
       <S.Background>
@@ -142,9 +143,6 @@ JabtiDetail.propTypes = {
   theme: PropTypes.shape({
     windowWidth: PropTypes.number,
   }).isRequired,
-  links: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
+
   index: PropTypes.number.isRequired,
 };
