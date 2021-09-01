@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
-import { HeaderContent } from '@F/layout/Header';
 import { useHistory, useLocation } from 'react-router';
 import ClipboardJS from 'clipboard';
 import { toast } from 'react-toastify';
@@ -18,7 +17,7 @@ import Background from '@C/tarot/Background';
 import * as S from './styles';
 
 function JabtiDetail({
-  resultImage, result, theme, links, color, index,
+  resultImage, resultTextImage, result, theme, spot, colorCode, colorName, index,
 }) {
   const location = useLocation();
   const fromQuestion = location.state ? location.state.fromQuestions : false;
@@ -37,13 +36,13 @@ function JabtiDetail({
   const goToTarot = useCallback(() => {
     history.push('/tarot');
   }, [history]);
-  const goToLink = useCallback(() => {
-    if (links?.url === 'instagram') {
-      window.open('https://www.instagram.com/snufestival', '_blank');
-    } else {
-      history.push(links?.url);
-    }
-  }, [history, links?.url]);
+  // const goToLink = useCallback(() => {
+  //   if (links?.url === 'instagram') {
+  //     window.open('https://www.instagram.com/snufestival', '_blank');
+  //   } else {
+  //     history.push(links?.url);
+  //   }
+  // }, [history, links?.url]);
 
   // console.log(mission);
 
@@ -88,6 +87,7 @@ function JabtiDetail({
     }
   }, [updatedViewCount]);
 
+
   const shareThroughUrl = useCallback(() => {
     toast('클립보드에 복사되었습니다');
     // EventBehavior('Tarot', 'Click Tarot Link Share', `share ${result} by clipboard`);
@@ -98,36 +98,50 @@ function JabtiDetail({
       templateId: 53192,
       templateArgs: {
         result,
-        imageUrl: `https://snufestival.com/images/achieve-card.png`,
-        // imageUrl: `https://snufestival.com/images/${result}-card.png`,
+        // imageUrl: `https://snufestival.com/images/achieve-card.png`,
+        imageUrl: `https://snufestival.com/images/${result}-card.png`,
       },
     });
     // EventBehavior('Tarot', 'Click Tarot Kakao Share', `share ${result} by kakao`);
   }, [result]);
-console.log(color);
+console.log(colorCode);
   return (
     <>
       <S.Background>
         {!isLoading && currentStars !== 0 && new Array(currentStars).fill(0).map((e, i) => (
-          <S.Star color={color} key={i} duration={getRandom(2, 4)} />
+          <S.Star color={colorCode} key={i} duration={getRandom(2, 4)} />
         ))}
       </S.Background>
       <S.StyledTarotDetail>
-        <HeaderContent backgroundColor="transparent" color="white">오늘의 타로</HeaderContent>
         {!isLoading && (
           <S.Body>
-            <img src={resultImage} alt="" />
-            <S.Button onClick={goToLink}>
-              {links?.name}
-              {' '}
-              연결하기
-            </S.Button>
+            <S.HeaderText>
+              당신의 {String.fromCharCode(0x591C)}비티아이 유형은
+            </S.HeaderText>
+            <S.ImageContainer>
+              <S.ResultImage over4={index >=4 }src={resultImage} />
+              <S.ResultImageText over4={index >=4 }src={resultTextImage} />
+            </S.ImageContainer>
+            <S.ExplainText>
+              여기는 유형별 설명란 계절이 지나 이 공기가 식어가도 너와 나의 맘속은 언제나 여름 빙하기가 다시 돌아와도 걱정 마 늘 함께야 여름이 쏟아진다아아아아 파핑 파핑 여름에 쏙 빠진 나
+            </S.ExplainText>
+            <S.RecommendSection>
+              <S.RecommendBox expandHeight={colorName.length > 15}>
+                <S.RecommendBackground></S.RecommendBackground>
+                <S.RecommendIndicator>나의 학교 스팟</S.RecommendIndicator>
+                <S.RecommendResult color={colorCode}>{spot}</S.RecommendResult>
+              </S.RecommendBox>
+              <S.RecommendBox expandHeight={colorName.length > 15}>
+              <S.RecommendBackground></S.RecommendBackground>
+                <S.RecommendIndicator>나의 별 색깔</S.RecommendIndicator>
+                <S.RecommendResult color={colorCode}>{colorName}</S.RecommendResult>
+              </S.RecommendBox>
+            </S.RecommendSection>
             <p>결과 공유하기</p>
             <S.Links>
-              <img src={LinkIcon} alt="링크 공유" className="clipboard" data-clipboard-text={`https://snufestival.com/tarot/${result}`} onClick={shareThroughUrl} />
               <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
             </S.Links>
-            <S.Button onClick={goToTarot}>타로 다시보기</S.Button>
+            {/* <S.Button onClick={goToTarot}>타로 다시보기</S.Button> */}
           </S.Body>
         )}
         {isLoading && <S.LoadingWrapper><Loading /></S.LoadingWrapper>}

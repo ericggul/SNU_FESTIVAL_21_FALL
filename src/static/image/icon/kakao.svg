@@ -1,6 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="57" height="58" viewBox="0 0 57 58">
-    <g transform="translate(-192 -1434)">
-        <ellipse cx="28.5" cy="29" fill="#fee600" rx="28.5" ry="29" transform="translate(192 1434)"/>
-        <path fill="#47292b" d="M278.368 495.169a9.968 9.968 0 0 0 2.7-4.429 10.793 10.793 0 0 1-3.463-2.908 7.609 7.609 0 0 1 .295-9.848 12.09 12.09 0 0 1 8.454-4.069 13.528 13.528 0 0 1 9.542 2.553 8.029 8.029 0 0 1 3.177 8.908 9.524 9.524 0 0 1-5.039 5.5 14.478 14.478 0 0 1-8.022 1.395 1.5 1.5 0 0 0-.873.211 26.954 26.954 0 0 1-5.847 2.688 6.757 6.757 0 0 1-.8.169z" transform="translate(-66.936 978.15)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34">
+    <defs>
+        <style>
+            .cls-2{fill:#964b00}
+        </style>
+    </defs>
+    <g id="그룹_6" data-name="그룹 6" transform="translate(-167 -652)">
+        <circle id="타원_1" data-name="타원 1" cx="17" cy="17" r="17" transform="translate(167 652)" style="fill:#f7e600"/>
+        <ellipse id="타원_2" data-name="타원 2" class="cls-2" cx="10.077" cy="8.061" rx="10.077" ry="8.061" transform="translate(173.852 659.622)"/>
+        <path id="다각형_1" data-name="다각형 1" class="cls-2" d="m4.6 0 4.6 12.026H0z" transform="rotate(-149 185.425 315.762)"/>
     </g>
 </svg>

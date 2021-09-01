@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="174" height="90">
+    <defs>
+        <filter id="a" x="3" y="15" width="168" height="67" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g transform="translate(-17 -560)">
+        <rect data-name="사각형 2" width="150" height="66" rx="15" transform="translate(29 572)" style="fill:#fff;opacity:.65"/>
+        
+    </g>
+</svg>
