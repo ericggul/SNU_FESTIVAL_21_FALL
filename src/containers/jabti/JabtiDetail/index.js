@@ -7,9 +7,11 @@ import { useHistory, useLocation } from 'react-router';
 import ClipboardJS from 'clipboard';
 import { toast } from 'react-toastify';
 
+import Loading from '@/containers/jabti/Loading';
+import Stars2 from '@F/stars/Stars2';
+
 import KakaoIcon from '@I/icon/kakao.svg';
-import LinkIcon from '@I/icon/link.svg';
-import Loading from '@C/tarot/Loading';
+import StartAgain from '@I/icon/start-again.svg';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { jabtiCollectionRef } from '@U/initializer/firebase';
 import countapi from 'countapi-js';
@@ -22,7 +24,6 @@ function JabtiDetail({
   const location = useLocation();
   const fromQuestion = location.state ? location.state.fromQuestions : false;
 
-  const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
   const [isLoading, setIsLoading] = useState(false);
   const [viewCount, setViewCount] = useState([]);
   const [updatedViewCount, setUpdatedViewCount] = useState([]);
@@ -30,19 +31,11 @@ function JabtiDetail({
   const [origin, setOrigin] = useState(false);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-  const stars = 10;
 
   const history = useHistory();
-  const goToTarot = useCallback(() => {
-    history.push('/tarot');
+  const goToJabti = useCallback(() => {
+    history.push('/jabti');
   }, [history]);
-  // const goToLink = useCallback(() => {
-  //   if (links?.url === 'instagram') {
-  //     window.open('https://www.instagram.com/snufestival', '_blank');
-  //   } else {
-  //     history.push(links?.url);
-  //   }
-  // }, [history, links?.url]);
 
   // console.log(mission);
 
@@ -65,7 +58,7 @@ function JabtiDetail({
       });
     }
     new ClipboardJS('.clipboard');
-    setTimeout(() => setIsLoading(false), 3);
+    setTimeout(() => setIsLoading(false), 5000);
   }, [index, fromQuestion, location, history]);
 
   useEffect(() => {
@@ -87,11 +80,8 @@ function JabtiDetail({
     }
   }, [updatedViewCount]);
 
+  console.log(currentStars);
 
-  const shareThroughUrl = useCallback(() => {
-    toast('클립보드에 복사되었습니다');
-    // EventBehavior('Tarot', 'Click Tarot Link Share', `share ${result} by clipboard`);
-  }, [result]);
 
   const shareThroughKakao = useCallback(() => {
     window.Kakao.Link.sendCustom({
@@ -104,13 +94,14 @@ function JabtiDetail({
     });
     // EventBehavior('Tarot', 'Click Tarot Kakao Share', `share ${result} by kakao`);
   }, [result]);
-console.log(colorCode);
+
+  
   return (
     <>
       <S.Background>
-        {!isLoading && currentStars !== 0 && new Array(currentStars).fill(0).map((e, i) => (
-          <S.Star color={colorCode} key={i} duration={getRandom(2, 4)} />
-        ))}
+        {
+          currentStars>0 && <Stars2 width="100%" height="100%" color={colorCode} number={400}/>
+        }
       </S.Background>
       <S.StyledTarotDetail>
         {!isLoading && (
@@ -137,15 +128,21 @@ console.log(colorCode);
                 <S.RecommendResult color={colorCode}>{colorName}</S.RecommendResult>
               </S.RecommendBox>
             </S.RecommendSection>
-            <p>결과 공유하기</p>
-            <S.Links>
-              <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
-            </S.Links>
-            {/* <S.Button onClick={goToTarot}>타로 다시보기</S.Button> */}
+            <S.LinkSection>
+              <S.Links>
+              <p>결과 공유하기</p>
+                <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
+              </S.Links>
+              <S.Links>
+              <p>테스트 다시하기</p>
+                <img src={StartAgain} alt="타로 다시보기" onClick={goToJabti} />
+              </S.Links>
+            </S.LinkSection>
           </S.Body>
         )}
-        {isLoading && <S.LoadingWrapper><Loading /></S.LoadingWrapper>}
+        {isLoading && <S.LoadingWrapper><Loading index={index} colorCode={colorCode}/></S.LoadingWrapper>}
       </S.StyledTarotDetail>
+      
     </>
   );
 }

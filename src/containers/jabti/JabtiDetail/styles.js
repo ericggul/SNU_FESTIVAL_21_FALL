@@ -14,27 +14,6 @@ export const Background = styled.div`
   background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
-export const Star = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  filter: blur(3px);
-  background: ${props => props.color};
-  ${RandomSetStyle};
-
-  @keyframes appear{
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes appear-2{
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  animation: appear ${props => props.duration}s infinite alternate;
-`;
-
 export const StyledTarotDetail = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.zIndex.base};
@@ -52,7 +31,7 @@ const appear = css`
     to { opacity: 1; }
   }
   animation-name: appear-2;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 `;
@@ -66,8 +45,6 @@ export const Body = styled.div`
   padding: 2rem 0 10rem;
   box-sizing: border-box;
   
-  ${appear};
-  opacity: 0;
   color: white;
   
   p {
@@ -82,6 +59,9 @@ export const HeaderText = styled.div`
   text-align: center;
   font-size: 1.8rem;
   width: 80%;
+
+  ${appear};
+  opacity: 0;
 `;
 
 export const ImageContainer = styled.div`
@@ -90,6 +70,10 @@ export const ImageContainer = styled.div`
   max-height: 500px;
   position: relative;
   margin-top: -2rem;
+
+  ${appear};
+  opacity: 0;
+  animation-delay: 3s;
 `;
 
 export const ResultImage = styled.img`
@@ -113,12 +97,20 @@ export const ExplainText = styled.div`
   word-break: keep-all;
   width: 80%;
   line-height: 1.7;
+
+  ${appear};
+  opacity: 0;
+  animation-delay: 3.5s;
 `;
 
 export const RecommendSection = styled.div`
   ${FlexCenterStyle};
   margin-top: 0.5rem;
   flex-direction: row;
+
+  ${appear};
+  opacity: 0;
+  animation-delay: 5s;
 `;
 
 export const RecommendBox = styled.div`
@@ -174,13 +166,28 @@ export const Button = styled.div`
   background-color: white;
 `;
 
+export const LinkSection = styled.div`
+  ${FlexCenterStyle};
+  flex-direction: row;
+
+  ${appear};
+  opacity: 0;
+  animation-delay: 5s;
+`;
+
 export const Links = styled.div`
   display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 8rem;
+  padding: 0 1rem;
+  cursor: pointer;
+
   
   img {
     width: 2.8rem;
     height: 2.8rem;
-    margin: 0.2rem;
+    margin: 0.3rem 2.6rem;
   }
 `;
 
@@ -189,6 +196,6 @@ export const LoadingWrapper = styled.div`
   height: ${({ theme }) => theme.windowHeight * 0.85}px;
   ${appear};
   opacity: 1;
-  animation-delay: 2s;
+  animation-delay: 3s;
   animation-direction: reverse;
 `;

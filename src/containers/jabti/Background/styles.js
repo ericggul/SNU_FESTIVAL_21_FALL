@@ -6,6 +6,14 @@ export const StyledBackground = styled.div`
   left: 0;
   width: ${({ theme }) => theme.windowWidth * 1.2}px;
   height: ${({ theme }) => theme.windowHeight * 1.2}px;
-  background: ${({ theme }) => theme.palette.DARK_PURPLE};
+  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
   z-index: -5;
+`;
+
+export const ImageTop = styled.img`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: auto;
+
 `;
