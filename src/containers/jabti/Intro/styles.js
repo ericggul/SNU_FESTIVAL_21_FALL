@@ -47,6 +47,6 @@ export const Button = styled.button`
     border-radius: 0.7rem;
     background: ${({ theme }) => theme.palette.WHITE_YELLOW};
     color: ${({ theme }) => theme.palette.DARK_PURPLE};
-    box-shadow: inset 0.3rem 0.3rem 0.7rem #999;
+    box-shadow: inset -0.3rem -0.3rem 0.7rem #999;
     cursor: pointer;
 `;

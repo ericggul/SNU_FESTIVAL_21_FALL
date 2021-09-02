@@ -4,7 +4,7 @@ import * as S from './styles';
 
 const NEON_YELLOW = `#f6f8c0`;
 
-function TextReveal({ text, duration, delay, color = NEON_YELLOW }) {
+function TextReveal({ text, durationTime, delayTime, color = NEON_YELLOW }) {
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const transformText = (string, ref) => {
     const target = ref.current;
@@ -24,8 +24,8 @@ function TextReveal({ text, duration, delay, color = NEON_YELLOW }) {
           opacity: 1,
           filter: 'blur(0px)',
         }], {
-          duration: duration,
-          delay: getRandom(delay.min, delay.max),
+          duration: durationTime,
+          delay: getRandom(delayTime.min, delayTime.max),
           fill: 'backwards',
         });
         if (i === boldPosition) {
@@ -33,9 +33,9 @@ function TextReveal({ text, duration, delay, color = NEON_YELLOW }) {
          `
          0 0 0rem ${color},
          0 0 0.1rem ${color}, 
-         0 0 0.2rem ${color}, 
-         0 0 0.5rem ${color}, 
-          0 0 0.7rem ${color}`;
+   
+         0 0 0.6rem ${color},
+         0 0 1rem ${color}`;
         }
         target.appendChild(n);
       };

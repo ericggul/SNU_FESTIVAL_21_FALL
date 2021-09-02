@@ -17,7 +17,7 @@ export const StyledQuestions = styled.div`
     bottom: 15vh;
 
     opacity: ${props => props.opacity};
-    transition: opacity 1s;
+    transition: opacity 0.5s;
 `;
 
 export const Question = styled.div`

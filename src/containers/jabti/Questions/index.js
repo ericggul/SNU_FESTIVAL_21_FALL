@@ -14,7 +14,7 @@ function Questions({
 
   const onClick = useCallback((id, i) => {
     setTransit(true);
-    setTimeout(() => handleClick(id, i), 1000);
+    setTimeout(() => handleClick(id, i), 700);
   }, []);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function Questions({
         {AnswersData[index - 1].map((answer, i) => (
           <S.AnswerBox key={i} onClick={() => onClick(index, i)}>
             {' '}
-            <TextReveal text={answer} duration={1000} delay={{ min: 500, max: 2000 }} />
+            <TextReveal text={answer} durationTime={500} delayTime={{ min: 200, max: 200 }} />
           </S.AnswerBox>
         ))}
       </S.Answer>

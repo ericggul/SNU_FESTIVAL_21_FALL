@@ -9,9 +9,24 @@ export const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ theme }) => theme.windowWidth * 1.2}px;
-  height: ${({ theme }) => theme.windowHeight * 1.2}px;
+  width: ${({ theme }) => theme.windowWidth}px;
+  height: ${({ theme }) => theme.windowHeight}px;
   background: ${({ theme }) => theme.palette.DARK_PURPLE};
+  z-index: -5;
+`;
+
+export const ImageTop = styled.img`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: auto;
+`;
+
+export const ImageBottom = styled.img`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
 `;
 
 export const StyledTarotDetail = styled.div`
@@ -41,6 +56,7 @@ export const Body = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 500px;
+  margin-top: 10rem;
 
   padding: 2rem 0 10rem;
   box-sizing: border-box;
@@ -73,7 +89,7 @@ export const ImageContainer = styled.div`
 
   ${appear};
   opacity: 0;
-  animation-delay: 3s;
+  animation-delay: 1s;
 `;
 
 export const ResultImage = styled.img`
@@ -100,7 +116,7 @@ export const ExplainText = styled.div`
 
   ${appear};
   opacity: 0;
-  animation-delay: 3.5s;
+  animation-delay: 1.5s;
 `;
 
 export const RecommendSection = styled.div`
@@ -110,7 +126,7 @@ export const RecommendSection = styled.div`
 
   ${appear};
   opacity: 0;
-  animation-delay: 5s;
+  animation-delay: 2s;
 `;
 
 export const RecommendBox = styled.div`
@@ -172,7 +188,7 @@ export const LinkSection = styled.div`
 
   ${appear};
   opacity: 0;
-  animation-delay: 5s;
+  animation-delay: 2s;
 `;
 
 export const Links = styled.div`

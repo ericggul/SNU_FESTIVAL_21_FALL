@@ -4,8 +4,8 @@ export const StyledBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ theme }) => theme.windowWidth * 1.2}px;
-  height: ${({ theme }) => theme.windowHeight * 1.2}px;
+  width: ${({ theme }) => theme.windowWidth}px;
+  height: ${({ theme }) => theme.windowHeight}px;
   // background: ${({ theme }) => theme.palette.DARK_PURPLE};
   z-index: -5;
 `;
@@ -13,6 +13,14 @@ export const StyledBackground = styled.div`
 export const ImageTop = styled.img`
   position: absolute;
   top: 0;
+  width: 100%;
+  height: auto;
+
+`;
+
+export const ImageBottom = styled.img`
+  position: absolute;
+  bottom: 0;
   width: 100%;
   height: auto;
 

@@ -7,6 +7,10 @@ export const StyledLoading = styled.div`
     ${CenterImageStyle};
     flex-direction: column;
     text-align: center;
+    margin-top: 40vh;
+    margin-bottom: 40vh;
+
+
 
     // @keyframes appear {
     //     from { opacity: 1; }

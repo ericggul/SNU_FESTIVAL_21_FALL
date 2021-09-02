@@ -19,11 +19,11 @@ import * as S from './styles';
 function ScreenTest({ theme }) {
   return (
     <S.StyledScreenTest>
-      <LightChange1 image={ClosingFestival} />
+      {/* <LightChange1 image={ClosingFestival} /> */}
       {/* <Wave /> */}
       {/* <Balls /> */}
       {/* <Firework /> */}
-      {/* <SparklySkull /> */}
+      <SparklySkull />
       {/* <WaterThreejs /> */}
       {/* <Particle /> */}
 

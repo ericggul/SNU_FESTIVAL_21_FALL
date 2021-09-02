@@ -12,6 +12,9 @@ import Stars2 from '@F/stars/Stars2';
 
 import KakaoIcon from '@I/icon/kakao.svg';
 import StartAgain from '@I/icon/start-again.svg';
+import CloudTop from '@I/jabti/background/cloud-top.png';
+import CloudBottom from '@I/jabti/background/cloud-bottom.png';
+
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { jabtiCollectionRef } from '@U/initializer/firebase';
 import countapi from 'countapi-js';
@@ -58,7 +61,7 @@ function JabtiDetail({
       });
     }
     new ClipboardJS('.clipboard');
-    setTimeout(() => setIsLoading(false), 5000);
+    setTimeout(() => setIsLoading(false), 3000);
   }, [index, fromQuestion, location, history]);
 
   useEffect(() => {
@@ -102,6 +105,8 @@ function JabtiDetail({
         {
           currentStars>0 && <Stars2 width="100%" height="100%" color={colorCode} number={400}/>
         }
+        <S.ImageTop src={CloudTop} />
+        <S.ImageBottom src={CloudBottom} />
       </S.Background>
       <S.StyledTarotDetail>
         {!isLoading && (
