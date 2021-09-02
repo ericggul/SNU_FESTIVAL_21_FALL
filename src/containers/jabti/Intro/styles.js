@@ -1,7 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FlexCenterStyle, ResponsiveHeightStyle } from '@S/responsive/display';
 
+const appear = css`
+  @keyframes appear-2 {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  animation-name: appear-2;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  opacity: 0;
+`;
+
 export const StyledIntro = styled.div`
+    ${appear};
     ${FlexCenterStyle};
     justify-content: space-between;
     flex-direction: column;

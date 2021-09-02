@@ -61,7 +61,6 @@ function Jabti() {
         {displayIndex === 0 ? 
         <Intro handleClick={handleClick}/> : 
         <Questions index={displayIndex} handleClick={handleClick} />}
-      
       </S.StyledJabti>
     </>
   );

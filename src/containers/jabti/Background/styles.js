@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const appear = css`
+  @keyframes appear-2 {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  animation-name: appear-2;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+`;
 
 export const StyledBackground = styled.div`
   position: fixed;
@@ -6,7 +18,6 @@ export const StyledBackground = styled.div`
   left: 0;
   width: ${({ theme }) => theme.windowWidth}px;
   height: ${({ theme }) => theme.windowHeight}px;
-  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
   z-index: -5;
 `;
 
@@ -15,7 +26,8 @@ export const ImageTop = styled.img`
   top: 0;
   width: 100%;
   height: auto;
-
+  ${appear};
+  opacity: 0;
 `;
 
 export const ImageBottom = styled.img`
@@ -23,5 +35,6 @@ export const ImageBottom = styled.img`
   bottom: 0;
   width: 100%;
   height: auto;
-
+  ${appear};
+  opacity: 0;
 `;

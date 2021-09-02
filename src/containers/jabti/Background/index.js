@@ -11,7 +11,7 @@ function Background() {
   return (
     <S.StyledBackground>
       <Stars />
-      <Stars2 width="100%" height="100%" color="rgb(255, 240, 150)" number="100" />
+      <Stars2 width="100%" height="100%" color="rgb(255, 240, 150)" number="30" />
       <S.ImageTop src={CloudTop} />
       <S.ImageBottom src={CloudBottom} />
     </S.StyledBackground>

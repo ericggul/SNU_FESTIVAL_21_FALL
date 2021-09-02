@@ -14,6 +14,7 @@ export const palette = {
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',
+  STAR_YELLOW2: '#fdfccb',
   WHITE_YELLOW: '#ffffe5',
   NEON_YELLOW: '#f6f8c0',
 

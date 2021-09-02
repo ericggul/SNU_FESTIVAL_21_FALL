@@ -7,18 +7,17 @@ import { useHistory, useLocation } from 'react-router';
 import ClipboardJS from 'clipboard';
 import { toast } from 'react-toastify';
 
-import Loading from '@/containers/jabti/Loading';
-import Stars2 from '@F/stars/Stars2';
+import DetailBackground from '@C/jabti/detail/DetailBackground';
+import DetailImage from '@C/jabti/detail/DetailImage';
+import DetailRecommend from '@C/jabti/detail/DetailRecommend';
+import DetailLink from '@C/jabti/detail/DetailLink';
 
-import KakaoIcon from '@I/icon/kakao.svg';
-import StartAgain from '@I/icon/start-again.svg';
-import CloudTop from '@I/jabti/background/cloud-top.png';
-import CloudBottom from '@I/jabti/background/cloud-bottom.png';
+import Loading from '@/containers/jabti/Loading';
 
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { jabtiCollectionRef } from '@U/initializer/firebase';
 import countapi from 'countapi-js';
-import Background from '@C/tarot/Background';
+
 import * as S from './styles';
 
 function JabtiDetail({
@@ -61,7 +60,7 @@ function JabtiDetail({
       });
     }
     new ClipboardJS('.clipboard');
-    setTimeout(() => setIsLoading(false), 3000);
+    setTimeout(() => setIsLoading(false), 4000);
   }, [index, fromQuestion, location, history]);
 
   useEffect(() => {
@@ -101,52 +100,23 @@ function JabtiDetail({
   
   return (
     <>
-      <S.Background>
-        {
-          currentStars>0 && <Stars2 width="100%" height="100%" color={colorCode} number={400}/>
-        }
-        <S.ImageTop src={CloudTop} />
-        <S.ImageBottom src={CloudBottom} />
-      </S.Background>
-      <S.StyledTarotDetail>
+      <DetailBackground currentStars={currentStars} colorCode={colorCode} />
+      <S.Detail>
         {!isLoading && (
           <S.Body>
             <S.HeaderText>
               당신의 {String.fromCharCode(0x591C)}비티아이 유형은
             </S.HeaderText>
-            <S.ImageContainer>
-              <S.ResultImage over4={index >=4 }src={resultImage} />
-              <S.ResultImageText over4={index >=4 }src={resultTextImage} />
-            </S.ImageContainer>
+            <DetailImage resultImage={resultImage} resultTextImage={resultTextImage} index={index} /> 
             <S.ExplainText>
               여기는 유형별 설명란 계절이 지나 이 공기가 식어가도 너와 나의 맘속은 언제나 여름 빙하기가 다시 돌아와도 걱정 마 늘 함께야 여름이 쏟아진다아아아아 파핑 파핑 여름에 쏙 빠진 나
             </S.ExplainText>
-            <S.RecommendSection>
-              <S.RecommendBox expandHeight={colorName.length > 15}>
-                <S.RecommendBackground></S.RecommendBackground>
-                <S.RecommendIndicator>나의 학교 스팟</S.RecommendIndicator>
-                <S.RecommendResult color={colorCode}>{spot}</S.RecommendResult>
-              </S.RecommendBox>
-              <S.RecommendBox expandHeight={colorName.length > 15}>
-              <S.RecommendBackground></S.RecommendBackground>
-                <S.RecommendIndicator>나의 별 색깔</S.RecommendIndicator>
-                <S.RecommendResult color={colorCode}>{colorName}</S.RecommendResult>
-              </S.RecommendBox>
-            </S.RecommendSection>
-            <S.LinkSection>
-              <S.Links>
-              <p>결과 공유하기</p>
-                <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
-              </S.Links>
-              <S.Links>
-              <p>테스트 다시하기</p>
-                <img src={StartAgain} alt="타로 다시보기" onClick={goToJabti} />
-              </S.Links>
-            </S.LinkSection>
+            <DetailRecommend colorCode={colorCode} colorName={colorName} spot={spot} />
+            <DetailLink result={result} />
           </S.Body>
         )}
         {isLoading && <S.LoadingWrapper><Loading index={index} colorCode={colorCode}/></S.LoadingWrapper>}
-      </S.StyledTarotDetail>
+      </S.Detail>
       
     </>
   );

@@ -3,7 +3,6 @@ import { QuestionsData, AnswersData } from '@C/jabti/Data';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import RandomTextShuffle from '@F/animation/text-animation/RandomTextShuffle';
-import Transition from '@C/jabti/Transition';
 import TextReveal from '@F/animation/text-animation/TextReveal';
 import * as S from './styles';
 

@@ -18,18 +18,12 @@ function Stars({ theme }) {
     && (
     <S.Container>
       <SmallStarDuo top={600} left={200} />
-      {/* {
-        smallQuatroPos.length > 0 && smallQuatroPos.map((e, i) => (
-          <SmallStarQuatro
-            top={smallQuatroPos.top}
-            left={smallQuatroPos.left}
-            size={smallQuatroPos.size}
-            key={i}
-          />
-        ))
-      } */}
-      <LargeStarQuatro top={100} left={100} />
-      <LargeStarMultiple top={theme.windowHeight - 100} left={theme.windowWidth - 90} spikes={8} size={1.2} />
+      <SmallStarQuatro top={theme.windowHeight * 0.18} left={theme.windowWidth * 0.6} size={0.4} />
+      <SmallStarQuatro top={theme.windowHeight * 0.2} left={theme.windowWidth / 2 - 10} size={0.6} />
+      <SmallStarQuatro top={theme.windowHeight * 0.7} left={40} size={0.7} />
+      <SmallStarQuatro top={400} left={theme.windowWidth - 40} />
+      <LargeStarQuatro top={theme.windowHeight * 0.37} left={25} size={0.8} />
+      <LargeStarMultiple top={theme.windowHeight * 0.75} left={theme.windowWidth - 30} spikes={8} size={0.7} />
     </S.Container>
     )
   );
@@ -56,7 +50,7 @@ const SmallStarQuatro = ({ top, left, size = 1 }) => {
   const [subAxisLength, setSubAxisLength] = useState(getRandom(0.3, 0.7));
   const [color, setColor] = useState(`rgb(255, ${getRandom(240, 252)}, ${getRandom(150, 200)})`);
 
-  const [animationTime, setAnimationTime] = useState(getRandom(3, 8));
+  const [animationTime, setAnimationTime] = useState(getRandom(3, 15));
   const [animationDelay, setAnimationDelay] = useState(getRandom(0, 10));
   return (
     <S.StarContainer time={animationTime} delay={animationDelay}>
@@ -71,7 +65,7 @@ const SmallStarQuatro = ({ top, left, size = 1 }) => {
 const LargeStarQuatro = ({ top, left, size = 1 }) => {
   const [tilted, setTilted] = useState(getRandom(-2, 2));
   const [subAxisAngle, setSubAxisAngle] = useState(getRandom(40, 50));
-  const [subAxisLength, setSubAxisLength] = useState(getRandom(0, 0.7));
+  const [subAxisLength, setSubAxisLength] = useState(getRandom(0.3, 0.7));
   return (
     <>
       <S.DivLine width={3 * size} height={100 * size * subAxisLength} top={top} left={left} angle={tilted + subAxisAngle} />
