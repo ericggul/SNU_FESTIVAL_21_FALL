@@ -39,9 +39,10 @@ function JabtiDetail({
     history.push('/jabti');
   }, [history]);
 
-  // console.log(mission);
+
 
   useEffect(() => {
+    console.log(fromQuestion);
     setIsLoading(true);
     jabtiCollectionRef.doc('result-array').get().then((doc) => (
       (Object.entries(doc.data()).forEach(([key, likes]) => {
@@ -69,8 +70,12 @@ function JabtiDetail({
       updated[index] += 1;
       setUpdatedViewCount(updated);
     }
-    if (viewCount.length > 10) {
-      setCurrentStars(viewCount[index]);
+    if (viewCount.length > 10 && viewCount[index] > 0) {
+      var whole = 0;
+      for(let i=0; i<viewCount.length; i++){
+        whole += viewCount[i];
+      }
+      setCurrentStars(Math.floor(viewCount[index]/whole * (theme.windowHeight * theme.windowWidth)/10));
     }
   }, [viewCount, origin]);
 
@@ -81,8 +86,6 @@ function JabtiDetail({
       });
     }
   }, [updatedViewCount]);
-
-  console.log(currentStars);
 
 
   const shareThroughKakao = useCallback(() => {

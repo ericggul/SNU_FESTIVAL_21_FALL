@@ -13,8 +13,8 @@ export const StyledQuestions = styled.div`
     max-height: 600px;
     position: absolute;
     margin: auto;
-    top: 0;
-    bottom: 15vh;
+    top: ${({ theme }) => theme.windowHeight * 0.05}px;
+    bottom: ${({ theme }) => theme.windowHeight * 0.15}px;
 
     opacity: ${props => props.opacity};
     transition: opacity 0.5s;

@@ -17,7 +17,6 @@ function Jabti() {
 
   const history = useHistory();
   const goToResult = () => {
-    console.log(answerArray);
 
     const answertoResult = (answer) => {
       let result = "";
@@ -25,7 +24,6 @@ function Jabti() {
       result += (answer[1] === 0 ? 'y' : 'w');
       result += (answer[2] === 0 ? 'b' : 'g');
       result += (answer[3] === 0 ? 'g' : 't');
-      console.log(result);
 
       return result;
     }
@@ -39,7 +37,9 @@ function Jabti() {
 
   useEffect(() => {
     if (resultReady) {
-      goToResult();
+      setTimeout(()=>{
+        goToResult();
+      }, 2000)
     }
   }, [resultReady]);
 
@@ -56,7 +56,7 @@ function Jabti() {
 
   return (
     <>
-      <Background />
+      <Background index={displayIndex} resultReady={resultReady} />
       <S.StyledJabti>
         {displayIndex === 0 ? 
         <Intro handleClick={handleClick}/> : 

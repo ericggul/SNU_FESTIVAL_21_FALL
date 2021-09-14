@@ -18,7 +18,19 @@ export const StyledBackground = styled.div`
   left: 0;
   width: ${({ theme }) => theme.windowWidth}px;
   height: ${({ theme }) => theme.windowHeight}px;
+  background: ${({ theme }) => theme.palette.DARK_PURPLE};
   z-index: -5;
+`;
+
+export const StarsContainer = styled.div`
+
+  @keyframes disappear{
+    from{opacity: 1;}
+    to{ opacity: 0;}
+  }
+  ${({ fadeOut }) => fadeOut && `
+    animation: disappear 2s forwards
+  `}
 `;
 
 export const ImageTop = styled.img`
@@ -37,4 +49,24 @@ export const ImageBottom = styled.img`
   height: auto;
   ${appear};
   opacity: 0;
+  trnasition: 2s;
+`;
+
+export const ImageLeft = styled.img`
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: auto;
+  ${appear};
+  opacity: 0;
+`;
+
+export const ImageRight = styled.img`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: auto;
+  ${appear};
+  opacity: 0;
+  trnasition: 2s;
 `;

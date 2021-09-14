@@ -32,7 +32,7 @@ export const Body = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  margin-top: 15vh;
+  margin-top: ${({ theme }) => theme.windowHeight * 0.1}px;
 
   padding: 2rem 0 10rem;
   box-sizing: border-box;

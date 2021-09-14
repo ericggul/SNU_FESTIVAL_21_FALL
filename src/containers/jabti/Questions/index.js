@@ -9,7 +9,7 @@ import * as S from './styles';
 function Questions({
   index, handleClick,
 }) {
-  const [transit, setTransit] = useState(false);
+  const [transit, setTransit] = useState(true);
 
   const onClick = useCallback((id, i) => {
     setTransit(true);
@@ -17,7 +17,9 @@ function Questions({
   }, []);
 
   useEffect(() => {
-    setTransit(false);
+    setTimeout(() => {
+      setTransit(false);
+    }, 100);
   }, [index]);
 
   const splittedQuestions = (question) => (
@@ -38,7 +40,7 @@ function Questions({
         {AnswersData[index - 1].map((answer, i) => (
           <S.AnswerBox key={i} onClick={() => onClick(index, i)}>
             {' '}
-            <TextReveal text={answer} durationTime={500} delayTime={{ min: 200, max: 200 }} />
+            <TextReveal text={answer} durationTime={500} delayTime={{ min: 700, max: 1300 }} />
           </S.AnswerBox>
         ))}
       </S.Answer>

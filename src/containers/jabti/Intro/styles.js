@@ -14,6 +14,17 @@ const appear = css`
   opacity: 0;
 `;
 
+const reverseAppear = css`
+  @keyframes appear-3 {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  animation-name: appear-3;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+`;
+
 export const StyledIntro = styled.div`
     ${appear};
     ${FlexCenterStyle};
@@ -37,21 +48,29 @@ export const FirstText = styled.div`
     font-size: 1.7rem;
     font-weight: 300;
     line-height: 1;
+    ${({ transition }) => transition && reverseAppear};
+    animation-delay: 0.5s;
 `;
 export const SecondText = styled.div`
     font-size: 4rem;
     font-weight: 600;
+
+
 `;
 export const ThirdText = styled.div`
     font-size: 1.2rem;
     font-weight: 300;
     line-height: 1;
+    ${({ transition }) => transition && reverseAppear};
+    animation-delay: 0.3s;
 `;
 export const ButtonSector = styled.div`
 
 `;
 export const ButtonText = styled.div`
     font-size: 1.4rem;
+    ${({ transition }) => transition && reverseAppear};
+    animation-delay: 0.15s;
 `;
 export const Button = styled.button`
     margin-top: 0.6rem;
@@ -63,4 +82,7 @@ export const Button = styled.button`
     color: ${({ theme }) => theme.palette.DARK_PURPLE};
     box-shadow: inset -0.3rem -0.3rem 0.7rem #999;
     cursor: pointer;
+
+    ${({ transition }) => transition && reverseAppear};
+    animation-delay: 0s;
 `;

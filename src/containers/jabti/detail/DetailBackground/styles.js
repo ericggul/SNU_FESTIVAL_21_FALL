@@ -15,6 +15,7 @@ export const ImageTop = styled.img`
   top: 0;
   width: 100%;
   height: auto;
+
 `;
 
 export const ImageBottom = styled.img`
@@ -22,4 +23,20 @@ export const ImageBottom = styled.img`
   bottom: 0;
   width: 100%;
   height: auto;
+  trnasition: 2s;
+`;
+
+export const ImageLeft = styled.img`
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: auto;
+`;
+
+export const ImageRight = styled.img`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: auto;
+  trnasition: 2s;
 `;

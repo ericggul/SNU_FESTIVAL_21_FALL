@@ -29,6 +29,15 @@ export const StarContainer = styled.div`
     animation-delay: ${({ delay }) => delay}s;
 `;
 
+export const QuatroStarContainer = styled.div`
+    @keyframes appear2{
+        from{filter: brightness(0.7)}
+        to{filter: brightness(1)}
+    }
+    animation: appear2 3s infinite alternate;
+    animation-delay: 0s;
+`;
+
 export const SmallDot = styled.div`
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
@@ -76,4 +85,12 @@ export const DivLine = styled.div`
     left: ${({ left }) => left}px;
     border-radius: 50%;
 
+`;
+
+export const ImageMoon = styled.img`
+  position: absolute;
+  left: ${({ left }) => left}px;
+  top: ${({ top }) => top}px;
+  height: ${({ size }) => size}px;
+  width: auto;
 `;

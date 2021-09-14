@@ -66,7 +66,6 @@ class Star {
   update() {
     this.time += 1;
     this.radius = Math.max((this.time - this.start) * (this.delta + this.start - this.time), 0) * this.targetRadius;
-    console.log(this.radius);
   }
 }
 

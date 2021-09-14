@@ -46,15 +46,17 @@ class App {
   }
 
   resize() {
+    this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     this.stageWidth = this.wrapper.clientWidth;
     this.stageHeight = this.wrapper.clientHeight;
 
     this.canvas.width = this.stageWidth;
     this.canvas.height = this.stageHeight;
-    this.starSet = new StarSet(this.stageWidth, this.stageHeight, 1, this.color, [1 * this.delay, 3 * this.delay], [200, 800], this.number);
+    this.starSet = new StarSet(this.stageWidth, this.stageHeight, 1, this.color, [1 * this.delay, 3 * this.delay], [300, 700], this.number);
     this.starSet2 = new StarSet(this.stageWidth, this.stageHeight, 1, this.color, [3 * this.delay, 8 * this.delay], [1000, 2000], this.number);
     this.ctx.scale(1, 1);
 
+    console.log(this.starSet);
     requestAnimationFrame(this.animate.bind(this));
   }
 
@@ -101,10 +103,12 @@ class StarSet {
     this.intervalTimeRange = intervalTimeRange;
     this.number = number;
     // this.number = Math.ceil(this.stageWidth * this.stageHeight / 5000);
+
     this.reset();
   }
 
   reset() {
+    console.log('reset called');
     this.time = 0;
     this.x = getRandom(0, this.stageWidth * (1 - this.sizeIndex));
     this.y = getRandom(0, this.stageHeight * (1 - this.sizeIndex));

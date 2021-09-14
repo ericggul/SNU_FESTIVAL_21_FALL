@@ -125,7 +125,7 @@ class Wheel {
         this.points[i].y,
         this.points[i].r,
       );
-      console.log(this.color);
+
       g.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.5)`);
       g.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
       ctx.fillStyle = g;

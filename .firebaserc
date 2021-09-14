@@ -1,5 +1,18 @@
 {
   "projects": {
-    "default": "festival-pokemongo-test"
+    "snu-festival": "snu-festival",
+    "default": "snufestival-e9a04"
+  },
+  "targets": {
+    "snu-festival": {
+      "hosting": {
+        "staging": [
+          "snu-festival-staging"
+        ],
+        "production": [
+          "snu-festival"
+        ]
+      }
+    }
   }
 }
