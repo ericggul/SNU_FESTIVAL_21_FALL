@@ -75,7 +75,7 @@ function JabtiDetail({
       for(let i=0; i<viewCount.length; i++){
         whole += viewCount[i];
       }
-      setCurrentStars(Math.floor(viewCount[index]/whole * (theme.windowHeight * theme.windowWidth)/10));
+      setCurrentStars(Math.floor(viewCount[index]/whole * (theme.windowHeight * theme.windowWidth)/40));
     }
   }, [viewCount, origin]);
 
