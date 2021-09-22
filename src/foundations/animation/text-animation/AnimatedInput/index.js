@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-export default function AnimatedInput({ passedPlaceholder, content, onMouseDown }) {
+export default function AnimatedInput({ content, onMouseDown }) {
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
   const [dir, setDir] = useState(1);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnswersData } from '@C/jabti/Data';
-import TextReveal from '@F/animation/text-animation/TextReveal';
+import TextReveal from '@/foundations/animation/text-animation/text-reveal/TextReveal';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 

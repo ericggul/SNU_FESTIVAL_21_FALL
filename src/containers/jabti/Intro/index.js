@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import TextReveal from '@F/animation/text-animation/TextRevealv3';
+import RandomTextShuffle from '@/foundations/animation/text-animation/random-text-shuffle/RandomTextShufflev2';
 import * as S from './styles';
 
 function Intro({ handleClick }) {
@@ -17,11 +18,13 @@ function Intro({ handleClick }) {
       <S.HeaderSector>
         <S.FirstText transition={transition}>야매로 보는 엠비티아이!</S.FirstText>
         <S.SecondText transition={transition}>
-          {/* 0x591C */}
-
           {transition
-            ? <TextReveal text="야비티아이 " delayTime={{ min: 300, max: 1000 }} />
-            : '야비티아이'}
+            ? <TextReveal text={`${String.fromCharCode(0x591C)}비티아이 `} delayTime={{ min: 300, max: 1000 }} />
+            : (
+              <>
+                <RandomTextShuffle initialText="야비티아이" changeText={`${String.fromCharCode(0x591C)}비티아이`} delayTime={1500} />
+              </>
+            )}
         </S.SecondText>
         <S.ThirdText transition={transition}>관악의 밤을 비추는 별이 되어주세요!</S.ThirdText>
       </S.HeaderSector>

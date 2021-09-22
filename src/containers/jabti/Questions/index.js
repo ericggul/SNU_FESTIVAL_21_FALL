@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { QuestionsData, AnswersData } from '@C/jabti/Data';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
-import RandomTextShuffle from '@F/animation/text-animation/RandomTextShuffle';
-import TextReveal from '@F/animation/text-animation/TextReveal';
+import RandomTextShuffle from '@/foundations/animation/text-animation/random-text-shuffle/RandomTextShuffle';
+import TextReveal from '@/foundations/animation/text-animation/text-reveal/TextReveal';
 import * as S from './styles';
 
 function Questions({

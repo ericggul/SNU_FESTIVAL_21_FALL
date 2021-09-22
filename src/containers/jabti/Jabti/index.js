@@ -5,8 +5,6 @@ import Intro from '@C/jabti/Intro';
 import Questions from '@C/jabti/Questions';
 import Background from '@C/jabti/Background';
 import { useHistory } from 'react-router';
-import { getRandomElementFromArray } from '@U/functions/array';
-import { jabtiCollectionRef } from '@U/initializer/firebase';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 

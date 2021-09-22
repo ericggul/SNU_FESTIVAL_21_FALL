@@ -54,8 +54,7 @@ export const FirstText = styled.div`
 export const SecondText = styled.div`
     font-size: 4rem;
     font-weight: 600;
-
-
+    display: inline;
 `;
 export const ThirdText = styled.div`
     font-size: 1.2rem;
