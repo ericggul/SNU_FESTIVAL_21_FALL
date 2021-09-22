@@ -15,7 +15,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { initializeKakao } from '@U/initializer/kakao';
 
 initializeGA();
-// initializeKakao();
+initializeKakao();
 
 // noinspection JSCheckFunctionSignatures
 ReactDOM.render(

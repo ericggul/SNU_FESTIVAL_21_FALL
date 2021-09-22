@@ -10,11 +10,11 @@ function DetailLink({result}) {
   const history = useHistory();
   const shareThroughKakao = useCallback(() => {
     window.Kakao.Link.sendCustom({
-      templateId: 53192,
+      templateId: 60678,
       templateArgs: {
         result,
         // imageUrl: `https://snufestival.com/images/achieve-card.png`,
-        imageUrl: `https://snufestival.com/images/${result}-card.png`,
+        imageUrl: `https://snufestival.com/images/${result}.png`,
       },
     });
     // EventBehavior('Tarot', 'Click Tarot Kakao Share', `share ${result} by kakao`);

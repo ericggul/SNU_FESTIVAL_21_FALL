@@ -40,7 +40,7 @@ import ResultText15 from '@I/jabti/result/text/15.png';
 import ResultText16 from '@I/jabti/result/text/16.png';
 
 function JabtiDetail({
-  resultImage, resultTextImage, result, spot, colorCode, colorName, index,
+  resultImage, resultTextImage, result, description, spot, colorCode, colorName, index,
 }) {
   return (
     <>
@@ -48,6 +48,7 @@ function JabtiDetail({
         resultImage={resultImage}
         resultTextImage={resultTextImage}
         result={result}
+        description={description}
         spot={spot}
         colorCode={colorCode}
         colorName={colorName}
@@ -62,6 +63,25 @@ JabtiDetail.propTypes = {
   resultImage: PropTypes.string.isRequired,
   result: PropTypes.string.isRequired,
 };
+
+const descriptions = [
+  '순살의 유연함을 지닌 그대여, // 빡세게 테니스를 치며 땀 흘리는 모습에 전전  전율이 찌릿!>< // 운동 끝나고 같이 걸어가자~',
+  '양념치킨 택시 뽑았다! 널 데리러 가. // Baby let’s ride 빨리 나와 Skkkkkkkkkrt // 어서타 달리자 어디든 괜찮아',
+  '아침부터 관정에서 빡공한 그대에게 드리는 선물! // 아이스크림 보러 갈래? 별 먹으러 갈래? // 관정 옥상으로!',
+  '있잖아, 나 궁금한게 있는데... // 샤대축제의 열기가 얼마나 후끈하길래 관악구에 폭염주의보가 내려진걸까? …',
+  '누군가 공학의 미래를 묻거든, 고개를 들어 저 사막 위의 301을 보게 하라. // 학생들의 밤샘 실험에 감탄한 나머지 하늘에서도 단비를 선사해 주는구나.',
+  ' Dear majesty, // please bring an umbrella when catching a cab on a rainy day. // Sincerely, snufestival.',
+  '비 오는 우중충한 날 머리에 꽃 하나 꽂고 // 가벼운 발걸음으로 노래 한곡 어떠세요? // 천둥이 ㅊ..ㅣ이이이이이이이으으으으으아아아아ㅏㅏㄱ',
+  '길을 잃었다 어딜 가야 할까 // 열두 개로 갈린 조각난 골목길 어딜 가면 너를 다시 만날까 // 운명으로 친다면, 내 운명을 고르자면 축제로 오면 됨 // 순살 체형 커버에는 노란신 ',
+  '닭다리뼈는 20kg, french rose는 20kg, 같이 들면 60kg // 20+20=60',
+  '거울아 거울아 이 세상에서 누가 제일 예쁘니? // 축방이요 // 정답을 맞힌 너에게 치킨을 (축)하사하노라',
+  '책상에 너무 오래 앉아있어 뼈만 앙상하게 남은 그대여, // 공부는 잠시 쉬어도 좋으니 가벼운 마음으로 축제에  참여해 보는 건 어떤가?',
+  '먹으면서도 운동하겠다고 순살 대신 뼈를 선택하고... 닭다리 돌리면서 줄넘기하는 당신… // 그런다고 살 안 찔 것 같아? // 포기해',
+  '비가 쏟아져도 그대의 운동 본능은 일절 꺾일 줄 모르는구려. // 그렇게 운동이 좋으면 축제도 걸어서, 아니 뛰어서 오너라.',
+  '목적지까지 10분. 숄더프레스 5세트 가능이다. 우선 신발을 벗고 코어를 안정화 시킨다. 이 아령과 택시라면 어깨 세트도 다행히 마무리 지을 수 있다.',
+  '그니까 치킨도 사줬는데... 세 명 중 한 명은 나 우산 같이 씌워줄 줄 알았는데... 메모지 다 젖겠네... 순살 말고 뼈로 사줘서 그런가... 젠장...이게 교생인가',
+  '그니까... 축장님이 이거 들고 서있으라고 시켰는데... 다들 어디간거지?? 축장님? 축..장님? // 아 치킨 먹고싶다.. 치킨은 뼈지...',
+];
 
 const spots = [
   '테니스장',
@@ -100,7 +120,7 @@ const capitalizedColorCodes = [
   '#DF00FF',
   '#93C572',
 ];
-console.log(capitalizedColorCodes);
+
 const convert = (givenArray) => {
   let result = [];
   givenArray.map((e, i) => {
@@ -110,7 +130,7 @@ const convert = (givenArray) => {
 };
 
 const colorCodes = convert(capitalizedColorCodes);
-console.log(colorCodes[0]);
+
 const colorNames = [
   'Electric Lime',
   'Cornell Red',
@@ -135,6 +155,7 @@ export const SYBG = () => (
     resultImage={Result1}
     resultTextImage={ResultText1}
     result="sybg"
+    description={descriptions[0]}
     spot={spots[0]}
     colorCode={colorCodes[0]}
     colorName={colorNames[0]}
@@ -147,6 +168,7 @@ export const SYBT = () => (
     resultImage={Result2}
     resultTextImage={ResultText2}
     result="sybt"
+    description={descriptions[1]}
     spot={spots[1]}
     colorCode={colorCodes[1]}
     colorName={colorNames[1]}
@@ -159,6 +181,7 @@ export const SYGG = () => (
     resultImage={Result3}
     resultTextImage={ResultText3}
     result="sygg"
+    description={descriptions[2]}
     spot={spots[2]}
     colorCode={colorCodes[2]}
     colorName={colorNames[2]}
@@ -171,6 +194,7 @@ export const SYGT = () => (
     resultImage={Result4}
     resultTextImage={ResultText4}
     result="sygt"
+    description={descriptions[3]}
     spot={spots[3]}
     colorCode={colorCodes[3]}
     colorName={colorNames[3]}
@@ -183,6 +207,7 @@ export const SWBG = () => (
     resultImage={Result5}
     resultTextImage={ResultText5}
     result="swbg"
+    description={descriptions[4]}
     spot={spots[4]}
     colorCode={colorCodes[4]}
     colorName={colorNames[4]}
@@ -195,6 +220,7 @@ export const SWBT = () => (
     resultImage={Result6}
     resultTextImage={ResultText6}
     result="swbt"
+    description={descriptions[5]}
     spot={spots[5]}
     colorCode={colorCodes[5]}
     colorName={colorNames[5]}
@@ -207,6 +233,7 @@ export const SWGG = () => (
     resultImage={Result7}
     resultTextImage={ResultText7}
     result="swgg"
+    description={descriptions[6]}
     spot={spots[6]}
     colorCode={colorCodes[6]}
     colorName={colorNames[6]}
@@ -219,6 +246,7 @@ export const SWGT = () => (
     resultImage={Result8}
     resultTextImage={ResultText8}
     result="swgt"
+    description={descriptions[7]}
     spot={spots[7]}
     colorCode={colorCodes[7]}
     colorName={colorNames[7]}
@@ -231,6 +259,7 @@ export const PYBG = () => (
     resultImage={Result9}
     resultTextImage={ResultText9}
     result="pybg"
+    description={descriptions[8]}
     spot={spots[8]}
     colorCode={colorCodes[8]}
     colorName={colorNames[8]}
@@ -243,6 +272,7 @@ export const PYBT = () => (
     resultImage={Result10}
     resultTextImage={ResultText10}
     result="pybt"
+    description={descriptions[9]}
     spot={spots[9]}
     colorCode={colorCodes[9]}
     colorName={colorNames[9]}
@@ -255,6 +285,7 @@ export const PYGG = () => (
     resultImage={Result11}
     resultTextImage={ResultText11}
     result="pygg"
+    description={descriptions[10]}
     spot={spots[10]}
     colorCode={colorCodes[10]}
     colorName={colorNames[10]}
@@ -267,6 +298,7 @@ export const PYGT = () => (
     resultImage={Result12}
     resultTextImage={ResultText12}
     result="pygt"
+    description={descriptions[11]}
     spot={spots[11]}
     colorCode={colorCodes[11]}
     colorName={colorNames[11]}
@@ -279,6 +311,7 @@ export const PWBG = () => (
     resultImage={Result13}
     resultTextImage={ResultText13}
     result="pwbg"
+    description={descriptions[12]}
     spot={spots[12]}
     colorCode={colorCodes[12]}
     colorName={colorNames[12]}
@@ -291,6 +324,7 @@ export const PWBT = () => (
     resultImage={Result14}
     resultTextImage={ResultText14}
     result="pwbt"
+    description={descriptions[13]}
     spot={spots[13]}
     colorCode={colorCodes[13]}
     colorName={colorNames[13]}
@@ -303,6 +337,7 @@ export const PWGG = () => (
     resultImage={Result15}
     resultTextImage={ResultText15}
     result="pwgg"
+    description={descriptions[14]}
     spot={spots[14]}
     colorCode={colorCodes[14]}
     colorName={colorNames[14]}
@@ -315,6 +350,7 @@ export const PWGT = () => (
     resultImage={Result16}
     resultTextImage={ResultText16}
     result="pwgt"
+    description={descriptions[15]}
     spot={spots[15]}
     colorCode={colorCodes[15]}
     colorName={colorNames[15]}

@@ -53,6 +53,7 @@ export const HeaderText = styled.div`
   width: 80%;
 
   ${appear};
+  animation-delay: 0.1s;
   opacity: 0;
 `;
 

@@ -40,7 +40,7 @@ function Questions({
         {AnswersData[index - 1].map((answer, i) => (
           <S.AnswerBox key={i} onClick={() => onClick(index, i)}>
             {' '}
-            <TextReveal text={answer} durationTime={500} delayTime={{ min: 700, max: 1300 }} />
+            <TextReveal text={answer} durationTime={500} delayTime={{ min: 1000, max: 1000 }} />
           </S.AnswerBox>
         ))}
       </S.Answer>

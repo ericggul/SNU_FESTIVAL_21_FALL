@@ -5,7 +5,7 @@ import * as S from './styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function Stars({ theme, index }) {
+function Stars({ color, theme }) {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (theme.windowWidth > 0 && theme.windowHeight > 0) {
@@ -20,38 +20,35 @@ function Stars({ theme, index }) {
       theme.windowWidth < 768
         ? (
           <S.Container>
-            <SmallStarDuo top={600} left={200} />
-            <SmallStarQuatro top={theme.windowHeight * 0.18} left={theme.windowWidth * 0.6} size={0.4} />
-            <SmallStarQuatro top={theme.windowHeight * 0.2} left={theme.windowWidth / 2 - 10} size={0.6} />
-            <SmallStarQuatro top={theme.windowHeight * 0.7} left={theme.windowWidth * 0.12} size={0.7} />
-            <SmallStarQuatro top={theme.windowHeight * 0.1} left={theme.windowWidth * 0.8} size={1.5} />
+            <SmallStarDuo color={color} top={600} left={200} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.18} left={theme.windowWidth * 0.6} size={0.4} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.2} left={theme.windowWidth / 2 - 10} size={0.6} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.7} left={theme.windowWidth * 0.12} size={0.7} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.1} left={theme.windowWidth * 0.8} size={1.5} />
 
-            <SmallStarQuatro top={theme.windowHeight * 0.28} left={theme.windowWidth * 0.09} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.28} left={theme.windowWidth * 0.09} />
+            {/*
+            {index > 1 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.37} left={theme.windowWidth * 0.11} size={0.8} />}
+            {index > 2 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.2} left={theme.windowWidth * 0.6} size={0.7} />}
+            {index > 3 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.73} left={theme.windowWidth * 0.44} size={0.9} />} */}
 
-            {index > 1 && <LargeStarQuatro top={theme.windowHeight * 0.37} left={theme.windowWidth * 0.11} size={0.8} />}
-            {index > 2 && <LargeStarQuatro top={theme.windowHeight * 0.2} left={theme.windowWidth * 0.6} size={0.7} />}
-            {index > 3 && <LargeStarQuatro top={theme.windowHeight * 0.73} left={theme.windowWidth * 0.44} size={0.9} />}
-
-            {/* <LargeStarMultiple top={theme.windowHeight * 0.65} left={theme.windowWidth - 30} spikes={8} size={1.3} /> */}
-            <S.ImageMoon top={theme.windowHeight * 0.5} left={theme.windowWidth * 0.5} size={theme.windowHeight * 0.4} src={Moon} />
           </S.Container>
         )
         : (
           <S.Container>
-            <SmallStarDuo top={600} left={200} />
-            <SmallStarQuatro top={theme.windowHeight * 0.18} left={theme.windowWidth * 0.6} size={0.4} />
-            <SmallStarQuatro top={theme.windowHeight * 0.2} left={theme.windowWidth / 2 - 10} size={0.6} />
-            <SmallStarQuatro top={theme.windowHeight * 0.7} left={theme.windowWidth * 0.12} size={0.7} />
-            <SmallStarQuatro top={theme.windowHeight * 0.1} left={theme.windowWidth * 0.8} size={1.5} />
+            <SmallStarDuo color={color} top={600} left={200} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.18} left={theme.windowWidth * 0.14} size={0.4} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.2} left={theme.windowWidth * 0.75} size={0.6} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.7} left={theme.windowWidth * 0.12} size={0.7} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.1} left={theme.windowWidth * 0.78} size={1.5} />
 
-            <SmallStarQuatro top={theme.windowHeight * 0.28} left={theme.windowWidth * 0.09} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.78} left={theme.windowWidth * 0.78} size={1.5} />
+            <SmallStarQuatro color={color} top={theme.windowHeight * 0.28} left={theme.windowWidth * 0.09} />
+            {/*
+            {index > 1 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.40} left={theme.windowWidth * 0.31} size={1} />}
+            {index > 2 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.10} left={theme.windowWidth * 0.6} size={0.9} />}
+            {index > 3 && <LargeStarQuatro color={color} top={theme.windowHeight * 0.85} left={theme.windowWidth * 0.39} size={1.3} />} */}
 
-            {index > 1 && <LargeStarQuatro top={theme.windowHeight * 0.40} left={theme.windowWidth * 0.31} size={1} />}
-            {index > 2 && <LargeStarQuatro top={theme.windowHeight * 0.10} left={theme.windowWidth * 0.6} size={0.9} />}
-            {index > 3 && <LargeStarQuatro top={theme.windowHeight * 0.85} left={theme.windowWidth * 0.39} size={1.3} />}
-
-            {/* <LargeStarMultiple top={theme.windowHeight * 0.65} left={theme.windowWidth - 30} spikes={8} size={1.3} /> */}
-            <S.ImageMoon top={theme.windowHeight * 0.5} left={theme.windowWidth * 0.5} size={theme.windowHeight * 0.6} src={Moon} />
           </S.Container>
         )
     )
@@ -60,9 +57,10 @@ function Stars({ theme, index }) {
 
 export default withTheme(Stars);
 
-const SmallStarDuo = ({ top, left, size = 1 }) => {
+const SmallStarDuo = ({
+  color, top, left, size = 1,
+}) => {
   const [tilted, setTilted] = useState(getRandom(-4, 4));
-  const [color, setColor] = useState(`rgb(255, ${getRandom(240, 252)}, ${getRandom(150, 200)})`);
   const [relativeHorizontalLength, setRelativeHorizontalLength] = useState(getRandom(0.7, 1.3));
   return (
     <S.StarContainer time={6} delay={0}>
@@ -72,11 +70,12 @@ const SmallStarDuo = ({ top, left, size = 1 }) => {
   );
 };
 
-const SmallStarQuatro = ({ top, left, size = 1 }) => {
+const SmallStarQuatro = ({
+  color, top, left, size = 1,
+}) => {
   const [tilted, setTilted] = useState(getRandom(-4, 4));
   const [subAxisAngle, setSubAxisAngle] = useState(getRandom(38, 52));
   const [subAxisLength, setSubAxisLength] = useState(getRandom(0.3, 0.7));
-  const [color, setColor] = useState(`rgb(255, ${getRandom(240, 252)}, ${getRandom(150, 200)})`);
 
   const [animationTime, setAnimationTime] = useState(getRandom(3, 10));
   const [animationDelay, setAnimationDelay] = useState(getRandom(0, 5));
@@ -90,7 +89,9 @@ const SmallStarQuatro = ({ top, left, size = 1 }) => {
   );
 };
 
-const LargeStarQuatro = ({ top, left, size = 1 }) => {
+const LargeStarQuatro = ({
+  color, top, left, size = 1,
+}) => {
   const [tilted, setTilted] = useState(getRandom(-2, 2));
   const [subAxisAngle, setSubAxisAngle] = useState(getRandom(40, 50));
   const [subAxisLength, setSubAxisLength] = useState(getRandom(0.3, 0.7));
@@ -107,7 +108,7 @@ const LargeStarQuatro = ({ top, left, size = 1 }) => {
 };
 
 const LargeStarMultiple = ({
-  top, left, size = 1, spikes,
+  color, top, left, size = 1, spikes,
 }) => {
   const [tilted, setTilted] = useState(getRandom(-2, 2));
 

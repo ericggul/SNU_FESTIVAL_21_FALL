@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withTheme } from 'styled-components';
 import Stars2 from '@F/stars/Stars2';
+import DetailStars from '@F/stars/DetailStars';
 import CloudTop from '@I/jabti/background/cloud-top.png';
 import CloudBottom from '@I/jabti/background/cloud-bottom.png';
 import CloudLeft from '@I/jabti/background/cloud-left.png';
@@ -18,7 +19,13 @@ function DetailBackground({ theme, currentStars, colorCode }) {
   return (
     <S.Background>
       {
-        loading && <Stars2 width="100%" height="100%" color={colorCode} delay={0} number={currentStars} />
+        loading
+        && (
+        <>
+          <Stars2 width="100%" height="100%" color={colorCode} delay={0} number={currentStars} />
+          <DetailStars color={colorCode} />
+        </>
+        )
       }
       {
         theme.windowWidth < 768

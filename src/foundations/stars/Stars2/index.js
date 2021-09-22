@@ -41,8 +41,6 @@ class App {
 
     this.resize();
     window.addEventListener('resize', this.resize.bind(this), false);
-
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   resize() {
@@ -56,13 +54,11 @@ class App {
     this.starSet2 = new StarSet(this.stageWidth, this.stageHeight, 1, this.color, [3 * this.delay, 8 * this.delay], [1000, 2000], this.number);
     this.ctx.scale(1, 1);
 
-    console.log(this.starSet);
-    requestAnimationFrame(this.animate.bind(this));
+    this.animate();
   }
 
   animate() {
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
-
     this.starSet.draw(this.ctx);
     this.starSet2.draw(this.ctx);
     requestAnimationFrame(this.animate.bind(this));
@@ -145,6 +141,7 @@ class StarSet {
       ctx.closePath();
     }
     if (this.time > this.startTimeRange[1] + this.intervalTimeRange[1]) {
+      console.log('calling reset');
       this.reset();
     }
   }

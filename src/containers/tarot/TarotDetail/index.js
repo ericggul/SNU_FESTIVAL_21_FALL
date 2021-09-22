@@ -45,7 +45,7 @@ function TarotDetail({
 
   const shareThroughKakao = useCallback(() => {
     window.Kakao.Link.sendCustom({
-      templateId: 53192,
+      templateId: 60678,
       templateArgs: {
         result,
         imageUrl: `https://snufestival.com/images/${result}-card.png`,

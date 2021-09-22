@@ -20,10 +20,10 @@ function ScreenTest({ theme }) {
   return (
     <S.StyledScreenTest>
       {/* <LightChange1 image={ClosingFestival} /> */}
-      {/* <Wave /> */}
+      <Wave />
       {/* <Balls /> */}
       {/* <Firework /> */}
-      <SparklySkull />
+      {/* <SparklySkull /> */}
       {/* <WaterThreejs /> */}
       {/* <Particle /> */}
 
