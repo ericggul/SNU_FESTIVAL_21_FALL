@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '@I/jabti/Logo.png';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal/Fade';
-import TextReveal from '@F/animation/text-animation/TextRevealv4';
+import TextReveal from '@F/animation/text-animation/text-reveal/TextRevealv4';
 import * as S from './styles';
 
 function DetailFestivalInfo() {

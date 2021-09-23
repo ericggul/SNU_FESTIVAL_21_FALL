@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 
 import Header from '@I/introduction/header.png';
 import Poster21Fall from '@I/poster/21Fall.png';
-import TextReveal from '@F/animation/text-animation/TextRevealv2';
+import TextReveal from '@F/animation/text-animation/text-reveal/TextRevealv2';
 import * as S from './styles';
 
 function BasicInfoSection({ isMobile }) {

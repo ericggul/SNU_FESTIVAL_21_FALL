@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import TextReveal from '@F/animation/text-animation/TextRevealv3';
+import TextReveal from '@F/animation/text-animation/text-reveal/TextRevealv3';
 import RandomTextShuffle from '@/foundations/animation/text-animation/random-text-shuffle/RandomTextShufflev2';
 import * as S from './styles';
 
