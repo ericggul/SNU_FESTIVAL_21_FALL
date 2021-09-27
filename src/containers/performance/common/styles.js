@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -37,7 +38,7 @@ export const IconBubble = styled.div`
   margin: 2rem 0;
 `;
 
-export const Icon = styled.div`
+export const Icon = styled(motion.div)`
   width: calc(min(33vw, 200px));
   height: auto;
   margin-right: 2rem;

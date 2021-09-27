@@ -14,10 +14,9 @@ import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
 
 import * as S from './styles';
 
-export const transition = { duration: 1.5, ease: [0.43, 0.13, 0.23, 0.96] };
+export const transition = { duration: 1.3, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function Performance({ theme }) {
-  const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [selected, setSelected] = useState(null);
 
   const mainPoster = (
@@ -61,30 +60,7 @@ function Performance({ theme }) {
       {Item('hit-the-stage', HitTheStageIcon, '힛더스테이지', 1)}
       {Item('sing-stealer', SingStealerIcon, '씽스틸러', 2)}
       {Item('game-tournament', GameTournamentIcon, '관악게임토너먼트', 3)}
-      {/* <S.GridItem>
-        <S.IconImage src={PhoneCertIcon} onClick={() => send('phone-cert')} />
-        <S.IconDescription>
-          폰서트 LIVE
-        </S.IconDescription>
-      </S.GridItem>
-      <S.GridItem>
-        <S.IconImage src={HitTheStageIcon} onClick={() => send('hit-the-stage')} />
-        <S.IconDescription>
-          힛더스테이지
-        </S.IconDescription>
-      </S.GridItem>
-      <S.GridItem>
-        <S.IconImage src={GameTournamentIcon} onClick={() => send('game-tournament')} />
-        <S.IconDescription>
-          관악게임토너먼트
-        </S.IconDescription>
-      </S.GridItem>
-      <S.GridItem>
-        <S.IconImage src={SingStealerIcon} onClick={() => send('sing-stealer')} />
-        <S.IconDescription>
-          씽스틸러
-        </S.IconDescription>
-      </S.GridItem> */}
+
     </S.IconGrid>
   );
 

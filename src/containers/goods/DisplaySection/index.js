@@ -23,8 +23,8 @@ function DisplaySection() {
   const Item = (url, image, name, price, i) => (
     <S.Item
       onClick={() => handleClick(url, i)}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
       exit={{
         opacity: selected === i ? 1 : 0,
 

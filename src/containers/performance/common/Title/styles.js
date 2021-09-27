@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { motion } from 'framer-motion';
 
-export const StyledTitle = styled.div`
+export const StyledTitle = styled(motion.div)`
   font-size: 1.2rem;
   font-weight: 500;
   position: relative;

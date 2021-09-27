@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { motion } from 'framer-motion';
 
-export const StyledDate = styled.div`
+export const StyledDate = styled(motion.div)`
     ${FlexCenterStyle};
     flex-direction: row;
     color: ${({ theme }) => theme.palette.WHITE};

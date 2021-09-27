@@ -2,18 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-export default function AnimatedInput({ content, onMouseDown }) {
+export default function AnimatedInput({ scripts, content, onMouseDown }) {
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState('');
   const [dir, setDir] = useState(1);
   const [index, setIndex] = useState(0);
   const [scriptIndex, setScriptIndex] = useState(0);
-
-  const scripts = [
-    '내용을 여기에 쓰면 됩니다.',
-    '축하사 화이팅!   ',
-    '2021 가을축제, 관악의 밤',
-  ];
 
   useEffect(() => {
     setTimeout(() => {

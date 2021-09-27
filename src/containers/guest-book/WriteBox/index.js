@@ -11,6 +11,12 @@ import SignInGuide from '@F/modal/content/SignInGuide';
 import useModal from '@U/hooks/useModal';
 import * as S from './styles';
 
+const scripts = [
+  '내용을 여기에 쓰면 됩니다.',
+  '축하사 화이팅!   ',
+  '2021 가을축제, 관악의 밤',
+];
+
 function WriteBox({ user }) {
   const isAuthorized = useMemo(() => !!(user.uid && !user.isLoading), [user]);
   const { modalComponent, setIsModalOpen } = useModal(SignInGuide);
@@ -53,7 +59,7 @@ function WriteBox({ user }) {
   return (
     <S.StyledWriteBox>
       <S.InputBox placeholder="닉네임" {...username} onMouseDown={checkAuthority} />
-      <AnimatedInput passedPlaceholder="내용을 여기에 쓰면 됩니다." content={content} onMouseDown={checkAuthority} />
+      <AnimatedInput scripts={scripts} passedPlaceholder="내용을 여기에 쓰면 됩니다." content={content} onMouseDown={checkAuthority} />
       {/* <S.TextArea placeholder="내용을 여기에 쓰면 됩니다." {...content} onMouseDown={checkAuthority} /> */}
       <S.Submit onClick={isAuthorized ? Submit : checkAuthority}>등록</S.Submit>
 

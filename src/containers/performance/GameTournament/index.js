@@ -1,11 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
+import GameTournamentIcon from '@I/performance/icon/game-tournament-icon.png';
+import GameTournamentImage from '@I/performance/game-tournament.png';
+import { GameTournamentData } from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
+import Title from '@C/performance/common/Title';
+import Bubble from '@C/performance/common/Bubble';
+import Date from '@C/performance/common/Date';
+import Guide from '@C/performance/common/Guide';
+import Starring from '@C/performance/common/Starring';
+import Fade from 'react-reveal/Fade';
+
 import CloudTemplar from '@I/performance/cloud-templar.png';
 import CloudTemplarSmall from '@I/performance/cloud-templar-small.png';
-import Guide from '@C/performance/common/Guide';
-import Bubble from '@C/introduction/staff-section/Bubble';
+
 import MascotForMission from '@C/performance/common/MascotForMission';
 import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
@@ -16,40 +25,26 @@ import * as SS from './styles';
 function GameTournament({ theme }) {
   const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
 
-  const title = (
-    <SS.Title>
-      <p>관악게임토너먼트 결승전</p>
-      <p>LOL 해설의 최강자</p>
-      <p>
-        <SS.PurpleText>클템</SS.PurpleText>
-        과 함께 하는 관게토
-        {' '}
-        <SS.PurpleText>결승전</SS.PurpleText>
-      </p>
-    </SS.Title>
-  );
-  const image = (
-    <SS.Image><Image src={isMobile ? CloudTemplarSmall : CloudTemplar} alt="" circle /></SS.Image>
-  );
-  const teams = (
-    <SS.Teams>
-      <div>
-        <p>Team</p>
-        <p>
-          <span style={{ visibility: 'hidden' }}>정</span>
-          정글차이
-          <span style={{ visibility: 'hidden' }}>어</span>
-        </p>
-      </div>
-      <div>vs</div>
-      <div>
-        <p>Team</p>
-        <p>입이커서악어</p>
-      </div>
-    </SS.Teams>
-  );
+  // const teams = (
+  //   <SS.Teams>
+  //     <div>
+  //       <p>Team</p>
+  //       <p>
+  //         <span style={{ visibility: 'hidden' }}>정</span>
+  //         정글차이
+  //         <span style={{ visibility: 'hidden' }}>어</span>
+  //       </p>
+  //     </div>
+  //     <div>vs</div>
+  //     <div>
+  //       <p>Team</p>
+  //       <p>입이커서악어</p>
+  //     </div>
+  //   </SS.Teams>
+  // );
 
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
+  const [speak, setSpeak] = useState(false);
   useEffect(() => {
     linkCollectionRef.doc('game-tournament').get()
       .then((doc) => {
@@ -59,53 +54,63 @@ function GameTournament({ theme }) {
         toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
   }, []);
 
-  const guide = <Guide youtubeUrl={url} date="5월 12일" times={['15:00~18:00']} />;
+  const icon = (
+    <S.Icon
+      onClick={() => setSpeak(!speak)}
+    >
+      <Image src={GameTournamentIcon} alt="" objectFit="scale-down" />
+    </S.Icon>
+  );
+  const bubble = <Bubble decoration="카트라이더 슝슝~" title="관악게임토너먼트!" speak={speak} />;
+  const title = <Title title="관악게임토너먼트" />;
+  const date = <Date date={29} />;
+  const youTube = <Fade left distance="30px" delay={1000}><iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></Fade>;
+  const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
+  const starring = <Starring data={GameTournamentData} />;
+  const image = <S.Image><Fade left distance="30px" delay={200}><Image src={GameTournamentImage} alt="" objectFit="scale-down" /></Fade></S.Image>;
 
   return (
-    <SS.StyledGameTournament>
+    <S.Wrapper>
       <HeaderContent>관악게임토너먼트</HeaderContent>
-      <SS.Body>
-        {isMobile && (
+      {isMobile && (
         <S.MobileBody>
+          <S.IconBubble>
+            {icon}
+            {bubble}
+          </S.IconBubble>
           {title}
-          {image}
-          {teams}
+          {date}
+          {youTube}
           {guide}
+          {starring}
+          {image}
         </S.MobileBody>
-        )}
-        {!isMobile && (
-        <S.BodyWrapper>
-          <S.Body>
-            {image}
-            <div>
+      )}
+      {!isMobile && (
+        <S.MobileBody>
+          <S.DesktopWrapper>
+            <S.IconBubble>
+              {icon}
+              {bubble}
+            </S.IconBubble>
+            <S.TitleDate>
               {title}
-              {teams}
-              {guide}
-            </div>
-          </S.Body>
-        </S.BodyWrapper>
-        )}
-        {url && (
-          <SS.VideoWrapper
-            widths={[850, 700, 300]}
-            heights={[850 / 1.77, 700 / 1.77, 300 / 1.77]}
-          >
-            <iframe
-              width="100%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${url.split('/').pop()}`}
-              title="관악게임토너먼트 라이브"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
-          </SS.VideoWrapper>
-        )}
-      </SS.Body>
-      <Bubble theme={theme} />
+              {date}
+            </S.TitleDate>
+
+          </S.DesktopWrapper>
+            {youTube}
+            {guide}
+            {starring}
+            {image}
+
+        </S.MobileBody>
+      )}
+      {/* <Bubble theme={theme} /> */}
       <MascotForMission
         performance="gameTournament"
       />
-    </SS.StyledGameTournament>
+    </S.Wrapper>
   );
 }
 export default withTheme(GameTournament);

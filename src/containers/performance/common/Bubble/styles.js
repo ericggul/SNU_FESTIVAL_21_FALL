@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { motion } from 'framer-motion';
 
-export const StyledBubble = styled.div`
+export const StyledBubble = styled(motion.div)`
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;

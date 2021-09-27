@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { FlexCenterStyle } from '@S/responsive/display';
 import { HoverStyle } from '@S/responsive/mouse';
+import { motion } from 'framer-motion';
 
-export const StyledGuide = styled.div`
+export const StyledGuide = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;

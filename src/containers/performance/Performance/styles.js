@@ -19,14 +19,14 @@ export const Description = styled.div`
   margin-top: 5rem;
 `;
 
-export const IconGrid = styled(motion.div)`
+export const IconGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, calc(min(46vw, 350px)));
 
   margin-bottom: 5rem;
 `;
 
-export const GridItem = styled.div`
+export const GridItem = styled(motion.div)`
   ${FlexCenterStyle};
   flex-direction: column;
   margin: 2.5vw;

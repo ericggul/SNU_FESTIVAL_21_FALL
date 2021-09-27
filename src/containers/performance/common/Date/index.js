@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
+import { transition } from '@C/performance/Performance';
 import * as S from './styles';
 
 function Date({ date }) {
@@ -10,7 +11,17 @@ function Date({ date }) {
   }, [history]);
 
   return (
-    <S.StyledDate>
+    <S.StyledDate
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+      }}
+      transition={{
+        ...transition,
+        delay: 0.9,
+      }}
+    >
       <S.SingleDate onClick={() => send('phone-cert')}>
         <S.Day>화</S.Day>
         <S.Date isSelected={date === 26}>26</S.Date>
