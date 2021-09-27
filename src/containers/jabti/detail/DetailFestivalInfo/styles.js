@@ -5,7 +5,7 @@ import { FlexCenterStyle } from '@S/responsive/display';
 export const StyledDetailFestivalInfo = styled.div`
   ${FlexCenterStyle};
   ${appear};
-  margin: 1.5rem;
+  margin: 5rem 1.5rem;
   animation-delay: 2.5s;
   opacity: 0;
   text-align: center;
@@ -16,7 +16,7 @@ export const Logo = styled.img`
     width: 11rem;
     height: auto;
     margin: .5rem;
-
+    cursor: pointer;
 `;
 
 export const Header = styled.div`

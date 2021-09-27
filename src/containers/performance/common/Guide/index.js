@@ -21,9 +21,8 @@ function Guide({ date, times, youtubeUrl }) {
       <S.Texts>
         <p>{date}</p>
         {times.map(time => <p key={time}>{time}</p>)}
-        <p>유튜브 라이브 중계 </p>
       </S.Texts>
-      <S.Button onClick={goToYoutube}>보러가기</S.Button>
+      {/* <S.Button onClick={goToYoutube}>보러가기</S.Button> */}
     </S.StyledGuide>
   );
 }

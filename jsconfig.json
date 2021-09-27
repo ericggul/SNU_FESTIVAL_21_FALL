@@ -4,6 +4,7 @@
     "paths": {
       "@/*": ["./*"],
       "@C/*": ["./containers/*"],
+      "@P/*": ["./pages/*"],
       "@F/*": ["./foundations/*"],
       "@I/*": ["./static/image/*"],
       "@S/*": ["./static/style/*"],

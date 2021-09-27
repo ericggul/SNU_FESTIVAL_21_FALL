@@ -115,7 +115,7 @@ function RandomTextShuffle({ text }) {
 
   useEffect(() => {
     WordShuffler(text, textRef);
-  }, [text, textRef]);
+  }, [text, textRef, WordShuffler]);
 
   return (
     <S.StyledRandomTextShuffle>

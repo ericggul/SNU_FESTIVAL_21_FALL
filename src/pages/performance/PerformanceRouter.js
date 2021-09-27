@@ -1,21 +1,37 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, useLocation, Switch } from 'react-router-dom';
 import NotFound from '@/pages/NotFound';
+import { AnimatePresence } from 'framer-motion';
 
 function PerformanceRouter({ match }) {
+  const location = useLocation();
   return (
-    <Switch>
+    <>
       { performanceRoutes.map((route) => (
-        <Route
-          exact
-          key={`${match.path}${route.path}`}
-          path={`${match.path}${route.path}`}
-          component={route.component}
-        />
+        <React.Fragment key={route.path}>
+          <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.pathname}>
+              <Route
+                exact
+                key={`${match.path}${route.path}`}
+                path={`${match.path}${route.path}`}
+                component={route.component}
+              />
+              { route.children && route.children.map((childRoute) => (
+                <Route
+                  exact
+                  key={`${match.path}${route.path}${childRoute.path}`}
+                  path={`${match.path}${route.path}${childRoute.path}`}
+                  component={childRoute.component}
+                />
+              ))}
+              <Route component={NotFound} />
+            </Switch>
+          </AnimatePresence>
+        </React.Fragment>
       ))}
-      <Route component={NotFound} />
-    </Switch>
+    </>
   );
 }
 export default PerformanceRouter;
@@ -26,6 +42,7 @@ PerformanceRouter.propTypes = {
   }).isRequired,
 };
 
+const Performance = lazy(() => import('@/pages/performance/Performance'));
 const PhoneCert = lazy(() => import('@/pages/performance/PhoneCert'));
 const HitTheStage = lazy(() => import('@/pages/performance/HitTheStage'));
 const SingStealer = lazy(() => import('@/pages/performance/SingStealer'));
@@ -33,19 +50,26 @@ const GameTournament = lazy(() => import('@/pages/performance/GameTournament'));
 
 const performanceRoutes = [
   {
-    path: '/phone-cert',
-    component: PhoneCert,
+    path: '',
+    component: Performance,
+    children: [
+      {
+        path: '/phone-cert',
+        component: PhoneCert,
+      },
+      {
+        path: '/hit-the-stage',
+        component: HitTheStage,
+      },
+      {
+        path: '/sing-stealer',
+        component: SingStealer,
+      },
+      {
+        path: '/game-tournament',
+        component: GameTournament,
+      },
+    ],
   },
-  {
-    path: '/hit-the-stage',
-    component: HitTheStage,
-  },
-  {
-    path: '/sing-stealer',
-    component: SingStealer,
-  },
-  {
-    path: '/game-tournament',
-    component: GameTournament,
-  },
+
 ];

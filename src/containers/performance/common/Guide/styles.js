@@ -6,46 +6,34 @@ import { HoverStyle } from '@S/responsive/mouse';
 export const StyledGuide = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  ${media.lessThan('large')`
-    align-items: center;
-  `};
+  align-items: center;
+  margin-top: 1.3rem;
 `;
 
 export const Texts = styled.div`
   display: flex;
   flex-direction: column;
-  ${media.lessThan('large')`
-    text-align: center;
-  `};
+  text-align: center;
+  color: ${({ theme }) => theme.palette.WHITE};
   
   p {
     margin: 0;
     line-height: 1.6;
-    font-weight: 500;
+    font-weight: normal;
   }
   
   p:nth-of-type(1) {
-    color: ${({ theme }) => theme.palette.GRAY80};
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 500;
   }
   
   p:nth-of-type(2) {
-    color: ${({ theme }) => theme.palette.GRAY80};
-    font-size: 1.1rem;
+  
   }
   
   p:nth-of-type(3) {
-    color: ${({ theme }) => theme.palette.GRAY80};
-    font-size: 1.1rem;
+
   }
   
-  p:last-of-type {
-    color: ${({ theme }) => theme.palette.PURPLE50};
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
 `;
 
 export const Button = styled.div`

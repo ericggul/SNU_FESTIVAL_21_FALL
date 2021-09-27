@@ -8,7 +8,6 @@ import CloudLeft from '@I/jabti/background/cloud-left.png';
 import CloudRight from '@I/jabti/background/cloud-right.png';
 import LazyLoad from 'react-lazyload';
 
-import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function Background({ theme, index, resultReady }) {

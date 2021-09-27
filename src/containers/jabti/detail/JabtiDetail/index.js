@@ -8,6 +8,7 @@ import ClipboardJS from 'clipboard';
 
 import DetailBackground from '@C/jabti/detail/DetailBackground';
 import DetailImage from '@C/jabti/detail/DetailImage';
+import DetailBestWorst from '@C/jabti/detail/DetailBestWorst';
 import DetailRecommend from '@C/jabti/detail/DetailRecommend';
 import DetailLink from '@C/jabti/detail/DetailLink';
 import DetailFestivalInfo from '@C/jabti/detail/DetailFestivalInfo';
@@ -20,7 +21,7 @@ import { jabtiCollectionRef } from '@U/initializer/firebase';
 import * as S from './styles';
 
 function JabtiDetail({
-  resultImage, resultTextImage, result, theme, description, spot, colorCode, colorName, index,
+  resultImage, resultTextImage, result, bestResult, worstResult, theme, description, spot, colorCode, colorName, index,
 }) {
   const location = useLocation();
   const fromQuestion = location.state ? location.state.fromQuestions : false;
@@ -33,9 +34,6 @@ function JabtiDetail({
   const getRandom = (a, b) => Math.random() * (b - a) + a;
 
   const history = useHistory();
-  const goToJabti = useCallback(() => {
-    history.push('/jabti');
-  }, [history]);
 
   useEffect(() => {
     console.log(fromQuestion);
@@ -96,6 +94,7 @@ function JabtiDetail({
               비티아이 유형은
             </S.HeaderText>
             <DetailImage resultImage={resultImage} resultTextImage={resultTextImage} index={index} />
+            <DetailBestWorst best={bestResult} worst={worstResult} />
             <S.ExplainText>
               {description.split('//').map((e, i) => <div key={i}>{e}</div>)}
             </S.ExplainText>

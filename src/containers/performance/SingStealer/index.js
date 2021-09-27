@@ -24,7 +24,7 @@ function SingStealer({ theme }) {
         toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
   }, []);
 
-  const title = <Title decorationOne="RnB, 힙합, 발라드 장르 불문!" decorationTwo="매력적인 목소리들로 채워가는" title="씽스틸러" />;
+  const title = <Title decoration="매력적인 목소리들로 채워가는" title="씽스틸러" />;
   const image = <S.Image><Image src={SingStealerImage} alt="" objectFit="scale-down" /></S.Image>;
   const guide = <Guide youtubeUrl={url} date="5월 11일" times={['14:00~16:00']} />;
 

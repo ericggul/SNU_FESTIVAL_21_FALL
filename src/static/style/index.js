@@ -10,6 +10,8 @@ export const palette = {
   LIGHT_PURPLE: '#c0b9db',
   TEXT_PURPLE: '#b975e6',
   BORDER_PURPLE: `#dbddef`,
+  BLACK_PURPLE: '#0f004e',
+  CHOCO_PURPLE: '#9581e9',
   
   WHITE: '#fff',
 

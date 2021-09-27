@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { QuestionsData, AnswersData } from '@C/jabti/Data';
+import useAudio from '@U/hooks/useAudio';
+import JabtiBackground from '@/static/audio/jabti_background.mp3';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import RandomTextShuffle from '@/foundations/animation/text-animation/random-text-shuffle/RandomTextShuffle';

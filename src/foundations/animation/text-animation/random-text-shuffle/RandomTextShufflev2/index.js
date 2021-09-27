@@ -12,10 +12,6 @@ function RandomTextShuffle({ initialText, changeText, delayTime }) {
     let delta;
     let currentTimeOffset = 0;
 
-    let currentWord = initialText;
-    let currentCharacter = 0;
-    let currentWordLength = initialText.length;
-
     const options = {
       fps: 100,
       timeOffset: 30,
@@ -48,11 +44,6 @@ function RandomTextShuffle({ initialText, changeText, delayTime }) {
       return lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
     };
 
-    const writeWord = (inputText) => {
-      currentWord = giventext;
-      currentWordLength = currentWord.length;
-    };
-
     const generateSingleCharacter = (color, character) => {
       const span = document.createElement('span');
       span.style.color = color;
@@ -74,12 +65,12 @@ function RandomTextShuffle({ initialText, changeText, delayTime }) {
       if (delta > interval) {
         currentTimeOffset += 1;
 
-        if (currentTimeOffset === options.timeOffset) {
+        if (currentTimeOffset === options.timeOffset && holder.current !== null) {
           holder.current.removeChild(holder.current.firstChild);
           holder.current.prepend(generateSingleCharacter('white', changeText.charAt(0)));
           needUpdate = false;
         }
-        if (currentTimeOffset < options.timeOffset) {
+        if (currentTimeOffset < options.timeOffset && holder.current !== null) {
           holder.current.removeChild(holder.current.firstChild);
           let color = getRandomColor();
           let w = getRandCharacter('야');
@@ -94,7 +85,6 @@ function RandomTextShuffle({ initialText, changeText, delayTime }) {
       requestAnimationFrame(update);
     }
 
-    writeWord(changeText);
     if (needUpdate) {
       update(time);
     }
