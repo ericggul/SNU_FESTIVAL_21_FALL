@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { transition } from '@C/performance/Performance';
 import * as S from './styles';
 
-function Title({ title }) {
+function Title({ title, handleClick }) {
   return (
     <S.StyledTitle
       initial={{ opacity: 0 }}
@@ -15,8 +15,12 @@ function Title({ title }) {
         ...transition,
         delay: 0.5,
       }}
+      onClick={handleClick}
     >
-      {title}
+      <S.Text>
+        {title}
+      </S.Text>
+
     </S.StyledTitle>
   );
 }

@@ -6,7 +6,7 @@ import LightChange2 from '@/foundations/animation/ImageTransition/LightChange2';
 import Wave from '@/foundations/animation/Wave';
 import WaveFourSide from '@/foundations/animation/WaveFourSide';
 import Balls from '@/foundations/animation/Balls';
-import Firework from '@/foundations/animation/Firework';
+import Firework from '@/foundations/animation/fireworks/Firework';
 import SparklySkull from '@/foundations/animation/SparklySkull';
 import Particle from '@/foundations/animation/Particle';
 import ClosingFestival from '@I/jpg/closing-festival.jpg';
@@ -19,13 +19,11 @@ import * as S from './styles';
 function ScreenTest({ theme }) {
   return (
     <S.StyledScreenTest>
-      {/* <LightChange1 image={ClosingFestival} /> */}
-      <Wave />
+      {/* <Wave /> */}
       {/* <Balls /> */}
       {/* <Firework /> */}
       {/* <SparklySkull /> */}
-      {/* <WaterThreejs /> */}
-      {/* <Particle /> */}
+      <Particle />
 
       {/* <TextShine /> */}
       {/* <Lumination1 /> */}

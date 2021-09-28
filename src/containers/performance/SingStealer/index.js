@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import confettiFire from '@C/performance/common/confettiFire';
 import PropTypes from 'prop-types';
 import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
 import SingStealerImage from '@I/performance/sing-stealer.png';
@@ -23,6 +24,19 @@ function SingStealer({ theme }) {
 
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
   const [speak, setSpeak] = useState(false);
+  const [confettiEnabled, setConfettiEnabled] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setConfettiEnabled(true);
+    }, 3000);
+  }, []);
+  useEffect(() => {
+    if (confettiEnabled) {
+      confettiFire();
+      setConfettiEnabled(false);
+    }
+  }, [confettiEnabled]);
   useEffect(() => {
     linkCollectionRef.doc('sing-stealer').get()
       .then((doc) => {
@@ -40,9 +54,21 @@ function SingStealer({ theme }) {
     </S.Icon>
   );
   const bubble = <Bubble decoration="매력적인 목소리들로 채워가는~" title="씽스틸러!" speak={speak} />;
-  const title = <Title title="씽스틸러" />;
+  const title = <Title title="씽스틸러" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={28} />;
-  const youTube = <Fade left distance="30px" delay={1000}><iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></Fade>;
+  const youTube = (
+    <S.YouTube
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 3,
+        ease: [0.43, 0.13, 0.23, 0.96],
+        delay: 1.5,
+      }}
+    >
+      <iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+    </S.YouTube>
+  );
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={SingStealerData} />;
   const image = <S.Image><Fade left distance="30px" delay={200}><Image src={SingStealerImage} alt="" objectFit="scale-down" /></Fade></S.Image>;

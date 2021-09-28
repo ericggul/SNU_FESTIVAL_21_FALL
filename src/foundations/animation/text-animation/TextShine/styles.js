@@ -1,20 +1,17 @@
 import styled from 'styled-components';
 
 export const StyledTextShine = styled.div`
-    background: black;
     display: flex;
 
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    // height: 100vh;
+    // width: 100vw;
 `;
 
 export const Text = styled.div`
     position: relative;
 
-    font-size: 2em;
-    letter-spacing: 4px;
     background: linear-gradient(90deg, #000, #fff, #000);
     background-repeat: no-repeat;
     text-transform: uppercase;
@@ -22,7 +19,6 @@ export const Text = styled.div`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255,255,255,0.3));
-
 
     @keyframes move {
         from{

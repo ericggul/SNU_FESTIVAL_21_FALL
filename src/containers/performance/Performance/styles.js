@@ -33,9 +33,16 @@ export const GridItem = styled(motion.div)`
   cursor: pointer;
 `;
 
-export const IconImage = styled.img`
+export const ImageContainer = styled.div`
   max-width: calc(min(35vw, 280px));
   height: auto;
+  position: relativve;
+
+  
+`;
+
+export const IconImage = styled.img`
+  max-width: 100%;
 `;
 
 export const IconDescription = styled.div`
@@ -66,15 +73,19 @@ export const IconDescription = styled.div`
     border-radius: 1.1rem;
     box-shadow: 
       0 0 10px ${({ theme }) => theme.palette.WHITE},
-      0 0 15px ${({ theme }) => theme.palette.WHITE};
-    opacity: 0.4;
+      0 0 15px ${({ theme }) => theme.palette.WHITE},
+      0 0 20px ${({ theme }) => theme.palette.WHITE},
+      0 0 25px ${({ theme }) => theme.palette.WHITE},
+      0 0 30px ${({ theme }) => theme.palette.WHITE},
+      0 0 35px ${({ theme }) => theme.palette.WHITE},;
+    opacity: 0;
     @keyframes opacity{
-      from{ opacity: 0.4; }
+      from{ opacity: 0; }
       to{opacity: 1; }
     }
-    animation: opacity 4s infinite alternate;
+    ${({ shine }) => shine && 'animation: opacity 1.5s infinite alternate'};
   }
-  transition: color, background-color, .15s;
+
 
 `;
 

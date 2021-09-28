@@ -52,6 +52,10 @@ export const Icon = styled(motion.div)`
   animation: rotation 1.1s infinite linear alternate;
 `;
 
+export const YouTube = styled(motion.div)`
+
+`;
+
 export const BodyWrapper = styled.div`
   display: flex;
   align-items: center;

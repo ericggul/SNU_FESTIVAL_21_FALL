@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
+import confettiFire from '@C/performance/common/confettiFire';
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import PhoneCertImage from '@I/performance/phone-cert.png';
+import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
 import { PhoneCertData } from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
 import Title from '@C/performance/common/Title';
@@ -23,6 +25,20 @@ function PhoneCert({ theme }) {
 
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
   const [speak, setSpeak] = useState(false);
+  const [confettiEnabled, setConfettiEnabled] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setConfettiEnabled(true);
+    }, 3000);
+  }, []);
+  useEffect(() => {
+    if (confettiEnabled) {
+      confettiFire();
+      setConfettiEnabled(false);
+    }
+  }, [confettiEnabled]);
+
   useEffect(() => {
     linkCollectionRef.doc('phone-cert').get()
       .then((doc) => {
@@ -40,12 +56,30 @@ function PhoneCert({ theme }) {
     </S.Icon>
   );
   const bubble = <Bubble decoration="관악의 밴드 실력자들과 함께하는" title="폰서트 LIVE" speak={speak} />;
-  const title = <Title title="폰서트 LIVE" />;
+  const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={26} />;
-  const youTube = <Fade left distance="30px" delay={1000}><iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></Fade>;
+  const youTube = (
+    <S.YouTube
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 3,
+        ease: [0.43, 0.13, 0.23, 0.96],
+        delay: 1.5,
+      }}
+    >
+      <iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+    </S.YouTube>
+  );
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={PhoneCertData} />;
-  const image = <S.Image><Fade left distance="30px" delay={200}><Image src={PhoneCertImage} alt="" objectFit="scale-down" /></Fade></S.Image>;
+  const image = (
+    <S.Image>
+      <Fade left distance="30px" delay={200}>
+        <Image src={PhoneCertImage} alt="" objectFit="scale-down" />
+      </Fade>
+    </S.Image>
+  );
 
   return (
     <S.Wrapper>
