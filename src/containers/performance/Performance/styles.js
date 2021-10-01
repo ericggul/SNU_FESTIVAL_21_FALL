@@ -17,6 +17,12 @@ export const Description = styled.div`
   font-weight: 500;
   margin: 2rem;
   margin-top: 5rem;
+  text-align: center;
+
+  p{
+    font-wieght: 200;
+    font-size: 0.6rem;
+  }
 `;
 
 export const IconGrid = styled.div`

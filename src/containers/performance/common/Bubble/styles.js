@@ -3,6 +3,7 @@ import { FlexCenterStyle } from '@S/responsive/display';
 import { motion } from 'framer-motion';
 
 export const StyledBubble = styled(motion.div)`
+text-align: center;
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;

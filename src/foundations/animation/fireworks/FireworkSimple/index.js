@@ -1309,7 +1309,7 @@ export default function Firework() {
 
     // auto launch shells
     if (store.state.config.autoLaunch) {
-      autoLaunchTime -= timeStep;
+      autoLaunchTime -= timeStep * 2;
       if (autoLaunchTime <= 0) {
         autoLaunchTime = startSequence() * 1.25;
       }

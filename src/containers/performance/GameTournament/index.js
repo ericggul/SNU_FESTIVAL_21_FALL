@@ -1,7 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import confettiFire from '@C/performance/common/confettiFire';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
+import { confettiFire, confettiSpread } from '@C/performance/common/confettiFire';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import GameTournamentIcon from '@I/performance/icon/game-tournament-icon.png';
 import GameTournamentImage from '@I/performance/game-tournament.png';
 import { GameTournamentData } from '@C/performance/Data';
@@ -48,6 +51,20 @@ function GameTournament({ theme }) {
   const [speak, setSpeak] = useState(false);
   const [confettiEnabled, setConfettiEnabled] = useState(false);
 
+  const [confettiPos, setConfettiPos] = useState({ x: 0.5, y: 0.5 });
+
+  const clickforConfetti = useCallback((e) => {
+    console.log(theme.windowWidth);
+    console.log(e.clientX / theme.windowWidth);
+    setConfettiPos({ x: e.clientX / theme.windowWidth, y: e.clientY / theme.windowHeight });
+    setConfettiEnabled(true);
+  }, [theme]);
+
+  useEffect(() => {
+    window.addEventListener('click', clickforConfetti);
+    return () => window.removeEventListener('click', clickforConfetti);
+  }, []);
+
   useEffect(() => {
     setTimeout(() => {
       setConfettiEnabled(true);
@@ -55,7 +72,7 @@ function GameTournament({ theme }) {
   }, []);
   useEffect(() => {
     if (confettiEnabled) {
-      confettiFire();
+      confettiSpread(confettiPos.x, confettiPos.y);
       setConfettiEnabled(false);
     }
   }, [confettiEnabled]);
@@ -99,6 +116,7 @@ function GameTournament({ theme }) {
   return (
     <S.Wrapper>
       <HeaderContent>관악게임토너먼트</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       {isMobile && (
         <S.MobileBody>
           <S.IconBubble>

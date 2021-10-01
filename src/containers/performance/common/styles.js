@@ -8,10 +8,11 @@ export const Wrapper = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
-  background: ${({ theme }) => theme.palette.DARK_PURPLE};
+  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
 export const MobileBody = styled.div`
+z-index: 2;
   width: 100%;
   box-sizing: border-box;
 
@@ -34,6 +35,7 @@ export const TitleDate = styled.div`
 
 export const IconBubble = styled.div`
   ${FlexCenterStyle};
+  text-alingn: ccenter;
   flex-direction: row;
   margin: 2rem 0;
 `;
@@ -53,14 +55,14 @@ export const Icon = styled(motion.div)`
 `;
 
 export const YouTube = styled(motion.div)`
-
+  z-index: 5;
 `;
 
 export const BodyWrapper = styled.div`
   display: flex;
   align-items: center;
   height: ${({ theme }) => theme.windowHeight / 1.1}px;
-
+  z-index: 5;
 `;
 
 export const Body = styled.div`

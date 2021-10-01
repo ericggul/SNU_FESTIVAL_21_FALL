@@ -1,9 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
-import confettiFire from '@C/performance/common/confettiFire';
+import { confettiFire, confettiSpread } from '@C/performance/common/confettiFire';
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import PhoneCertImage from '@I/performance/phone-cert.png';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
+import Stars from '@/foundations/stars/Performance/PerformanceStars';
 import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
 import { PhoneCertData } from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
@@ -26,6 +30,19 @@ function PhoneCert({ theme }) {
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
   const [speak, setSpeak] = useState(false);
   const [confettiEnabled, setConfettiEnabled] = useState(false);
+  const [confettiPos, setConfettiPos] = useState({ x: 0.5, y: 0.5 });
+
+  const clickforConfetti = useCallback((e) => {
+    console.log(theme.windowWidth);
+    console.log(e.clientX / theme.windowWidth);
+    setConfettiPos({ x: e.clientX / theme.windowWidth, y: e.clientY / theme.windowHeight });
+    setConfettiEnabled(true);
+  }, [theme]);
+
+  useEffect(() => {
+    window.addEventListener('click', clickforConfetti);
+    return () => window.removeEventListener('click', clickforConfetti);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,10 +51,10 @@ function PhoneCert({ theme }) {
   }, []);
   useEffect(() => {
     if (confettiEnabled) {
-      confettiFire();
+      confettiFire(confettiPos.x, confettiPos.y);
       setConfettiEnabled(false);
     }
-  }, [confettiEnabled]);
+  }, [confettiPos, confettiEnabled]);
 
   useEffect(() => {
     linkCollectionRef.doc('phone-cert').get()
@@ -84,6 +101,8 @@ function PhoneCert({ theme }) {
   return (
     <S.Wrapper>
       <HeaderContent>폰서트 LIVE</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
+      {/* <Stars /> */}
       {isMobile && (
         <S.MobileBody>
           <S.IconBubble>

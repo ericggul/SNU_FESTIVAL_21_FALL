@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withTheme } from 'styled-components';
 import Stars2 from '@F/stars/Stars2';
-import DetailStars from '@F/stars/DetailStars';
+import DetailStars from '@/foundations/stars/Jabti/JabtiDetailStars';
 import CloudTop from '@I/jabti/background/cloud-top.png';
 import CloudBottom from '@I/jabti/background/cloud-bottom.png';
 import CloudLeft from '@I/jabti/background/cloud-left.png';

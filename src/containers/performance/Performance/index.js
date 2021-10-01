@@ -3,7 +3,7 @@ import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
-import FireworkSingle from '@/foundations/animation/fireworks/FireworkSingle';
+import FireworkSingle from '@/foundations/animation/fireworks/FireworkSimple';
 import { HeaderContent } from '@F/layout/Header';
 import Fade from 'react-reveal/Fade';
 
@@ -76,6 +76,10 @@ function Performance({ theme }) {
       <S.StyledContainer>
         <S.Description>
           각 공연별 아이콘을 클릭해보세요!
+          <p>
+            Firework Code from @Caleb_Miller
+          </p>
+
         </S.Description>
 
         {iconGrid}

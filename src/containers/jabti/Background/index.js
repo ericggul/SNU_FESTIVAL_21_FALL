@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
-import Stars from '@F/stars/Stars';
+import Stars from '@/foundations/stars/Jabti/JabtiStars';
 import Stars2 from '@F/stars/Stars2';
 import CloudTop from '@I/jabti/background/cloud-top.png';
 import CloudBottom from '@I/jabti/background/cloud-bottom.png';
