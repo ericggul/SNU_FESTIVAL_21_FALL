@@ -21,20 +21,25 @@ function ActivityRouter({ match }) {
               />
               { route.children && route.children.map((childRoute) => (
                 <React.Fragment key={childRoute.path}>
-                  <Route
-                    exact
-                    key={`${match.path}${route.path}${childRoute.path}`}
-                    path={`${match.path}${route.path}${childRoute.path}`}
-                    component={childRoute.component}
-                  />
-                  {childRoute.children && childRoute.children.map((grandChildRoute) => (
-                    <Route
-                      exact
-                      key={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
-                      path={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
-                      component={grandChildRoute.component}
-                    />
-                  ))}
+                  <AnimatePresence exitBeforeEnter>
+                    <Switch location={location} key={location.pathname}>
+                      <Route
+                        exact
+                        key={`${match.path}${route.path}${childRoute.path}`}
+                        path={`${match.path}${route.path}${childRoute.path}`}
+                        component={childRoute.component}
+                      />
+                      {childRoute.children && childRoute.children.map((grandChildRoute) => (
+                        <Route
+                          exact
+                          key={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
+                          path={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
+                          component={grandChildRoute.component}
+                        />
+                      ))}
+                      <Route component={NotFound} />
+                    </Switch>
+                  </AnimatePresence>
                 </React.Fragment>
               ))}
               <Route component={NotFound} />

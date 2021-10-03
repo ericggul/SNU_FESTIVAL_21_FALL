@@ -22,7 +22,7 @@ class App {
     this.wrapper.appendChild(this.canvas);
 
     const isMobile = document.body.clientWidth < 768;
-    this.waveGroup = new WaveGroup(isMobile ? 5 : 6);
+    this.waveGroup = new WaveGroup(isMobile ? 6 : 10);
 
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
@@ -49,13 +49,15 @@ class App {
 }
 
 class Point {
-  constructor(index, x, y) {
+  constructor(index, x, y, width, height) {
     this.x = x;
     this.y = y;
+    this.width = width;
+    this.height = height;
     this.fixedY = y;
-    this.speed = 0.04;
+    this.speed = 0.025;
     this.cur = index;
-    this.max = Math.random() * 70 + 20;
+    this.max = Math.random() * 50 + width * 0.025;
   }
 
   update() {
@@ -67,9 +69,16 @@ class Point {
 class Wave {
   constructor(index, totalPoints, color) {
     this.index = index;
-    this.totalPoints = totalPoints;
+    this.totalPoints = Math.ceil(Math.random() * (totalPoints) + totalPoints * 0.5);
     this.color = color;
     this.points = [];
+
+    document.addEventListener('click', this.onClick.bind(this), false);
+  }
+
+  onClick(e) {
+    console.log(e.clientY, e.pageY);
+    this.clickedPosition = { x: e.pageX, y: e.pageY - 65 };
   }
 
   resize(stageWidth, stageHeight) {
@@ -77,9 +86,9 @@ class Wave {
     this.stageHeight = stageHeight;
 
     this.centerX = stageWidth / 2;
-    this.centerY = stageHeight / 1.2;
+    this.centerY = stageHeight / 1.25;
 
-    this.pointGap = this.stageWidth / (this.totalPoints - 1);
+    this.pointGap = this.stageWidth * 1.2 / (this.totalPoints - 1);
 
     this.init();
   }
@@ -90,13 +99,15 @@ class Wave {
     for (let i = 0; i < this.totalPoints; i += 1) {
       this.points[i] = new Point(
         this.index + i,
-        this.pointGap * i,
+        this.pointGap * i - this.stageWidth * 0.1,
         this.centerY,
+        this.stageWidth, this.stageHeight,
       );
     }
   }
 
   draw(ctx) {
+    console.log(this.clickedPosition);
     ctx.beginPath();
     ctx.fillStyle = this.color;
 
@@ -109,10 +120,18 @@ class Wave {
       if (i < this.totalPoints - 1) {
         this.points[i].update();
       }
+
       const cx = (prevX + this.points[i].x) / 2;
       const cy = (prevY + this.points[i].y) / 2;
+      let changedY = cy;
 
-      ctx.quadraticCurveTo(prevX, prevY, cx, cy);
+      if (this.clickedPosition && Math.abs(cx - this.clickedPosition.x) < this.stageWidth * 0.03) {
+        console.log('oui');
+        changedY = this.clickedPosition.y;
+        this.clickedPosition.y += (cy - this.clickedPosition.y) * 0.03;
+      }
+
+      ctx.quadraticCurveTo(prevX, prevY, cx, changedY);
 
       prevX = this.points[i].x;
       prevY = this.points[i].y;
@@ -132,8 +151,12 @@ class WaveGroup {
     this.totalPoints = totalPoints;
 
     this.color = [
-      'rgba(210, 208, 234, 0.4)',
-      'rgba(181, 214, 232, 0.4)',
+      'rgba(210, 208, 234, 0.6)',
+      'rgba(197, 197, 234, 0.4)',
+      'rgba(181, 214, 232, 0.5)',
+      'rgba(176, 214, 237, 0.5)',
+      'rgba(195, 210, 235, 0.5)',
+      'rgba(165, 210, 245, 0.4)',
     ];
 
     this.waves = [];

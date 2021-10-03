@@ -17,7 +17,7 @@ import * as S from './styles';
 
 function MiniGame({ theme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-
+  const getRandom = (a, b) => Math.random() * (b - a) + a;
   const [selected, setSelected] = useState(null);
   const history = useHistory();
   const send = useCallback((location, i) => {
@@ -31,7 +31,7 @@ function MiniGame({ theme }) {
     return (
       <GS.GridItem
         onClick={() => sendFunction(url, i)}
-        initial={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{
           opacity: selected === i ? 1 : 0,
@@ -44,6 +44,8 @@ function MiniGame({ theme }) {
         <GS.ImageContainer>
           <GS.IconImage
             src={src}
+            duration={getRandom(0.5, 2)}
+            delay={getRandom(-5, 0)}
           />
         </GS.ImageContainer>
         <GS.IconDescription shine={selected === i}>
@@ -92,7 +94,7 @@ function MiniGame({ theme }) {
 
   return (
     <S.StyledMiniGame>
-      <HeaderContent>미니게임</HeaderContent>
+      <HeaderContent backgroundColor={theme.palette.SOFTLIGHT_PURPLE}>미니게임</HeaderContent>
       <Wave />
       <S.StyledContainer>
         <S.Description>

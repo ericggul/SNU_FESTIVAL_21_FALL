@@ -17,7 +17,7 @@ const PathMoveRouter = lazy(() => import('@/pages/PathMove'));
 const routes = [
   {
     path: '/',
-    component: JabtiRouter,
+    component: Home,
     exact: true,
   },
   {

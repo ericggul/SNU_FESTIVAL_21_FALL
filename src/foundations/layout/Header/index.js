@@ -2,31 +2,35 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import MascotInFolder from '@I/svg/mascot/mascot-in-folder.svg';
+import Back from '@I/svg/back.svg';
 import Fade from 'react-reveal/Fade';
 import Menus from '@F/layout/Menus';
 import styled, { css } from 'styled-components';
 import * as S from './styles';
 
-function Header({ hamburgerColor }) {
+function Header({ hamburgerColor, backVisible = true }) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [backAnimation, setBackAnimation] = useState(false);
   const history = useHistory();
 
-  const goToPage = useCallback((route) => {
-    history.push(route);
-    setMenuIsOpen(false);
-  }, [history]);
+  // const goBack = useCallback((route) => {
+  //   history.push(route);
+  //   setMenuIsOpen(false);
+  // }, [history]);
+
+  const backClick = useCallback(() => {
+    setBackAnimation(true);
+    history.goBack();
+  }, []);
 
   const Logo = (
-    <S.Logo onClick={() => goToPage('/')}>
-      <S.LogoImage
-        src={MascotInFolder}
-        alt="mascot"
-      />
+    <S.Logo onClick={backClick}>
+      {backVisible && <S.LogoImage src={Back} backAnimation={backAnimation} />}
       { menuIsOpen && (
         <Fade duration={800}>
           <S.BasicText>
-            <p>서울대학교 2031 봄축제</p>
-            <p>페스트</p>
+            <p>서울대학교 2021 가을축제</p>
+            <p>관악의 밤</p>
           </S.BasicText>
         </Fade>
       )}
@@ -36,8 +40,8 @@ function Header({ hamburgerColor }) {
   const MenuHamburger = (
     <S.MenuButton onClick={() => setMenuIsOpen(!menuIsOpen)}>
       <S.MenuButtonBar color={hamburgerColor} menuIsOpen={menuIsOpen} width="100%" />
-      <S.MenuButtonBar color={hamburgerColor} menuIsOpen={menuIsOpen} width="66%" />
-      <S.MenuButtonBar color={hamburgerColor} menuIsOpen={menuIsOpen} width="33%" />
+      <S.MenuButtonBar color={hamburgerColor} menuIsOpen={menuIsOpen} width="100%" />
+      <S.MenuButtonBar color={hamburgerColor} menuIsOpen={menuIsOpen} width="67%" />
     </S.MenuButton>
   );
 
@@ -87,7 +91,7 @@ export const HeaderContent = styled.div`
   width: 100%;
   min-height: 65px;
   
-  background-color: ${props => props.backgroundColor || props.theme.palette.PURPLE50};
+  background-color: ${props => props.backgroundColor || props.theme.palette.HEADER_PURPLE};
   color: ${props => props.color || 'white'};
   font-size: 1.5rem;
   font-weight: bold;

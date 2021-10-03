@@ -4,11 +4,11 @@ import { HoverStyle } from '@S/responsive/mouse';
 import { motion } from 'framer-motion';
 
 export const GridItem = styled(motion.div)`
-${FlexCenterStyle};
-${HoverStyle};
-flex-direction: column;
-margin: 2.5vw;
-cursor: pointer;
+    ${FlexCenterStyle};
+    ${HoverStyle};
+    flex-direction: column;
+    margin: 2.5vw;
+    cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`
@@ -18,7 +18,19 @@ position: relativve;
 `;
 
 export const IconImage = styled.img`
-max-width: 100%;
+    max-width: 100%;
+
+    @keyframes swing{
+        from{
+            transform: rotate(-6deg);
+        }
+        to{ 
+            transform: rotate(6deg);
+        }
+    }
+
+    animation: swing ${({ duration }) => duration}s infinite linear alternate;
+    animation-delay: ${({ delay }) => delay}s;
 `;
 
 export const IconDescription = styled.div`

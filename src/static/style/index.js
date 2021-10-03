@@ -20,6 +20,9 @@ export const palette = {
   //미니게임 배경
   SKYLIGHT_BLUE: '#C8E2EF',
   SKYLIGHT_PURPLE: '#E2DDF4',
+
+  HEADER_PURPLE: '#dcbbe6',
+  SOFTLIGHT_PURPLE: '#c1b0db',
   
   WHITE: '#fff',
 

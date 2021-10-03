@@ -36,14 +36,19 @@ export const Logo = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  width: 5rem;
+  width: 2.5rem;
   height: 100%;
   cursor: pointer;
-  ${HoverStyle};
+  @keyframes backmove{
+    0%{transform: translateX(0);}
+    50%{transform: translateX(-3px);}
+    100%{transform: translateX(0);}
+  }
+  transition: transform 1s;
+  ${({ backAnimation }) => backAnimation && 'transform: rotate(360deg)'}
 `;
 
 export const MenuButton = styled.div`
-  ${HoverStyle};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -59,25 +64,25 @@ export const MenuButtonBar = styled.div`
   margin-left: auto;
 
   box-sizing: border-box;
-  border-radius: 5px;
   border: solid 2px ${props => (props.menuIsOpen ? 'white' : props.color)};
   background-color: ${props => (props.menuIsOpen ? 'white' : props.color)};
 
-  transform-origin: right;
+  transform-origin: left;
   transform: rotate(0deg);
   transition: transform, opacity, width, border, background-color, 1s;
   will-change: transform, opacity, width;
 
   ${props => props.menuIsOpen && css`
     &:first-of-type {
-      transform: rotate(-45deg) scaleX(0.935);
+      transform: rotate(405deg) scaleX(0.935);
     }
-    &:nth-of-type(2) {
+    &:nth-of-type(2) { 
+      transform: translateX(599px);
       opacity: 0;
     }
     &:last-of-type {
       width: 100%;
-      transform: rotate(45deg) scaleX(0.935);
+      transform: rotate(-405deg) scaleX(0.935);
     }
   `};
 `;
