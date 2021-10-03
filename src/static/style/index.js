@@ -23,6 +23,15 @@ export const palette = {
 
   HEADER_PURPLE: '#dcbbe6',
   SOFTLIGHT_PURPLE: '#c1b0db',
+  PASTELLIGHT_PURPLE: '#c0c3f0',
+  
+  RIDDLE_PURPLE: '#e4e8f9',
+
+  RIDDLE_WHITE: '#83AAE2',
+  RIDDLE_BLACK: '#06102E',
+
+  HANDWRITING_HEADER: '#7a63b8',
+  HANDWRITING_PURPLE: '#352465',
   
   WHITE: '#fff',
 

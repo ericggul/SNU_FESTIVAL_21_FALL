@@ -1,61 +1,60 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
-import HauntedHouseTheme from '@C/activity/mini/riddle/HauntedHouseTheme';
+
+import WhiteTheme from '@C/activity/mini/riddle/WhiteTheme';
+import BlackTheme from '@C/activity/mini/riddle/BlackTheme';
+
 import FullScreen from '@F/FullScreen';
-import { theme } from '@S/index';
-import AliceOpening from '@I/activity/riddle/alice/alice-opening.png';
-import HauntedHouseOpening from '@I/activity/riddle/hounted-house/haunted-house-opening.png';
-import AliceTheme from '@C/activity/mini/riddle/AliceTheme';
+
+import { withTheme } from 'styled-components';
+import WhiteOpening from '@I/activity/riddle/white/white-opening.png';
+import WhiteOpeningFont from '@I/activity/riddle/white/white-opening-font.png';
+import BlackOpening from '@I/activity/riddle/black/black-opening.png';
+import BlackOpeningFont from '@I/activity/riddle/black/black-opening-font.png';
+
 import * as S from './styles';
 
-function Riddle() {
+function Riddle({ theme }) {
   const [riddleTheme, setRiddleTheme] = useState(null);
+  const [backgroundTransit, setBakcgroundTransit] = useState(0);
 
+  console.log(backgroundTransit);
   return (
     <S.StyledRiddle>
-      <HeaderContent backgroundColor="transparent" color={theme.palette.PURPLE50}>미궁게임</HeaderContent>
-      <S.Body>
+      <HeaderContent backgroundColor={theme.palette.PASTELLIGHT_PURPLE}>미궁게임</HeaderContent>
+      <S.Body background={backgroundTransit}>
         <S.OpeningWrapper>
-          <S.Opening onClick={() => setRiddleTheme('Alice')}>
-            <S.Image src={AliceOpening} alt="이상한 나라의 앨리스" />
-            <S.Title>이상한 나라의 앨리스</S.Title>
+          <S.Opening onClick={() => setRiddleTheme('White')} onMouseEnter={() => setBakcgroundTransit(1)}>
+            <S.Image src={WhiteOpening} />
+            <S.Image src={WhiteOpeningFont} />
           </S.Opening>
-          <S.Opening onClick={() => setRiddleTheme('HauntedHouse')}>
-            <S.Image src={HauntedHouseOpening} alt="유령의 집" />
-            <S.Title>유령의 집</S.Title>
+          <S.Opening onClick={() => setRiddleTheme('Black')} onMouseEnter={() => setBakcgroundTransit(-1)}>
+            <S.Image src={BlackOpening} />
+            <S.Image src={BlackOpeningFont} />
           </S.Opening>
         </S.OpeningWrapper>
-        <S.Texts>
-          <span>내가 어디로 가야 하는지 길을 알려 줄래?</span>
-          <br />
-          <span>그건 네가 어디로 가고 싶은가에 달렸지.</span>
-          <br />
-          <span>난 어디든 상관 없어.</span>
-          <br />
-          <span>그렇다면 어느 길로 가든 상관없잖아?</span>
-        </S.Texts>
       </S.Body>
 
       <FullScreen
-        isFullScreen={riddleTheme === 'Alice'}
+        isFullScreen={riddleTheme === 'White'}
         onCloseFullScreen={() => setRiddleTheme(null)}
-        backgroundColor={theme.palette.PINK20}
+        backgroundColor={theme.palette.RIDDLE_WHITE}
       >
-        <AliceTheme />
+        <WhiteTheme />
       </FullScreen>
 
       <FullScreen
-        isFullScreen={riddleTheme === 'HauntedHouse'}
+        isFullScreen={riddleTheme === 'Black'}
         onCloseFullScreen={() => setRiddleTheme(null)}
-        backgroundColor={theme.palette.PURPLE90}
+        backgroundColor={theme.palette.RIDDLE_BLACK}
       >
-        <HauntedHouseTheme />
+        <BlackTheme />
       </FullScreen>
     </S.StyledRiddle>
   );
 }
-export default Riddle;
+export default withTheme(Riddle);
 
 Riddle.propTypes = {
 

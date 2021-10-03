@@ -1,15 +1,15 @@
 import React from 'react';
-import RiddleContainer from '@C/activity/mini/riddle/Riddle';
+import HandwritingContainer from '@C/activity/mini/handwriting/Handwriting';
 import withMountEvent from '@U/hoc/withMountEvent';
 import Header from '@F/layout/Header';
 import { theme } from '@S/index';
 
-function Riddle() {
+function Handwriting() {
   return (
     <>
       <Header />
-      <RiddleContainer />
+      <HandwritingContainer />
     </>
   );
 }
-export default withMountEvent(Riddle);
+export default withMountEvent(Handwriting);

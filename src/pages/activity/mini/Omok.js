@@ -1,15 +1,15 @@
 import React from 'react';
-import RiddleContainer from '@C/activity/mini/riddle/Riddle';
+import OmokContainer from '@C/activity/mini/omok/Omok';
 import withMountEvent from '@U/hoc/withMountEvent';
 import Header from '@F/layout/Header';
 import { theme } from '@S/index';
 
-function Riddle() {
+function Omok() {
   return (
     <>
       <Header />
-      <RiddleContainer />
+      <OmokContainer />
     </>
   );
 }
-export default withMountEvent(Riddle);
+export default withMountEvent(Omok);

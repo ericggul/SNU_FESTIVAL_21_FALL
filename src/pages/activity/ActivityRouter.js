@@ -63,6 +63,9 @@ const MiniGame = lazy(() => import('@/pages/activity/mini/MiniGame'));
 const GuessTheSong = lazy(() => import('@/pages/activity/mini/GuessTheSong'));
 const TreasureHunt = lazy(() => import('@/pages/activity/mini/TreasureHunt'));
 const Riddle = lazy(() => import('@/pages/activity/mini/Riddle'));
+const Handwriting = lazy(() => import('@/pages/activity/mini/Handwriting'));
+const Place = lazy(() => import('@/pages/activity/mini/Place'));
+const Omok = lazy(() => import('@/pages/activity/mini/Omok'));
 const BlackAndWhite = lazy(() => import('@/pages/activity/mini/BlackAndWhite'));
 const Radio = lazy(() => import('@/pages/activity/Radio'));
 const Competition = lazy(() => import('@/pages/activity/Competition'));
@@ -79,6 +82,23 @@ const activityRoutes = [
         component: MiniGame,
         children: [
           {
+            path: '/riddle',
+            component: Riddle,
+          },
+          {
+            path: '/handwriting',
+            component: Handwriting,
+          },
+          {
+            path: '/omok',
+            component: Omok,
+          },
+          {
+            path: '/place',
+            component: Place,
+          },
+
+          {
             path: '/guess-the-song',
             component: GuessTheSong,
           },
@@ -86,10 +106,7 @@ const activityRoutes = [
             path: '/treasure-hunt',
             component: TreasureHunt,
           },
-          {
-            path: '/riddle',
-            component: Riddle,
-          },
+
           {
             path: '/black-and-white',
             component: BlackAndWhite,
