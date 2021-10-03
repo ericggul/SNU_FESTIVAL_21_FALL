@@ -2,11 +2,8 @@ import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 import { motion } from 'framer-motion';
 
-export const StyledMiniGame = styled.div`
-  background-image: linear-gradient(to top, 
-    ${({ theme }) => theme.palette.SKYLIGHT_PURPLE}, 
-    ${({ theme }) => theme.palette.SKYLIGHT_BLUE} 50%, 
-    ${({ theme }) => theme.palette.SKYLIGHT_PURPLE} 100%);
+export const StyledActivity = styled.div`
+  background: ${({ theme }) => theme.palette.STARLIGHT_PURPLE};
   height: ${({ theme }) => theme.windowHeight}px;
 `;
 

@@ -1,69 +1,47 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Switch } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import NotFound from '@/pages/NotFound';
 
 function ActivityRouter({ match }) {
   // TODO: router 버그 있음
+  const location = useLocation();
   return (
     <>
-      <Switch>
-        <Route
-          exact
-          path={`${match.path}${activityRoutes[0].path}`}
-          component={activityRoutes[0].component}
-        />
-        { activityRoutes[0].children && activityRoutes[0].children.map((childRoute) => (
-          <Route
-            exact
-            path={`${match.path}${activityRoutes[0].path}${childRoute.path}`}
-            key={`${match.path}${activityRoutes[0].path}${childRoute.path}`}
-            component={childRoute.component}
-          />
-        ))}
-
-        <Route
-          exact
-          path={`${match.path}${activityRoutes[1].path}`}
-          component={activityRoutes[1].component}
-        />
-        <Route
-          exact
-          path={`${match.path}${activityRoutes[2].path}`}
-          component={activityRoutes[2].component}
-        />
-        <Route
-          exact
-          path={`${match.path}${activityRoutes[3].path}`}
-          component={activityRoutes[3].component}
-        />
-        <Route
-          exact
-          path={`${match.path}${activityRoutes[4].path}`}
-          component={activityRoutes[4].component}
-        />
-        <Route component={NotFound} />
-      </Switch>
-      {/* { activityRoutes.map((route, index) => ( */}
-      {/*  <React.Fragment key={route.path}> */}
-      {/*    <Switch> */}
-      {/*      <Route */}
-      {/*        exact */}
-      {/*        path={`${match.path}${route.path}`} */}
-      {/*        component={route.component} */}
-      {/*      /> */}
-      {/*      { route.children && route.children.map((childRoute) => ( */}
-      {/*        <Route */}
-      {/*          exact */}
-      {/*          path={`${match.path}${route.path}${childRoute.path}`} */}
-      {/*          key={`${match.path}${route.path}${childRoute.path}`} */}
-      {/*          component={childRoute.component} */}
-      {/*        /> */}
-      {/*      ))} */}
-      {/*      <Route component={Lottie404} /> */}
-      {/*    </Switch> */}
-      {/*  </React.Fragment> */}
-      {/* ))} */}
+      { activityRoutes.map((route) => (
+        <React.Fragment key={route.path}>
+          <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.pathname}>
+              <Route
+                exact
+                key={`${match.path}${route.path}`}
+                path={`${match.path}${route.path}`}
+                component={route.component}
+              />
+              { route.children && route.children.map((childRoute) => (
+                <React.Fragment key={childRoute.path}>
+                  <Route
+                    exact
+                    key={`${match.path}${route.path}${childRoute.path}`}
+                    path={`${match.path}${route.path}${childRoute.path}`}
+                    component={childRoute.component}
+                  />
+                  {childRoute.children && childRoute.children.map((grandChildRoute) => (
+                    <Route
+                      exact
+                      key={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
+                      path={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
+                      component={grandChildRoute.component}
+                    />
+                  ))}
+                </React.Fragment>
+              ))}
+              <Route component={NotFound} />
+            </Switch>
+          </AnimatePresence>
+        </React.Fragment>
+      ))}
     </>
   );
 }
@@ -75,6 +53,7 @@ ActivityRouter.propTypes = {
   }).isRequired,
 };
 
+const ActivityMain = lazy(() => import('@/pages/activity/Activity'));
 const MiniGame = lazy(() => import('@/pages/activity/mini/MiniGame'));
 const GuessTheSong = lazy(() => import('@/pages/activity/mini/GuessTheSong'));
 const TreasureHunt = lazy(() => import('@/pages/activity/mini/TreasureHunt'));
@@ -87,41 +66,47 @@ const GroupImages = lazy(() => import('@/pages/activity/GroupImages'));
 
 const activityRoutes = [
   {
-    path: '/mini',
-    component: MiniGame,
+    path: '',
+    component: ActivityMain,
     children: [
       {
-        path: '/guess-the-song',
-        component: GuessTheSong,
+        path: '/mini',
+        component: MiniGame,
+        children: [
+          {
+            path: '/guess-the-song',
+            component: GuessTheSong,
+          },
+          {
+            path: '/treasure-hunt',
+            component: TreasureHunt,
+          },
+          {
+            path: '/riddle',
+            component: Riddle,
+          },
+          {
+            path: '/black-and-white',
+            component: BlackAndWhite,
+          },
+        ],
       },
       {
-        path: '/treasure-hunt',
-        component: TreasureHunt,
+        path: '/radio',
+        component: Radio,
       },
       {
-        path: '/riddle',
-        component: Riddle,
+        path: '/competition',
+        component: Competition,
       },
       {
-        path: '/black-and-white',
-        component: BlackAndWhite,
+        path: '/group',
+        component: Group,
+      },
+      {
+        path: '/group/images',
+        component: GroupImages,
       },
     ],
-  },
-  {
-    path: '/radio',
-    component: Radio,
-  },
-  {
-    path: '/competition',
-    component: Competition,
-  },
-  {
-    path: '/group',
-    component: Group,
-  },
-  {
-    path: '/group/images',
-    component: GroupImages,
   },
 ];

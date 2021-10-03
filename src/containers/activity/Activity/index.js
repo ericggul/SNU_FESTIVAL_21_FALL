@@ -1,28 +1,26 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { HeaderContent } from '@F/layout/Header';
 import { useHistory } from 'react-router';
-
-// import Item from '@F/layout/GridItem';
-import OmokIcon from '@I/activity/home/omok.png';
-import RiddleIcon from '@I/activity/home/riddle.png';
-import HandwritingIcon from '@I/activity/home/handwriting.png';
-import PlaceIcon from '@I/activity/home/place.png';
-
-import Wave from '@F/animation/Wave';
+import { withTheme } from 'styled-components';
+import CompetitionIcon from '@I/activity/home/competition.png';
+import MiniIcon from '@I/activity/home/mini.png';
+import GroupIcon from '@I/activity/home/group.png';
+import RadioIcon from '@I/activity/home/radio.png';
 
 import PropTypes from 'prop-types';
-import { transition } from '@C/activity/Activity';
-import * as GS from '@C/activity/Activity/gridStyles';
 import * as S from './styles';
+import * as GS from './gridStyles';
 
-function MiniGame({ theme }) {
+export const transition = { duration: 0.7, ease: [0.43, 0.13, 0.23, 0.96] };
+
+function Activity({ theme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
 
   const [selected, setSelected] = useState(null);
   const history = useHistory();
   const send = useCallback((location, i) => {
     setSelected(i);
-    history.push(`/activity/mini/${location}`);
+    history.push(`/activity/${location}`);
   }, [history]);
 
   function Item({
@@ -56,33 +54,33 @@ function MiniGame({ theme }) {
   const iconGrid = (
     <S.IconGrid isMobile={isMobile}>
       <Item
-        url="omok"
-        src={OmokIcon}
-        text="오목게임"
+        url="competition"
+        src={CompetitionIcon}
+        text="공모전"
         i={0}
         selected={selected}
         sendFunction={send}
       />
       <Item
-        url="riddle"
-        src={RiddleIcon}
-        text="미궁게임"
+        url="mini"
+        src={MiniIcon}
+        text="미니게임"
         i={1}
         selected={selected}
         sendFunction={send}
       />
       <Item
-        url="handwriting"
-        src={HandwritingIcon}
-        text="필기 맞추기"
+        url="group"
+        src={GroupIcon}
+        text="단체게임"
         i={2}
         selected={selected}
         sendFunction={send}
       />
       <Item
-        url="place"
-        src={PlaceIcon}
-        text="장소 맞추기"
+        url="radio"
+        src={RadioIcon}
+        text="토크쇼"
         i={3}
         selected={selected}
         sendFunction={send}
@@ -91,23 +89,21 @@ function MiniGame({ theme }) {
   );
 
   return (
-    <S.StyledMiniGame>
-      <HeaderContent>미니게임</HeaderContent>
-      <Wave />
+    <S.StyledActivity>
+      <HeaderContent>행사</HeaderContent>
       <S.StyledContainer>
         <S.Description>
-          각 미니게임별 아이콘을 클릭해보세요!
+          각 행사별 아이콘을 클릭해보세요!
         </S.Description>
+
         {iconGrid}
       </S.StyledContainer>
-    </S.StyledMiniGame>
+
+    </S.StyledActivity>
   );
 }
-export default MiniGame;
+export default withTheme(Activity);
 
-MiniGame.propTypes = {
-  theme: PropTypes.shape({
-    palette: PropTypes.objectOf(PropTypes.any),
-    windowWidth: PropTypes.number,
-  }).isRequired,
+Activity.propTypes = {
+
 };

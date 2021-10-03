@@ -12,6 +12,14 @@ export const palette = {
   BORDER_PURPLE: `#dbddef`,
   BLACK_PURPLE: '#0f004e',
   CHOCO_PURPLE: '#9581e9',
+
+  //행사팀
+
+  STARLIGHT_PURPLE: '#40266B',
+
+  //미니게임 배경
+  SKYLIGHT_BLUE: '#C8E2EF',
+  SKYLIGHT_PURPLE: '#E2DDF4',
   
   WHITE: '#fff',
 

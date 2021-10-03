@@ -6,7 +6,7 @@ import Lumination2 from '@F/animation/Lumination/Lumination2';
 import FireworkSingle from '@/foundations/animation/fireworks/FireworkSimple';
 import { HeaderContent } from '@F/layout/Header';
 import Fade from 'react-reveal/Fade';
-
+import Item from '@F/layout/GridItem';
 import Poster21Fall from '@I/performance/poster.png';
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import HitTheStageIcon from '@I/performance/icon/hit-the-stage-icon.png';
@@ -32,38 +32,45 @@ function Performance({ theme }) {
     history.push(`/performance/${location}`);
   }, [history]);
 
-  const Item = (url, src, text, i) => (
-    <S.GridItem
-      onClick={() => send(url, i)}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{
-        opacity: selected === i ? 1 : 0,
-      }}
-      transition={{
-        ...transition,
-        delay: (i + 1) * 0.3,
-      }}
-
-    >
-      <S.ImageContainer>
-        <S.IconImage
-          src={src}
-        />
-      </S.ImageContainer>
-      <S.IconDescription shine={selected === i}>
-        {text}
-      </S.IconDescription>
-    </S.GridItem>
-  );
-
   const iconGrid = (
     <S.IconGrid>
-      {Item('phone-cert', PhoneCertIcon, '폰서트 LIVE', 0)}
-      {Item('hit-the-stage', HitTheStageIcon, '힛더스테이지', 1)}
-      {Item('sing-stealer', SingStealerIcon, '씽스틸러', 2)}
-      {Item('game-tournament', GameTournamentIcon, '관악게임토너먼트', 3)}
-
+      <Item
+        url="phone-cert"
+        src={PhoneCertIcon}
+        text="폰서트 LIVE"
+        i={0}
+        selected={selected}
+        sendFunction={send}
+      />
+      <Item
+        url="hit-the-stage"
+        src={HitTheStageIcon}
+        text="힛더스테이지"
+        i={1}
+        selected={selected}
+        sendFunction={send}
+      />
+      <Item
+        url="sing-stealer"
+        src={SingStealerIcon}
+        text="씽스틸러"
+        i={2}
+        selected={selected}
+        sendFunction={send}
+      />
+      <Item
+        url="game-tournament"
+        src={GameTournamentIcon}
+        text="관악게임토너먼트"
+        i={3}
+        selected={selected}
+        sendFunction={send}
+      />
+      {/*
+      {Item('phone-cert', PhoneCertIcon, '폰서트 LIVE', 0, selected, send)}
+      {Item('hit-the-stage', HitTheStageIcon, '힛더스테이지', 1, selected, send)}
+      {Item('sing-stealer', SingStealerIcon, '씽스틸러', 2, selected, send)}
+      {Item('game-tournament', GameTournamentIcon, '관악게임토너먼트', 3, selected, send)} */}
     </S.IconGrid>
   );
 
@@ -79,7 +86,6 @@ function Performance({ theme }) {
           <p>
             Firework Code from @Caleb_Miller
           </p>
-
         </S.Description>
 
         {iconGrid}
