@@ -95,7 +95,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "hygen": "^6.0.4",
     "prop-types": "^15.7.2",
-    "react-ga": "^3.1.2",
+    "react-ga4": "^1.1.0",
     "react-lazy-load": "^3.1.13",
     "slick-carousel": "^1.8.1",
     "source-map-explorer": "^2.5.0"
