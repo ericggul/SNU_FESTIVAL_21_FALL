@@ -77,7 +77,6 @@ class Wave {
   }
 
   onClick(e) {
-    console.log(e.clientY, e.pageY);
     this.clickedPosition = { x: e.pageX, y: e.pageY - 65 };
   }
 
@@ -107,7 +106,6 @@ class Wave {
   }
 
   draw(ctx) {
-    console.log(this.clickedPosition);
     ctx.beginPath();
     ctx.fillStyle = this.color;
 
@@ -126,7 +124,6 @@ class Wave {
       let changedY = cy;
 
       if (this.clickedPosition && Math.abs(cx - this.clickedPosition.x) < this.stageWidth * 0.03) {
-        console.log('oui');
         changedY = this.clickedPosition.y;
         this.clickedPosition.y += (cy - this.clickedPosition.y) * 0.03;
       }

@@ -23,7 +23,6 @@ import Skeleton from '@I/skeleton/skeleton.png';
 import FestivalBackground from '@I/introduction/festival-background.jpg';
 import Poster21SpringCastle from '@I/poster/21springCastle.png';
 import Poster21Spring from '@I/poster/21spring.png';
-import Guests from '@I/activity/radio/guests.png';
 import GuessTheSong from '@I/activity/home/guess-the-song.png';
 import Riddle from '@I/activity/home/riddle.png';
 import TreasureHunt from '@I/activity/home/treasure-hunt.png';
@@ -53,7 +52,7 @@ function MobileHome({ theme }) {
   const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, { width: '95%' });
   const onLoadIsland = useCallback(() => {
     setIsLoading(false);
-    [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title, Guests,
+    [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
       GuessTheSong, Riddle, TreasureHunt, BlackAndWhite, Event, TimeTableImage, Envelope, EnvelopeImage,
       Universe, Ball, Glow, FortuneTeller,
     ].forEach(preloadImage);

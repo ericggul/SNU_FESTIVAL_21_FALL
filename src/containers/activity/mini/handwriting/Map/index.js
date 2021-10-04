@@ -11,7 +11,7 @@ import Object5 from '@I/activity/handwriting/object5.png';
 
 import * as S from './styles';
 
-function Map({ theme }) {
+function Map({ theme, handleClick }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [currentSolved, setCurrentSolved] = useState(Array(10).fill(0));
 
@@ -60,6 +60,7 @@ function Map({ theme }) {
           left={convert(POS_DATA[i].x)}
           top={convert(POS_DATA[i].y)}
           width={convert(150)}
+          onClick={() => handleClick(i)}
         />
       ))}
       <S.Object src={Object3} left={convert(256)} top={convert(928)} width={convert(60)} />

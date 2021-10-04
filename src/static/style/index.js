@@ -32,6 +32,14 @@ export const palette = {
 
   HANDWRITING_HEADER: '#7a63b8',
   HANDWRITING_PURPLE: '#352465',
+
+  //토크쇼
+  TALKSHOW_HEADER: '#070c27',
+
+  //장소
+  PLACE_MINT1: '#e7f4c6',
+  PLACE_MINT2: '#f0f4d9',
+  PLACE_HEADER: '#c2e843',
   
   WHITE: '#fff',
 
