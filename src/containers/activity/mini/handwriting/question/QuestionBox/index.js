@@ -8,6 +8,9 @@ import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { MapInteractionCSS } from 'react-map-interaction';
 
+import { withTheme } from 'styled-components';
+
+import DiscreteCarousel from '@F/carousel/DiscreteCarousel';
 import DummyOne from '@I/activity/handwriting/question/dummy1.png';
 import DummyTwo from '@I/activity/handwriting/question/dummy2.png';
 import DummyThree from '@I/activity/handwriting/question/dummy3.png';
@@ -21,8 +24,9 @@ import { useDispatch } from 'react-redux';
 import * as S from './styles';
 
 export function QuestionBox({
-  answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints,
+  answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints, theme,
 }) {
+  const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
@@ -74,42 +78,24 @@ export function QuestionBox({
     slidesToScroll: 1,
   };
 
+  const handleIndex = (i) => {
+    console.log(i);
+  };
+
   return (
     <>
       <S.Content>
         <S.SliderContent>
-          <Slider {...settings}>
-            <S.Question>
-              <MapInteractionCSS>
-                <S.Image
-                  src={DummyOne}
-                  alt="문제"
-                />
-              </MapInteractionCSS>
-            </S.Question>
-            <S.Question>
-              <MapInteractionCSS>
-                <S.Image
-                  src={DummyTwo}
-                  alt="문제"
-                />
-              </MapInteractionCSS>
-            </S.Question>
-            <S.Question>
-              <MapInteractionCSS>
-                <S.Image
-                  src={DummyThree}
-                  alt="문제"
-                />
-              </MapInteractionCSS>
-            </S.Question>
-          </Slider>
-
+          <DiscreteCarousel
+            images={[DummyOne, DummyTwo, DummyThree]}
+            width={Math.min(theme.windowWidth, theme.windowHeight * 0.8)}
+            initialIndex={0}
+            emitCurrentIndex={handleIndex}
+          />
         </S.SliderContent>
-
-        <S.Answer>
+        <S.Answer width={isMobile ? theme.windowWidth : 750}>
           <S.InputBox value={value} onChange={onChange} color={answerColor} placeholder={hints[step]} />
-          <S.Button onClick={submit}>등록</S.Button>
+          <S.Button onClick={submit}>제출</S.Button>
         </S.Answer>
       </S.Content>
       {miniGameModalComponent}
@@ -144,4 +130,4 @@ function QuestionBoxParent(props) {
 
   return <QuestionBox {...props} user={user} isAuthorized={isAuthorized} isNotCompleted={isNotCompleted} />;
 }
-export default withUser(QuestionBoxParent);
+export default withTheme(withUser(QuestionBoxParent));
