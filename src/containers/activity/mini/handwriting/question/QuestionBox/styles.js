@@ -6,10 +6,11 @@ import { rgba } from 'polished';
 export const Content = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   max-width: 550px;
+  min-width: 0;
+  overflow: hidden;
   height: 100%;
-  z-index: ${({ theme }) => theme.zIndex.base};
   
   ${media.lessThan('medium')`
     width: 80%;
@@ -17,10 +18,18 @@ export const Content = styled.div`
   `};
 `;
 
-export const Question = styled.div`
-  ${FlexCenterStyle};
+export const SliderContent = styled.div`
+  width: 100%;
   max-width: 550px;
-  max-height: 550px;
+  min-width: 0;
+  overflow: hidden;
+  height: 100%;
+  margin-top: 10vh;
+`;
+
+export const Question = styled.div`
+  max-width: 500px;
+  max-height: 500px;
   border-radius: 15px;
   background: ${({ theme }) => theme.palette.HANDWRITING_PURPLE};
   border: 1px solid white;
@@ -34,10 +43,15 @@ export const Question = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: 500px;
   border-radius: 15px;
   overflow: hidden;
+
+  ${media.lessThan('medium')`
+    width: 80vw;
+    height: 80vw;
+  `};
 `;
 
 export const Answer = styled.div`

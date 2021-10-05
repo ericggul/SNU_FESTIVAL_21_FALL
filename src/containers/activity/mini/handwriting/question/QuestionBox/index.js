@@ -72,49 +72,40 @@ export function QuestionBox({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1170,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false,
-          infinite: true,
-        },
-      },
-    ],
   };
 
   return (
     <>
       <S.Content>
-        <Slider {...settings}>
-          <S.Question>
-            <MapInteractionCSS>
-              <S.Image
-                src={DummyOne}
-                alt="문제"
-              />
-            </MapInteractionCSS>
-          </S.Question>
-          {/* <S.Question className="QuestionImage">
-            <MapInteractionCSS>
-              <S.Image
-                src={DummyThree}
-                alt="wetwet"
-              />
-            </MapInteractionCSS>
-          </S.Question> */}
-        </Slider>
+        <S.SliderContent>
+          <Slider {...settings}>
+            <S.Question>
+              <MapInteractionCSS>
+                <S.Image
+                  src={DummyOne}
+                  alt="문제"
+                />
+              </MapInteractionCSS>
+            </S.Question>
+            <S.Question>
+              <MapInteractionCSS>
+                <S.Image
+                  src={DummyTwo}
+                  alt="문제"
+                />
+              </MapInteractionCSS>
+            </S.Question>
+            <S.Question>
+              <MapInteractionCSS>
+                <S.Image
+                  src={DummyThree}
+                  alt="문제"
+                />
+              </MapInteractionCSS>
+            </S.Question>
+          </Slider>
+
+        </S.SliderContent>
 
         <S.Answer>
           <S.InputBox value={value} onChange={onChange} color={answerColor} placeholder={hints[step]} />
