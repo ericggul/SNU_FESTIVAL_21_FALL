@@ -5,13 +5,12 @@ import { HeaderContent } from '@F/layout/Header';
 import WhiteTheme from '@C/activity/mini/riddle/WhiteTheme';
 import BlackTheme from '@C/activity/mini/riddle/BlackTheme';
 
-import FullScreen from '@F/FullScreen';
-
 import { withTheme } from 'styled-components';
 import WhiteOpening from '@I/activity/riddle/white/white-opening.png';
 import WhiteOpeningFont from '@I/activity/riddle/white/white-opening-font.png';
 import BlackOpening from '@I/activity/riddle/black/black-opening.png';
 import BlackOpeningFont from '@I/activity/riddle/black/black-opening-font.png';
+import FullScreen from '@/foundations/full-screen/FullScreen';
 
 import * as S from './styles';
 

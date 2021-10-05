@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useEffect, useCallback, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import useInput from '@U/hooks/useInput';
 import Slider from 'react-slick';
@@ -6,7 +8,9 @@ import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
+import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
+import { MAJORS, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
 
 import { withTheme } from 'styled-components';
 
@@ -19,18 +23,30 @@ import { useUser } from '@U/hooks/useAuth';
 import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
-import { actions } from '@/redux/mini-game/state';
 import { useDispatch } from 'react-redux';
+import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints, theme,
+  sectorNum, answerColor, user, isAuthorized, isNotCompleted, theme,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
+
+  const incrementArrayConverter = useCallback((length) => {
+    let array = [];
+    for (let i = 0; i < length; i += 1) {
+      array[i] = i;
+    }
+    return array;
+  }, []);
+  // Unsolved problems: indexes --> Currently temporary implementation
+  const [indexes, setIndexes] = useState(incrementArrayConverter(CONVERTED_MAJORS[sectorNum].length));
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+
+  const shuffledIndexes = useMemo(() => shuffleArray(indexes), [indexes]);
 
   const goToNextStep = () => {
     setTimeout(() => setStep(step + 1), 1000);
@@ -58,16 +74,16 @@ export function QuestionBox({
   };
 
   const submit = () => {
-    if (sha256(value.toLowerCase()) === answers[step]) {
-      if (step < 2) {
-        toast('정답입니다🎉');
-        goToNextStep();
-      } else {
-        clear();
-      }
-    } else {
-      toast('오답입니다😅');
-    }
+    // if (sha256(value.toLowerCase()) === answers[step]) {
+    //   if (step < 2) {
+    //     toast('정답입니다🎉');
+    //     goToNextStep();
+    //   } else {
+    //     clear();
+    //   }
+    // } else {
+    //   toast('오답입니다😅');
+    // }
   };
 
   const settings = {
@@ -87,14 +103,14 @@ export function QuestionBox({
       <S.Content>
         <S.SliderContent>
           <DiscreteCarousel
-            images={[DummyOne, DummyTwo, DummyThree]}
+            sectorNum={sectorNum}
+            indexes={shuffledIndexes}
             width={Math.min(theme.windowWidth, theme.windowHeight * 0.8)}
-            initialIndex={0}
             emitCurrentIndex={handleIndex}
           />
         </S.SliderContent>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
-          <S.InputBox value={value} onChange={onChange} color={answerColor} placeholder={hints[step]} />
+          <S.InputBox value={value} onChange={onChange} color={answerColor} />
           <S.Button onClick={submit}>제출</S.Button>
         </S.Answer>
       </S.Content>
@@ -106,8 +122,7 @@ export function QuestionBox({
 
 QuestionBox.propTypes = {
   answerColor: PropTypes.string,
-  questions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  answers: PropTypes.arrayOf(PropTypes.string).isRequired,
+
   user: PropTypes.shape({
     uid: PropTypes.string,
     isLoading: PropTypes.bool,
@@ -115,7 +130,7 @@ QuestionBox.propTypes = {
   }).isRequired,
   isAuthorized: PropTypes.bool.isRequired,
   isNotCompleted: PropTypes.bool.isRequired,
-  hints: PropTypes.arrayOf(PropTypes.string).isRequired,
+
 };
 
 QuestionBox.defaultProps = {

@@ -35,7 +35,18 @@ function Map({ theme, handleClick }) {
     { x: 42.5, y: 326 },
   ];
 
-  console.log(currentSolved);
+  const CORRESPONDENCE = [
+    [0, 0], //
+    [1, 1], //
+    [2, 9], //
+    [3, 8],
+    [4, 5],
+    [5, 2],
+    [6, 3],
+    [7, 6],
+    [8, 4],
+    [9, 7],
+  ];
 
   return (
     <S.MapContainer width={convert(375)} height={convert(1048)}>
@@ -56,11 +67,11 @@ function Map({ theme, handleClick }) {
       {currentSolved.map((e, i) => (
         <S.Building
           key={i}
-          src={`https://snufestival.com/images/handwriting/${i + 1}-${e}.png`}
+          src={`https://snufestival-e9a04.web.app/images/handwriting/buildings/${i + 1}-${e}.png`}
           left={convert(POS_DATA[i].x)}
           top={convert(POS_DATA[i].y)}
           width={convert(150)}
-          onClick={() => handleClick(i)}
+          onClick={() => handleClick(CORRESPONDENCE[i][1])}
         />
       ))}
       <S.Object src={Object3} left={convert(256)} top={convert(928)} width={convert(60)} />

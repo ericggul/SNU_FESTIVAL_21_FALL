@@ -48,7 +48,7 @@ export const Box = styled.div`
 
   @keyframes imageChange{
     from{
-      transform: translate3d(100px, 0, -300px);
+      transform: translate3d(0, 0, -200px);
     } 
     to{
       transform: translate3d(0);

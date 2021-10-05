@@ -27,7 +27,7 @@ export const Answer = styled.div`
   align-items: center;
   width: ${props => props.width}px;
   height: 2.3rem;
-  margin: 3rem;
+  margin: 2rem;
 `;
 
 export const InputBox = styled.input`
