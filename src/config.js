@@ -1,4 +1,4 @@
-export const GA_TRACKING_KEY = process.env.REACT_APP_GA_TRACKING_ID;
+export const GA_TRACKING_KEY = 'G-Z0X2843JG2';
 
 // TODO: 보안
 export const FIREBASE_CONFIG = {

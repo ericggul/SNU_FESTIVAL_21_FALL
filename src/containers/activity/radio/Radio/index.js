@@ -4,15 +4,16 @@ import React, {
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
-import Title from '@I/activity/radio/title.png';
-import Guests from '@I/activity/radio/guests.png';
+import BackMobile from '@I/activity/radio/background-mobile.png';
+import BackDesktop from '@I/activity/radio/background-web.png';
+import DummyImage from '@I/activity/riddle/black/black-opening.png';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import * as S from './styles';
 
 function Radio({ theme }) {
-  const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
+  const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
 
   const [url, setUrl] = useState(null);
   useEffect(() => {
@@ -35,46 +36,14 @@ function Radio({ theme }) {
     }
   }, [url]);
 
-  const texts = useCallback((name, date, textAlign) => (
-    <S.Texts textAlign={isMobile ? 'center' : textAlign}>
-      <div>
-        <p>with</p>
-        <p>{name}</p>
-      </div>
-      <div>
-        <p>{date}</p>
-        <p>20:30~22:00</p>
-        <p>유튜브 라이브 중계</p>
-      </div>
-    </S.Texts>
-  ), [isMobile]);
-
   return (
     <S.StyledRadio>
-      <HeaderContent>보이는 라디오</HeaderContent>
-      <S.Body>
-        {ellipses(isMobile)}
-        <S.Title>
-          <S.Image src={Title} alt="고릴라디오" />
-          {stars}
-        </S.Title>
-        { isMobile ? (
-          <S.MobileGuests>
-            <S.Image src={Guests} alt="게스트" />
-            <div>
-              {texts('오정연 아나운서', '5월 11일', 'center')}
-              {texts('나상현씨밴드', '5월 13일', 'center')}
-            </div>
-          </S.MobileGuests>
-        ) : (
-          <S.Guests>
-            {texts('오정연 아나운서', '5월 11일', 'right')}
-            <S.Image src={Guests} alt="게스트" />
-            {texts('나상현씨밴드', '5월 13일', 'left')}
-          </S.Guests>
-        )}
-        <S.Button onClick={goToYoutube}>보러가기</S.Button>
-      </S.Body>
+      <HeaderContent backgroundColor={theme.palette.TALKSHOW_HEADER}>토크쇼</HeaderContent>
+      {isMobile
+        ? <S.Background src={BackMobile} alt="백야 배경" />
+        : <S.Background src={BackDesktop} alt="백야 배경" />}
+      <S.Image src={DummyImage} />
+      <S.Texts />
     </S.StyledRadio>
   );
 }
@@ -85,40 +54,3 @@ Radio.propTypes = {
     windowWidth: PropTypes.number,
   }).isRequired,
 };
-
-function Star({
-  r, duration, top, left, right, bottom,
-}) {
-  return (
-    <S.Star
-      r={r || 5}
-      duration={duration || (1 + Math.random() * 2)}
-      delay={Math.random() * 2}
-      top={top}
-      left={left}
-      right={right}
-      bottom={bottom}
-    />
-  );
-}
-
-const stars = (
-  <>
-    <Star top={-10} left={10} r={7} />
-    <Star top={13} left={20} r={5} />
-    <Star top={15} left={6} r={6} />
-    <Star top={60} left={25} r={4} />
-
-    <Star top={-10} right={10} r={6} />
-    <Star top={13} right={25} r={7} />
-    <Star top={15} right={6} r={6} />
-    <Star top={45} right={20} r={4} />
-  </>
-);
-
-const ellipses = (isMobile) => (
-  <>
-    <S.Ellipse top={isMobile ? -20 : -10} left={isMobile ? -40 : -20} rotate={isMobile ? 60 : -20} />
-    <S.Ellipse top={isMobile ? -15 : 1} right={isMobile ? -40 : -25} rotate={isMobile ? 60 : -20} />
-  </>
-);

@@ -5,7 +5,6 @@ import { AnimatePresence } from 'framer-motion';
 import NotFound from '@/pages/NotFound';
 
 function ActivityRouter({ match }) {
-  // TODO: router 버그 있음
   const location = useLocation();
   return (
     <>
@@ -19,29 +18,16 @@ function ActivityRouter({ match }) {
                 path={`${match.path}${route.path}`}
                 component={route.component}
               />
+
               { route.children && route.children.map((childRoute) => (
-                <React.Fragment key={childRoute.path}>
-                  <AnimatePresence exitBeforeEnter>
-                    <Switch location={location} key={location.pathname}>
-                      <Route
-                        exact
-                        key={`${match.path}${route.path}${childRoute.path}`}
-                        path={`${match.path}${route.path}${childRoute.path}`}
-                        component={childRoute.component}
-                      />
-                      {childRoute.children && childRoute.children.map((grandChildRoute) => (
-                        <Route
-                          exact
-                          key={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
-                          path={`${match.path}${route.path}${childRoute.path}${grandChildRoute.path}`}
-                          component={grandChildRoute.component}
-                        />
-                      ))}
-                      <Route component={NotFound} />
-                    </Switch>
-                  </AnimatePresence>
-                </React.Fragment>
+                <Route
+                  exact
+                  key={`${match.path}${route.path}${childRoute.path}`}
+                  path={`${match.path}${route.path}${childRoute.path}`}
+                  component={childRoute.component}
+                />
               ))}
+
               <Route component={NotFound} />
             </Switch>
           </AnimatePresence>
@@ -59,6 +45,11 @@ ActivityRouter.propTypes = {
 };
 
 const ActivityMain = lazy(() => import('@/pages/activity/Activity'));
+const MiniGameRouter = lazy(() => import('@/pages/activity/mini/MiniRouter'));
+const Radio = lazy(() => import('@/pages/activity/Radio'));
+const Competition = lazy(() => import('@/pages/activity/Competition'));
+const Group = lazy(() => import('@/pages/activity/Group'));
+const GroupImages = lazy(() => import('@/pages/activity/GroupImages'));
 const MiniGame = lazy(() => import('@/pages/activity/mini/MiniGame'));
 const GuessTheSong = lazy(() => import('@/pages/activity/mini/GuessTheSong'));
 const TreasureHunt = lazy(() => import('@/pages/activity/mini/TreasureHunt'));
@@ -67,52 +58,12 @@ const Handwriting = lazy(() => import('@/pages/activity/mini/Handwriting'));
 const Place = lazy(() => import('@/pages/activity/mini/Place'));
 const Omok = lazy(() => import('@/pages/activity/mini/Omok'));
 const BlackAndWhite = lazy(() => import('@/pages/activity/mini/BlackAndWhite'));
-const Radio = lazy(() => import('@/pages/activity/Radio'));
-const Competition = lazy(() => import('@/pages/activity/Competition'));
-const Group = lazy(() => import('@/pages/activity/Group'));
-const GroupImages = lazy(() => import('@/pages/activity/GroupImages'));
 
 const activityRoutes = [
   {
     path: '',
     component: ActivityMain,
     children: [
-      {
-        path: '/mini',
-        component: MiniGame,
-        children: [
-          {
-            path: '/riddle',
-            component: Riddle,
-          },
-          {
-            path: '/handwriting',
-            component: Handwriting,
-          },
-          {
-            path: '/omok',
-            component: Omok,
-          },
-          {
-            path: '/place',
-            component: Place,
-          },
-
-          {
-            path: '/guess-the-song',
-            component: GuessTheSong,
-          },
-          {
-            path: '/treasure-hunt',
-            component: TreasureHunt,
-          },
-
-          {
-            path: '/black-and-white',
-            component: BlackAndWhite,
-          },
-        ],
-      },
       {
         path: '/radio',
         component: Radio,
@@ -128,6 +79,26 @@ const activityRoutes = [
       {
         path: '/group/images',
         component: GroupImages,
+      },
+      {
+        path: '/mini',
+        component: MiniGame,
+      },
+      {
+        path: '/mini/omok',
+        component: Omok,
+      },
+      {
+        path: '/mini/riddle',
+        component: Riddle,
+      },
+      {
+        path: '/mini/handwriting',
+        component: Handwriting,
+      },
+      {
+        path: '/mini/place',
+        component: Place,
       },
     ],
   },

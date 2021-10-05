@@ -25,6 +25,7 @@ export const Background = styled.img`
   height: 100%;
   bottom: 0px;
   object-fit: cover;
+  object-position: center bottom;
 `;
 
 export const ConfettiWrapper = styled.div`
