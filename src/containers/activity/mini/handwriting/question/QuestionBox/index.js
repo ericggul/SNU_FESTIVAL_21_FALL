@@ -14,7 +14,6 @@ import { MAJORS, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
 
 import { withTheme } from 'styled-components';
 
-import DiscreteCarousel from '@F/carousel/DiscreteCarousel';
 import DummyOne from '@I/activity/handwriting/question/dummy1.png';
 import DummyTwo from '@I/activity/handwriting/question/dummy2.png';
 import DummyThree from '@I/activity/handwriting/question/dummy3.png';
@@ -24,6 +23,7 @@ import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useDispatch } from 'react-redux';
+import DiscreteCarousel from '@/foundations/carousel/HandwritingCarousel';
 import { speakRightorWrong, confettiRightorWrong } from './reactions.js';
 import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';

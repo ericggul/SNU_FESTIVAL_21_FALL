@@ -2,22 +2,21 @@ import React, { useState, useMemo, useCallback } from 'react';
 import MapImage from '@I/activity/place/Map.png';
 import DefaultPointer from '@I/activity/place/DefaultPointer.png';
 import DiscoveredPointer from '@I/activity/place/DiscoveredPointer.png';
-import { NeurtralRio } from '@I/activity/place/NeutralRio.png';
-import { RightRio } from '@I/activity/place/RightRio.png';
-import { WrongRio } from '@I/activity/place/WrongRio.png';
+import NeurtralRio from '@I/activity/place/NeutralRio.png';
+
 import { MapInteractionCSS } from 'react-map-interaction';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function Map({ theme }) {
+function Map({ theme, solvedArray, handleClick }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
     return result;
   }, []);
 
-  const data = [
+  const POS_DATA = [
     { x: 60.3, y: 461 },
     { x: 116.3, y: 400 },
     { x: 116.3, y: 371 },
@@ -31,23 +30,25 @@ function Map({ theme }) {
 
   return (
     <S.MapContainer width={convert(375)} height={convert(375)}>
-      {/* <MapInteractionCSS> */}
       <S.Map src={MapImage} />
-      {data.map((data, i) => (
+      {solvedArray.map((solved, i) => (
         <S.Pointer
           key={i}
-          src={DefaultPointer}
-          left={convert(data.x - 6)}
-          top={convert(data.y - 250)}
+          src={solved === 0 ? DefaultPointer : DiscoveredPointer}
+          animate={solved === 0}
+          left={convert(POS_DATA[i].x - 6)}
+          top={convert(POS_DATA[i].y - 250)}
           width={convert(30)}
+          onClick={() => handleClick(i)}
         />
       ))}
-      {/* </MapInteractionCSS> */}
+
+      <S.Image src={NeurtralRio} top={convert(185)} width={convert(136)} height={convert(136)} />
     </S.MapContainer>
   );
 }
 export default withTheme(Map);
 
 Map.propTypes = {
-
+  solvedArray: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
