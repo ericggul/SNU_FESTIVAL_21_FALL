@@ -26,7 +26,7 @@ export const MAJORS = [
     '지리교육과', '윤리교육과', '수학교육과', '물리교육과', '화학교육과', '생물교육과', '지구과학교육과', '체육교육과'],
   ['소비자아동학부', '식품영약학과', '의류학과'],
   ['성악과', '작곡과', '기악과', '국악과'],
-  ['간호학과', '경영학과', '수의학과', '의학과', '자유전공학부', '치의학과', '약학과'],
+  ['간호학과', '경영학과', '수의학과', '의학과', '자유전공학부', '치의학과'],
 ];
 
 // for (let i = 0; i < MAJORS.length; i++) {
@@ -137,6 +137,5 @@ export const CONVERTED_MAJORS = [
     'efa63decd01c3386bfc68d29fa5a6ad1cf95ecccd6d152a9158db16d9961fc97',
     '4c6ba58b2fb55eeb3b3f17fce7d57c669c6c032830aa78b1e47993aff7ba644e',
     '3cbaa791223ca5c3c01c1a0fab719c3d4ca9d43f826e54119886d9f3fd06fd8b',
-    'aaa4507e907edfdb15abaa73e6dfaa3accf009302602fffac62b62a6bef1a8cf',
   ],
 ];

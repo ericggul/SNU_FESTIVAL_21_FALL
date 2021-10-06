@@ -43,20 +43,36 @@ export const Box = styled.div`
   border-radius: 20px;
   border: 0.4px solid white;
   box-shadow: 0 0 0.8rem rgba(255,255,255,0.5);
+  position: relative;
 
   transform: perspective(100px);
 
   @keyframes imageChange{
     from{
-      transform: translate3d(0, 0, -200px);
+      transform: rotateY(180deg);
     } 
     to{
-      transform: translate3d(0);
+      transform: rotateY(0);
     }
   }
 
   animation: imageChange 0.5s;
+
 `;
+
+export const Skeleton = styled.div`
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  color: white;
+  font-weight: 600;
+  font-size: 1.3rem;
+  ${FlexCenterStyle};
+`;
+
 export const Image = styled.img`
   width: 100%;
   height: 100%;

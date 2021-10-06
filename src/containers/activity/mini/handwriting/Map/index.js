@@ -20,8 +20,6 @@ function Map({ theme, handleClick }) {
     return result;
   }, []);
 
-  console.log(convert(375));
-
   const POS_DATA = [
     { x: 37.5, y: 630.4 },
     { x: 165.5, y: 543.5 },

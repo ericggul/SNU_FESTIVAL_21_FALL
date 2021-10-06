@@ -43,10 +43,10 @@ export function QuestionBox({
   }, []);
   // Unsolved problems: indexes --> Currently temporary implementation
   const [indexes, setIndexes] = useState(incrementArrayConverter(CONVERTED_MAJORS[sectorNum].length));
+  const shuffledIndexes = useMemo(() => shuffleArray(indexes), [indexes]);
+  const [currentLoc, setCurrentLoc] = useState(shuffledIndexes[0]);
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-
-  const shuffledIndexes = useMemo(() => shuffleArray(indexes), [indexes]);
 
   const goToNextStep = () => {
     setTimeout(() => setStep(step + 1), 1000);
@@ -74,30 +74,36 @@ export function QuestionBox({
   };
 
   const submit = () => {
-    // if (sha256(value.toLowerCase()) === answers[step]) {
-    //   if (step < 2) {
-    //     toast('정답입니다🎉');
-    //     goToNextStep();
-    //   } else {
-    //     clear();
-    //   }
-    // } else {
-    //   toast('오답입니다😅');
-    // }
+    if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
+      if (step < 2) {
+        toast('정답입니다🎉');
+        // goToNextStep();
+      } else {
+        clear();
+      }
+    } else {
+      toast('오답입니다😅');
+    }
   };
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  useEffect(() => {
+    setValue('');
+  }, [currentLoc]);
 
   const handleIndex = (i) => {
     console.log(i);
+    setCurrentLoc(i);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      submit();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keypress', handleKeyPress);
+  }, []);
   return (
     <>
       <S.Content>
@@ -111,7 +117,7 @@ export function QuestionBox({
         </S.SliderContent>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
           <S.InputBox value={value} onChange={onChange} color={answerColor} />
-          <S.Button onClick={submit}>제출</S.Button>
+          <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button>
         </S.Answer>
       </S.Content>
       {miniGameModalComponent}
