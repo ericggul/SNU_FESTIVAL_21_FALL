@@ -4,8 +4,8 @@ import {
 import { debounce } from '@U/functions/timer';
 
 function useResize() {
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(document.documentElement.clientWidth);
+  const [windowHeight, setWindowHeight] = useState(document.documentElement.clientHeight > 768 ? document.documentElement.clientHeight : window.innerHeight);
 
   const onResize = useCallback(() => {
     const documentClientHeight = document.documentElement.clientHeight;

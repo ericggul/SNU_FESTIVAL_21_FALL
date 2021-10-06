@@ -3,13 +3,12 @@ import { IoMdClose } from 'react-icons/all';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledFullScreen = styled.div`
-  z-index: ${({ theme }) => theme.zIndex.fullScreen};
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: scroll;
   
-  background-color: ${props => props.backgroundColor};
   width: 0;
   height: 0;
   border-radius: 100%;

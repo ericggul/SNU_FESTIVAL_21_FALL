@@ -12,6 +12,7 @@ import Object5 from '@I/activity/handwriting/object5.png';
 import * as S from './styles';
 
 function Map({ theme, handleClick }) {
+  const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [currentSolved, setCurrentSolved] = useState(Array(10).fill(0));
 
@@ -49,19 +50,19 @@ function Map({ theme, handleClick }) {
   return (
     <S.MapContainer width={convert(375)} height={convert(1048)}>
       <S.Image src={RoadImage} />
-      <S.Object src={Object1} left={convert(153)} top={convert(498)} width={convert(45)} />
-      <S.Object src={Object1} left={convert(276)} top={convert(338)} width={convert(33)} />
-      <S.Object src={Object1} left={convert(265)} top={convert(348)} width={convert(33)} />
-      <S.Object src={Object1} left={convert(294)} top={convert(344)} width={convert(28)} />
-      <S.Object src={Object1} left={convert(305)} top={convert(352)} width={convert(33)} />
+      <S.Object src={Object1} left={convert(153)} top={convert(498)} width={convert(45)} jump={getRandom(3, 10)} />
+      <S.Object src={Object1} left={convert(276)} top={convert(338)} width={convert(33)} jump={getRandom(3, 10)} />
+      <S.Object src={Object1} left={convert(265)} top={convert(348)} width={convert(33)} jump={getRandom(3, 10)} />
+      <S.Object src={Object1} left={convert(294)} top={convert(344)} width={convert(28)} jump={getRandom(3, 10)} />
+      <S.Object src={Object1} left={convert(305)} top={convert(352)} width={convert(33)} jump={getRandom(3, 10)} />
 
-      <S.Object src={Object2} left={convert(96)} top={convert(547)} width={convert(51)} />
-      <S.Object src={Object2} left={convert(323)} top={convert(783)} width={convert(51)} />
-      <S.Object src={Object4} left={convert(134.8)} top={convert(275.7)} width={convert(53)} />
-      <S.Object src={Object5} left={convert(24)} top={convert(659)} width={convert(61)} />
-      <S.Object src={Object5} left={convert(145)} top={convert(899)} width={convert(61)} />
-      <S.Object src={Object5} left={convert(276)} top={convert(610)} width={convert(60)} />
-      <S.Object src={Object5} left={convert(292)} top={convert(616)} width={convert(60)} />
+      <S.Object src={Object2} left={convert(96)} top={convert(547)} width={convert(51)} jump={getRandom(3, 10)} />
+      <S.Object src={Object2} left={convert(323)} top={convert(783)} width={convert(51)} jump={getRandom(3, 10)} />
+      <S.Object src={Object4} left={convert(134.8)} top={convert(275.7)} width={convert(53)} jump={getRandom(3, 10)} />
+      <S.Object src={Object5} left={convert(24)} top={convert(659)} width={convert(61)} jump={getRandom(3, 10)} />
+      <S.Object src={Object5} left={convert(145)} top={convert(899)} width={convert(61)} jump={getRandom(3, 10)} />
+      <S.Object src={Object5} left={convert(276)} top={convert(610)} width={convert(60)} jump={getRandom(3, 10)} />
+      <S.Object src={Object5} left={convert(292)} top={convert(616)} width={convert(60)} jump={getRandom(3, 10)} />
       {currentSolved.map((e, i) => (
         <S.Building
           key={i}

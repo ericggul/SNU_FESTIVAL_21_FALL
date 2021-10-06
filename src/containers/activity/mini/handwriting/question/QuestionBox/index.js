@@ -24,6 +24,7 @@ import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useDispatch } from 'react-redux';
+import { speakRightorWrong, confettiRightorWrong } from './reactions.js';
 import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
@@ -77,12 +78,15 @@ export function QuestionBox({
     if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
       if (step < 2) {
         toast('정답입니다🎉');
-        // goToNextStep();
+        speakRightorWrong(true);
+        confettiRightorWrong(isMobile, true);
       } else {
         clear();
       }
     } else {
       toast('오답입니다😅');
+      speakRightorWrong(false);
+      confettiRightorWrong(isMobile, false);
     }
   };
 

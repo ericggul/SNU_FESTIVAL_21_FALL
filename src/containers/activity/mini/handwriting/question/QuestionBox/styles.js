@@ -20,6 +20,7 @@ export const SliderContent = styled.div`
   overflow: hidden;
   margin: 2rem 0;
   ${FlexCenterStyle};
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
 
 export const Answer = styled.div`
@@ -28,6 +29,7 @@ export const Answer = styled.div`
   width: ${props => props.width}px;
   height: 2.3rem;
   margin: 2rem;
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
 
 export const InputBox = styled.input`

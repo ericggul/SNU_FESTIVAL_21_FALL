@@ -16,6 +16,9 @@ function Place({ theme }) {
       </HeaderContent>
       <S.Container>
         <Map />
+        <S.RioContainer>
+          <S.Image src={NeurtralRio} />
+        </S.RioContainer>
       </S.Container>
     </S.StyledPlace>
   );

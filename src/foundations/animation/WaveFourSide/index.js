@@ -8,7 +8,9 @@ export default function WaveCanvas() {
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '70vh', background: 'black' }}
+      style={{
+        position: 'absolute', width: '100vw', height: '100vh', background: 'black',
+      }}
     />
   );
 }
@@ -21,8 +23,6 @@ class App {
 
     this.wrapper = document.getElementById('CanvasWrapper');
     this.wrapper.appendChild(this.canvas);
-
-    const isMobile = document.body.clientWidth < 768;
 
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
@@ -54,11 +54,11 @@ class App {
 }
 
 class CirclePoint {
-  constructor(x, y, theta, thetaSpeed, initialRadius, r, speed) {
-    this.x = x;
-    this.y = y;
+  constructor(width, height, theta, initialRadius, r, speed) {
+    this.width = width;
+    this.height = height;
+
     this.theta = theta;
-    this.thetaSpeed = thetaSpeed;
     this.initialRadius = initialRadius;
     this.r = r;
     this.speed = speed;
@@ -66,29 +66,33 @@ class CirclePoint {
   }
 
   init() {
-    this.x += this.initialRadius * Math.cos(this.theta);
-    this.y += this.initialRadius * Math.sin(this.theta);
+    this.x = getRandom(0, this.width);
+    this.y = getRandom(0, this.height);
   }
 
   update() {
-    this.theta += this.thetaSpeed;
-    // this.r += this.speed * 0.01;
     this.x += this.speed * Math.cos(this.theta);
     this.y += this.speed * Math.sin(this.theta);
+    if (this.x > this.width || this.x < 0) {
+      this.theta = Math.PI - this.theta;
+    }
+    if (this.y > this.height || this.y < 0) {
+      this.theta = -this.theta;
+    }
   }
 }
 
 class Wheel {
-  constructor(x, y, color) {
-    this.x = x;
-    this.y = y;
+  constructor(width, height, color, pointRadius) {
+    this.width = width;
+    this.height = height;
+
     this.color = color;
     this.points = [];
-    this.totalPoints = 15;
-    this.initialRadius = getRandom(300, 400);
-    this.pointRadius = 170;
-    this.thetaSpeed = getRandom(0.01, 0.02);
-    this.radSpeed = this.thetaSpeed * 20;
+    this.totalPoints = 8;
+    this.initialRadius = getRandom(300, 800);
+    this.pointRadius = this.width < 700 ? 150 : 300;
+    this.radSpeed = getRandom(0.5, 1);
     this.init();
   }
 
@@ -98,10 +102,10 @@ class Wheel {
 
     for (let i = 0; i < this.totalPoints; i += 1) {
       this.points.push(new CirclePoint(
-        this.x,
-        this.y,
+        this.width,
+        this.height,
+
         this.deltaT * i,
-        this.thetaSpeed,
         this.initialRadius,
         this.pointRadius,
         this.radSpeed,
@@ -140,19 +144,19 @@ class WheelSets {
   constructor(stageWidth, stageHeight) {
     this.width = stageWidth;
     this.height = stageHeight;
-    this.totalWheels = 40;
+    this.totalWheels = this.width > 768 ? 30 : 20;
     this.wheels = [];
     this.init();
   }
 
   init() {
     this.wheels = [];
-    const colorSet = [{r: 33, g: 21, b: 73}, {r: 36, g: 26, b: 87}];
+    const colorSet = [{ r: 33, g: 21, b: 73 }, { r: 36, g: 26, b: 87 }];
     for (let i = 0; i < this.totalWheels; i += 1) {
       this.wheels.push(new Wheel(
-        getRandom(0, this.width), getRandom(0, this.height), 
-        // { r: getRandom(33, 36), g: getRandom(21, 26), b: getRandom(73, 87) },
-        { r: getRandom(20, 36), g: getRandom(18, 26), b: getRandom(45, 87) },
+        this.width, this.height,
+        { r: getRandom(20, 50), g: getRandom(18, 36), b: getRandom(45, 101) },
+        this.width > 768 ? 150 : 80,
       ));
     }
   }

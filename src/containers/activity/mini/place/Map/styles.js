@@ -2,11 +2,9 @@ import styled, { css } from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const MapContainer = styled.div`
-  ${FlexCenterStyle};
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-
 `;
 
 export const Map = styled.img`

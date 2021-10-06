@@ -2,15 +2,18 @@ import React, { useState, useMemo, useCallback } from 'react';
 import MapImage from '@I/activity/place/Map.png';
 import DefaultPointer from '@I/activity/place/DefaultPointer.png';
 import DiscoveredPointer from '@I/activity/place/DiscoveredPointer.png';
+import { NeurtralRio } from '@I/activity/place/NeutralRio.png';
+import { RightRio } from '@I/activity/place/RightRio.png';
+import { WrongRio } from '@I/activity/place/WrongRio.png';
 import { MapInteractionCSS } from 'react-map-interaction';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function Map({ theme }) {
-  const isMobile = useMemo(() => theme.windowWidth < 1000, [theme.windowWidth]);
+  const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const convert = useCallback((value) => {
-    const result = isMobile ? (theme.windowWidth / 375) * value : (1000 / 375) * value;
+    const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
     return result;
   }, []);
 
@@ -29,13 +32,13 @@ function Map({ theme }) {
   return (
     <S.MapContainer width={convert(375)} height={convert(375)}>
       {/* <MapInteractionCSS> */}
-      <S.Map src={MapImage} top={convert(243)} />
+      <S.Map src={MapImage} />
       {data.map((data, i) => (
         <S.Pointer
           key={i}
           src={DefaultPointer}
           left={convert(data.x - 6)}
-          top={convert(data.y - 7)}
+          top={convert(data.y - 250)}
           width={convert(30)}
         />
       ))}
