@@ -13,12 +13,11 @@ export const Wrapper = styled.div`
 `;
 
 export const ArrowButton = styled.div`
-  font-size: 2.5rem;
-  color: ${({ theme }) => theme.palette.WHITE};
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.palette.PLACE_ARROW};
   cursor: pointer;
   user-select: none;
-  margin: 0 1.5rem;
-  text-shadow: 0 0 5px white;
+  margin: 0 1.2rem;
 
   @keyframes arrowAnimate{
     from{
@@ -41,8 +40,7 @@ export const Box = styled.div`
   height: ${props => props.itemWidth}px;
   ${FlexCenterStyle};
   border-radius: 20px;
-  border: 0.4px solid white;
-  box-shadow: 0 0 0.8rem rgba(255,255,255,0.5);
+  box-shadow: 0 0 0.5rem rgba(73, 73, 73,0.3);
   position: relative;
 
   transform: perspective(100px);

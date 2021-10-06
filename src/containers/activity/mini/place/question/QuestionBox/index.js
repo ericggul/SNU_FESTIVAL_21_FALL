@@ -10,7 +10,11 @@ import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
-import { MAJORS, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import { CONVERTED_PLACES } from '@C/activity/mini/place/data.js';
+
+import NeutralRio from '@I/activity/place/NeutralRio.png';
+import RightRio from '@I/activity/place/RightRio.png';
+import WrongRio from '@I/activity/place/WrongRio.png';
 
 import { withTheme } from 'styled-components';
 
@@ -20,28 +24,34 @@ import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useDispatch } from 'react-redux';
 import DiscreteCarousel from '@/foundations/carousel/PlaceCarousel';
-import { speakRightorWrong, confettiRightorWrong } from './reactions.js';
+import { speakRightorWrong, ConfettiRightorWrong } from './reactions.js';
 import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  sectorNum, answerColor, user, isAuthorized, isNotCompleted, theme,
+  sectorNum, user, isAuthorized, isNotCompleted, theme,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
+  const [lastAttemptRight, setLastAttemptRight] = useState(0);
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
+
+  // SIZE CONVERTER for Image
+  const convert = useCallback((val) => {
+    const result = isMobile ? (theme.windowWidth / 375) * val : (768 / 375) * val;
+    return result;
+  }, []);
 
   const incrementArrayConverter = useCallback((length) => {
     let array = [];
     for (let i = 0; i < length; i += 1) {
-      array[i] = i;
+      array[i] = i + 1;
     }
     return array;
   }, []);
   // Unsolved problems: indexes --> Currently temporary implementation
-  const [indexes, setIndexes] = useState(incrementArrayConverter(CONVERTED_MAJORS[sectorNum].length));
-  const shuffledIndexes = useMemo(() => shuffleArray(indexes), [indexes]);
-  const [currentLoc, setCurrentLoc] = useState(shuffledIndexes[0]);
+  const [indexes, setIndexes] = useState(incrementArrayConverter(sectorNum === 5 ? 3 : 4));
+  const [currentLoc, setCurrentLoc] = useState(0);
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
@@ -71,24 +81,20 @@ export function QuestionBox({
   };
 
   const submit = () => {
-    if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
+    if (sha256(value.toLowerCase()) === CONVERTED_PLACES[sectorNum]) {
       if (step < 2) {
-        toast('정답입니다🎉');
         speakRightorWrong(true);
-        confettiRightorWrong(isMobile, true);
+
+        setLastAttemptRight(1);
       } else {
         clear();
       }
     } else {
-      toast('오답입니다😅');
       speakRightorWrong(false);
-      confettiRightorWrong(isMobile, false);
+
+      setLastAttemptRight(-1);
     }
   };
-
-  useEffect(() => {
-    setValue('');
-  }, [currentLoc]);
 
   const handleIndex = (i) => {
     console.log(i);
@@ -106,19 +112,29 @@ export function QuestionBox({
   }, []);
   return (
     <>
+      <ConfettiRightorWrong tf={lastAttemptRight} />
       <S.Content>
         <S.SliderContent>
           <DiscreteCarousel
             sectorNum={sectorNum}
-            indexes={shuffledIndexes}
+            indexes={indexes}
             width={Math.min(theme.windowWidth, theme.windowHeight * 0.8)}
             emitCurrentIndex={handleIndex}
           />
         </S.SliderContent>
+        <S.Description>어디일까요?</S.Description>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
-          <S.InputBox value={value} onChange={onChange} color={answerColor} />
-          <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button>
+          <S.InputBox placeholder="백퍼 자하연 아님?" value={value} onChange={onChange} />
+          {/* <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button> */}
+          <S.Image
+            src={lastAttemptRight === 1 ? RightRio : (lastAttemptRight === 0 ? NeutralRio : WrongRio)}
+            onKeyPress={handleKeyPress}
+            onClick={submit}
+            width={convert(136)}
+            height={convert(136)}
+          />
         </S.Answer>
+
       </S.Content>
       {miniGameModalComponent}
       {signInModalComponent}
@@ -127,8 +143,6 @@ export function QuestionBox({
 }
 
 QuestionBox.propTypes = {
-  answerColor: PropTypes.string,
-
   user: PropTypes.shape({
     uid: PropTypes.string,
     isLoading: PropTypes.bool,
@@ -140,7 +154,7 @@ QuestionBox.propTypes = {
 };
 
 QuestionBox.defaultProps = {
-  answerColor: null,
+
 };
 
 function QuestionBoxParent(props) {

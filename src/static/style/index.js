@@ -9,22 +9,22 @@ export const palette = {
   PASTEL_PURPLE: '#9f8ec5',
   LIGHT_PURPLE: '#c0b9db',
   TEXT_PURPLE: '#b975e6',
-  BORDER_PURPLE: `#dbddef`,
+  BORDER_PURPLE: '#dbddef',
   BLACK_PURPLE: '#0f004e',
   CHOCO_PURPLE: '#9581e9',
 
-  //행사팀
+  // 행사팀
 
   STARLIGHT_PURPLE: '#40266B',
 
-  //미니게임 배경
+  // 미니게임 배경
   SKYLIGHT_BLUE: '#C8E2EF',
   SKYLIGHT_PURPLE: '#E2DDF4',
 
   HEADER_PURPLE: '#dcbbe6',
   SOFTLIGHT_PURPLE: '#c1b0db',
   PASTELLIGHT_PURPLE: '#c0c3f0',
-  
+
   RIDDLE_PURPLE: '#e4e8f9',
 
   RIDDLE_WHITE: '#83AAE2',
@@ -33,18 +33,20 @@ export const palette = {
   HANDWRITING_HEADER: '#7a63b8',
   HANDWRITING_PURPLE: '#352465',
 
-  //토크쇼
+  // 토크쇼
   TALKSHOW_HEADER: '#070c27',
 
-  //장소
+  // 장소
   PLACE_MINT1: '#e7f4c6',
   PLACE_MINT2: '#f0f4d9',
   PLACE_HEADER: '#c2e843',
+  PLACE_ARROW: '#b3db2d',
+  PLACE_DESCRIPTION: '#606060',
 
-  //핅기
+  // 필기
   HANDWRITING_INPUT: '#719dde',
   HANDWRITING_HANDLE: '#5381c5',
-  
+
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',

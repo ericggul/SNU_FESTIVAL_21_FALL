@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slide from 'react-reveal/Slide';
+import AnimatedInput from '@F/animation/text-animation/AnimatedInput';
 import WaveFourSide from '@F/animation/WaveFourSide';
 import * as S from './styles';
 
@@ -17,7 +18,7 @@ function FullScreen({
           <>
             <S.Top>
               <S.Description>
-                {headerName}
+                어디일까요?
               </S.Description>
               <S.CloseButton onClick={onCloseFullScreen}>
                 <S.CloseIcon />

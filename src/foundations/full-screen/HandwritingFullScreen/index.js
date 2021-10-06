@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Slide from 'react-reveal/Slide';
+import Particle from '@F/animation/Particle';
 import WaveFourSide from '@F/animation/WaveFourSide';
 import * as S from './styles';
 
@@ -15,6 +15,7 @@ function FullScreen({
         backgroundColor={backgroundColor}
       >
         {isFullScreen && <WaveFourSide />}
+        {isFullScreen && <Particle />}
         { isFullScreen && (
           <>
             <S.Top>

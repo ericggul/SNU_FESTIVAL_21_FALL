@@ -11,7 +11,7 @@ export const StyledFullScreen = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   
   width: 0;
   height: 0;
@@ -26,7 +26,7 @@ export const StyledFullScreen = styled.div`
     border-radius: 0;
     
     transform: scale(1);
-    transition: width 1s ease-in;
+    transition: opacity 0.5s ease-in;
   `};
 `;
 

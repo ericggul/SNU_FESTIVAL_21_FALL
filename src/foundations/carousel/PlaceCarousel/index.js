@@ -15,6 +15,7 @@ function Carousel({
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
   const [animateDir, setAnimateDir] = useState(0);
+  const [date, setDate] = useState(4);
   const length = useMemo(() => indexes.length, [indexes]);
 
   useEffect(() => {
@@ -32,6 +33,18 @@ function Carousel({
     }
   }, [currentLoc, length]);
 
+  useEffect(() => {
+    const today = new Date();
+    if (today.getDate() === 26) {
+      setDate(1);
+    } else if (today.getDate() === 27) {
+      setDate(2);
+    } else if (today.getDate() === 28) {
+      setDate(3);
+    } else if (today.getDate() === 29) {
+      setDate(4);
+    }
+  }, []);
   // console.log(i.toString(16));
   // console.log(parseInt(i.toString(16), 16));
 
@@ -43,15 +56,15 @@ function Carousel({
           index === indexes[currentLoc] && (
           <S.Box itemWidth={width * 0.7} key={i}>
             {isLoading && <S.Skeleton>LOADING...</S.Skeleton>}
-            <MapInteractionCSS>
+            {/* <MapInteractionCSS> */}
 
-              <S.Image
-                isLoading={isLoading}
-                onLoad={() => setIsLoading(false)}
-                src={`https://snufestival-e9a04.web.app/images/handwriting/writings/${sectorNum}${index.toString(16)}.png`}
-              />
+            <S.Image
+              isLoading={isLoading}
+              onLoad={() => setIsLoading(false)}
+              src={`https://snufestival-e9a04.web.app/images/places/${sectorNum}${date}${index}.jpg`}
+            />
 
-            </MapInteractionCSS>
+            {/* </MapInteractionCSS> */}
           </S.Box>
           )
         ))}

@@ -5,13 +5,18 @@ export const MapContainer = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
+  background-image: linear-gradient(to top, 
+    ${({ theme }) => theme.palette.PLACE_MINT1}, 
+    ${({ theme }) => theme.palette.PLACE_MINT2} 50%, 
+    ${({ theme }) => theme.palette.PLACE_MINT1} 100%);
 `;
 
 export const Map = styled.img`
   position: absolute;
-  ${props => props.top && css`top: ${props.top}px`};
-  width: 100%;
-  height: 100%;
+  left: 0;
+  top: 0;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   object-fit: cover;
 `;
 

@@ -7,7 +7,7 @@ export const StyledFullScreen = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   
   width: 0;
   height: 0;

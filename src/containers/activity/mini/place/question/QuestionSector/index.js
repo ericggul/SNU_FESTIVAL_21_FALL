@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QuestionBox from '@C/activity/mini/handwriting/question/QuestionBox';
+import QuestionBox from '@C/activity/mini/place/question/QuestionBox';
 import * as S from './styles';
 
 function QuestionSector({ sectorNum }) {
