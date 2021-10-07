@@ -6,7 +6,6 @@ import Map from '@C/activity/mini/handwriting/Map';
 import QuestionSector from '@C/activity/mini/handwriting/question/QuestionSector';
 import PropTypes from 'prop-types';
 import { COLLEGES } from '@C/activity/mini/handwriting/data.js';
-
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useUser } from '@U/hooks/useAuth';

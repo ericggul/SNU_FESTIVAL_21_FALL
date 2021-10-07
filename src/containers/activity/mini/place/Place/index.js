@@ -1,9 +1,12 @@
 import React, {
   useCallback, useState, useEffect, useMemo,
 } from 'react';
+import { useUser } from '@U/hooks/useAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import useMiniGame from '@U/hooks/useMiniGame';
+import withUser from '@U/hoc/withUser';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
-import { CONVERTED_PLACES } from '@C/activity/mini/place/data.js';
 import Map from '@C/activity/mini/place/Map';
 import FullScreen from '@F/full-screen/PlaceFullScreen';
 import QuestionSector from '@C/activity/mini/place/question/QuestionSector';
@@ -11,9 +14,12 @@ import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function Place({ theme }) {
+  const { user, isAuthorized } = useUser();
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [sectorNum, setSectorNum] = useState(-1);
-  const [solvedArray, setSolvedArray] = useState([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+  // const [solvedArray, setSolvedArray] = useState([0, 1, 0, 0, 0, 0, 0, 0, 0]);
+
+  let places = useSelector(state => state.miniGame.place);
 
   const handleClick = useCallback((i) => {
     setSectorNum(i);
@@ -25,7 +31,7 @@ function Place({ theme }) {
         서울대 장소 찾기
       </HeaderContent>
       <S.Container isMobile={isMobile}>
-        <Map solvedArray={solvedArray} handleClick={handleClick} />
+        <Map solvedArray={places} handleClick={handleClick} />
       </S.Container>
       <FullScreen
         isFullScreen={sectorNum !== -1}
@@ -37,7 +43,7 @@ function Place({ theme }) {
     </S.StyledPlace>
   );
 }
-export default withTheme(Place);
+export default withTheme(withUser(Place));
 
 Place.propTypes = {
 

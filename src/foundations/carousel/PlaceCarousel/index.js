@@ -2,25 +2,18 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
-import Skeleton from '@I/skeleton/skeleton.png';
 import { withTheme } from 'styled-components';
-import { MapInteractionCSS } from 'react-map-interaction';
 
 import * as S from './styles';
 
 function Carousel({
-  theme, width, sectorNum, indexes, emitCurrentIndex,
+  theme, width, sectorNum, indexes,
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
   const [animateDir, setAnimateDir] = useState(0);
   const [date, setDate] = useState(4);
   const length = useMemo(() => indexes.length, [indexes]);
-
-  useEffect(() => {
-    emitCurrentIndex(indexes[currentLoc]);
-  }, [currentLoc, emitCurrentIndex]);
 
   const handleClick = useCallback((direction) => {
     setIsLoading(true);
@@ -45,8 +38,6 @@ function Carousel({
       setDate(4);
     }
   }, []);
-  // console.log(i.toString(16));
-  // console.log(parseInt(i.toString(16), 16));
 
   return (
     <S.Wrapper width={width}>
@@ -76,9 +67,5 @@ function Carousel({
 export default withTheme(Carousel);
 
 Carousel.propTypes = {
-  emitCurrentIndex: PropTypes.func,
-};
 
-Carousel.defaultProps = {
-  emitCurrentIndex: () => {},
 };

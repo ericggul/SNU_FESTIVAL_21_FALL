@@ -2,15 +2,12 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
-import Skeleton from '@I/skeleton/skeleton.png';
-import { withTheme } from 'styled-components';
 import { MapInteractionCSS } from 'react-map-interaction';
 
 import * as S from './styles';
 
 function Carousel({
-  theme, width, sectorNum, indexes, emitCurrentIndex,
+  width, sectorNum, indexes, emitCurrentIndex,
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
@@ -31,9 +28,6 @@ function Carousel({
       setAnimateDir(-1);
     }
   }, [currentLoc, length]);
-
-  // console.log(i.toString(16));
-  // console.log(parseInt(i.toString(16), 16));
 
   return (
     <S.Wrapper width={width}>
@@ -60,7 +54,7 @@ function Carousel({
     </S.Wrapper>
   );
 }
-export default withTheme(Carousel);
+export default Carousel;
 
 Carousel.propTypes = {
   emitCurrentIndex: PropTypes.func,

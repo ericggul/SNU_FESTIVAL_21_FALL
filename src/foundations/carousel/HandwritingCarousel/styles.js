@@ -41,8 +41,8 @@ export const Box = styled.div`
   height: ${props => props.itemWidth}px;
   ${FlexCenterStyle};
   border-radius: 20px;
-  border: 0.4px solid white;
-  box-shadow: 0 0 0.8rem rgba(255,255,255,0.5);
+  // border: 0.4px solid white;
+  box-shadow: inset 0 0 0.8rem rgba(255,255,255,0.5);
   position: relative;
 
   transform: perspective(100px);

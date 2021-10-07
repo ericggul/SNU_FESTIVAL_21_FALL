@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledPlace = styled.div`
-  height: ${({ theme }) => theme.windowHeight}px;
+  min-height: ${({ theme }) => theme.windowHeight}px;
   width: ${({ theme }) => theme.windowWidth}px;
+  overflow-y: hidden;
 
   background-image: linear-gradient(to top, 
     ${({ theme }) => theme.palette.PLACE_MINT1}, 

@@ -5,10 +5,7 @@ export const MapContainer = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  background-image: linear-gradient(to top, 
-    ${({ theme }) => theme.palette.PLACE_MINT1}, 
-    ${({ theme }) => theme.palette.PLACE_MINT2} 50%, 
-    ${({ theme }) => theme.palette.PLACE_MINT1} 100%);
+
 `;
 
 export const Map = styled.img`

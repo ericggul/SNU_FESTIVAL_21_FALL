@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import Search from '@C/fortune/Search';
 import { toast } from 'react-toastify';
-import Text from '@C/fortune/FortuneText';
+
 import CookieImage from '@I/fortune/Fortune.png';
 import SearchLogo from '@I/fortune/Search.svg';
 import useInput from '@U/hooks/useInput';
