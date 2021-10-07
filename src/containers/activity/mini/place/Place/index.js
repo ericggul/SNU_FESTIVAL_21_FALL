@@ -32,7 +32,7 @@ function Place({ theme }) {
         onCloseFullScreen={() => setSectorNum(-1)}
         headerName="어디일까요?"
       >
-        <QuestionSector sectorNum={sectorNum} />
+        <QuestionSector sectorNum={sectorNum} setSectorNum={setSectorNum} />
       </FullScreen>
     </S.StyledPlace>
   );

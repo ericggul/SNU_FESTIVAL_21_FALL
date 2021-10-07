@@ -112,7 +112,6 @@ export function QuestionBox({
   }, []);
   return (
     <>
-      <ConfettiRightorWrong tf={lastAttemptRight} />
       <S.Content>
         <S.SliderContent>
           <DiscreteCarousel

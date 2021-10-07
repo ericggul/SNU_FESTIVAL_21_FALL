@@ -47,6 +47,12 @@ export const palette = {
   HANDWRITING_INPUT: '#719dde',
   HANDWRITING_HANDLE: '#5381c5',
 
+  // 포츈쿠키
+  FORTUNE_BLUE: '#1A73E8',
+  FORTUNE_RED: '#EA4335',
+  FORTUNE_YELLOW: '#FBBC05',
+  FORTUNE_GREEN: '#34A853',
+
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',

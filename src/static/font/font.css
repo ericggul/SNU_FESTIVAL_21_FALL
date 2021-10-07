@@ -47,6 +47,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./Product-Sans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Product Sans';
+  src: url('./Product-Sans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 
 /* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
  */
