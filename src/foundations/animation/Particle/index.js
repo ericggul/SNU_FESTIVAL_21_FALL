@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Particles from 'react-particles-js';
 import * as S from './styles';
 
 function Particle({ theme }) {
+  const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   return (
     <S.StyledParticle>
       <Particles
@@ -13,10 +14,10 @@ function Particle({ theme }) {
         params={{
           particles: {
             number: {
-              value: 600,
+              value: isMobile ? 1000 : 600,
               density: {
                 enable: true,
-                value_area: 1500,
+                value_area: 1400,
               },
             },
             line_linked: {
@@ -38,7 +39,7 @@ function Particle({ theme }) {
               },
             },
             size: {
-              value: 1,
+              value: isMobile ? 0.5 : 1,
             },
             color: {
               value: '#ffffff',

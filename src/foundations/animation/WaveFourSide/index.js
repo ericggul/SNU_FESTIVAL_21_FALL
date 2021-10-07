@@ -9,7 +9,7 @@ export default function WaveCanvas() {
     <div
       id="CanvasWrapper"
       style={{
-        position: 'absolute', width: '100vw', height: '100vh', background: 'black',
+        position: 'absolute', width: '100vw', height: '100vh', background: '#14122D',
       }}
     />
   );
@@ -45,14 +45,10 @@ class App {
 }
 
 class CirclePoint {
-  constructor(width, height, theta, initialRadius, r, speed) {
+  constructor(width, height, r) {
     this.width = width;
     this.height = height;
-
-    this.theta = theta;
-    this.initialRadius = initialRadius;
     this.r = r;
-    this.speed = speed;
     this.init();
   }
 
@@ -63,32 +59,25 @@ class CirclePoint {
 }
 
 class Wheel {
-  constructor(width, height, color, pointRadius) {
+  constructor(width, height, color) {
     this.width = width;
     this.height = height;
 
     this.color = color;
     this.points = [];
     this.totalPoints = 8;
-    this.initialRadius = getRandom(300, 800);
-    this.pointRadius = this.width < 700 ? 200 : 350;
-    this.radSpeed = getRandom(0.5, 3);
+    this.pointRadius = this.width < 700 ? 150 : 350;
     this.init();
   }
 
   init() {
     this.points = [];
-    this.deltaT = (2 * Math.PI) / this.totalPoints;
 
     for (let i = 0; i < this.totalPoints; i += 1) {
       this.points.push(new CirclePoint(
         this.width,
         this.height,
-
-        this.deltaT * i,
-        this.initialRadius,
         this.pointRadius,
-        this.radSpeed,
       ));
     }
   }
@@ -119,7 +108,7 @@ class WheelSets {
   constructor(stageWidth, stageHeight) {
     this.width = stageWidth;
     this.height = stageHeight;
-    this.totalWheels = this.width > 768 ? 10 : 7;
+    this.totalWheels = this.width > 768 ? 10 : 8;
     this.wheels = [];
     this.init();
   }
@@ -131,7 +120,6 @@ class WheelSets {
       this.wheels.push(new Wheel(
         this.width, this.height,
         { r: getRandom(20, 50), g: getRandom(18, 36), b: getRandom(45, 101) },
-        this.width > 768 ? 150 : 80,
       ));
     }
   }
