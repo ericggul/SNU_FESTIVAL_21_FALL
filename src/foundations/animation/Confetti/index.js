@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import ConfettiGenerator from 'confetti-js';
 import * as S from './styles';
 
-function Confetti({ theme, svgs, max }) {
+function Confetti({
+  theme, svgs, max, zIndex = 0,
+}) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ function Confetti({ theme, svgs, max }) {
   }, [theme.windowHeight, theme.windowWidth, svgs, isMobile, max]);
 
   return (
-    <canvas id="confetti-canvas" />
+    <canvas id="confetti-canvas" style={{ position: 'absolute', zIndex }} />
   );
 }
 export default withTheme(Confetti);

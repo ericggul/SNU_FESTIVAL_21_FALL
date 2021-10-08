@@ -21,6 +21,14 @@ export const Object = styled.img`
   ${props => props.top && css`top: ${props.top}px`};
   ${props => props.left && css`left: ${props.left}px`};
   ${props => props.width && css`width: ${props.width}px`};
+
+  @keyframes jump{
+    97%{ transform: translateY(0)};
+    99%{transform: translateY(-5px)};
+    100%{transform: translateY(0)};
+  }
+
+  animation: jump ${props => props.jump}s infinite;
 `;
 
 export const Building = styled.img`

@@ -1,8 +1,10 @@
 import {
   all, call, put, takeLeading,
 } from 'redux-saga/effects';
-import { fetchMiniGameFromFirestore, setStageInFirestore } from '@/redux/mini-game/api';
 import { toast } from 'react-toastify';
+import {
+  fetchMiniGameFromFirestore, setPlaceInFirestore, setHandwritingInFirestore, setStageInFirestore,
+} from '@/redux/mini-game/api';
 import { actions, types } from './state';
 
 export function* fetchMiniGame(action) {
@@ -10,6 +12,24 @@ export function* fetchMiniGame(action) {
     const stages = yield call(fetchMiniGameFromFirestore, action.user);
     if (stages) yield put(actions.setMiniGame(stages));
     yield put(actions.setLoaded(true));
+  } catch {
+    toast('인터넷이 불안정합니다. 다시 시도해주세요.');
+  }
+}
+
+export function* setFirestorePlace(action) {
+  try {
+    yield call(setPlaceInFirestore, action.user, action.places);
+    yield put(actions.setPlace(action.places));
+  } catch {
+    toast('인터넷이 불안정합니다. 다시 시도해주세요.');
+  }
+}
+
+export function* setFirestoreHandwriting(action) {
+  try {
+    yield call(setHandwritingInFirestore, action.user, action.handwritings);
+    yield put(actions.setHandwriting(action.handwritings));
   } catch {
     toast('인터넷이 불안정합니다. 다시 시도해주세요.');
   }
@@ -27,6 +47,8 @@ export function* setFirestoreStage(action) {
 export default function* () {
   yield all([
     takeLeading(types.FETCH_MINI_GAME, fetchMiniGame),
+    takeLeading(types.SET_FIRESTORE_PLACE, setFirestorePlace),
+    takeLeading(types.SET_FIRESTORE_HANDWRITING, setFirestoreHandwriting),
     takeLeading(types.SET_FIRESTORE_STAGE, setFirestoreStage),
   ]);
 }

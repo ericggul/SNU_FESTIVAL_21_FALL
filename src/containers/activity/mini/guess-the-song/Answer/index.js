@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
-import { actions } from '@/redux/mini-game/state';
 import useMiniGame from '@U/hooks/useMiniGame';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { sha256 } from 'js-sha256';
+import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 const answers = [

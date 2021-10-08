@@ -8,7 +8,9 @@ export default function WaveCanvas() {
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '70vh', background: 'black' }}
+      style={{
+        position: 'absolute', width: '100vw', height: '100vh', background: '#14122D',
+      }}
     />
   );
 }
@@ -22,12 +24,8 @@ class App {
     this.wrapper = document.getElementById('CanvasWrapper');
     this.wrapper.appendChild(this.canvas);
 
-    const isMobile = document.body.clientWidth < 768;
-
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
-
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   resize() {
@@ -41,70 +39,45 @@ class App {
     // this.ctx.globalCompositeOperation = 'color-burn';
     this.ctx.globalCompositeOperation = 'saturation';
     this.ctx.scale(1, 1);
-  }
 
-  animate() {
-    this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
-    // this.ctx.fillStyle = 'black';
-    // this.ctx.fillRect(0, 0, this.stageWidth, this.stageHeight);
-    this.wheelSets.animate(this.ctx);
-
-    requestAnimationFrame(this.animate.bind(this));
+    this.wheelSets.draw(this.ctx);
   }
 }
 
 class CirclePoint {
-  constructor(x, y, theta, thetaSpeed, initialRadius, r, speed) {
-    this.x = x;
-    this.y = y;
-    this.theta = theta;
-    this.thetaSpeed = thetaSpeed;
-    this.initialRadius = initialRadius;
+  constructor(width, height, r) {
+    this.width = width;
+    this.height = height;
     this.r = r;
-    this.speed = speed;
     this.init();
   }
 
   init() {
-    this.x += this.initialRadius * Math.cos(this.theta);
-    this.y += this.initialRadius * Math.sin(this.theta);
-  }
-
-  update() {
-    this.theta += this.thetaSpeed;
-    // this.r += this.speed * 0.01;
-    this.x += this.speed * Math.cos(this.theta);
-    this.y += this.speed * Math.sin(this.theta);
+    this.x = getRandom(0, this.width);
+    this.y = getRandom(0, this.height);
   }
 }
 
 class Wheel {
-  constructor(x, y, color) {
-    this.x = x;
-    this.y = y;
+  constructor(width, height, color) {
+    this.width = width;
+    this.height = height;
+
     this.color = color;
     this.points = [];
-    this.totalPoints = 15;
-    this.initialRadius = getRandom(300, 400);
-    this.pointRadius = 170;
-    this.thetaSpeed = getRandom(0.01, 0.02);
-    this.radSpeed = this.thetaSpeed * 20;
+    this.totalPoints = 8;
+    this.pointRadius = this.width < 700 ? 120 : 350;
     this.init();
   }
 
   init() {
     this.points = [];
-    this.deltaT = (2 * Math.PI) / this.totalPoints;
 
     for (let i = 0; i < this.totalPoints; i += 1) {
       this.points.push(new CirclePoint(
-        this.x,
-        this.y,
-        this.deltaT * i,
-        this.thetaSpeed,
-        this.initialRadius,
+        this.width,
+        this.height,
         this.pointRadius,
-        this.radSpeed,
       ));
     }
   }
@@ -112,11 +85,7 @@ class Wheel {
   draw(ctx) {
     for (let i = 0; i < this.points.length; i += 1) {
       ctx.beginPath();
-
-      this.points[i].update();
-
       ctx.arc(this.points[i].x, this.points[i].y, this.points[i].r, 0, Math.PI * 2, false);
-
       const g = ctx.createRadialGradient(
         this.points[i].x,
         this.points[i].y,
@@ -125,7 +94,6 @@ class Wheel {
         this.points[i].y,
         this.points[i].r,
       );
-
       g.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0.5)`);
       g.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
       ctx.fillStyle = g;
@@ -140,24 +108,22 @@ class WheelSets {
   constructor(stageWidth, stageHeight) {
     this.width = stageWidth;
     this.height = stageHeight;
-    this.totalWheels = 40;
+    this.totalWheels = 10;
     this.wheels = [];
     this.init();
   }
 
   init() {
     this.wheels = [];
-    const colorSet = [{r: 33, g: 21, b: 73}, {r: 36, g: 26, b: 87}];
     for (let i = 0; i < this.totalWheels; i += 1) {
       this.wheels.push(new Wheel(
-        getRandom(0, this.width), getRandom(0, this.height), 
-        // { r: getRandom(33, 36), g: getRandom(21, 26), b: getRandom(73, 87) },
-        { r: getRandom(20, 36), g: getRandom(18, 26), b: getRandom(45, 87) },
+        this.width, this.height,
+        { r: getRandom(20, 55), g: getRandom(18, 40), b: getRandom(45, 110) },
       ));
     }
   }
 
-  animate(ctx) {
+  draw(ctx) {
     for (let i = 0; i < this.totalWheels; i += 1) {
       this.wheels[i].draw(ctx);
     }
