@@ -26,10 +26,6 @@ function Handwriting({ theme }) {
 
   const [sectorNum, setSectorNum] = useState(-1);
   const handleClick = useCallback((i) => {
-    if (!isAuthorized) {
-      setIsSignInModalOpen(true);
-      return;
-    }
     setSectorNum(i);
   }, [isAuthorized]);
 

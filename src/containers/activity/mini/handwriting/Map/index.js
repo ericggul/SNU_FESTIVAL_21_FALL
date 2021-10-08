@@ -13,6 +13,8 @@ import Object5 from '@I/activity/handwriting/object5.png';
 
 import * as S from './styles';
 
+export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
+
 function Map({ theme, handleClick, solvedRates }) {
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
@@ -62,7 +64,10 @@ function Map({ theme, handleClick, solvedRates }) {
   ];
 
   return (
-    <S.MapContainer width={convert(375)} height={convert(1048)}>
+    <S.MapContainer
+      width={convert(375)}
+      height={convert(1048)}
+    >
       <S.Image src={RoadImage} />
       <S.Object src={Object1} left={convert(153)} top={convert(498)} width={convert(45)} jump={getRandom(3, 10)} />
       <S.Object src={Object1} left={convert(276)} top={convert(338)} width={convert(33)} jump={getRandom(3, 10)} />

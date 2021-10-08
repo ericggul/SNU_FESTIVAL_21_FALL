@@ -12,7 +12,8 @@ export const Content = styled.div`
   min-width: 0;
   overflow: hidden;
   height: 100%;
-  
+  margin: 0;
+  margin-top: ${({ theme }) => theme.windowHeight * 0.1}px;
 `;
 
 export const SliderContent = styled.div`
@@ -31,10 +32,10 @@ export const Description = styled.div`
 
 export const Answer = styled.div`
   ${FlexCenterStyle};
+  flex-direction: column;
   position: relative;
   align-items: center;
   width: ${props => props.width}px;
-  height: 2.3rem;
   margin: 1rem;
   z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
@@ -59,13 +60,17 @@ export const InputBox = styled.input`
 `;
 
 export const Image = styled.img`
-  position: absolute;
-  left: 0;
-  right: 0;
   ${props => props.width && css`width: ${props.width}px`};
   top: 3rem;
   margin: auto;
   height: auto;
   object-fit: cover;
-  
+  cursor: pointer;
+`;
+
+export const RioDescription = styled.div`
+  text-align: center;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 300;
 `;

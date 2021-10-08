@@ -34,15 +34,18 @@ function Map({ theme, solvedArray, handleClick }) {
     <S.MapContainer width={convert(375)} height={convert(375)}>
       <S.Map src={MapImage} left={0} top={0} width={convert(375)} height={convert(375)} />
       {solvedArray.map((solved, i) => (
-        <S.Pointer
-          key={i}
-          src={solved === 0 ? DefaultPointer : DiscoveredPointer}
-          animate={solved === 0}
-          left={solved !== 0 ? convert(POS_DATA[i].x - 6) : convert(POS_DATA[i].x - 6 + getRandom(-40, 40))}
-          top={solved !== 0 ? convert(POS_DATA[i].y - 250) : convert(POS_DATA[i].y - 250 + getRandom(-20, 20))}
-          width={convert(30)}
-          onClick={() => handleClick(i)}
-        />
+        <S.PointerWrapper delay={0.9 + i * 0.02}>
+          <S.Pointer
+            key={i}
+            src={solved === 0 ? DefaultPointer : DiscoveredPointer}
+            animate={solved === 0}
+            left={solved !== 0 ? convert(POS_DATA[i].x - 6) : convert(POS_DATA[i].x - 6 + getRandom(-40, 40))}
+            top={solved !== 0 ? convert(POS_DATA[i].y - 250) : convert(POS_DATA[i].y - 250 + getRandom(-20, 20))}
+            width={convert(30)}
+            onClick={() => handleClick(i)}
+          />
+        </S.PointerWrapper>
+
       ))}
 
       <S.Image src={NeurtralRio} top={convert(185)} width={convert(136)} height={convert(136)} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useUser } from '@U/hooks/useAuth';
 import withUser from '@U/hoc/withUser';
@@ -8,18 +8,22 @@ import * as S from './styles';
 
 function QuestionSector({ sectorNum, setSectorNum }) {
   const { user, isAuthorized } = useUser();
+  const [tf, setTf] = useState(0);
 
   const changeTF = (val) => {
     if (val) {
+      setTf(1);
       setTimeout(() => {
         setSectorNum(-1);
       }, 3000);
+    } else {
+      setTf(-1);
     }
   };
 
   return (
     <S.StyledQuestionSector>
-      <ConfettiRightorWrong tf={-1} />
+      <ConfettiRightorWrong tf={tf} />
       <QuestionBox
         sectorNum={sectorNum}
         changeTF={changeTF}

@@ -14,10 +14,8 @@ import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function Place({ theme }) {
-  const { user, isAuthorized } = useUser();
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [sectorNum, setSectorNum] = useState(-1);
-  // const [solvedArray, setSolvedArray] = useState([0, 1, 0, 0, 0, 0, 0, 0, 0]);
 
   let places = useSelector(state => state.miniGame.place);
 

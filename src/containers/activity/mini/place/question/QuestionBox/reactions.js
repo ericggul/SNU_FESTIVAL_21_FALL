@@ -23,10 +23,13 @@ export const speakRightorWrong = (tf) => {
 
 export function ConfettiRightorWrong({ tf, isMobile }) {
   let source;
+
   if (tf === 1) {
     source = RightRio;
   } else if (tf === -1) {
     source = WrongRio;
+  } else if (tf === 0) {
+    source = NeutralRio;
   }
   return (
     <Confetti
