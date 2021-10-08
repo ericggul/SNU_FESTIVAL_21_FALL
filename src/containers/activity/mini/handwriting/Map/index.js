@@ -1,4 +1,6 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, {
+  useEffect, useState, useMemo, useCallback,
+} from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -11,10 +13,22 @@ import Object5 from '@I/activity/handwriting/object5.png';
 
 import * as S from './styles';
 
-function Map({ theme, handleClick }) {
+function Map({ theme, handleClick, solvedRates }) {
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-  const [currentSolved, setCurrentSolved] = useState(Array(10).fill(0));
+
+  const rateToLevelConverter = useCallback((rates) => {
+    let result = [];
+    for (let i = 0; i < solvedRates.length; i += 1) {
+      result[i] = Math.floor(rates[i] * 4);
+    }
+    return result;
+  }, []);
+  const [currentSolved, setCurrentSolved] = useState(rateToLevelConverter(solvedRates));
+  useEffect(() => {
+    setCurrentSolved(rateToLevelConverter(solvedRates));
+  }, [solvedRates]);
+  console.log('currentSolved', currentSolved);
 
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
@@ -35,16 +49,16 @@ function Map({ theme, handleClick }) {
   ];
 
   const CORRESPONDENCE = [
-    [0, 0], //
-    [1, 1], //
-    [2, 9], //
-    [3, 8],
-    [4, 5],
+    [2, 0],
+    [0, 1],
     [5, 2],
     [6, 3],
-    [7, 6],
     [8, 4],
+    [4, 5],
+    [7, 6],
     [9, 7],
+    [3, 8],
+    [1, 9],
   ];
 
   return (
@@ -66,11 +80,11 @@ function Map({ theme, handleClick }) {
       {currentSolved.map((e, i) => (
         <S.Building
           key={i}
-          src={`https://snufestival-e9a04.web.app/images/handwriting/buildings/${i + 1}-${e}.png`}
-          left={convert(POS_DATA[i].x)}
-          top={convert(POS_DATA[i].y)}
+          src={`https://snufestival-e9a04.web.app/images/handwriting/buildings/${CORRESPONDENCE[i][0] + 1}-${e}.png`}
+          left={convert(POS_DATA[CORRESPONDENCE[i][0]].x)}
+          top={convert(POS_DATA[CORRESPONDENCE[i][0]].y)}
           width={convert(150)}
-          onClick={() => handleClick(CORRESPONDENCE[i][1])}
+          onClick={() => handleClick(i)}
         />
       ))}
       <S.Object src={Object3} left={convert(256)} top={convert(928)} width={convert(60)} />

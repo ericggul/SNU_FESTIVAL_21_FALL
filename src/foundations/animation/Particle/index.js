@@ -14,7 +14,7 @@ function Particle({ theme }) {
         params={{
           particles: {
             number: {
-              value: isMobile ? 1000 : 600,
+              value: isMobile ? 1100 : 600,
               density: {
                 enable: true,
                 value_area: 1400,

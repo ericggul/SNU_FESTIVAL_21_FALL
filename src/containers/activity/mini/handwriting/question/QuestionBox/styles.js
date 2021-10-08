@@ -19,6 +19,7 @@ export const SliderContent = styled.div`
   width: 100%;
   overflow: hidden;
   margin: 2rem 0;
+  ${({ theme }) => theme.windowWidth > 768 && 'margin: 0.5rem 0;'}
   ${FlexCenterStyle};
   z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
@@ -29,6 +30,7 @@ export const Answer = styled.div`
   width: ${props => props.width}px;
   height: 2.3rem;
   margin: 2rem;
+  ${({ theme }) => theme.windowWidth > 768 && 'margin: 1rem;'}
   z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
 

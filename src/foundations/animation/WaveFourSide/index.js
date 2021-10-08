@@ -66,7 +66,7 @@ class Wheel {
     this.color = color;
     this.points = [];
     this.totalPoints = 8;
-    this.pointRadius = this.width < 700 ? 150 : 350;
+    this.pointRadius = this.width < 700 ? 120 : 350;
     this.init();
   }
 
@@ -108,18 +108,17 @@ class WheelSets {
   constructor(stageWidth, stageHeight) {
     this.width = stageWidth;
     this.height = stageHeight;
-    this.totalWheels = this.width > 768 ? 10 : 8;
+    this.totalWheels = 10;
     this.wheels = [];
     this.init();
   }
 
   init() {
     this.wheels = [];
-    const colorSet = [{ r: 33, g: 21, b: 73 }, { r: 36, g: 26, b: 87 }];
     for (let i = 0; i < this.totalWheels; i += 1) {
       this.wheels.push(new Wheel(
         this.width, this.height,
-        { r: getRandom(20, 50), g: getRandom(18, 36), b: getRandom(45, 101) },
+        { r: getRandom(20, 55), g: getRandom(18, 40), b: getRandom(45, 110) },
       ));
     }
   }

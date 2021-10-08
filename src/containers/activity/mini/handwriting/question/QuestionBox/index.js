@@ -10,13 +10,11 @@ import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
-import { MAJORS, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import { CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
 
 import { withTheme } from 'styled-components';
 
-import DummyOne from '@I/activity/handwriting/question/dummy1.png';
-import DummyTwo from '@I/activity/handwriting/question/dummy2.png';
-import DummyThree from '@I/activity/handwriting/question/dummy3.png';
+import Indicator from '@C/activity/mini/handwriting/question/Indicator';
 
 import { useUser } from '@U/hooks/useAuth';
 import useMiniGame from '@U/hooks/useMiniGame';
@@ -33,42 +31,61 @@ export function QuestionBox({
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const { value, onChange, setValue } = useInput('');
+
+  const solvedArrayConverter = useCallback((inputString, totalLength) => {
+    console.log('array converter');
+    let array = [];
+    let solvedIndexesStorage = [];
+    let unSolvedIndexesStorage = [];
+    for (let idx = 0; idx < totalLength; idx += 1) {
+      if (idx < inputString.length) {
+        array[idx] = parseInt(inputString[inputString.length - 1 - idx], 10);
+        if (array[idx] == 1) {
+          solvedIndexesStorage.push(idx);
+        } else {
+          unSolvedIndexesStorage.push(idx);
+        }
+      } else {
+        array[idx] = 0;
+        unSolvedIndexesStorage.push(idx);
+      }
+    }
+    return [array, solvedIndexesStorage, unSolvedIndexesStorage];
+  }, []);
+
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
   const dispatch = useDispatch();
-
-  console.log(handwritingArray);
+  const [solvedIndicatorArray, solvedStorage, unSolvedStorage] = useMemo(() => solvedArrayConverter(handwritingArray[sectorNum].toString(2), CONVERTED_MAJORS[sectorNum].length), [handwritingArray]);
+  console.log('handwriting', handwritingArray);
+  console.log('solved', solvedIndicatorArray, solvedStorage, unSolvedStorage);
 
   // useEffect(() => {
   //   dispatch(actions.reset());
   // }, []);
 
-  const incrementArrayConverter = useCallback((length) => {
-    let array = [];
-    for (let i = 0; i < length; i += 1) {
-      array[i] = i;
-    }
-    return array;
-  }, []);
   // Unsolved problems: indexes --> Currently temporary implementation
-  const [indexes, setIndexes] = useState(incrementArrayConverter(CONVERTED_MAJORS[sectorNum].length));
-  // const [unsolvedIndexes, setUnsolvedIndexes] = useState();
-  // useEffect(()=>{
-  //   let result;
-  //   const sectorBinary = handwritingArray[sectorNum].toString(2);
-
-  // }, []);
-  const shuffledIndexes = useMemo(() => shuffleArray(indexes), [indexes]);
+  const shuffledIndexes = useMemo(() => shuffleArray(unSolvedStorage), [unSolvedStorage]);
+  console.log('shuffledindex:', shuffledIndexes);
+  // Real Location
   const [currentLoc, setCurrentLoc] = useState(shuffledIndexes[0]);
+  // Shuffled Location
+  const [currentShuffledLoc, setCurrentShuffledLoc] = useState(0);
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+
+  const [shouldChangeLoc, setShouldChangeLoc] = useState(false);
+  // useEffect(() => {
+  //   console.log('shuffled index change!');
+  //   setShouldChangeLoc(true);
+  // }, [shuffledIndexes]);
 
   const submit = () => {
     if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
       const sectorBinary = handwritingArray[sectorNum].toString(2);
       const unsubmitted = sectorBinary.length > currentLoc
-        ? sectorBinary[sectorBinary.length - 1 - currentLoc] : '0';
-
-      if (unsubmitted === '0') {
+        ? parseInt(sectorBinary[sectorBinary.length - 1 - currentLoc], 10) : 0;
+      if (unsubmitted == 0) {
+        toast('정답입니다🎉');
         clear();
       } else {
         toast('이미 클리어했습니다 ㅡ.ㅡ');
@@ -89,7 +106,6 @@ export function QuestionBox({
       console.log(newArray);
       dispatch(actions.setFirestoreHandwriting(user, newArray));
     } else {
-      toast('정답입니다🎉');
       setIsSignInModalOpen(true);
     }
   };
@@ -99,7 +115,10 @@ export function QuestionBox({
   }, [currentLoc]);
 
   const handleIndex = (i) => {
-    setCurrentLoc(i);
+    setCurrentLoc(shuffledIndexes[i]);
+    setCurrentShuffledLoc(i);
+    console.log(shuffledIndexes[i]);
+    console.log(i);
   };
 
   const handleKeyPress = (e) => {
@@ -114,11 +133,16 @@ export function QuestionBox({
   return (
     <>
       <S.Content>
+        <Indicator
+          solvedIndicatorArray={solvedIndicatorArray}
+          i={currentShuffledLoc}
+        />
         <S.SliderContent>
           <DiscreteCarousel
             sectorNum={sectorNum}
             indexes={shuffledIndexes}
-            width={Math.min(theme.windowWidth, theme.windowHeight * 0.8)}
+            width={Math.min(theme.windowWidth, theme.windowHeight * 0.75)}
+            shouldChangeLoc={shouldChangeLoc}
             emitCurrentIndex={handleIndex}
           />
         </S.SliderContent>

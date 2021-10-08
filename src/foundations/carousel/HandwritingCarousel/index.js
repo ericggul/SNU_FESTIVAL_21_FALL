@@ -7,7 +7,7 @@ import { MapInteractionCSS } from 'react-map-interaction';
 import * as S from './styles';
 
 function Carousel({
-  width, sectorNum, indexes, emitCurrentIndex,
+  width, sectorNum, indexes, shouldChangeLoc, emitCurrentIndex,
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
@@ -15,7 +15,12 @@ function Carousel({
   const length = useMemo(() => indexes.length, [indexes]);
 
   useEffect(() => {
-    emitCurrentIndex(indexes[currentLoc]);
+    console.log('index change detected');
+    setCurrentLoc(0);
+  }, [indexes]);
+
+  useEffect(() => {
+    emitCurrentIndex(currentLoc);
   }, [currentLoc, emitCurrentIndex]);
 
   const handleClick = useCallback((direction) => {

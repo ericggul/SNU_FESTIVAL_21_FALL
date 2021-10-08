@@ -12,7 +12,7 @@ export const COLLEGES = [
 ];
 
 export const MAJORS = [
-  ['국어국만학과', '중어중문학과', '영어영문학과', '불어불문학과', '독어독문학과', '노어노문학과',
+  ['국어국문학과', '중어중문학과', '영어영문학과', '불어불문학과', '독어독문학과', '노어노문학과',
     '서어서문학과', '아시아언어문명학부', '언어학과', '국사학과', '동양사학과', '서양사학과', '철학과',
     '종교학과', '미학과', '고고미술사학과'],
   ['정치외교학부', '경제학부', '사회학과', '인류학과', '심리학과', '지리학과', '사회복지학과', '언론정보학과'],
@@ -143,7 +143,7 @@ export const MAJOR_ZEROS = [
 // }
 export const CONVERTED_MAJORS = [
   [
-    '7eaf7d0aadc365fa859fe6a001fa0edf7fd27f82faf4e142c0ca49568c1cf8d9',
+    'b53ce08a5cdb22c06d3a83c922487f91675837dccb825dbeeea66a9c34f6ba33',
     '906169456d17b70eb78bdb2bd746e987e628beeb23efb9d1d5ae2ae87e3051a9',
     '61a4468b2c04aa704b7aeae6e10086ad8fd5054bdb113aaeded73b42351b6f57',
     '2d191090890e425c335e969090992fb61df5fed34afd2b0feb6ac1f34c6bee5d',
