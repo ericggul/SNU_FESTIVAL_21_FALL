@@ -34,7 +34,7 @@ function Map({ theme, solvedArray, handleClick }) {
     <S.MapContainer width={convert(375)} height={convert(375)}>
       <S.Map src={MapImage} left={0} top={0} width={convert(375)} height={convert(375)} />
       {solvedArray.map((solved, i) => (
-        <S.PointerWrapper delay={0.9 + i * 0.02}>
+        <S.PointerWrapper delay={0.9 + i * 0.02} key={i}>
           <S.Pointer
             key={i}
             src={solved === 0 ? DefaultPointer : DiscoveredPointer}

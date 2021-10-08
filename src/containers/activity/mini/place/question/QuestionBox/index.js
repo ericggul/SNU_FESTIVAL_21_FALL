@@ -51,16 +51,23 @@ export function QuestionBox({
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
-  const wrongArray = ['땡', '이것도 못풀어?', '메롱', '서울대생 맞아?'];
+  const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '서울대생 맞아? 🤔'];
+  let wrongTextArray = [];
+  for (let i = 0; i < 100; i += 1) {
+    const repeated = '다시 '.repeat(i + 1);
+    wrongTextArray.push(`${repeated}시도해보세요`);
+  }
+  const [wrongAttempt, setWrongAttempt] = useState(0);
   const submit = () => {
     if (sha256(value.toLowerCase()) === CONVERTED_PLACES[sectorNum]) {
-      toast('딩동댕!');
+      toast('딩동댕! 🛎 🛎️');
       clear();
       speakRightorWrong(true);
       setLastAttemptRight(1);
       changeTF(true);
     } else {
-      toast(getRandomElementFromArray(wrongArray));
+      setWrongAttempt(wr => wr + 1);
+      toast(getRandomElementFromArray(wrongToastArray));
       speakRightorWrong(false);
       setLastAttemptRight(-1);
       changeTF(false);
@@ -89,7 +96,7 @@ export function QuestionBox({
             // emitCurrentIndex={handleIndex}
           />
         </S.SliderContent>
-        <S.Description>{lastAttemptRight === 1 ? '정답입니다!' : (lastAttemptRight === 0 ? '어디일까요?' : '오답입니다.')}</S.Description>
+        <S.Description>{lastAttemptRight === 1 ? '정답입니다!' : (lastAttemptRight === 0 ? '어디일까요?' : wrongTextArray[wrongAttempt])}</S.Description>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
           <S.InputBox placeholder="백퍼 자하연 아님?" value={value} onChange={onChange} />
           {/* <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button> */}

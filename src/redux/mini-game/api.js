@@ -5,18 +5,15 @@ export function fetchMiniGameFromFirestore(user) {
 }
 
 export function setPlaceInFirestore(user, places) {
-  console.log('setPlaceInFirestore, api', places);
   miniGameCollectionRef.doc(user.uid).set({
     place: places,
   }, { merge: true }).then();
 }
 
 export function setHandwritingInFirestore(user, handwritings) {
-  console.log('setPlaceInFirestore, api', handwritings);
   miniGameCollectionRef.doc(user.uid).set({
     handwriting: handwritings,
   }, { merge: true }).then();
-  console.log('complete, api');
 }
 
 export function setStageInFirestore(user, stage, isCompleted) {

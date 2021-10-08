@@ -30,7 +30,7 @@ function Handwriting({ theme }) {
   }, [isAuthorized]);
 
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
-
+  console.log('hand', handwritingArray);
   const solvedArrayMultipleSectors = useCallback((handwritings) => {
     console.log(handwritings);
     const solvedNumberArray = [];

@@ -1,5 +1,4 @@
 import sessionStorage from 'redux-persist/lib/storage/session';
-import { MAJOR_ZEROS } from '@C/activity/mini/handwriting/data.js';
 import { createReducer, createSetValueAction, setValueReducer } from '@/redux/common/helper-functions';
 
 /** prefix */
