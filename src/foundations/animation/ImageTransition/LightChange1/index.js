@@ -5,18 +5,29 @@ import * as S from './styles';
 
 function getRandom(a, b) { return Math.random() * (b - a) + a; }
 
-function LightChange({image}) {
+function LightChange({
+  image, index = 0, reRender = true, backgroundColor = 'black',
+}) {
   useEffect(() => {
-    const render = new App(image);
+    if (reRender) {
+      const render = new App(image, index, backgroundColor);
+    }
+    return () => {
+      const render = new App(image, index, backgroundColor);
+    };
   }, []);
   return (
     <div
-      id="Wrapper"
-      style={{ width: '100%',
-       height: '100%', 
-       position: 'absolute', 
-       zIndex: '3',
-       background: `transparent`, }}
+      className="Wrapper"
+      style={{
+        borderRadius: '7%',
+        overflow: 'hidden',
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        zIndex: '3',
+        background: 'transparent',
+      }}
     />
   );
 }
@@ -25,9 +36,9 @@ export default LightChange;
 const BOUNCE = 0.82;
 
 class App {
-  constructor(image) {
+  constructor(image, index, backgroundColor) {
     this.canvas = document.createElement('canvas');
-    this.wrapper = document.getElementById('Wrapper');
+    this.wrapper = document.getElementsByClassName('Wrapper')[index];
     this.wrapper.appendChild(this.canvas);
 
     this.ctx = this.canvas.getContext('2d');
@@ -39,8 +50,8 @@ class App {
     this.wrapper.appendChild(this.tmpCanvas);
     this.tmpCtx = this.tmpCanvas.getContext('2d');
 
-    this.pixelRatio = 1
-    this.ripple = new Ripple();
+    this.pixelRatio = 1;
+    this.ripple = new Ripple(backgroundColor);
 
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
@@ -79,10 +90,8 @@ class App {
     this.tmpCanvas.width = this.stageWidth;
     this.tmpCanvas.height = this.stageHeight;
 
-    
-    
-    this.pixelSize = this.stageWidth<400 ? 6 : 12;
-    this.radius = this.stageWidth<400 ? 2 : 5;
+    this.pixelSize = this.stageWidth < 400 ? 10 : 12;
+    this.radius = this.stageWidth < 400 ? 5 : 5;
 
     this.ripple.resize(this.stageWidth, this.stageHeight);
     if (this.isLoaded) {
@@ -95,7 +104,6 @@ class App {
     const imgRatio = this.image.width / this.image.height;
     this.imgPos.width = this.stageWidth;
     this.imgPos.height = this.stageHeight;
-
 
     if (imgRatio < stageRatio) {
       this.imgPos.width = Math.round(
@@ -117,13 +125,11 @@ class App {
       this.imgPos.x = 0;
     }
 
-
     this.ctx.drawImage(
       this.image,
       0, 0, this.image.width, this.image.height,
       this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,
     );
-
 
     this.tmpCtx.drawImage(
       this.image,
@@ -132,7 +138,6 @@ class App {
     );
 
     this.imageData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
-    
   }
 
   drawDots() {
@@ -141,7 +146,6 @@ class App {
     this.columns = Math.ceil(this.imgPos.width / this.pixelSize);
     this.rows = Math.ceil(this.imgPos.height / this.pixelSize);
 
-
     for (let i = 0; i < this.rows; i += 1) {
       const y = (i + 0.5) * this.pixelSize;
       const pixelY = Math.max(Math.min(y, this.imgPos.height), 0) + this.imgPos.y;
@@ -149,7 +153,6 @@ class App {
         const x = (j + 0.5) * this.pixelSize;
         const pixelX = Math.max(Math.min(x, this.imgPos.width), 0) + this.imgPos.x;
 
- 
         const pixelIndex = (pixelX + pixelY * this.imgPos.width) * 4;
         const red = this.imageData.data[pixelIndex + 0];
         const green = this.imageData.data[pixelIndex + 1];
@@ -238,10 +241,10 @@ class Dot {
 
     this.time -= this.timeV;
     this.radiusV += accel;
-    this.radiusV *= 0.92;
+    this.radiusV *= 0.75;
     this.radius += this.radiusV;
-    this.radius *= Math.max(this.time, 0);
-    this.radius += 0.1;
+    // this.radius *= Math.max(this.time, 0);
+    // this.radius += 0.1;
 
     ctx.beginPath();
 
@@ -257,12 +260,13 @@ class Dot {
 }
 
 class Ripple {
-  constructor() {
+  constructor(backgroundColor) {
     this.x = 0;
     this.y = 0;
     this.radius = 0;
     this.maxRadius = 0;
-    this.speed = 10;
+    this.speed = 6;
+    this.background = backgroundColor;
   }
 
   resize(stageWidth, stageHeight) {
@@ -283,7 +287,7 @@ class Ripple {
     }
 
     ctx.beginPath();
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = this.background;
     ctx.arc(this.x, this.y, this.radius, Math.PI * 2, false);
     ctx.fill();
   }

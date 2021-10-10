@@ -9,20 +9,16 @@ export const StyledFullScreen = styled.div`
   overflow-y: scroll;
   
   background-color: ${props => props.backgroundColor};
-  width: 0;
-  height: 0;
-  border-radius: 100%;
-  
-  transform: scale(1.8);
-  transition: all 0.2s ease-out;
+  width: 100vw;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 1s cubic-bezier(0.42, 0, 1, 0.49);
 
   ${props => props.isFullScreen && css`
-    width: 100vw;
-    height: 100%;
-    border-radius: 0;
-    
-    transform: scale(1);
-    transition: width 0.5s ease-out, height 0.6s ease-out, border-radius 0.9s ease, transform 1s ease;
+    opacity: 1;
+    pointer-events: auto;
   `};
 `;
 

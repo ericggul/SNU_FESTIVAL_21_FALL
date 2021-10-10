@@ -51,7 +51,7 @@ export function QuestionBox({
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
-  const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '서울대생 맞아? 🤔'];
+  const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '학교 와본거 맞아? 🤔'];
   let wrongTextArray = [];
   for (let i = 0; i < 100; i += 1) {
     const repeated = '다시 '.repeat(i + 1);

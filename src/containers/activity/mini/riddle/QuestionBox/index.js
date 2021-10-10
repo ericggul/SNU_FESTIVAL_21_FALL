@@ -9,12 +9,12 @@ import { useUser } from '@U/hooks/useAuth';
 import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
-import { actions } from '@/redux/mini-game/state';
 import { useDispatch } from 'react-redux';
+import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints,
+  textImg, answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints,
 }) {
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
@@ -48,7 +48,7 @@ export function QuestionBox({
 
   const submit = () => {
     if (sha256(value.toLowerCase()) === answers[step]) {
-      if (step < 2) {
+      if (step < questions.length - 1) {
         toast('정답입니다🎉');
         goToNextStep();
       } else {
@@ -62,6 +62,7 @@ export function QuestionBox({
   return (
     <>
       <S.Content>
+        <S.TextImage src={textImg} />
         <S.Question className="QuestionImage">
           <S.Image src={questions[step]} alt="문제" />
         </S.Question>

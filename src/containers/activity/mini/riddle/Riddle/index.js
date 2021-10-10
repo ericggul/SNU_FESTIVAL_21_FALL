@@ -10,26 +10,37 @@ import WhiteOpening from '@I/activity/riddle/white/white-opening.png';
 import WhiteOpeningFont from '@I/activity/riddle/white/white-opening-font.png';
 import BlackOpening from '@I/activity/riddle/black/black-opening.png';
 import BlackOpeningFont from '@I/activity/riddle/black/black-opening-font.png';
+import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
 import FullScreen from '@/foundations/full-screen/FullScreen';
 
 import * as S from './styles';
 
 function Riddle({ theme }) {
   const [riddleTheme, setRiddleTheme] = useState(null);
-  const [backgroundTransit, setBakcgroundTransit] = useState(0);
+  const [backgroundTransit, setBakcgroundTransit] = useState(null);
 
-  console.log(backgroundTransit);
+  const handleClick = (type) => {
+    setBakcgroundTransit(type);
+    if (!type) {
+      setRiddleTheme(type);
+    }
+    setTimeout(() => {
+      setRiddleTheme(type);
+    }, 0);
+  };
+
   return (
     <S.StyledRiddle>
-      <HeaderContent backgroundColor={theme.palette.PASTELLIGHT_PURPLE}>미궁게임</HeaderContent>
+      <HeaderContent backgroundColor="transparent">미궁게임</HeaderContent>
       <S.Body background={backgroundTransit}>
+        <S.Background background={backgroundTransit} />
         <S.OpeningWrapper>
-          <S.Opening onClick={() => setRiddleTheme('White')} onMouseEnter={() => setBakcgroundTransit(1)}>
-            <S.Image src={WhiteOpening} />
+          <S.Opening onClick={() => handleClick('White')}>
+            <LightChange1 image={WhiteOpening} index={0} reRender={!riddleTheme} backgroundColor="white" />
             <S.Image src={WhiteOpeningFont} />
           </S.Opening>
-          <S.Opening onClick={() => setRiddleTheme('Black')} onMouseEnter={() => setBakcgroundTransit(-1)}>
-            <S.Image src={BlackOpening} />
+          <S.Opening onClick={() => handleClick('Black')}>
+            <LightChange1 image={BlackOpening} index={1} reRender={!riddleTheme} backgroundColor="black" />
             <S.Image src={BlackOpeningFont} />
           </S.Opening>
         </S.OpeningWrapper>
@@ -37,7 +48,7 @@ function Riddle({ theme }) {
 
       <FullScreen
         isFullScreen={riddleTheme === 'White'}
-        onCloseFullScreen={() => setRiddleTheme(null)}
+        onCloseFullScreen={() => handleClick(null)}
         backgroundColor={theme.palette.RIDDLE_WHITE}
       >
         <WhiteTheme />
@@ -45,7 +56,7 @@ function Riddle({ theme }) {
 
       <FullScreen
         isFullScreen={riddleTheme === 'Black'}
-        onCloseFullScreen={() => setRiddleTheme(null)}
+        onCloseFullScreen={() => handleClick(null)}
         backgroundColor={theme.palette.RIDDLE_BLACK}
       >
         <BlackTheme />

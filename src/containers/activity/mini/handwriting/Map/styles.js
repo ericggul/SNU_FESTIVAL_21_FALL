@@ -29,6 +29,7 @@ export const Object = styled.img`
   }
 
   animation: jump ${props => props.jump}s infinite;
+  animation-delay: -4s;
 `;
 
 export const Building = styled.img`

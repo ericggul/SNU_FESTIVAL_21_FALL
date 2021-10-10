@@ -67,22 +67,22 @@ export const MenuButtonBar = styled.div`
   border: solid 2px ${props => (props.menuIsOpen ? 'white' : props.color)};
   background-color: ${props => (props.menuIsOpen ? 'white' : props.color)};
 
-  transform-origin: left;
+  transform-origin: center;
   transform: rotate(0deg);
   transition: transform, opacity, width, border, background-color, 1s;
   will-change: transform, opacity, width;
 
   ${props => props.menuIsOpen && css`
     &:first-of-type {
-      transform: rotate(405deg) scaleX(0.935);
+      opacity: 0;
+      transform: translateY(11px) rotate(-405deg);
     }
     &:nth-of-type(2) { 
-      transform: translateX(599px);
-      opacity: 0;
+      transform: rotate(405deg);
     }
     &:last-of-type {
       width: 100%;
-      transform: rotate(-405deg) scaleX(0.935);
+      transform: translateY(-11px) rotate(135deg);
     }
   `};
 `;

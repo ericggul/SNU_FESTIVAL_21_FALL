@@ -6,17 +6,18 @@ export const StyledBlackTheme = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.windowHeight}px;
   ${FlexCenterStyle};
+  flex-direction: column;
   
-  @keyframes background {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  // @keyframes background {
+  //   from { opacity: 0; }
+  //   to { opacity: 1; }
+  // }
   background-position: center bottom;
-  opacity: 0;
-  animation-name: background;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-  animation-delay: 1s;
+  // opacity: 0;
+  // animation-name: background;
+  // animation-fill-mode: forwards;
+  // animation-duration: 1s;
+  // animation-delay: 1s;
 `;
 
 export const Background = styled.img`
