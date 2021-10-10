@@ -17,14 +17,28 @@ export const Content = styled.div`
   `};
 `;
 
+export const TextImage = styled.img`
+  max-width: 200px;
+  height: auto;
+  z-index: 5;
+  pointer-events: none;
+  margin-top: 10px;
+  margin-bottom: 5vh;
+  ${media.lessThan('medium')`
+    width: 50%;
+    margin-top: ${({ theme }) => theme.windowHeight * 0.1}px;
+  `};
+`;
+
 export const Question = styled.div`
   ${FlexCenterStyle};
-  background-color: #f5f6ff;
+  background-color: transparent;
   width: 100%;
   height: 100%;
   max-width: 550px;
   max-height: 550px;
   border-radius: 15px;
+  position: relative;
   
   ${media.lessThan('medium')`
     width: 80vw;
@@ -38,55 +52,65 @@ export const Question = styled.div`
   }
   animation-name: appear;
   animation-duration: 2s;
+  
 `;
 
 export const Image = styled.img`
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: scale-down;
   border-radius: 15px;
+  @keyframes appear {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1;}
+  }
+  animation-name: appear;
+  animation-duration: 2s;
 `;
 
 export const Answer = styled.div`
-  display: flex;
+  ${FlexCenterStyle};
   align-items: center;
-  justify-content: space-between;
   width: 100%;
-  height: 2rem;
+  height: 2.3rem;
   margin-top: 2rem;
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
 
 export const InputBox = styled.input`
   outline: 0;
-  width: 80%;
-  height: 100%;
-  padding: 10px 8px;
-  border-radius: 13px;
+  width: 70%;
+  height: 2.3rem;
+  border-radius: 1rem;
   border: solid 1px #ffffff;
-  background-color: rgba(255, 255, 255, 0.31);
+  background-color: white;
 
-  color: ${props => props.color || props.theme.palette.GRAY80};
+  color: ${props => props.theme.palette.HANDWRITING_INPUT};
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
-  
+
   &::placeholder {
-    color: ${props => rgba(props.color || props.theme.palette.GRAY80, 0.4)};
+    color: ${props => props.theme.palette.HANDWRITING_INPUT};
   }
-  
-  margin-right: 1rem;
+
+  margin-right: 1.2rem;
+  box-shadow: 0 0 0.5rem white;
 `;
 
 export const Button = styled.div`
   ${FlexCenterStyle};
-  width: 20%;
-  height: 100%;
+  width: 4.5rem;
+  height: 2.3rem;
   background-color: white;
-  padding: 10px 0;
-  border-radius: 13px;
-  
-  color: ${({ theme }) => theme.palette.PURPLE70};
-  font-weight: bold;
-  
+  border-radius: 1.5rem;
+
+  color: ${({ theme }) => theme.palette.HANDWRITING_HANDLE};
+  font-size: 1rem;
+  font-weight: 600;
+
   cursor: pointer;
+  box-shadow: 0 0 0.5rem white;
 `;

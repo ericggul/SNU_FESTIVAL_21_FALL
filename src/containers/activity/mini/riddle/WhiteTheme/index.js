@@ -5,32 +5,42 @@ import WhiteBackgroundMobile from '@I/activity/riddle/white/white-background.png
 import WhiteBackgroundDesktop from '@I/activity/riddle/white/white-background-desktop.png';
 import QuestionBox from '@C/activity/mini/riddle/QuestionBox';
 
-import AliceOne from '@I/activity/riddle/alice/alice-1.png';
-import AliceTwo from '@I/activity/riddle/alice/alice-2.png';
-import AliceThree from '@I/activity/riddle/alice/alice-3.png';
+import WhiteOne from '@I/activity/riddle/white/white-1.png';
+import WhiteTwo from '@I/activity/riddle/white/white-2.png';
+import WhiteThree from '@I/activity/riddle/white/white-3.png';
+import WhiteFour from '@I/activity/riddle/white/white-4.png';
+import WhiteFive from '@I/activity/riddle/white/white-5.png';
+import WhiteOpeningFont from '@I/activity/riddle/white/white-opening-font.png';
+
 import { preloadImage } from '@U/functions/preload';
 import * as S from './styles';
 
 const answers = [
-  '07436abdfc015b3d6e7f6236e4817639b24bfb77e68adfb779ace94e8d08c047',
-  '4ea140588150773ce3aace786aeef7f4049ce100fa649c94fbbddb960f1da942',
-  'a27db16581bce5f90e4e7d08e10f861d0c6986a01d80babea22f6af4e5774ff1',
+  'b16bec1ce2b9561977e6a0005435cd4983a7994c9d96fbd7ecf8b4592ff4f1c8',
+  '720bce5ed1c8c73c1bee22b6f2178fb205920e4d37944ac7e2b815dab3a0d151',
+  '3de26124efdefae54af8af041e90adc091e6a6ae90eaed512eebc4c8d5f90b9d',
+  '0bdb1a1b7587449fcd50a6a6d0b1b89abdfc5ca17ba11c5d7b6948441a35f66b',
+  '8b49bda2606fd82b02065c7a4a6215fd76159579f0a46afb19af9c29139ebf1b',
 ];
 const hints = [
-  '힌트: 7',
-  '힌트: 선',
-  '힌트: 어린이',
+  '뭐게',
+  '뭐게',
+  '뭐게',
+  '뭐게',
+  '뭐게',
 ];
 const questions = [
-  AliceOne,
-  AliceTwo,
-  AliceThree,
+  WhiteOne,
+  WhiteTwo,
+  WhiteThree,
+  WhiteFour,
+  WhiteFive,
 ];
 
 function WhiteTheme({ theme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   useEffect(() => {
-    [AliceOne, AliceTwo].forEach(preloadImage);
+    [WhiteOne, WhiteTwo, WhiteThree].forEach(preloadImage);
   }, []);
 
   return (
@@ -38,8 +48,7 @@ function WhiteTheme({ theme }) {
       {isMobile
         ? <S.Background src={WhiteBackgroundMobile} alt="백야 배경" />
         : <S.Background src={WhiteBackgroundDesktop} alt="백야 배경" />}
-
-      <QuestionBox questions={questions} answers={answers} hints={hints} />
+      <QuestionBox textImg={WhiteOpeningFont} questions={questions} answers={answers} hints={hints} />
     </S.StyledWhiteTheme>
   );
 }

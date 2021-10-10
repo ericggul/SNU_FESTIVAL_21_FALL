@@ -13,6 +13,10 @@ export const palette = {
   BLACK_PURPLE: '#0f004e',
   CHOCO_PURPLE: '#9581e9',
 
+  // 홈화면
+  HOME_PURPLE: '#260f63',
+  HOME_PURPLE2: '#1C0A4D',
+
   // 행사팀
 
   STARLIGHT_PURPLE: '#40266B',

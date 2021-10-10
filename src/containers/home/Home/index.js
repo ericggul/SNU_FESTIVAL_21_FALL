@@ -1,21 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import Island from '@I/home/island.png';
-import Competition from '@I/home/competition.png';
-import GuestBook from '@I/home/guest-book.png';
-import Introduction from '@I/home/introduction.png';
-import GameTournament from '@I/home/game-tournament.png';
-import Mini from '@I/home/mini.png';
-import Performance from '@I/home/performance.png';
-import Radio from '@I/home/radio.png';
-import Goods from '@I/home/goods.png';
-import Tarot from '@I/home/tarot.png';
-import TarotGlow from '@I/home/tarot-glow.png';
-import Mission from '@I/home/mission.png';
-import Background from '@F/layout/Background';
+
 import { useHistory } from 'react-router';
-import { getRandomElementFromArray } from '@C/activity/mini/guess-the-song/functions';
-import Loading from '@I/home/loading.png';
+
+import Loading from '@I/home/desktop/background-bottom-light.png';
 import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
@@ -29,7 +17,6 @@ import Riddle from '@I/activity/home/riddle.png';
 import TreasureHunt from '@I/activity/home/treasure-hunt.png';
 import BlackAndWhite from '@I/activity/home/black-and-white.png';
 import Event from '@I/activity/home/event.png';
-import TimeTableImage from '@I/home/time-table.png';
 import Envelope from '@I/icon/stamp/envelope.gif';
 import EnvelopeImage from '@I/icon/stamp/envelope.png';
 import { preloadImage } from '@U/functions/preload';
@@ -37,10 +24,41 @@ import Universe from '@I/tarot/universe.jpg';
 import FortuneTeller from '@I/tarot/fortune-teller.png';
 import Ball from '@I/tarot/ball.png';
 import Glow from '@I/tarot/glow.png';
+
+// import BackgroundTop from '@I/home/desktop/background-top.png';
+import BackgroundTop from '@I/home/desktop/background-top-light.png';
+// import BackgroundMiddle from '@I/home/desktop/background-middle.png';
+import BackgroundMiddle from '@I/home/desktop/background-middle-light.png';
+// import BackgroundBottom from '@I/home/desktop/background-bottom.png';
+import BackgroundBottom from '@I/home/desktop/background-bottom-light.png';
+import Performance from '@I/home/desktop/performance.png';
+import Activity from '@I/home/desktop/activity.png';
+import Goods from '@I/home/desktop/goods.png';
+import GuestBook from '@I/home/desktop/guest-book.png';
+import Introduction from '@I/home/desktop/introduction.png';
+
+import BusOne from '@I/home/desktop/bus1.png';
+import BusTwo from '@I/home/desktop/bus2.png';
+import BusThree from '@I/home/desktop/bus3.png';
+import BusFour from '@I/home/desktop/bus4.png';
+import MainGateOn from '@I/home/desktop/main-gate-on.png';
+import MainGateOff from '@I/home/desktop/main-gate-off.png';
+import SleepRio from '@I/home/mobile/sleep-rio.png';
+import SleepRioTwo from '@I/home/mobile/sleep-rio2.png';
+import WakeRio from '@I/home/mobile/wake-rio.png';
+import StandImage from '@I/home/desktop/stand.png';
+import StandLight from '@I/home/desktop/stand-light.png';
+
+import * as CS from '@C/home/common/styles';
 import * as S from './styles';
+
+const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 function Home({ theme }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [gateOn, setGateOn] = useState(false);
+  const [lightIsOn, setLightIsOn] = useState(false);
+  const [rioWaked, setRioWaked] = useState(false);
 
   const ratio = useMemo(() => {
     if (theme.windowWidth >= 1700) return 1;
@@ -56,44 +74,68 @@ function Home({ theme }) {
   }, [history]);
 
   const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard);
-  const onLoadIsland = useCallback(() => {
+  const onLoad = useCallback(() => {
     setIsLoading(false);
     [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
-      GuessTheSong, Riddle, TreasureHunt, BlackAndWhite, Event, TimeTableImage, Envelope, EnvelopeImage,
+      GuessTheSong, Riddle, TreasureHunt, BlackAndWhite, Event, Envelope, EnvelopeImage,
       Universe, Ball, Glow, FortuneTeller,
     ].forEach(preloadImage);
   }, []);
+
+  const Stand = ({ lightOn, top, left }) => (
+    <CS.StandContainer top={top} left={left} width={convert(53)}>
+      <CS.StandImage src={StandImage} width={convert(53)} />
+      <CS.LightImage lightOn={lightOn} delay={getRandom(-30, 0)} src={StandLight} top={-convert(35)} left={-convert(72)} width={convert(194)} />
+    </CS.StandContainer>
+  );
+
+  const Rio = ({ waked, top, left }) => (
+    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={convert(280)} />
+  );
+
+  const LIGHT_LOC = [
+    { x: 1451, y: 159 },
+    { x: 1101, y: 247 },
+    { x: 416, y: 553 },
+    { x: 129, y: 807 },
+    { x: 1027, y: 1009 },
+    { x: 740, y: 1309 },
+    { x: 1631, y: 1231 },
+    { x: 1785, y: 1517 },
+    { x: 1633, y: 1866 },
+    { x: 1314, y: 2043 },
+  ];
+
+  const convert = useCallback((value) => (theme.windowWidth / 1920) * value, [theme]);
 
   return (
     <>
       <S.StyledHome height={theme.windowHeight}>
         <Title />
-        <S.IslandWrapper width={theme.windowWidth} height={theme.windowWidth * 0.527}>
-          <S.Island src={Island} width={theme.windowWidth} height={theme.windowWidth * 0.527} alt="" onLoad={onLoadIsland} />
+        <S.Wrapper width={convert(1920)} height={convert(2506)}>
           <Notice />
-          <S.Landmark src={Competition} alt="공모전" top={11} right={29} width={150 * ratio} onClick={() => goToPage('/activity/competition')} />
-          <S.Landmark src={GuestBook} alt="방명록" top={24} right={13} width={188 * ratio} onClick={() => goToPage('/guest-book')} />
-          <S.Landmark src={Introduction} alt="소개" top={32} right={28} width={168 * ratio} onClick={() => goToPage('/introduction')} />
-          <S.Landmark src={GameTournament} alt="관악게임토너먼트" top={44} right={10} width={230 * ratio} onClick={() => goToPage('/performance/game-tournament')} />
-          <S.Landmark src={Mini} alt="미니게임" top={52} right={24} width={381 * ratio} onClick={() => goToPage('/activity/mini')} />
-          <S.Landmark src={Radio} alt="보이는라디오" top={37} left={12.5} width={262 * ratio} onClick={() => goToPage('/activity/radio')} />
-          <S.Landmark src={Goods} alt="굿즈" top={12.5} left={24} width={234 * ratio} onClick={() => goToPage('/goods')} />
-          <S.Landmark src={TarotGlow} alt="타로" top={46.5} left={1.3} width={260 * ratio} glow />
-          <S.Landmark src={Tarot} alt="타로" top={54} left={4} width={174 * ratio} onClick={() => goToPage('/tarot')} />
-          <S.Landmark src={Mission} alt="미션" top={25} left={45} width={225 * ratio} vibrate onClick={() => setIsMissionModalOpen(true)} />
+          <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
+          <CS.Background src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
+          <CS.Image src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
+          <CS.Image src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
+          <CS.Image src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
+          <CS.Image src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
+          <CS.Image src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
+
+          {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          <Rio waked={rioWaked} top={convert(67)} left={convert(161)} />
+          <CS.Bus src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} vector={[-1, 0.1]} />
+          <CS.Bus src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} vector={[0, 0.4]} />
+          <CS.Bus src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} vector={[2, 0.3]} />
+          <CS.Bus src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} vector={[-1, -0.2]} />
+
+          <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
+
+          <CS.Background src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}
-          <S.Landmark
-            src={Performance}
-            alt="공연"
-            top={45}
-            left={26}
-            width={258 * ratio}
-            onClick={() => goToPage(getRandomElementFromArray(['/performance/phone-cert', '/performance/sing-stealer', '/performance/hit-the-stage']))}
-          />
-          {isLoading && <S.Island width={1700 * ratio} height={1700 * ratio * 0.527} src={Loading} alt="" />}
-        </S.IslandWrapper>
+          {isLoading && <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} alt="" />}
+        </S.Wrapper>
       </S.StyledHome>
-      <Background />
     </>
   );
 }

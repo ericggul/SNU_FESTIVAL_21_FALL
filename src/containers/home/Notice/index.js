@@ -1,7 +1,7 @@
 import React from 'react';
 import Bell from '@I/icon/bell.svg';
 import useModal from '@U/hooks/useModal';
-import TimeTableImage from '@I/home/time-table.png';
+import Skeleton from '@I/skeleton/skeleton.png';
 import * as S from './styles';
 
 function Notice() {
@@ -27,6 +27,6 @@ Notice.propTypes = {
 
 function TimeTable() {
   return (
-    <S.TimeTable src={TimeTableImage} alt="타임테이블" />
+    <S.TimeTable src={Skeleton} alt="타임테이블" />
   );
 }

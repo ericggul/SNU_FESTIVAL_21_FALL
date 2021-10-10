@@ -3,7 +3,6 @@ import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
-import FireworkSingle from '@/foundations/animation/fireworks/FireworkSimple';
 import { HeaderContent } from '@F/layout/Header';
 import Fade from 'react-reveal/Fade';
 import Item from '@F/layout/GridItem';
@@ -12,6 +11,7 @@ import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import HitTheStageIcon from '@I/performance/icon/hit-the-stage-icon.png';
 import GameTournamentIcon from '@I/performance/icon/game-tournament-icon.png';
 import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
+import FireworkSingle from '@/foundations/animation/fireworks/FireworkSimple';
 
 import * as S from './styles';
 
@@ -66,17 +66,13 @@ function Performance({ theme }) {
         selected={selected}
         sendFunction={send}
       />
-      {/*
-      {Item('phone-cert', PhoneCertIcon, '폰서트 LIVE', 0, selected, send)}
-      {Item('hit-the-stage', HitTheStageIcon, '힛더스테이지', 1, selected, send)}
-      {Item('sing-stealer', SingStealerIcon, '씽스틸러', 2, selected, send)}
-      {Item('game-tournament', GameTournamentIcon, '관악게임토너먼트', 3, selected, send)} */}
+
     </S.IconGrid>
   );
 
   return (
     <S.StyledPerformance>
-      <HeaderContent>공연</HeaderContent>
+      <HeaderContent backgroundColor="transparent">공연</HeaderContent>
 
       <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <FireworkSingle isRunning />
