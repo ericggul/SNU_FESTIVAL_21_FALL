@@ -12,7 +12,7 @@ function Home({ theme }) {
 
   return (
     <>
-      <Header hamburgerColor={theme.palette.PURPLE50} />
+      <Header hamburgerColor={theme.palette.WHITE} backVisible={false} />
       {isLoaded && !isMobile && <HomeContainer theme={theme} />}
       {isLoaded && isMobile && <MobileHomeContainer theme={theme} />}
     </>

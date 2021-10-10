@@ -8,7 +8,7 @@ export const StyledHome = styled.div`
   position: relative;
   width: 100%;
   height: ${({ theme }) => theme.windowHeight}px;
-  background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
+  background-color: ${({ theme }) => theme.palette.HOME_PURPLE2};
   ${FlexCenterStyle};
   min-height: ${({ height }) => height}px;
   
@@ -22,33 +22,8 @@ export const StyledHome = styled.div`
 
 export const Wrapper = styled.div`
   position: relative;
-  top: 0;
+  top: 150px;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
-`;
-
-export const Background = styled.img`
-  position: absolute;
-  width: ${({ width }) => width}px;
-  height: auto;
-  ${props => props.top && css`top: ${props.top}px`};
-  ${props => props.left && css`left: ${props.left}px`};
-  pointer-events: none;
-`;
-
-export const Landmark = styled.img`
-  position: absolute;
-  width: ${({ width }) => width}px;
-  height: auto;
-  ${props => props.top && css`top: ${props.top}px`};
-  ${props => props.left && css`left: ${props.left}px`};
-  ${props => props.right && css`right: ${props.right}px`};
-  ${props => props.bottom && css`bottom: ${props.bottom}px`};
-  
-  ${HoverStyle};
-  &:hover {
-    transform: scale(1.04);
-  }
-  
+  background-color: ${({ theme }) => theme.palette.HOME_PURPLE2};
 `;
