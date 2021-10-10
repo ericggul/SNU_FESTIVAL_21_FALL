@@ -9,8 +9,8 @@ function Title() {
       fixed
     >
       <S.Title>
-        <p>서울대학교 2021 봄축제</p>
-        <p>페스월드</p>
+        <p>가을축제</p>
+        <p>관악의 밤</p>
       </S.Title>
     </HeaderContent>
   );

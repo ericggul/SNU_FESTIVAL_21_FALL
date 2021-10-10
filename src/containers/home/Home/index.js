@@ -2,17 +2,17 @@ import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Island from '@I/home/island.png';
 import Competition from '@I/home/competition.png';
-import GuestBook from '@I/home/guest-book.png';
-import Introduction from '@I/home/introduction.png';
+// import GuestBook from '@I/home/guest-book.png';
+// import Introduction from '@I/home/introduction.png';
 import GameTournament from '@I/home/game-tournament.png';
 import Mini from '@I/home/mini.png';
-import Performance from '@I/home/performance.png';
+// import Performance from '@I/home/performance.png';
 import Radio from '@I/home/radio.png';
-import Goods from '@I/home/goods.png';
+// import Goods from '@I/home/goods.png';
 import Tarot from '@I/home/tarot.png';
 import TarotGlow from '@I/home/tarot-glow.png';
 import Mission from '@I/home/mission.png';
-import Background from '@F/layout/Background';
+// import Background from '@F/layout/Background';
 import { useHistory } from 'react-router';
 import { getRandomElementFromArray } from '@C/activity/mini/guess-the-song/functions';
 import Loading from '@I/home/loading.png';
@@ -37,6 +37,16 @@ import Universe from '@I/tarot/universe.jpg';
 import FortuneTeller from '@I/tarot/fortune-teller.png';
 import Ball from '@I/tarot/ball.png';
 import Glow from '@I/tarot/glow.png';
+
+import BackgroundTop from '@I/home/desktop/background-top.png';
+import BackgroundMiddle from '@I/home/desktop/background-middle.png';
+import BackgroundBottom from '@I/home/desktop/background-bottom.png';
+import Performance from '@I/home/desktop/performance.png';
+import Activity from '@I/home/desktop/activity.png';
+import Goods from '@I/home/desktop/goods.png';
+import GuestBook from '@I/home/desktop/guest-book.png';
+import Introduction from '@I/home/desktop/introduction.png';
+
 import * as S from './styles';
 
 function Home({ theme }) {
@@ -64,36 +74,27 @@ function Home({ theme }) {
     ].forEach(preloadImage);
   }, []);
 
+  const convert = useCallback((value) => (theme.windowWidth / 1920) * value, []);
+
   return (
     <>
       <S.StyledHome height={theme.windowHeight}>
         <Title />
-        <S.IslandWrapper width={theme.windowWidth} height={theme.windowWidth * 0.527}>
-          <S.Island src={Island} width={theme.windowWidth} height={theme.windowWidth * 0.527} alt="" onLoad={onLoadIsland} />
+        <S.Wrapper width={convert(1920)} height={convert(2376)}>
           <Notice />
-          <S.Landmark src={Competition} alt="공모전" top={11} right={29} width={150 * ratio} onClick={() => goToPage('/activity/competition')} />
-          <S.Landmark src={GuestBook} alt="방명록" top={24} right={13} width={188 * ratio} onClick={() => goToPage('/guest-book')} />
-          <S.Landmark src={Introduction} alt="소개" top={32} right={28} width={168 * ratio} onClick={() => goToPage('/introduction')} />
-          <S.Landmark src={GameTournament} alt="관악게임토너먼트" top={44} right={10} width={230 * ratio} onClick={() => goToPage('/performance/game-tournament')} />
-          <S.Landmark src={Mini} alt="미니게임" top={52} right={24} width={381 * ratio} onClick={() => goToPage('/activity/mini')} />
-          <S.Landmark src={Radio} alt="보이는라디오" top={37} left={12.5} width={262 * ratio} onClick={() => goToPage('/activity/radio')} />
-          <S.Landmark src={Goods} alt="굿즈" top={12.5} left={24} width={234 * ratio} onClick={() => goToPage('/goods')} />
-          <S.Landmark src={TarotGlow} alt="타로" top={46.5} left={1.3} width={260 * ratio} glow />
-          <S.Landmark src={Tarot} alt="타로" top={54} left={4} width={174 * ratio} onClick={() => goToPage('/tarot')} />
-          <S.Landmark src={Mission} alt="미션" top={25} left={45} width={225 * ratio} vibrate onClick={() => setIsMissionModalOpen(true)} />
+          <S.Background src={BackgroundBottom} top={convert(0)} left={0} width={convert(1920)} onLoad={onLoadIsland} />
+          <S.Background src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
+          <S.Landmark src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
+          <S.Landmark src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
+          <S.Landmark src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
+          <S.Landmark src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
+          <S.Landmark src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
+
+          <S.Background src={BackgroundTop} top={convert(0)} left={convert(0)} width={convert(1920)} />
           {missionComponent}
-          <S.Landmark
-            src={Performance}
-            alt="공연"
-            top={45}
-            left={26}
-            width={258 * ratio}
-            onClick={() => goToPage(getRandomElementFromArray(['/performance/phone-cert', '/performance/sing-stealer', '/performance/hit-the-stage']))}
-          />
-          {isLoading && <S.Island width={1700 * ratio} height={1700 * ratio * 0.527} src={Loading} alt="" />}
-        </S.IslandWrapper>
+          {/* {isLoading && <S.Image src={MobileLoading} alt="" />} */}
+        </S.Wrapper>
       </S.StyledHome>
-      <Background />
     </>
   );
 }

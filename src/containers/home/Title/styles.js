@@ -10,16 +10,15 @@ export const Title = styled.div`
   p {
     overflow-x: hidden;
     margin: 0;
-    color: ${props => props.theme.palette.PURPLE50};
+    color: white;
     font-weight: lighter;
     
     &:first-child {
-      font-size: 12px;
+      font-size: 14px;
     }
     
     &:last-child {
-      font-size: 16px;
-      font-family: 'PFStardust', sans-serif;
+      font-size: 18px;
       line-height: 1.2;
     }
   }

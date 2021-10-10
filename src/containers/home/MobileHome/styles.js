@@ -7,46 +7,35 @@ export const StyledMobileHome = styled.div`
   width: 100%;
 `;
 
-export const Background = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: #A2CCE9;
-`;
-
-export const IslandWrapper = styled.div`
+export const Wrapper = styled.div`
   position: relative;
+  top: 0;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
+  background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
   overflow: hidden;
 `;
 
-export const Island = styled.img`
+export const Background = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: ${({ width }) => width}px;
+  height: auto;
+  ${props => props.top && css`top: ${props.top}px`};
+  ${props => props.left && css`left: ${props.left}px`};
+  pointer-events: none;
 `;
 
 export const Landmark = styled.img`
   position: absolute;
   width: ${({ width }) => width}px;
   height: auto;
-  ${props => props.top && css`top: ${props.top}%`};
-  ${props => props.left && css`left: ${props.left}%`};
-  ${props => props.right && css`right: ${props.right}%`};
-  ${props => props.bottom && css`bottom: ${props.bottom}%`};
+  ${props => props.top && css`top: ${props.top}px`};
+  ${props => props.left && css`left: ${props.left}px`};
+  ${props => props.right && css`right: ${props.right}px`};
+  ${props => props.bottom && css`bottom: ${props.bottom}px`};
   
   ${HoverStyle};
   &:hover {
     transform: scale(1.04);
   }
-  
-  ${props => props.vibrate && VibrateAnimation};
-  
-  ${props => props.glow && css`
-    pointer-events: none;
-    ${FluctuationAnimation};
-  `};
 `;
