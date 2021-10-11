@@ -69,8 +69,10 @@ function MobileHome({ theme }) {
     </CS.StandContainer>
   );
 
-  const Rio = ({ waked, top, left }) => (
-    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={convert(85)} />
+  const Rio = ({
+    waked, top, left, width,
+  }) => (
+    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={width} />
   );
 
   const LIGHT_LOC = [
@@ -108,21 +110,23 @@ function MobileHome({ theme }) {
           <Notice />
           <CS.Background src={BackgroundBottom} top={convert(112)} left={0} width={convert(374)} onLoad={onLoad} />
           <CS.Background src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
-          <CS.Image src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
-          <CS.Image src={Activity} alt="행사" top={convert(446)} left={convert(153)} width={convert(222)} onClick={() => goToPage('/activity')} />
-          <CS.Image src={Goods} alt="굿즈" top={convert(703)} left={convert(7)} width={convert(193)} onClick={() => goToPage('/goods')} />
-          <CS.Image src={Introduction} alt="소개" top={convert(1112)} left={convert(4)} width={convert(182)} onClick={() => goToPage('/introduction')} />
-          <CS.Image src={GuestBook} alt="방명록" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/guest-book')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Activity} alt="행사" top={convert(446)} left={convert(153)} width={convert(222)} onClick={() => goToPage('/activity')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Goods} alt="굿즈" top={convert(703)} left={convert(7)} width={convert(193)} onClick={() => goToPage('/goods')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Introduction} alt="소개" top={convert(1112)} left={convert(4)} width={convert(182)} onClick={() => goToPage('/introduction')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={GuestBook} alt="방명록" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/guest-book')} />
 
           {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
-          <Rio waked={rioWaked} top={convert(167)} left={convert(261)} />
-          <CS.Bus src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} vector={[-1, 0.3]} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
-          <CS.Bus src={BusTwo} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} vector={[0.3, 0.5]} />
-          <CS.Bus src={BusThree} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} vector={[0, 0.3]} />
+          <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} />
+          <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} />
+          <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
+          <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
+          <CS.Bus index={2} src={BusThree} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />
 
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1344)} left={convert(35)} width={convert(215)} />
 
           <CS.Background src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
+          <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>
           {missionComponent}
           {isLoading && <CS.Background src={Loading} top={convert(112)} left={0} width={convert(374)} alt="" />}
         </S.Wrapper>

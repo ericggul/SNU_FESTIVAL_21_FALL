@@ -1,8 +1,8 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useLocation, Switch } from 'react-router-dom';
-import NotFound from '@/pages/NotFound';
 import { AnimatePresence } from 'framer-motion';
+import NotFound from '@/pages/NotFound';
 
 function PerformanceRouter({ match }) {
   const location = useLocation();

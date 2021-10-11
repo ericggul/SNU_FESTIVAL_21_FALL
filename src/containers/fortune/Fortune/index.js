@@ -11,7 +11,7 @@ import * as S from './styles';
 
 function Fortune({ theme }) {
   const width = useMemo(() => Math.min(theme.windowWidth, 700), [theme]);
-  const [number, setNumber] = useState(-1);
+  const [number, setNumber] = useState(37);
   const { value, onChange, setValue } = useInput('');
 
   const handleSearch = useCallback((input) => {

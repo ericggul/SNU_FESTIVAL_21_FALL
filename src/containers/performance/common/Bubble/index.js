@@ -25,6 +25,7 @@ function Bubble({ title, decoration, speak }) {
         ...transition,
         delay: 0.3,
       }}
+      long={decoration.length > 15}
     >
       <p>{decoration}</p>
       <p>{title}</p>

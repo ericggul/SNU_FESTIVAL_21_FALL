@@ -15,7 +15,6 @@ function DisplaySection() {
   const [selected, setSelected] = useState(null);
 
   const handleClick = (url, i) => {
-    console.log(url);
     history.push(`/goods/${url}`);
     setSelected(i);
   };
@@ -27,7 +26,6 @@ function DisplaySection() {
       animate={{ opacity: 1, filter: 'blur(0px)' }}
       exit={{
         opacity: selected === i ? 1 : 0,
-
       }}
       transition={{
         ...transition,

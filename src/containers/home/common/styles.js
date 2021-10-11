@@ -1,5 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+
+const appear = keyframes`
+  0%{ opacity: 0; filter: blur(100px);}
+  50%{ opacity: 0.5; filter: blur(80px);}
+  100%{ opacity: 1;}
+`;
 
 export const Background = styled.img`
   position: absolute;
@@ -7,7 +13,42 @@ export const Background = styled.img`
   height: auto;
   ${props => props.top && css`top: ${props.top}px`};
   ${props => props.left && css`left: ${props.left}px`};
+
   pointer-events: none;
+
+  // animation: ${appear} 3s linear;
+`;
+
+export const Contents = styled.div`
+  // opacity: 0;
+  // animation: ${appear} 2.4s linear forwards;
+  // animation-delay: 1s;
+`;
+
+export const Landmark = styled.img`
+  position: absolute;
+  width: ${({ width }) => width}px;
+  height: auto;
+  ${props => props.top && css`top: ${props.top}px`};
+  ${props => props.left && css`left: ${props.left}px`};
+  cursor: pointer;
+
+  @keyframes shine{
+    70%{ filter: brightness(1) saturate(100%);}
+    100%{filter: brightness(1.3) saturate(120%); }
+  }
+
+  animation: shine 5s infinite alternate;
+  animation-delay: ${props => props.delay}s;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: drop-shadow(0 0 1px white);
+  }
 `;
 
 export const Image = styled.img`
@@ -26,11 +67,12 @@ export const Bus = styled.img`
   ${props => props.left && css`left: ${props.left}px`};
 
   @keyframes bus-move{
-    0%{ transform: translate(0, 0);}
-    10%{ transform: translate(${({ width, vector }) => (width * vector[0]) / 10}px, -${({ width, vector }) => (width * vector[1]) / 1}px);}
-    20%{transform: translate(0, 0);}
+    0%{ transform: translateY(0);}
+    5%{ transform: translateY(-${({ width }) => (width / 3)}px);}
+    10%{transform: translateY(0);}
   }
-  animation: bus-move 3s infinite;
+  animation: bus-move 6s infinite;
+  animation-delay: ${props => props.index / 3.7 + 2}s;
 `;
 
 export const StandContainer = styled.div`
@@ -90,16 +132,27 @@ export const Rio = styled.img`
   transform-origin: center;
   @keyframes rotate{
     0%{transform: rotate(0);}
-    20%{transform: rotate(-7deg);}
-    22%{transform: rotate(2deg);}
-    30%{transform: rotate(0);}
-    50%{transform: rotate(-5deg);}
-    53%{transform: rotate(2deg);}
-    55%{transform: rotate(0deg);}
-    70%{transform: rotate(-13deg);}
-    72%{transform: rotate(0);}
-    90%{transform: rotate(-10deg);}
+    60%{transform: rotate(-25deg); opacity: 0.8;}
+    63%{transform: rotate(10deg); opacity: 1;}
+    65%{transform: rotate(-6deg); }
+    67%{transform: rotate(5deg); }
+    69%{transform: rotate(-3deg);}
+    70%{transform: rotate(2deg);}
+    73%{transform: rotate(0);}
   }
 
-  animation: rotate 12s linear infinite;
+  animation: rotate 4s linear infinite;
+`;
+
+export const Text = styled.div`
+  position: absolute;
+  height: auto;
+  ${props => props.top && css`top: ${props.top}px`};
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+  font-size: 2rem;
+  opacity: 0.5;
+  color: #3B2B66;
 `;

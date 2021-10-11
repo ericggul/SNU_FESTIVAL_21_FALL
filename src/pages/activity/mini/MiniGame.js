@@ -22,7 +22,7 @@ function MiniGame({ theme }) {
 
   return (
     <>
-      <Header hamburgerColor={theme.palette.PURPLE50} />
+      <Header hamburgerColor={theme.palette.WHITE} />
       <MiniGameContainer theme={theme} />
     </>
   );

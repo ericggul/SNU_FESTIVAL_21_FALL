@@ -3,13 +3,16 @@ import { FlexCenterStyle } from '@S/responsive/display';
 import { motion } from 'framer-motion';
 
 export const StyledBubble = styled(motion.div)`
-text-align: center;
+  text-align: center;
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;
   background: ${({ theme }) => theme.palette.WHITE};
   width: calc(min(50vw, 300px));
+  word-break: break-word;
+  padding: 0 calc(min(3vw, 18px));
   height: calc(min(14vw, 60px));
+  ${({ long }) => long && 'font-size: 0.9rem;'}
   border-radius: calc(min(5vw, 30px));
   box-shadow: 
       0 0 3px ${({ theme }) => theme.palette.WHITE},

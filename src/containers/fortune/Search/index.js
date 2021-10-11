@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { withTheme } from 'styled-components';
 import SearchLogo from '@I/fortune/Search.svg';
 import useInput from '@U/hooks/useInput';
@@ -15,27 +16,27 @@ function Search({ number, theme }) {
   const DATA = [
     {
       header: '꽝',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
+      body: '무겁고 단단한 물체가 바닥에 떨어지거나 부딪치는 소리, 또는 폭발할때 들리는 소리를 표현한 의성어로, 거센 말로 \'쾅\'이 있다.',
       link: 'https://kwwang.co.kr',
     },
     {
       header: `${number}번 탈락`,
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
+      body: '당신의 행운은 출중하지만 이번 기회는 탈락! 대신... 기말고사를 잘보게 될지도?!',
       link: 'https://tallak.co.kr',
     },
     {
-      header: '야비티아이',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
+      header: '지금은 \'존버\'할 때입니다.',
+      body: '지금은 ',
       link: 'https://snufestival.com/jabti',
     },
     {
-      header: '홍팀 ZZANG',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
+      header: '재도전 할 수 있는 기회를 드립니다!',
+      body: '포추쿠키는 총 980개! 아직.. 몇 발 남았다...',
       link: 'https://zzang.com/jabti',
     },
     {
       header: '서울대학교 가을축제 관악의 밤',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
+      body: '10월 26일 - 10월 29일, 밝게 빛날 관악의 밤을 상상해보세요.',
       link: 'https://snufestival.com/jabti',
     },
     {
@@ -75,11 +76,13 @@ function Search({ number, theme }) {
       <S.MainContainer>
         <S.Result>검색결과 약 4,810개 (0.39초)</S.Result>
         {DATA.map((d, i) => (
-          <S.Component key={i}>
-            <S.Link>{d.link}</S.Link>
-            <S.Header>{d.header}</S.Header>
-            <S.Body>{d.body}</S.Body>
-          </S.Component>
+          <a key={i} href={d.link} style={{ textDecoration: 'none' }}>
+            <S.Component key={i}>
+              <S.Link>{d.link}</S.Link>
+              <S.Header>{d.header}</S.Header>
+              <S.Body>{d.body}</S.Body>
+            </S.Component>
+          </a>
         ))}
       </S.MainContainer>
     </S.StyledSearch>

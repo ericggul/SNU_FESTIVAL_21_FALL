@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Logo from '@I/jabti/Logo.png';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal/Fade';

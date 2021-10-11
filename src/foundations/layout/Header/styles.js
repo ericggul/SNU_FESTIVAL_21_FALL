@@ -44,8 +44,8 @@ export const LogoImage = styled.img`
     50%{transform: translateX(-3px);}
     100%{transform: translateX(0);}
   }
-  transition: transform 1s;
-  ${({ backAnimation }) => backAnimation && 'transform: rotate(360deg)'}
+  transition: transform .4s;
+  ${({ backAnimation }) => backAnimation && 'transform: translateX(-5px);'}
 `;
 
 export const MenuButton = styled.div`

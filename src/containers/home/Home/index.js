@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useMemo, useState, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router';
@@ -55,10 +57,15 @@ import * as S from './styles';
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 function Home({ theme }) {
+  const [introLoading, setIntroLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [gateOn, setGateOn] = useState(false);
   const [lightIsOn, setLightIsOn] = useState(false);
   const [rioWaked, setRioWaked] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => { setIntroLoading(false); }, 3000);
+  }, []);
 
   const ratio = useMemo(() => {
     if (theme.windowWidth >= 1700) return 1;
@@ -89,8 +96,10 @@ function Home({ theme }) {
     </CS.StandContainer>
   );
 
-  const Rio = ({ waked, top, left }) => (
-    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={convert(280)} />
+  const Rio = ({
+    waked, top, left, width,
+  }) => (
+    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={width} />
   );
 
   const LIGHT_LOC = [
@@ -110,26 +119,32 @@ function Home({ theme }) {
 
   return (
     <>
+
       <S.StyledHome height={theme.windowHeight}>
         <Title />
+        <Notice />
         <S.Wrapper width={convert(1920)} height={convert(2506)}>
-          <Notice />
+
           <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
           <CS.Background src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
-          <CS.Image src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
-          <CS.Image src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
-          <CS.Image src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
-          <CS.Image src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
-          <CS.Image src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
+          <CS.Contents>
+            <CS.Landmark delay={getRandom(-10, 0)} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
+            <CS.Landmark delay={getRandom(-10, 0)} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
+            <CS.Landmark delay={getRandom(-10, 0)} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
+            <CS.Landmark delay={getRandom(-10, 0)} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
+            <CS.Landmark delay={getRandom(-10, 0)} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
-          {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
-          <Rio waked={rioWaked} top={convert(67)} left={convert(161)} />
-          <CS.Bus src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} vector={[-1, 0.1]} />
-          <CS.Bus src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} vector={[0, 0.4]} />
-          <CS.Bus src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} vector={[2, 0.3]} />
-          <CS.Bus src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} vector={[-1, -0.2]} />
+            {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+            <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} />
+            <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} />
+            <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
+            <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
+            <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />
+            <CS.Bus index={3} src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />
 
-          <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
+            <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
+
+          </CS.Contents>
 
           <CS.Background src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}

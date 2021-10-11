@@ -19,10 +19,10 @@ function Activity({ theme }) {
 
   const [selected, setSelected] = useState(null);
   const history = useHistory();
-  const send = useCallback((location, i) => {
-    setSelected(i);
+  const send = (location, i) => {
     history.push(`/activity/${location}`);
-  }, [history]);
+    setSelected(i);
+  };
 
   function Item({
     url, src, text, i, sendFunction,
