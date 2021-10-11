@@ -20,9 +20,9 @@ import CloudTemplar from '@I/performance/cloud-templar.png';
 import CloudTemplarSmall from '@I/performance/cloud-templar-small.png';
 
 import MascotForMission from '@C/performance/common/MascotForMission';
-import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
+import Image from '@/foundations/images/Image';
 import * as S from '../common/styles';
 import * as SS from './styles';
 
@@ -111,7 +111,11 @@ function GameTournament({ theme }) {
   );
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={GameTournamentData} />;
-  const image = <S.Image><Fade left distance="30px" delay={200}><Image src={GameTournamentImage} alt="" objectFit="scale-down" /></Fade></S.Image>;
+  const image = (
+    <S.Image>
+      {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={GameTournamentImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
+    </S.Image>
+  );
 
   return (
     <S.Wrapper>

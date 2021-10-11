@@ -3,8 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import * as S from './styles';
 
 export default function Firework() {
-
-
   const stageContainerRef = useRef();
   const canvasContainerRef = useRef();
 
@@ -616,8 +614,6 @@ export default function Firework() {
     }
   }
 
-
-
   // Selectors
   // -----------
 
@@ -637,7 +633,6 @@ export default function Firework() {
   const scaleFactorSelector = () => store.state.config.scaleFactor;
 
   console.log(store.state.config);
-
 
   // Render app UI / keep in sync with state
   const appNodes = {
@@ -692,7 +687,6 @@ export default function Firework() {
   if (!fullscreenEnabled()) {
     appNodes.fullscreenFormOption.classList.add('remove');
   }
-
 
   // store.subscribe(renderApp);
 
@@ -1017,7 +1011,6 @@ export default function Firework() {
     return position * 0.75;
   }
 
-
   function getRandomShellSize() {
     const baseSize = shellSizeSelector();
     const maxVariance = Math.min(2.5, baseSize);
@@ -1032,8 +1025,6 @@ export default function Firework() {
       height: fitShellPositionInBoundsV(height),
     };
   }
-
-
 
   // Sequences
   // -----------
@@ -1253,8 +1244,6 @@ export default function Firework() {
 
   let isUpdatingSpeed = false;
 
-
-
   // Key commands are likely unwanted when fireworks are just an overlay.
   // window.addEventListener('keydown', handleKeydown);
 
@@ -1309,9 +1298,9 @@ export default function Firework() {
 
     // auto launch shells
     if (store.state.config.autoLaunch) {
-      autoLaunchTime -= timeStep * 2;
+      autoLaunchTime -= timeStep * 1.5;
       if (autoLaunchTime <= 0) {
-        autoLaunchTime = startSequence() * 1.25;
+        autoLaunchTime = startSequence() * 1;
       }
     }
   }
@@ -1814,7 +1803,7 @@ export default function Firework() {
         // For non-horsetail shells, compute an initial vertical speed to add to star burst.
         // The magic number comes from testing what looks best. The ideal is that all shell
         // bursts appear visually centered for the majority of the star life (exc
-        
+
         const standardInitialSpeed = this.spreadSize / 1800;
 
         const star = Star.add(
@@ -1902,15 +1891,14 @@ export default function Firework() {
           console.log('normal burst');
           createBurst(this.starCount, starFactory);
         }
-      } 
-      else if (Array.isArray(this.color)) {
+      } else if (Array.isArray(this.color)) {
         if (Math.random() < 0.5) {
           const start = Math.random() * Math.PI;
           const start2 = start + Math.PI;
           const arc = Math.PI;
           color = this.color[0];
           // Not creating a full arc automatically reduces star count.
-  
+
           createBurst(this.starCount, starFactory, start, arc);
           color = this.color[1];
           createBurst(this.starCount, starFactory, start2, arc);
@@ -1920,8 +1908,7 @@ export default function Firework() {
           color = this.color[1];
           createBurst(this.starCount / 2, starFactory);
         }
-      } 
-      else {
+      } else {
         throw new Error(`Invalid shell color. Expected string or array of strings, but got: ${this.color}`);
       }
 
@@ -2099,8 +2086,6 @@ export default function Firework() {
       this._pool.push(instance);
     },
   };
-
-
 
   // Kick things off.
 

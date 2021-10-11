@@ -7,8 +7,6 @@ import { confettiFire, confettiSpread } from '@C/performance/common/confettiFire
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import PhoneCertImage from '@I/performance/phone-cert.png';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
-import Stars from '@/foundations/stars/Performance/PerformanceStars';
-import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
 import { PhoneCertData } from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
 import Title from '@C/performance/common/Title';
@@ -18,10 +16,12 @@ import Guide from '@C/performance/common/Guide';
 import Starring from '@C/performance/common/Starring';
 import Fade from 'react-reveal/Fade';
 import MascotForMission from '@C/performance/common/MascotForMission';
-import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { transition } from '@C/performance/Performance';
 import { toast } from 'react-toastify';
+import Image from '@/foundations/images/Image';
+import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
+import Stars from '@/foundations/stars/Performance/PerformanceStars';
 import * as S from '../common/styles';
 
 function PhoneCert({ theme }) {
@@ -92,9 +92,7 @@ function PhoneCert({ theme }) {
   const starring = <Starring data={PhoneCertData} />;
   const image = (
     <S.Image>
-      <Fade left distance="30px" delay={200}>
-        <Image src={PhoneCertImage} alt="" objectFit="scale-down" />
-      </Fade>
+      {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={PhoneCertImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
     </S.Image>
   );
 

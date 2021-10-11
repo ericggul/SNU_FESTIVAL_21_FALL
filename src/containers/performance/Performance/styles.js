@@ -36,14 +36,18 @@ export const PosterWrapper = styled.div`
   position: relative;
   width: ${({ theme }) => theme.windowWidth}px;
   height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 33.333vw);
+  margin-top: ${({ theme }) => theme.windowHeight * 0.5}px;
+  margin-bottom: ${({ theme }) => theme.windowHeight * 0.5}px;
 `;
 
 export const AbsoluteImage = styled.img`
-  position: absolute;
   height: auto;
   width: 100%;
   max-width: 700px;
   margin: auto;
   left: 0;
   right: 0;
+  filter: hue-rotate(${props => props.hue}deg);
 `;

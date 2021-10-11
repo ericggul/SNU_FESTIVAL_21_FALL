@@ -117,6 +117,7 @@ function Map({ theme, handleClick, solvedRates }) {
           top={convert(POS_DATA[CORRESPONDENCE[i][0]].y)}
           width={convert(150)}
           onClick={() => handleClick(i)}
+          jump={i * 0.2}
         />
       ))}
       <S.Object src={Object3} left={convert(256)} top={convert(928)} width={convert(60)} />

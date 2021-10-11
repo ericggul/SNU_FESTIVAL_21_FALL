@@ -87,17 +87,20 @@ function Activity({ theme }) {
 
   const Constellation = (
     <S.ConstellationConatiner isMobile={isMobile}>
-      <S.ConstellationImage src={ConstellationOne} left={convert(POS[0].x)} top={convertY(POS[0].y)} width={convert(POS[0].w)} delay={3} />
-      <S.ConstellationImage src={ConstellationTwo} left={convert(POS[1].x)} top={convertY(POS[1].y)} width={convert(POS[1].w)} delay={6} />
-      <S.ConstellationImage src={ConstellationThree} left={convert(POS[2].x)} top={convertY(POS[2].y)} width={convert(POS[2].w)} delay={0} />
-      <S.ConstellationImage src={ConstellationFour} left={convert(POS[3].x)} top={convertY(POS[3].y)} width={convert(POS[3].w)} delay={1} />
-      <S.ConstellationImage src={ConstellationFive} left={convert(POS[4].x)} top={convertY(POS[4].y)} width={convert(POS[4].w)} delay={2} />
-      {SUB_POS.map((pos, i) => <S.ConstellationImage src={i % 2 === 0 ? ConstellationOne : ConstellationFive} left={convert(pos.x)} top={convertY(pos.y)} width={convert(pos.w)} angle={convert(pos.a)} key={i} delay={i} />)}
+      <S.ConstellationImage src={ConstellationOne} left={convert(POS[0].x)} top={convertY(POS[0].y)} width={convert(POS[0].w)} delay={0} />
+      <S.ConstellationImage src={ConstellationTwo} left={convert(POS[1].x)} top={convertY(POS[1].y)} width={convert(POS[1].w)} delay={0.2} />
+      <S.ConstellationImage src={ConstellationThree} left={convert(POS[2].x)} top={convertY(POS[2].y)} width={convert(POS[2].w)} delay={0.6} />
+      <S.ConstellationImage src={ConstellationFour} left={convert(POS[3].x)} top={convertY(POS[3].y)} width={convert(POS[3].w)} delay={0.8} />
+      <S.ConstellationImage src={ConstellationFive} left={convert(POS[4].x)} top={convertY(POS[4].y)} width={convert(POS[4].w)} delay={0.4} />
     </S.ConstellationConatiner>
   );
 
+  const width = isMobile ? Math.min(theme.windowWidth * 0.46, theme.windowHeight * 0.4) : Math.min(theme.windowWidth * 0.23, 350);
+
   const Item = (url, src, text, i) => (
     <GS.GridItem
+      rotate
+      isMobile={isMobile}
       onClick={() => send(url, i)}
       initial={{ opacity: 0, filter: 'blur(10px)' }}
       animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -112,9 +115,10 @@ function Activity({ theme }) {
       <GS.ImageContainer>
         <GS.IconImage
           src={src}
-          duration={getRandom(0.5, 2)}
+          duration={getRandom(2, 5)}
           delay={getRandom(-5, 0)}
         />
+
       </GS.ImageContainer>
       <GS.IconDescription shine={selected === i}>
         {text}
@@ -123,7 +127,7 @@ function Activity({ theme }) {
   );
 
   const iconGrid = (
-    <S.IconGrid isMobile={isMobile}>
+    <S.IconGrid rotate isMobile={isMobile}>
       {Item('competition', CompetitionIcon, '공모전', 0, selected)}
       {Item('radio', RadioIcon, '토크쇼', 1, selected)}
       {Item('mini', MiniIcon, '미니게임', 2, selected)}

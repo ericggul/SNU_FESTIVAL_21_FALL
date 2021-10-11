@@ -91,10 +91,23 @@ export const Image = styled.div`
   width: 100%;
   height: 100%;
   margin: 1rem 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 33.333vw);
+  margin-top: ${({ theme }) => theme.windowHeight * 0.3}px;
   
   ${media.greaterThan('large')`
-    width: 47%;
+    max-width: 1000px;
     height: auto;
     margin: 0;
   `};
+`;
+
+export const AbsoluteImage = styled.img`
+  height: auto;
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  filter: hue-rotate(${props => props.hue}deg);
 `;

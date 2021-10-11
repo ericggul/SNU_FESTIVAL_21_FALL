@@ -18,15 +18,29 @@ export const Map = styled.img`
 
   @keyframes earthquake{
     0%{ transform: rotate(-0deg);}
-    20%{ transform: rotate(-1deg);}
-    40%{ transform: rotate(.75deg);}
-    60%{ transform: rotate(-.5deg);}
-    80%{ transform: rotate(0.25deg);}
+    5%{ transform: rotate(-3deg);}
+    10%{ transform: rotate(2deg);}
+    15%{ transform: rotate(-1.8deg);}
+    20%{ transform: rotate(1.4deg);}
+    25%{ transform: rotate(-1.2deg);}
+    30%{ transform: rotate(1deg);}
+    35%{ transform: rotate(-.75deg);}
+    40%{ transform: rotate(.5deg);}
+    45%{ transform: rotate(-.5deg);}
+    50%{ transform: rotate(.4deg);}
+    55%{ transform: rotate(-.4deg);}
+    60%{ transform: rotate(.3deg);}
+    65%{ transform: rotate(-.3deg);}
+    70%{ transform: rotate(.3deg);}
+    75%{ transform: rotate(-.27deg);}
+    80%{ transform: rotate(.2deg);}
+    85%{ transform: rotate(-.2deg);}
+    90%{ transform: rotate(.1deg);}
+    95%{ transform: rotate(-.1deg);}
     100%{ transform: rotate(0deg);}
-
   }
 
-  animation: earthquake .4s linear;
+  animation: earthquake 1.5s linear;
   animation-delay: .9s;
 `;
 

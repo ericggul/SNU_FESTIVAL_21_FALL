@@ -29,7 +29,7 @@ export const Landmark = styled.img`
 
   @keyframes shine{
     70%{ filter: brightness(1) saturate(100%);}
-    100%{filter: brightness(1.3) saturate(120%); }
+    100%{filter: brightness(1.4) saturate(130%); }
   }
 
   animation: shine 5s infinite alternate;

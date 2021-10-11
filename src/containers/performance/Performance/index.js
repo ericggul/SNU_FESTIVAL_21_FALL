@@ -16,13 +16,14 @@ import FireworkSingle from '@/foundations/animation/fireworks/FireworkSimple';
 import * as S from './styles';
 
 export const transition = { duration: 1.3, ease: [0.43, 0.13, 0.23, 0.96] };
+const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 function Performance({ theme }) {
   const [selected, setSelected] = useState(null);
   const mainPoster = (
     <Fade left distance="30px" delay={200}>
       <S.PosterWrapper>
-        <S.AbsoluteImage src={Poster21Fall} alt="21spring" />
+        {new Array(9).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={Poster21Fall} alt="21Fall" hue={getRandom(-30, 30)} />)}
       </S.PosterWrapper>
     </Fade>
   );
@@ -85,6 +86,7 @@ function Performance({ theme }) {
         </S.Description>
 
         {iconGrid}
+        {mainPoster}
         {mainPoster}
       </S.StyledContainer>
 

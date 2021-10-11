@@ -32,12 +32,8 @@ export const Background = styled.div`
   width: 100%;
   height: 550vh;
   
-  background: linear-gradient(#83AAE2 0%, rgb(228, 232, 249) 40% 60%, #06102E  77% 100% );
-  background-position: 0 50%;
-  ${props => props.background === 'White' && 'transform: translateY(200vh);'}
-  ${props => props.background === 'Black' && 'transform: translateY(-200vh);'}
+  background: rgb(228, 232, 249);
   transition: all 1s;
-
 `;
 
 export const OpeningWrapper = styled.div`

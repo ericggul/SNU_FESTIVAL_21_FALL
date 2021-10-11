@@ -33,6 +33,14 @@ export const IconGrid = styled.div`
   grid-template-columns: ${({ isMobile }) => (isMobile
     ? 'repeat(2, calc(min(46vw, 40vh)));'
     : 'repeat(4, calc(min(23vw, 350px)));')};
+
+  @keyframes rotation{
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+  }
+
+  ${props => props.rotate && props.isMobile && 'animation: rotation 100s linear infinite;'}
+  animation-delay: .5s;
 `;
 
 export const ConstellationConatiner = styled.div`
@@ -81,11 +89,12 @@ export const ConstellationImage = styled.img`
     90%{opacity: 1;}
   }
   @keyframes simple{
-    0%{ opacity: 1; transform: rotate(0deg);}
-    100%{ opacity: 0; transform: rotate(10deg);}
+    0%{ opacity: 0; transform: rotate(0deg);}
+    20%{ opacity: 1; transform: rotate(2deg);}
+    100%{ opacity: 1; }
   }
-  animation: simple 8s infinite linear alternate;
-  // ${props => props.delay && 'animation: filter 3s infinite alternate'};
-  ${props => !props.delay && 'animation: simple 8s infinite linear alternate;'};
-  animation-delay: -${props => props.delay}s;
+
+  filter: drop-shadow(0 0 10px white);
+  animation: simple 1s infinite linear alternate backwards;
+  animation-delay: ${props => props.delay}s;
 `;

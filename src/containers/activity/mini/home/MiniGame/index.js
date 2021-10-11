@@ -63,7 +63,7 @@ function MiniGame({ theme }) {
 
   return (
     <S.StyledMiniGame>
-      <HeaderContent backgroundColor={theme.palette.SOFTLIGHT_PURPLE}>미니게임</HeaderContent>
+      <HeaderContent backgroundColor="transparent">미니게임</HeaderContent>
       <Wave />
       <S.StyledContainer>
         <S.Description>
