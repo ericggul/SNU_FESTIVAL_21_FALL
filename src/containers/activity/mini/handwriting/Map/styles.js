@@ -24,12 +24,12 @@ export const Object = styled.img`
 
   @keyframes jump{
     97%{ transform: translateY(0)};
-    99%{transform: translateY(-5px)};
+    99%{transform: translateY(-3px)};
     100%{transform: translateY(0)};
   }
 
-  animation: jump ${props => props.jump}s infinite;
-  animation-delay: -4s;
+  animation: jump 10s infinite;
+  animation-delay: -${props => props.jump}s;
 `;
 
 export const Building = styled.img`

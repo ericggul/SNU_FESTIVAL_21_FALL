@@ -11,11 +11,8 @@ import Skeleton from '@I/skeleton/skeleton.png';
 import FestivalBackground from '@I/introduction/festival-background.jpg';
 import Poster21SpringCastle from '@I/poster/21springCastle.png';
 import Poster21Spring from '@I/poster/21spring.png';
-import GuessTheSong from '@I/activity/home/guess-the-song.png';
 import Riddle from '@I/activity/home/riddle.png';
 import TreasureHunt from '@I/activity/home/treasure-hunt.png';
-import BlackAndWhite from '@I/activity/home/black-and-white.png';
-import Event from '@I/activity/home/event.png';
 import { preloadImage } from '@U/functions/preload';
 
 import BackgroundTop from '@I/home/mobile/background-top.png';
@@ -58,7 +55,7 @@ function MobileHome({ theme }) {
   const onLoad = useCallback(() => {
     setIsLoading(false);
     [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
-      GuessTheSong, Riddle, TreasureHunt, BlackAndWhite, Event,
+      Riddle, TreasureHunt,
     ].forEach(preloadImage);
   }, []);
 

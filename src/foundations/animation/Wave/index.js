@@ -8,7 +8,7 @@ export default function WaveCanvas() {
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '100vh' }}
+      style={{ width: '100vw', height: 'calc(100vh - 65px)' }}
     />
   );
 }
@@ -85,7 +85,7 @@ class Wave {
     this.stageHeight = stageHeight;
 
     this.centerX = stageWidth / 2;
-    this.centerY = stageHeight / 1.25;
+    this.centerY = stageHeight / 1.1;
 
     this.pointGap = this.stageWidth * 1.2 / (this.totalPoints - 1);
 

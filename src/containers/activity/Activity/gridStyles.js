@@ -12,9 +12,9 @@ export const GridItem = styled(motion.div)`
 `;
 
 export const ImageContainer = styled.div`
-max-width: calc(min(44vw, 430px));
-height: auto;
-position: relativve;
+    max-width: calc(min(44vw, 430px));
+    height: auto;
+    position: relativve;
 `;
 
 export const IconImage = styled.img`
@@ -34,20 +34,19 @@ export const IconImage = styled.img`
 `;
 
 export const IconDescription = styled.div`
-position: relative; 
-margin: 0rem;
-font-size: 1rem;
-font-weight: 600;
-height: 1.8rem;
-width: 6.5rem;
-${FlexCenterStyle};
-background: white;
-color: ${({ theme }) => theme.palette.BLACK_PURPLE};
-border-radius: 0.9rem;
+    position: relative; 
+    margin-top: -0.7rem;
+    margin-bottom: 1.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 1.6rem;
+    width: 6.3rem;
+    ${FlexCenterStyle};
+    background: white;
+    color: ${({ theme }) => theme.palette.BLACK_PURPLE};
+    border-radius: 0.9rem;
 
-box-shadow: 
-    0 0 2px ${({ theme }) => theme.palette.WHITE},
-    0 0 5px ${({ theme }) => theme.palette.WHITE},
-    0 0 7px ${({ theme }) => theme.palette.WHITE},
-    0 0 10px ${({ theme }) => theme.palette.WHITE};
+    box-shadow: 
+        0 0 2px ${({ theme }) => theme.palette.WHITE},
+        0 0 5px ${({ theme }) => theme.palette.WHITE};
 `;

@@ -10,14 +10,12 @@ import GreenBalloon from '@I/activity/treasure-hunt/balloon-green.png';
 import PurpleBalloon from '@I/activity/treasure-hunt/balloon-purple.png';
 import AliceOpening from '@I/activity/riddle/alice/alice-opening.png';
 import HauntedHouseOpening from '@I/activity/riddle/hounted-house/haunted-house-opening.png';
-import Polaroid from '@I/activity/home/polaroid.png';
-import MobilePolaroid from '@I/activity/home/polariod-mobile.png';
 import { preloadImage } from '@U/functions/preload';
 
 function MiniGame({ theme }) {
   useEffect(() => {
     [RedBalloon, GreenBalloon, PurpleBalloon, AliceOpening, HauntedHouseOpening,
-      Swirl, Polaroid, MobilePolaroid].forEach(preloadImage);
+      Swirl].forEach(preloadImage);
   }, []);
 
   return (

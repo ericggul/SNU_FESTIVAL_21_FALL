@@ -14,11 +14,9 @@ import Skeleton from '@I/skeleton/skeleton.png';
 import FestivalBackground from '@I/introduction/festival-background.jpg';
 import Poster21SpringCastle from '@I/poster/21springCastle.png';
 import Poster21Spring from '@I/poster/21spring.png';
-import GuessTheSong from '@I/activity/home/guess-the-song.png';
 import Riddle from '@I/activity/home/riddle.png';
 import TreasureHunt from '@I/activity/home/treasure-hunt.png';
-import BlackAndWhite from '@I/activity/home/black-and-white.png';
-import Event from '@I/activity/home/event.png';
+
 import Envelope from '@I/icon/stamp/envelope.gif';
 import EnvelopeImage from '@I/icon/stamp/envelope.png';
 import { preloadImage } from '@U/functions/preload';
@@ -84,7 +82,7 @@ function Home({ theme }) {
   const onLoad = useCallback(() => {
     setIsLoading(false);
     [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
-      GuessTheSong, Riddle, TreasureHunt, BlackAndWhite, Event, Envelope, EnvelopeImage,
+      Riddle, TreasureHunt, Envelope, EnvelopeImage,
       Universe, Ball, Glow, FortuneTeller,
     ].forEach(preloadImage);
   }, []);
@@ -127,24 +125,22 @@ function Home({ theme }) {
 
           <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
           <CS.Background src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
-          <CS.Contents>
-            <CS.Landmark delay={getRandom(-10, 0)} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
-            <CS.Landmark delay={getRandom(-10, 0)} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
-            <CS.Landmark delay={getRandom(-10, 0)} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
-            <CS.Landmark delay={getRandom(-10, 0)} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
-            <CS.Landmark delay={getRandom(-10, 0)} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
-            {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
-            <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} />
-            <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} />
-            <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
-            <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
-            <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />
-            <CS.Bus index={3} src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
+          <CS.Landmark delay={getRandom(-10, 0)} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
-            <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
+          {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} />
+          <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} />
+          <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
+          <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
+          <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />
+          <CS.Bus index={3} src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />
 
-          </CS.Contents>
+          <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
           <CS.Background src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}

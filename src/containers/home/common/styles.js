@@ -19,12 +19,6 @@ export const Background = styled.img`
   // animation: ${appear} 3s linear;
 `;
 
-export const Contents = styled.div`
-  // opacity: 0;
-  // animation: ${appear} 2.4s linear forwards;
-  // animation-delay: 1s;
-`;
-
 export const Landmark = styled.img`
   position: absolute;
   width: ${({ width }) => width}px;

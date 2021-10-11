@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
-import Polaroid from '@I/activity/home/polaroid.png';
-import MobilePolaroid from '@I/activity/home/polariod-mobile.png';
 import { useUser } from '@U/hooks/useAuth';
 import { getRandomElementFromArray } from '@U/functions/array';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
@@ -39,7 +37,7 @@ function PolaroidGuide({ theme }) {
   return (
     <S.StyledPolaroidGuide>
       <S.Polaroid>
-        <img src={isMobile ? MobilePolaroid : Polaroid} alt="폴라로이드" />
+        {/* <img src={isMobile ? MobilePolaroid} alt="폴라로이드" /> */}
         <div>
           <span>{isAuthorized ? user.email : '로그인이 필요합니다 :)'}</span>
           <span>{getRandomElementFromArray(phrases)}</span>
