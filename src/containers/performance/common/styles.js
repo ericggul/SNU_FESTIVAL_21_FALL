@@ -17,7 +17,6 @@ export const MobileBody = styled(motion.div)`
 
   ${FlexCenterStyle};
   flex-direction: column;
-
 `;
 
 export const DesktopWrapper = styled.div`
@@ -51,10 +50,6 @@ export const Icon = styled.div`
   }
 
   animation: rotation 1.1s infinite linear alternate;
-`;
-
-export const YouTube = styled.div`
-  z-index: 5;
 `;
 
 export const BodyWrapper = styled.div`

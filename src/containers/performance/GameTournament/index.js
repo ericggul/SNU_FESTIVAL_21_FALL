@@ -65,11 +65,6 @@ function GameTournament({ theme }) {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setConfettiEnabled(true);
-    }, 3000);
-  }, []);
-  useEffect(() => {
     if (confettiEnabled) {
       confettiSpread(confettiPos.x, confettiPos.y);
       setConfettiEnabled(false);

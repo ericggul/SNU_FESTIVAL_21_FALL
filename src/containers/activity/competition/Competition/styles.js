@@ -4,6 +4,11 @@ export const StyledCompetition = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: ${({ theme }) => theme.windowHeight}px;
+  background-image: linear-gradient(to top, 
+    ${({ theme }) => theme.palette.BACKGROUND_LIGHTPINK}, 
+    ${({ theme }) => theme.palette.BACKGROUND_LIGHTORANGE} 50%, 
+    ${({ theme }) => theme.palette.BACKGROUND_LIGHTPINK} 100%);
 `;
 
 export const Body = styled.div`
@@ -14,26 +19,22 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 2rem;
+  padding: 3rem 1rem;
   box-sizing: border-box;
 `;
 
 export const Tab = styled.div`
   display: flex;
   align-items: center;
-  padding-left: 2px;
-  
-  & p {
-    padding: 0 1rem;
-    color: ${({ theme }) => theme.palette.PURPLE50};
-  }
+  margin-left: 1rem;
 `;
 
 export const TabItem = styled.div`
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1.2rem;
   cursor: pointer;
-
-  color: ${props => (props.isSelected ? props.theme.palette.PURPLE50 : props.theme.palette.GRAY60)};
+  margin: 0 .4rem;
+  padding: .2rem .1rem;
+  color: ${props => (props.isSelected ? props.theme.palette.HIGHLIGHT_RED : props.theme.palette.TEXT_GRAY)};
+  border-bottom: ${props => (props.isSelected && `2px solid ${props.theme.palette.HIGHLIGHT_RED}`)};
   transition: color 0.2s;
 `;

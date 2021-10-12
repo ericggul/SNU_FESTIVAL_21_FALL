@@ -44,11 +44,6 @@ function PhoneCert({ theme }) {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setConfettiEnabled(true);
-    }, 3000);
-  }, []);
-  useEffect(() => {
     if (confettiEnabled) {
       confettiFire(confettiPos.x, confettiPos.y);
       setConfettiEnabled(false);

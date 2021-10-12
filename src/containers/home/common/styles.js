@@ -47,12 +47,12 @@ export const Landmark = styled.img`
 
   @keyframes shine{
     70%{ filter: brightness(1) saturate(100%) drop-shadow(0 0 0 white);}
-    100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 ${({ width }) => width / 40}px ${({ width }) => width / 20}px white); 
-    }
+    100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 0 ${({ width }) => width / 15}px white); 
+  }
   }
 
   animation: shine 5s infinite alternate;
-  animation-delay: ${props => props.delay}s;
+  animation-delay: ${props => props.delay - 2}s;
   &:after{
     content: '';
     position: absolute;

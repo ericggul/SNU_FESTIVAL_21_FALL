@@ -16,12 +16,12 @@ import {
 import { shuffleArray } from '@U/functions/array';
 import PropTypes from 'prop-types';
 import { competitionCollectionRef } from '@U/initializer/firebase';
-import { actions } from '@/redux/mission/state';
 import useMission from '@U/hooks/useMission';
 import { useDispatch } from 'react-redux';
 import useModal from '@U/hooks/useModal';
 import MissionGuide from '@F/modal/content/MissionGuide';
 import CompetitionStamp from '@I/icon/stamp/competition-stamp.png';
+import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
 function Competition({ user, isAuthorized }) {
@@ -111,7 +111,7 @@ function Competition({ user, isAuthorized }) {
 
   return (
     <S.StyledCompetition>
-      <HeaderContent>공모전</HeaderContent>
+      <HeaderContent backgroundColor="#e694a2">공모전</HeaderContent>
       <S.Body>
         <TextSection />
         <S.Tab>
@@ -123,7 +123,6 @@ function Competition({ user, isAuthorized }) {
               >
                 {fieldName}
               </S.TabItem>
-              {FIELDS[fieldName] !== 2 && <p>|</p>}
             </React.Fragment>
           ))}
         </S.Tab>
