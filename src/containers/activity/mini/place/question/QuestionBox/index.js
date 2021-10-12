@@ -32,12 +32,16 @@ export function QuestionBox({
   let places = useSelector(state => state.miniGame.place);
   const dispatch = useDispatch();
 
-  // SIZE CONVERTER for Image
-  const convert = useCallback((val) => {
-    const result = isMobile ? (theme.windowWidth / 375) * val : (768 / 375) * val;
-    return result;
+  useEffect(() => {
+    toast('ex. 느티나무 ✔, 느나 ❎',
+      {
+        autoClose: 3500, draggable: true,
+      });
+    toast('장소 이름은 글자수에 맞게!',
+      {
+        autoClose: 3800, draggable: true,
+      });
   }, []);
-
   const incrementArrayConverter = useCallback((length) => {
     let array = [];
     for (let i = 0; i < length; i += 1) {
@@ -54,7 +58,7 @@ export function QuestionBox({
   const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '학교 와본거 맞아? 🤔'];
   let wrongTextArray = [];
   for (let i = 0; i < 100; i += 1) {
-    const repeated = '다시 '.repeat(i + 1);
+    const repeated = '다시 '.repeat(i);
     wrongTextArray.push(`${repeated}시도해보세요`);
   }
   const [wrongAttempt, setWrongAttempt] = useState(0);

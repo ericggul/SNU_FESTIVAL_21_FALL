@@ -16,9 +16,19 @@ export const Container = styled.div`
 `;
 
 export const Description = styled.div`
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-align: center;
+  font-size: .9rem;
+  font-weight: 300;
+  text-align: left;
   color: white;
-  margin: 1rem;
+  margin: 6rem 2rem;
+  margin-bottom: 0;
+  width: 70vw;
+  max-width: 50rem;
+  word-break: keep-all;
+`;
+
+export const EmphText = styled.span`
+  word-break: keep-all;
+  font-size: 1.3rem;
+  font-weight: 600;
 `;

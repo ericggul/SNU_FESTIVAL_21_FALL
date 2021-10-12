@@ -71,12 +71,29 @@ function Handwriting({ theme }) {
   console.log('solvedNumbers', solvedNumbers, solvedRates);
   return (
     <S.StyledHandwriting>
-      <HeaderContent backgroundColor={theme.palette.HANDWRITING_HEADER}>
+      {/* <HeaderContent backgroundColor={theme.palette.HANDWRITING_HEADER}>
         서울대 필기 맞추기
-      </HeaderContent>
+      </HeaderContent> */}
       <S.Container>
         <S.Description>
-          단과대 별로 필기를 찾아보세요!
+          <S.EmphText>이 필기, 어느 과 친구가 쓴 걸까?</S.EmphText>
+          <br />
+          <br />
+          숫자로, 수식으로, 언어로, 그림으로!
+          <br />
+          학생들의 실제 필기 사진을 보며
+          여기가 어느 과인지
+          추측해 보세요.
+          <br />
+          생각보다 뻔하지 않아요!
+          {' '}
+          글자 하나, 수식 하나 꼼꼼히 살펴보시는 것을 추천합니다.
+          <br />
+          아니, 다들 이렇게 열심히 공부했을 줄 몰랐네요...
+          <br />
+          <br />
+          <br />
+          <S.EmphText>10개 단과대, 82개 과. 30개 이상 맞춰보세요!</S.EmphText>
         </S.Description>
         <Map
           handleClick={handleClick}

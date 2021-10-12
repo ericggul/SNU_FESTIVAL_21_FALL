@@ -15,7 +15,7 @@ function Map({ theme, solvedArray, handleClick }) {
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const POS_DATA = [
     { x: 116.3, y: 400 },

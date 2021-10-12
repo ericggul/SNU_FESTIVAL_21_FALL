@@ -27,7 +27,11 @@ function Omok({ theme }) {
         <S.BlackDot top={300} left={100} />
         <S.Sector>
           <S.Board src={Board} />
-          <S.Info>10분마다 줌 입장</S.Info>
+          <S.Info>
+            <p>진행일시</p>
+            <p>10월 26일(화) - 10월 29일(금)</p>
+            <p>11:00 - 17:00</p>
+          </S.Info>
         </S.Sector>
         <S.Sector>
           <S.Links>

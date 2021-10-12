@@ -17,7 +17,7 @@ function OmokGuide({ mode, setIsModalOpen }) {
         <S.Description>
           안녕하세요! 반갑습니다. 오목 게임은 어쩌구
         </S.Description>
-        <S.Button>확인</S.Button>
+        <S.Button onClick={() => setIsModalOpen(false)}>확인</S.Button>
       </S.OmokBox>
     </S.StyledOmokGuide>
   );

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { motion } from 'framer-motion';
 
 export const MapContainer = styled.div`
   ${FlexCenterStyle};
@@ -7,6 +8,12 @@ export const MapContainer = styled.div`
   width:${({ width }) => width}px;
   height: ${({ height }) => height}px;
   margin-top: -${({ height }) => height * 0.11}px;
+  @keyframes appear{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  animation: appear 2s linear backwards;
+  animation-delay: 1s;
 `;
 
 export const Image = styled.img`

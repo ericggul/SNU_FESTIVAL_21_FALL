@@ -5,7 +5,7 @@ export const MapContainer = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-
+  margin-top: ${({ height }) => height * 0.1}px;
 `;
 
 export const Map = styled.img`
@@ -40,7 +40,7 @@ export const Map = styled.img`
     100%{ transform: rotate(0deg);}
   }
 
-  animation: earthquake 1.5s linear;
+  animation: earthquake 1.2s linear;
   animation-delay: .9s;
 `;
 

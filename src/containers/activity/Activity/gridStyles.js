@@ -10,10 +10,10 @@ export const GridItem = styled(motion.div)`
     cursor: pointer;
 
     @keyframes occasional{
-        0%{ opacity: 0.6;}
-        60%{opacity: 0.6;}
-        90%{ opacity: 1;}
-        100%{ opacity: 1; }
+        0%{ filter: contrast(100%);}
+        60%{filter: contrast(100%);}
+        90%{ filter: contrast(300%);}
+        100%{ filter: contrast(300%); }
       }
 
     ${props => props.fromActivity && 'animation: occasional 3s infinite linear alternate backwards;'}

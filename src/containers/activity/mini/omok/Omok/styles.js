@@ -34,6 +34,7 @@ export const Info = styled.div`
   margin: 1.5rem;
   font-size: 1.3rem;
   font-weight: 500;
+  p{margin: 0;}
 `;
 
 export const Links = styled.div`

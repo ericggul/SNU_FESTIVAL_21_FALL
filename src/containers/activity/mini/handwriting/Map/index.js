@@ -35,7 +35,7 @@ function Map({ theme, handleClick, solvedRates }) {
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const POS_DATA = [
     { x: 37.5, y: 630.4 },
@@ -67,25 +67,33 @@ function Map({ theme, handleClick, solvedRates }) {
     <S.MapContainer
       width={convert(375)}
       height={convert(1048)}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      // transition={{
+      //   duration: 2,
+      //   ease: [0.43, 0.13, 0.23, 0.96],
+      //   delay: 1,
+      // }}
     >
       <S.Image src={RoadImage} />
 
-      <S.Object src={Object1} left={convert(276)} top={convert(338)} width={convert(33)} jump={getRandom(5, 10)} />
-      <S.Object src={Object1} left={convert(265)} top={convert(348)} width={convert(33)} jump={getRandom(5, 10)} />
-      <S.Object src={Object1} left={convert(294)} top={convert(344)} width={convert(28)} jump={getRandom(5, 10)} />
-      <S.Object src={Object1} left={convert(305)} top={convert(352)} width={convert(33)} jump={getRandom(5, 10)} />
+      <S.Object src={Object1} left={convert(276)} top={convert(338)} width={convert(33)} jump={getRandom(0, 10)} />
+      <S.Object src={Object1} left={convert(265)} top={convert(348)} width={convert(33)} jump={getRandom(0, 10)} />
+      <S.Object src={Object1} left={convert(294)} top={convert(344)} width={convert(28)} jump={getRandom(0, 10)} />
+      <S.Object src={Object1} left={convert(305)} top={convert(352)} width={convert(33)} jump={getRandom(0, 10)} />
 
-      <S.Object src={Object1} left={convert(180)} top={convert(490)} width={convert(33)} jump={getRandom(5, 10)} />
-      <S.Object src={Object1} left={convert(155)} top={convert(493)} width={convert(45)} jump={getRandom(5, 10)} />
-      <S.Object src={Object1} left={convert(198)} top={convert(495)} width={convert(40)} jump={getRandom(5, 10)} />
+      <S.Object src={Object1} left={convert(180)} top={convert(490)} width={convert(33)} jump={getRandom(0, 10)} />
+      <S.Object src={Object1} left={convert(155)} top={convert(493)} width={convert(45)} jump={getRandom(0, 10)} />
+      <S.Object src={Object1} left={convert(198)} top={convert(495)} width={convert(40)} jump={getRandom(0, 10)} />
 
-      <S.Object src={Object5} left={convert(5)} top={convert(380)} width={convert(61)} jump={getRandom(5, 10)} />
-      <S.Object src={Object5} left={convert(20)} top={convert(385)} width={convert(61)} jump={getRandom(5, 10)} />
-      <S.Object src={Object4} left={convert(50)} top={convert(420)} width={convert(53)} jump={getRandom(5, 10)} />
+      <S.Object src={Object5} left={convert(5)} top={convert(380)} width={convert(61)} jump={getRandom(0, 10)} />
+      <S.Object src={Object5} left={convert(20)} top={convert(385)} width={convert(61)} jump={getRandom(0, 10)} />
+      <S.Object src={Object4} left={convert(50)} top={convert(420)} width={convert(53)} jump={getRandom(0, 10)} />
 
-      <S.Object src={Object2} left={convert(115)} top={convert(578)} width={convert(51)} jump={getRandom(5, 10)} />
-      <S.Object src={Object2} left={convert(90)} top={convert(567)} width={convert(51)} jump={getRandom(5, 10)} />
-      <S.Object src={Object2} left={convert(98)} top={convert(585)} width={convert(51)} jump={getRandom(5, 10)} />
+      <S.Object src={Object2} left={convert(115)} top={convert(578)} width={convert(51)} jump={getRandom(0, 10)} />
+      <S.Object src={Object2} left={convert(90)} top={convert(567)} width={convert(51)} jump={getRandom(0, 10)} />
+      <S.Object src={Object2} left={convert(98)} top={convert(585)} width={convert(51)} jump={getRandom(0, 10)} />
 
       <S.Object src={Object2} left={convert(323)} top={convert(783)} width={convert(51)} jump={getRandom(5, 10)} />
       <S.Object src={Object4} left={convert(134.8)} top={convert(275.7)} width={convert(53)} jump={getRandom(5, 10)} />
