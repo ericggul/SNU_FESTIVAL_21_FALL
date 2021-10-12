@@ -29,11 +29,11 @@ export const Landmark = styled.img`
 
   @keyframes shine{
     70%{ filter: brightness(1) saturate(100%);}
-    100%{filter: brightness(1.4) saturate(130%); }
+    100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 ${({ width }) => width / 40}px ${({ width }) => width / 20}px white); }
   }
 
   animation: shine 5s infinite alternate;
-  animation-delay: ${props => props.delay}s;
+  animation-delay: ${props => props.delay - 2}s;
   &:after{
     content: '';
     position: absolute;
@@ -41,7 +41,7 @@ export const Landmark = styled.img`
     left: 0;
     right: 0;
     bottom: 0;
-    filter: drop-shadow(0 0 1px white);
+    filter: drop-shadow(0 0 3px white);
   }
 `;
 

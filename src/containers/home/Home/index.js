@@ -55,15 +55,10 @@ import * as S from './styles';
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 function Home({ theme }) {
-  const [introLoading, setIntroLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [gateOn, setGateOn] = useState(false);
   const [lightIsOn, setLightIsOn] = useState(false);
   const [rioWaked, setRioWaked] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => { setIntroLoading(false); }, 3000);
-  }, []);
 
   const ratio = useMemo(() => {
     if (theme.windowWidth >= 1700) return 1;
@@ -129,8 +124,8 @@ function Home({ theme }) {
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
           <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
           <CS.Landmark delay={4} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
-          <CS.Landmark delay={6} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
-          <CS.Landmark delay={8} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
+          <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
+          <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
           {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} />
