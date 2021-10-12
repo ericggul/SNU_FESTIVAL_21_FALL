@@ -16,6 +16,7 @@ export const palette = {
   // 홈화면
   HOME_PURPLE: '#260f63',
   HOME_PURPLE2: '#1C0A4D',
+  HOME_PURPLE3: '#040036',
 
   // 행사팀
 

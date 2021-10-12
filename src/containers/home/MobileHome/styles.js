@@ -6,7 +6,7 @@ import { FluctuationAnimation, VibrateAnimation } from '@S/responsive/animation'
 export const StyledMobileHome = styled.div`
   position: relative;
   width: 100%;
-  height: ${({ theme }) => theme.windowHeight}px;
+  // height: ${({ theme }) => theme.windowHeight}px;
 
   @keyframes change-color{
     0%{ background-color: black;}

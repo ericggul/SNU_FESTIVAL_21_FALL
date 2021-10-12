@@ -73,20 +73,18 @@ function MobileHome({ theme }) {
   );
 
   const LIGHT_LOC = [
-    { x: 294, y: 248 },
     { x: 219, y: 273 },
     { x: 44, y: 501 },
     { x: 82, y: 611 },
-    { x: 206, y: 572 },
     { x: 261, y: 641 },
-    { x: 298, y: 715 },
+    // { x: 298, y: 715 },
     { x: 270, y: 839 },
     { x: 53, y: 1043 },
     { x: 242, y: 1098 },
     { x: 188, y: 1222 },
     { x: 313, y: 1199 },
     { x: 310, y: 1308 },
-    { x: 143, y: 1339 },
+    // { x: 143, y: 1339 },
   ];
 
   const speak = useCallback((text) => {
@@ -106,7 +104,7 @@ function MobileHome({ theme }) {
         <S.Wrapper width={convert(375)} height={convert(1555)}>
           <Notice />
           <CS.Background src={BackgroundBottom} top={convert(112)} left={0} width={convert(374)} onLoad={onLoad} />
-          <CS.Background src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
+          <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
           <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(446)} left={convert(153)} width={convert(222)} onClick={() => goToPage('/activity')} />
           <CS.Landmark delay={4} src={Goods} alt="굿즈" top={convert(703)} left={convert(7)} width={convert(193)} onClick={() => goToPage('/goods')} />
@@ -122,7 +120,7 @@ function MobileHome({ theme }) {
 
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1344)} left={convert(35)} width={convert(215)} />
 
-          <CS.Background src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
+          <CS.BackgroundFront src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
           <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>
           {missionComponent}
           {isLoading && <CS.Background src={Loading} top={convert(112)} left={0} width={convert(374)} alt="" />}

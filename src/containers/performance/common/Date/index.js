@@ -11,17 +11,7 @@ function Date({ date }) {
   }, [history]);
 
   return (
-    <S.StyledDate
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        ...transition,
-        delay: 0.9,
-      }}
-    >
+    <S.StyledDate>
       <S.SingleDate onClick={() => send('phone-cert')}>
         <S.Day>화</S.Day>
         <S.Date isSelected={date === 26}>26</S.Date>

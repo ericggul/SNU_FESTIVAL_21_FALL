@@ -8,11 +8,10 @@ export const Wrapper = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
-  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
-export const MobileBody = styled.div`
-z-index: 2;
+export const MobileBody = styled(motion.div)`
+  z-index: 2;
   width: 100%;
   box-sizing: border-box;
 
@@ -40,7 +39,7 @@ export const IconBubble = styled.div`
   margin: 2rem 0;
 `;
 
-export const Icon = styled(motion.div)`
+export const Icon = styled.div`
   width: calc(min(33vw, 200px));
   height: auto;
   margin-right: 2rem;
@@ -54,7 +53,7 @@ export const Icon = styled(motion.div)`
   animation: rotation 1.1s infinite linear alternate;
 `;
 
-export const YouTube = styled(motion.div)`
+export const YouTube = styled.div`
   z-index: 5;
 `;
 
@@ -90,16 +89,11 @@ export const Body = styled.div`
 export const Image = styled.div`
   width: 100%;
   height: 100%;
-  margin: 1rem 0 1.5rem;
+  margin: 1rem 0;
+
   display: grid;
   grid-template-columns: repeat(3, 33.333vw);
   margin-top: ${({ theme }) => theme.windowHeight * 0.3}px;
-  
-  ${media.greaterThan('large')`
-    max-width: 1000px;
-    height: auto;
-    margin: 0;
-  `};
 `;
 
 export const AbsoluteImage = styled.img`

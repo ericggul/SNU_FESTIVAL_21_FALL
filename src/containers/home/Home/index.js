@@ -113,13 +113,13 @@ function Home({ theme }) {
   return (
     <>
 
-      <S.StyledHome height={theme.windowHeight}>
+      <S.StyledHome>
         <Title />
         <Notice />
         <S.Wrapper width={convert(1920)} height={convert(2506)}>
 
           <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
-          <CS.Background src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
+          <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
 
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
           <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
@@ -137,7 +137,7 @@ function Home({ theme }) {
 
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
-          <CS.Background src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
+          <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}
           {isLoading && <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} alt="" />}
         </S.Wrapper>

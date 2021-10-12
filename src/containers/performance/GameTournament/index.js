@@ -12,6 +12,7 @@ import { HeaderContent } from '@F/layout/Header';
 import Title from '@C/performance/common/Title';
 import Bubble from '@C/performance/common/Bubble';
 import Date from '@C/performance/common/Date';
+import Youtube from '@C/performance/common/Youtube';
 import Guide from '@C/performance/common/Guide';
 import Starring from '@C/performance/common/Starring';
 import Fade from 'react-reveal/Fade';
@@ -54,8 +55,6 @@ function GameTournament({ theme }) {
   const [confettiPos, setConfettiPos] = useState({ x: 0.5, y: 0.5 });
 
   const clickforConfetti = useCallback((e) => {
-    console.log(theme.windowWidth);
-    console.log(e.clientX / theme.windowWidth);
     setConfettiPos({ x: e.clientX / theme.windowWidth, y: e.clientY / theme.windowHeight });
     setConfettiEnabled(true);
   }, [theme]);
@@ -96,19 +95,7 @@ function GameTournament({ theme }) {
   const bubble = <Bubble decoration="카트라이더 슝슝~" title="관악게임토너먼트!" speak={speak} />;
   const title = <Title title="관악게임토너먼트" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={29} />;
-  const youTube = (
-    <S.YouTube
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 3,
-        ease: [0.43, 0.13, 0.23, 0.96],
-        delay: 1.5,
-      }}
-    >
-      <iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-    </S.YouTube>
-  );
+  const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={GameTournamentData} />;
   const image = (
@@ -122,7 +109,16 @@ function GameTournament({ theme }) {
       <HeaderContent>관악게임토너먼트</HeaderContent>
       <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       {isMobile && (
-        <S.MobileBody>
+        <S.MobileBody
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+            ease: [0.43, 0.13, 0.23, 0.96],
+            delay: 1,
+          }}
+        >
           <S.IconBubble>
             {icon}
             {bubble}
@@ -136,7 +132,16 @@ function GameTournament({ theme }) {
         </S.MobileBody>
       )}
       {!isMobile && (
-        <S.MobileBody>
+        <S.MobileBody
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+            ease: [0.43, 0.13, 0.23, 0.96],
+            delay: 1,
+          }}
+        >
           <S.DesktopWrapper>
             <S.IconBubble>
               {icon}

@@ -87,7 +87,6 @@ function Performance({ theme }) {
 
         {iconGrid}
         {mainPoster}
-        {mainPoster}
       </S.StyledContainer>
 
     </S.StyledPerformance>
