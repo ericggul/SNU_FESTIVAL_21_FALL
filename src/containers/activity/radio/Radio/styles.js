@@ -44,7 +44,7 @@ export const Container = styled.div`
 export const Image = styled.img`
   height: auto;
   width: 50%;
-  max-width: 450px;
+  max-width: 300px;
   filter: drop-shadow(.4rem .4rem .8rem rgba(255, 255, 255, 0.85));
 `;
 

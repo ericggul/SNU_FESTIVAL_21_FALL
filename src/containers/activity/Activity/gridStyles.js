@@ -5,18 +5,19 @@ import { motion } from 'framer-motion';
 
 export const GridItem = styled(motion.div)`
     ${FlexCenterStyle};
-    ${HoverStyle};
     flex-direction: column;
     margin: 2.5vw;
     cursor: pointer;
 
-    @keyframes rotate-description{
-        0%{transform: rotate(0deg);}
-        100%{transform: rotate(-360deg);}
-    }
+    @keyframes occasional{
+        0%{ opacity: 0.6;}
+        60%{opacity: 0.6;}
+        90%{ opacity: 1;}
+        100%{ opacity: 1; }
+      }
 
-    ${props => props.rotate && props.isMobile && 'animation: rotate-description 100s linear infinite;'}
-    animation-delay: .5s;
+    ${props => props.fromActivity && 'animation: occasional 3s infinite linear alternate backwards;'}
+    animation-delay: ${props => props.delay}s;
 `;
 
 export const ImageContainer = styled.div`

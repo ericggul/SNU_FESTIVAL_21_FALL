@@ -66,6 +66,11 @@ export const palette = {
   BACKGROUND_LIGHTPINK: '#E7D1D7',
   BACKGROUND_LIGHTORANGE: '#EFD5B7',
 
+  // 오목
+  OMOK_PURPLE_BACKGROUND: '#c498ff',
+  OMOK_PURPLE: '#9c65f1',
+  OMOK_POPUP_PURPLE: '#b286ed',
+
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',

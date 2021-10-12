@@ -96,10 +96,10 @@ function Activity({ theme }) {
   );
 
   const width = isMobile ? Math.min(theme.windowWidth * 0.46, theme.windowHeight * 0.4) : Math.min(theme.windowWidth * 0.23, 350);
-
+  const DELAY_ARRAY = isMobile ? [0, 1.5, 4.5, 3] : [0, 1.5, 3, 4.5];
   const Item = (url, src, text, i) => (
     <GS.GridItem
-      rotate
+      fromActivity
       isMobile={isMobile}
       onClick={() => send(url, i)}
       initial={{ opacity: 0, filter: 'blur(10px)' }}
@@ -111,6 +111,7 @@ function Activity({ theme }) {
         ...transition,
         delay: i * 0.2 + 0.1,
       }}
+      delay={DELAY_ARRAY[i]}
     >
       <GS.ImageContainer>
         <GS.IconImage
@@ -127,7 +128,7 @@ function Activity({ theme }) {
   );
 
   const iconGrid = (
-    <S.IconGrid rotate isMobile={isMobile}>
+    <S.IconGrid isMobile={isMobile}>
       {Item('competition', CompetitionIcon, '공모전', 0, selected)}
       {Item('radio', RadioIcon, '토크쇼', 1, selected)}
       {Item('mini', MiniIcon, '미니게임', 2, selected)}
