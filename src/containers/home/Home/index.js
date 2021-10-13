@@ -10,6 +10,7 @@ import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
 import MissionCard from '@C/home/MissionCard';
+import Rio from '@C/home/common/Rio';
 
 import { preloadImage } from '@U/functions/preload';
 
@@ -98,28 +99,6 @@ function Home({ theme }) {
     }, 400);
   }, [rioWaked]);
 
-  const Rio = ({
-    waked, top, left, width,
-  }) => (
-    <>
-      <CS.Rio
-        onClick={() => clickRio()}
-        waked={waked}
-        src={waked ? WakeRio : SleepRio}
-        top={top}
-        left={left}
-        width={width}
-      />
-      <CS.RioBubble
-        top={top}
-        left={left}
-        width={width}
-      >
-        꽥!
-      </CS.RioBubble>
-    </>
-  );
-
   const LIGHT_LOC = [
     { x: 1451, y: 159 },
     { x: 1101, y: 247 },
@@ -153,8 +132,8 @@ function Home({ theme }) {
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
           {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
-          <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} />
-          <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} />
+          <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
+          <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
           <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
           <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />

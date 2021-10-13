@@ -171,17 +171,23 @@ export const Rio = styled.img`
 
 export const RioBubble = styled.div`
   ${FlexCenterStyle};
+  font-family: 'Bangers';
+  color: white;
+  font-size: 1.8rem;
   text-align: center;
   position: absolute;
-  ${props => props.top && css`top: ${props.top}px`};
-  ${props => props.left && css`left: ${props.left + props.width}px`};
-  background: ${({ theme }) => theme.palette.WHITE};
-  width: calc(min(10vw, 60px));
-  height: calc(min(6vw, 25px));
-  border-radius: calc(min(3vw, 13px));
-  box-shadow: 
-      0 0 1px ${({ theme }) => theme.palette.WHITE},
-      0 0 3px ${({ theme }) => theme.palette.WHITE};
+  ${props => props.top && css`top: ${props.top - props.width * 0.2}px`};
+  ${props => props.left && css`left: ${props.left + props.width * 0.4}px`};
+  height: auto;
+  transform: rotate(-7deg);
+
+  @keyframes shake{
+    0%{ opacity: 0; transform: rotate(0);}
+    50%{opacity: 1; transform: rotate(-10deg);}
+    100%{transform: rotate(-7deg);}
+  }
+
+  animation: shake 0.4s;
 `;
 
 export const Text = styled.div`

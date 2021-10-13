@@ -13,15 +13,15 @@ export const StyledMissionCard = styled.div`
   position: relative;
 
   min-width: 264px;
-  max-width: 500px;
+  width: 70vw;
 
   @media (orientation: landscape) {
-    width: 60%;
+    width: 60vw;
     height: 100%;
   }
   
   @media (orientation: portrait) {
-    width: 80%;
+    width: 80vw;
     height: auto;
   }
   
@@ -66,10 +66,20 @@ export const Contents = styled.div`
 `;
 
 export const Header = styled.div`
-  margin-top: 2.2rem;
+  
   font-size: 1.5rem;
   font-weight: 500;
+  margin-bottom: .9rem;
   text-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
+`;
+
+export const SubHeader = styled.div`
+margin-top: 2.2rem;
+  font-size: 1rem;
+  font-weight: 300;
+  font-type: italic;
+  color: transparent;
+  text-shadow: 0 0 .15rem ${({ theme }) => theme.palette.HOME_PURPLE};
 `;
 
 export const PinkText = styled.span`
@@ -81,7 +91,6 @@ export const Text = styled.div`
   ${FlexCenterStyle};
   font-size: .9rem;
   font-weight: 500;
-  margin-top: .9rem;
 `;
 
 export const Button = styled.div`

@@ -7,6 +7,8 @@ import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
 import MissionCard from '@C/home/MissionCard';
+import Rio from '@C/home/common/Rio';
+
 import Skeleton from '@I/skeleton/skeleton.png';
 import FestivalBackground from '@I/introduction/festival-background.jpg';
 import Poster21SpringCastle from '@I/poster/21springCastle.png';
@@ -73,18 +75,18 @@ function MobileHome({ theme }) {
     }, 400);
   }, [rioWaked]);
 
-  const Rio = ({
-    waked, top, left, width,
-  }) => (
-    <CS.Rio
-      onClick={() => clickRio()}
-      src={waked ? WakeRio : SleepRio}
-      waked={waked}
-      top={top}
-      left={left}
-      width={width}
-    />
-  );
+  // const Rio = ({
+  //   waked, top, left, width,
+  // }) => (
+  //   <CS.Rio
+  //     onClick={() => clickRio()}
+  //     src={waked ? WakeRio : SleepRio}
+  //     waked={waked}
+  //     top={top}
+  //     left={left}
+  //     width={width}
+  //   />
+  // );
 
   const LIGHT_LOC = [
     { x: 219, y: 273 },
@@ -126,8 +128,8 @@ function MobileHome({ theme }) {
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/guest-book')} />
 
           {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
-          <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} />
-          <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} />
+          <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
+          <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
           <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
           <CS.Bus index={2} src={BusThree} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />

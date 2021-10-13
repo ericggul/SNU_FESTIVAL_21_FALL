@@ -7,6 +7,9 @@ import MiniIcon from '@I/activity/home/mini.png';
 import GroupIcon from '@I/activity/home/group.png';
 import RadioIcon from '@I/activity/home/radio.png';
 
+// import SparklySkull from '@F/animation/SparklySkull';
+import { Light2, LightSimple } from '@F/Light';
+import { LargeStarQuatro } from '@F/stars/StarComponents';
 import ConstellationOne from '@I/activity/home/constellation1.png';
 import ConstellationTwo from '@I/activity/home/constellation2.png';
 import ConstellationThree from '@I/activity/home/constellation3.png';
@@ -145,6 +148,8 @@ function Activity({ theme }) {
         </S.Description> */}
 
         {iconGrid}
+
+        <Light2 top={100} left={100} />
       </S.StyledContainer>
       {Constellation}
     </S.StyledActivity>

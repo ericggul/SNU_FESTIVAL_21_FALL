@@ -13,6 +13,7 @@ function MissionCard({ setIsModalOpen }) {
   const lightArray = useSelector(state => state.mission.light);
   const dispatch = useDispatch();
   const isPlaying = useMemo(() => lightArray !== null, [lightArray]);
+  console.log(isPlaying);
 
   // useEffect(() => {
   //   if (isAuthorized && !isPlaying) {
@@ -20,11 +21,20 @@ function MissionCard({ setIsModalOpen }) {
   //   }
   // }, [isAuthorized, isPlaying]);
 
+  const TEXTS = [[
+    '- 학교 곳곳으로 사라져버린 빛들을 찾아 관악의 밤을 밝혀주세요!',
+    '- 찾아야 하는 빛은 총 10개! 빛을 찾아 클릭하세요.',
+  ], [
+    '- 현재 찾은 빛 총 n개! (10-n)개 남았어요.',
+    '- 빛을 모두 찾아서 관의 밤을 빛내주세요!!',
+  ]];
+
   return (
     <>
       <S.StyledMissionCard>
         <S.Contents>
           <S.Image src={LightRio} />
+          <S.SubHeader>사라져버린 빛을 찾아</S.SubHeader>
           <S.Header>
             관악의 밤
             {' '}
@@ -33,9 +43,9 @@ function MissionCard({ setIsModalOpen }) {
             이벤트
           </S.Header>
           <S.Text>
-            - 웹사이트 곳곳을 돌아다니며 반짝거리는 빛을 찾아보세요!
+            - 학교 곳곳으로 사라져버린 빛들을 찾아 관악의 밤을 밝혀주세요!
             <br />
-            - 찾아야 하는 빛은 총 10개! 모두 모아 미션을 완수하세요.
+            - 찾아야 하는 빛은 총 10개! 빛을 찾아 클릭하세요.
           </S.Text>
           <S.Button onClick={() => setIsModalOpen(false)}>확인</S.Button>
         </S.Contents>
