@@ -10,20 +10,22 @@ import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
 import MissionCard from '@C/home/MissionCard';
-import Skeleton from '@I/skeleton/skeleton.png';
-import FestivalBackground from '@I/introduction/festival-background.jpg';
-import Poster21SpringCastle from '@I/poster/21springCastle.png';
-import Poster21Spring from '@I/poster/21spring.png';
-import Riddle from '@I/activity/home/riddle.png';
-import TreasureHunt from '@I/activity/home/treasure-hunt.png';
 
-import Envelope from '@I/icon/stamp/envelope.gif';
-import EnvelopeImage from '@I/icon/stamp/envelope.png';
 import { preloadImage } from '@U/functions/preload';
-import Universe from '@I/tarot/universe.jpg';
-import FortuneTeller from '@I/tarot/fortune-teller.png';
-import Ball from '@I/tarot/ball.png';
-import Glow from '@I/tarot/glow.png';
+
+import LightRio from '@I/home/LightRio.png';
+import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
+import HitTheStageIcon from '@I/performance/icon/hit-the-stage-icon.png';
+import GameTournamentIcon from '@I/performance/icon/game-tournament-icon.png';
+import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
+import CompetitionIcon from '@I/activity/home/competition.png';
+import MiniIcon from '@I/activity/home/mini.png';
+import GroupIcon from '@I/activity/home/group.png';
+import RadioIcon from '@I/activity/home/radio.png';
+import OmokIcon from '@I/activity/home/omok.png';
+import RiddleIcon from '@I/activity/home/riddle.png';
+import HandwritingIcon from '@I/activity/home/handwriting.png';
+import PlaceIcon from '@I/activity/home/place.png';
 
 // import BackgroundTop from '@I/home/desktop/background-top.png';
 import BackgroundTop from '@I/home/desktop/background-top-light.png';
@@ -76,9 +78,9 @@ function Home({ theme }) {
   const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard);
   const onLoad = useCallback(() => {
     setIsLoading(false);
-    [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
-      Riddle, TreasureHunt, Envelope, EnvelopeImage,
-      Universe, Ball, Glow, FortuneTeller,
+    [LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+      CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
+      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon,
     ].forEach(preloadImage);
   }, []);
 
@@ -89,10 +91,33 @@ function Home({ theme }) {
     </CS.StandContainer>
   );
 
+  const clickRio = useCallback(() => {
+    setRioWaked(true);
+    setTimeout(() => {
+      setIsMissionModalOpen(true);
+    }, 400);
+  }, [rioWaked]);
+
   const Rio = ({
     waked, top, left, width,
   }) => (
-    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={width} />
+    <>
+      <CS.Rio
+        onClick={() => clickRio()}
+        waked={waked}
+        src={waked ? WakeRio : SleepRio}
+        top={top}
+        left={left}
+        width={width}
+      />
+      <CS.RioBubble
+        top={top}
+        left={left}
+        width={width}
+      >
+        꽥!
+      </CS.RioBubble>
+    </>
   );
 
   const LIGHT_LOC = [

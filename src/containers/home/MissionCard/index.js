@@ -1,38 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import Card from '@I/icon/stamp/card.png';
-import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
-import PerformanceMascot from '@I/icon/stamp/performance-stamp.png';
-import CompetitionStamp from '@I/icon/stamp/competition-stamp.png';
-import ActivityStampOne from '@I/icon/stamp/activity-stamp-1.png';
-import ActivityStampTwo from '@I/icon/stamp/activity-stamp-2.png';
-import Envelope from '@I/icon/stamp/envelope.gif';
-import EnvelopeImage from '@I/icon/stamp/envelope.png';
+import React, { useState, useEffect, useMemo } from 'react';
+import LightRio from '@I/home/LightRio.png';
 import useMission from '@U/hooks/useMission';
-import useAuth from '@U/hooks/useAuth';
+import { useUser } from '@U/hooks/useAuth';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
+import { useSelector, useDispatch } from 'react-redux';
+import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
-function MissionCard() {
-  useAuth();
+function MissionCard({ setIsModalOpen }) {
+  const { user, isAuthorized } = useUser();
   const mission = useMission();
+  const lightArray = useSelector(state => state.mission.light);
+  const dispatch = useDispatch();
+  const isPlaying = useMemo(() => lightArray !== null, [lightArray]);
 
-  const [hideGif, setHideGif] = useState(false);
-  useEffect(() => {
-    EventBehavior('Mission', 'Click Mission Card', 'Click Mission Card');
-    setTimeout(() => setHideGif(true), 1050);
-  }, []);
+  // useEffect(() => {
+  //   if (isAuthorized && !isPlaying) {
+  //     dispatch(actions.intializeLight());
+  //   }
+  // }, [isAuthorized, isPlaying]);
 
   return (
     <>
-      {!hideGif && <S.Envelope src={Envelope} alt="미션 봉투" />}
-      <S.EnvelopeImage src={EnvelopeImage} alt="미션 봉투" />
       <S.StyledMissionCard>
-        <S.Card src={Card} alt="미션 카드" />
-        {mission.guestBook && <S.Stamp src={GuestBookStamp} alt="방명록 도장" width={16.3} top={17.7} left={12.3} />}
-        {mission.performance && <S.Stamp src={PerformanceMascot} alt="공연 도장" width={15.4} top={26.5} left={24} />}
-        {mission.competition && <S.Stamp src={CompetitionStamp} alt="공모전 도장" width={18.5} top={28} left={37.5} />}
-        {mission.miniOne && <S.Stamp src={ActivityStampOne} alt="행사 도장" width={31} top={8.68} left={53.25} />}
-        {mission.miniTwo && <S.Stamp src={ActivityStampTwo} alt="행사 도장" width={19.1} top={3.7} left={39.3} />}
+        <S.Contents>
+          <S.Image src={LightRio} />
+          <S.Header>
+            관악의 밤
+            {' '}
+            <S.PinkText>빛 찾기</S.PinkText>
+            {' '}
+            이벤트
+          </S.Header>
+          <S.Text>
+            - 웹사이트 곳곳을 돌아다니며 반짝거리는 빛을 찾아보세요!
+            <br />
+            - 찾아야 하는 빛은 총 10개! 모두 모아 미션을 완수하세요.
+          </S.Text>
+          <S.Button onClick={() => setIsModalOpen(false)}>확인</S.Button>
+        </S.Contents>
       </S.StyledMissionCard>
     </>
   );

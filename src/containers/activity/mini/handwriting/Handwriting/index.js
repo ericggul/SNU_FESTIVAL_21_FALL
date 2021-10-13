@@ -22,8 +22,6 @@ function Handwriting({ theme }) {
   const { user, isAuthorized } = useUser();
   const miniGame = useMiniGame();
 
-  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-
   const [sectorNum, setSectorNum] = useState(-1);
   const handleClick = useCallback((i) => {
     setSectorNum(i);
@@ -32,40 +30,46 @@ function Handwriting({ theme }) {
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
   console.log('hand', handwritingArray);
   const solvedArrayMultipleSectors = useCallback((handwritings) => {
-    console.log(handwritings);
     const solvedNumberArray = [];
     const solvedRateArray = [];
-    for (let i = 0; i < COLLEGES.length; i += 1) {
-      const inputString = handwritings[i].toString(2);
-      const array = [];
-      const solvedIndexesStorage = [];
-      const unSolvedIndexesStorage = [];
-      let solvedNumber;
-      let solvedRate;
-      for (let idx = 0; idx < CONVERTED_MAJORS[i].length; idx += 1) {
-        if (idx < inputString.length) {
-          array[idx] = parseInt(inputString[inputString.length - 1 - idx], 10);
-          if (array[idx] === 1) {
-            solvedIndexesStorage.push(idx);
+    if (handwritings) {
+      for (let i = 0; i < COLLEGES.length; i += 1) {
+        const inputString = handwritings[i].toString(2);
+        const array = [];
+        const solvedIndexesStorage = [];
+        const unSolvedIndexesStorage = [];
+        let solvedNumber;
+        let solvedRate;
+        for (let idx = 0; idx < CONVERTED_MAJORS[i].length; idx += 1) {
+          if (idx < inputString.length) {
+            array[idx] = parseInt(inputString[inputString.length - 1 - idx], 10);
+            if (array[idx] === 1) {
+              solvedIndexesStorage.push(idx);
+            } else {
+              unSolvedIndexesStorage.push(idx);
+            }
           } else {
+            array[idx] = 0;
             unSolvedIndexesStorage.push(idx);
           }
-        } else {
-          array[idx] = 0;
-          unSolvedIndexesStorage.push(idx);
         }
+        solvedNumber = solvedIndexesStorage.length;
+        solvedRate = solvedNumber / CONVERTED_MAJORS[i].length;
+        solvedNumberArray.push(solvedNumber);
+        solvedRateArray.push(solvedRate);
       }
-      solvedNumber = solvedIndexesStorage.length;
-      solvedRate = solvedNumber / CONVERTED_MAJORS[i].length;
-      solvedNumberArray.push(solvedNumber);
-      solvedRateArray.push(solvedRate);
     }
-
     return [solvedNumberArray, solvedRateArray];
   }, []);
-  let [solvedNumbers, solvedRates] = solvedArrayMultipleSectors(handwritingArray);
-  useEffect(() => {
+  let solvedNumbers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let solvedRates = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  if (handwritingArray) {
     [solvedNumbers, solvedRates] = solvedArrayMultipleSectors(handwritingArray);
+  }
+  useEffect(() => {
+    if (handwritingArray && solvedNumbers && solvedRates) {
+      [solvedNumbers, solvedRates] = solvedArrayMultipleSectors(handwritingArray);
+    }
   }, [sectorNum]);
 
   console.log('solvedNumbers', solvedNumbers, solvedRates);
@@ -108,7 +112,6 @@ function Handwriting({ theme }) {
       >
         <QuestionSector sectorNum={sectorNum} />
       </FullScreen>
-      {signInModalComponent}
     </S.StyledHandwriting>
   );
 }

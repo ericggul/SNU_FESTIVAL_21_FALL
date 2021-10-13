@@ -47,7 +47,7 @@ export const Landmark = styled.img`
 
   @keyframes shine{
     70%{ filter: brightness(1) saturate(100%) drop-shadow(0 0 0 white);}
-    100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 0 ${({ width }) => width / 15}px white); 
+    100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 0 ${({ width }) => width / 20}px white); 
   }
   }
 
@@ -137,6 +137,7 @@ export const LightImage = styled.img`
 `;
 
 export const Rio = styled.img`
+  cursor: pointer;
   position: absolute;
   width: ${({ width }) => width}px;
   height: auto;
@@ -154,7 +155,33 @@ export const Rio = styled.img`
     73%{transform: rotate(0);}
   }
 
-  animation: rotate 4s linear infinite;
+  @keyframes wake{
+    0%{ transform: rotate(-7deg);}
+    3%{transform: rotate(5deg);}
+    6%{transform: rotate(-4deg);}
+    8%{transform: rotate(3deg);}
+    10%{transform: rotate(-2deg);}
+    12%{transform: rotate(1deg);}
+    13%{transform: rotate(0);}
+  }
+
+  ${props => !props.waked && 'animation: rotate 4s linear infinite;'}
+  ${props => props.waked && 'animation: wake 3s linear;'}
+`;
+
+export const RioBubble = styled.div`
+  ${FlexCenterStyle};
+  text-align: center;
+  position: absolute;
+  ${props => props.top && css`top: ${props.top}px`};
+  ${props => props.left && css`left: ${props.left + props.width}px`};
+  background: ${({ theme }) => theme.palette.WHITE};
+  width: calc(min(10vw, 60px));
+  height: calc(min(6vw, 25px));
+  border-radius: calc(min(3vw, 13px));
+  box-shadow: 
+      0 0 1px ${({ theme }) => theme.palette.WHITE},
+      0 0 3px ${({ theme }) => theme.palette.WHITE};
 `;
 
 export const Text = styled.div`

@@ -16,6 +16,7 @@ import * as S from './styles';
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function Map({ theme, handleClick, solvedRates }) {
+  console.log('inside solved rates', solvedRates);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
 

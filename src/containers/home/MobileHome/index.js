@@ -66,10 +66,24 @@ function MobileHome({ theme }) {
     </CS.StandContainer>
   );
 
+  const clickRio = useCallback(() => {
+    setRioWaked(true);
+    setTimeout(() => {
+      setIsMissionModalOpen(true);
+    }, 400);
+  }, [rioWaked]);
+
   const Rio = ({
     waked, top, left, width,
   }) => (
-    <CS.Rio src={waked ? WakeRio : SleepRio} top={top} left={left} width={width} />
+    <CS.Rio
+      onClick={() => clickRio()}
+      src={waked ? WakeRio : SleepRio}
+      waked={waked}
+      top={top}
+      left={left}
+      width={width}
+    />
   );
 
   const LIGHT_LOC = [

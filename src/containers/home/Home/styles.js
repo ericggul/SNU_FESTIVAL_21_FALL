@@ -20,11 +20,6 @@ export const StyledHome = styled.div`
   align-items: center;
   justify-content: center;
 
-  // @keyframes change-color{
-  //   0%{ background-color: black;}
-  //   100%{ background-color: ${({ theme }) => theme.palette.HOME_PURPLE2};}
-  // }
-  // animation: change-color 1s linear;
 `;
 
 export const Wrapper = styled.div`

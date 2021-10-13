@@ -71,6 +71,10 @@ export const palette = {
   OMOK_PURPLE: '#9c65f1',
   OMOK_POPUP_PURPLE: '#b286ed',
 
+  // 빛 찾기
+  CREAM_PURPLE: '#e5ddff',
+  SOFTPASTEL_PURPLE: '#a494d9',
+
   WHITE: '#fff',
 
   STAR_YELLOW: '#feee96',
