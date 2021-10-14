@@ -1,17 +1,23 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withTheme } from 'styled-components';
 import SearchLogo from '@I/fortune/Search.svg';
 import useInput from '@U/hooks/useInput';
+import { sha256 } from 'js-sha256';
+import { ANSWERS } from '@C/fortune/Search/data';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function Search({ number, theme, backToMain }) {
   const width = useMemo(() => Math.min(theme.windowWidth, 700), [theme]);
   const { value, onChange, setValue } = useInput(number);
+  const [lucky, setLucky] = useState(false);
   useEffect(() => {
+    if (ANSWERS.includes(sha256(number))) {
+      setLucky(true);
+    }
     setValue(number);
-  }, []);
+  }, [number]);
 
   const DATA = [
     {
@@ -35,26 +41,54 @@ function Search({ number, theme, backToMain }) {
       link: 'https://zzang.com/jabti',
     },
     {
+      header: '그러길래',
+      body: `그러길래 누가 ${number}번 뽑으래? 메롱 :->`,
+      link: 'https://snufestival.com/404',
+    },
+    {
       header: '서울대학교 가을축제 관악의 밤',
-      body: '10월 26일 - 10월 29일, 밝게 빛날 관악의 밤을 상상해보세요.',
+      body: '10월 26일 - 10월 29일, 밝게 빛날 관악의 밤을 상상해보세요. 풍선마당과 웹사이트를 통해 열리는 관악의 밤, 기대해주세요!',
       link: 'https://ajik.gaebal.jung',
     },
     {
       header: '서울대학교 겨울축제 관악의 눈',
-      body: '포스트-코로나 시대의 포스트-페스티벌, 관악의 눈을 통해 ',
+      body: '포스트-코로나 시대의 포스트-페스티벌. 아무런 걱정 없이 눈오는 날을 반겼던 어른이들을 추억하며.',
       link: 'https://snufestival.com/gwanak-eyes',
     },
     {
-      header: '야비티아이',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
-      link: 'https://snufestival.com/jabti',
+      header: '404 Page Not Found.',
+      body: '죄송합니다. 방문하시려는 페이지의 주소가 잘못 입력된것 같습니다. 입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.',
+      link: 'https://snufestival.com/404',
     },
     {
-      header: '야비티아이',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
-      link: 'https://snufestival.com/jabti',
+      header: '404 Page Not Found.',
+      body: '404. That\'s an error. The requested URL was not found on this server.',
+      link: 'https://snufestival.com/404',
+    },
+    {
+      header: '꽝',
+      body: '꽝이라고요. 그만 내려보세요.',
+      link: 'https://kwwang.co.kr',
     },
   ];
+
+  const LUCKY_DATA = [
+    {
+      header: 'I\'m Feeling Lucky!',
+      body: '축하합니다! 포춘쿠키 이벤츠에 당첨되셨습니다.',
+      link: 'https://lucky.congrats',
+    },
+
+  ];
+
+  const [dataSet, setDataSet] = useState(DATA);
+
+  useEffect(() => {
+    if (lucky) {
+      setDataSet(LUCKY_DATA);
+    }
+  }, [lucky]);
+
   return (
     <S.StyledSearch>
       <S.Text top={width * 0.6} onClick={backToMain}>
@@ -74,7 +108,7 @@ function Search({ number, theme, backToMain }) {
       </S.SearchContainer>
       <S.MainContainer>
         <S.Result>검색결과 약 4,810개 (0.39초)</S.Result>
-        {DATA.map((d, i) => (
+        {dataSet.map((d, i) => (
           <a key={i} href={d.link} style={{ textDecoration: 'none' }}>
             <S.Component key={i}>
               <S.Link>{d.link}</S.Link>

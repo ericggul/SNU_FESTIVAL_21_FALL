@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback, useMemo, useState, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import Loading from '@I/home/mobile/background-bottom-light.png';
 import { useHistory } from 'react-router';
@@ -51,12 +53,18 @@ function MobileHome({ theme, user, isAuthorized }) {
   const lightArray = useSelector(state => state.mission.light);
   const isLightPlaying = useMemo(() => isAuthorized && lightArray !== null, [lightArray]);
   const foundedLightNumbers = useMemo(() => (lightArray ? sumOfArray(lightArray) : 0), [lightArray]);
+  console.log(isLightPlaying);
   console.log(foundedLightNumbers);
 
   const [isLoading, setIsLoading] = useState(true);
   const [gateOn, setGateOn] = useState(false);
   const [lightIsOn, setLightIsOn] = useState(foundedLightNumbers);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
+
+  useEffect(() => {
+    setLightIsOn(foundedLightNumbers);
+    setRioWaked(isLightPlaying);
+  }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
   const history = useHistory();
   const goToPage = useCallback((route) => {

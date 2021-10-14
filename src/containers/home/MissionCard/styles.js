@@ -94,6 +94,7 @@ export const Text = styled.div`
 `;
 
 export const Button = styled.div`
+  cursor: pointer;
   margin-top: 1.3rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
