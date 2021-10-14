@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useResize from '@U/hooks/useResize';
+
+import BusSample from '@I/home/mobile/bus1.png';
 import * as d3 from 'd3';
 import * as S from './styles';
 
 function CustomPath() {
-  const path = 'M10.362 18.996s-6.046 21.453 1.47 25.329c10.158 5.238 18.033-21.308 29.039-18.23 13.125 3.672 18.325 36.55 18.325 36.55l12.031-47.544';
-  const height = 79.375;
-  const width = 79.375;
-  const [scaledPath, setScaledPath] = useState('M 10.364');
+  const path = 'M247 1C187 25 71.8001 94.2 91.0001 179C115 285 118.5 263.5 171 337C223.5 410.5 253 456.5 130.5 571C7.99986 685.5 165.5 812 190 838C214.5 864 302 957 142.5 1087.5C14.8999 1191.9 -4.33346 1208.33 1.99988 1203.5';
+  const height = 1205;
+  const width = 248;
+  const [scaledPath, setScaledPath] = useState('M 10.362');
   const [windowWidth, windowHeight] = useResize();
 
   useEffect(() => {
@@ -23,9 +25,11 @@ function CustomPath() {
     <S.StyledCustomPath>
       <div className="result" style={{ position: 'relative', width: '100vw', height: '100vh' }}>
         <svg className="svg" style={{ position: 'absolute', width: '100%', height: '100%' }}>
-          <path className="path" style={{ fill: 'none', stroke: '#f00', strokeWidth: '12' }} />
+          <path className="path" style={{ fill: 'none', stroke: 'black', strokeWidth: '12' }} />
         </svg>
-        <S.Element path={scaledPath} />
+        <S.Element path={scaledPath}>
+          <S.BusObject src={BusSample} />
+        </S.Element>
       </div>
     </S.StyledCustomPath>
   );

@@ -5,9 +5,8 @@ export const StyledCustomPath = styled.div`
 `;
 
 export const Element = styled.div`
-    height: 40px;
-    width: 40px;
-    background: pink;
+    height: 60px;
+    width: 60px;
     position: absolute;
     offset-path:  path('${({ path }) => path}');
     @keyframes travel{
@@ -19,7 +18,11 @@ export const Element = styled.div`
         }
     }
 
-    animation: travel 2s infinite alternate;
+    animation: travel 5s linear forwards;
 `;
 
+export const BusObject = styled.img`
+    width: 100%;
+    height: auto;
+`;
 // offset-path: path(${({ path }) => path});
