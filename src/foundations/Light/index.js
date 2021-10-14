@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
@@ -139,8 +139,16 @@ export function Light7({
     }
     return array;
   }, []);
+
+  const [animate, setAnimate] = useState(false);
+  const onClick = useCallback(() => {
+    setAnimate(true);
+    setTimeout(() => {
+      handleClick();
+    }, 1000);
+  }, [animate]);
   return (
-    <S.StyledLight1 top={top} left={left} width={width / 5} onClick={handleClick}>
+    <S.StyledLight1 animate={animate} top={top} left={left} width={width / 5} onClick={onClick}>
       {randomArray.map((pos, i) => (
         <S.Axis3 top={pos.y} left={pos.x} width={pos.size} rotate={pos.rotate} delay={i * 0.1} key={i} />
       ))}

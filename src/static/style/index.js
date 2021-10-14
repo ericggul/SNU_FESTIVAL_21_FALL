@@ -74,6 +74,9 @@ export const palette = {
   // 빛 찾기
   CREAM_PURPLE: '#e5ddff',
   SOFTPASTEL_PURPLE: '#a494d9',
+  GUIDE_PURPLE: '#14122D',
+  GUIDE_SHADOW_PURPLE: '#434064',
+  GUIDE_TEXT_PURPLE: '#CCD3F5',
 
   WHITE: '#fff',
 
@@ -133,6 +136,7 @@ export const zIndex = {
   fullScreen: 100,
   mouseTrail: 200,
   loading: 1000,
+  light: 2000,
 };
 
 export const theme = {

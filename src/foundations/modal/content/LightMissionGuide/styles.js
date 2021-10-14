@@ -13,22 +13,24 @@ export const StyledMissionCard = styled.div`
   position: relative;
 
   min-width: 264px;
-  width: 70vw;
+  width: 30rem;
+  height: 30rem;
 
-  @media (orientation: landscape) {
-    width: 40vw;
-    height: 90vh;
-  }
+  // @media (orientation: landscape) {
+  //   width: 40vw;
+  //   height: 90vh;
+  // }
   
-  @media (orientation: portrait) {
-    width: 90vw;
-    height: auto;
-  }
+  // @media (orientation: portrait) {
+  //   width: 90vw;
+  //   height: auto;
+  // }
   
   ${disappear};
-  animation: disappear 1.5s linear reverse backwards;
+  animation: disappear 1s linear reverse backwards;
   ${FlexCenterStyle};
-  background: ${({ theme }) => theme.palette.CREAM_PURPLE};
+  background: ${({ theme }) => theme.palette.GUIDE_PURPLE};
+  box-shadow: 0 0 2rem .3rem ${({ theme }) => theme.palette.GUIDE_SHADOW_PURPLE};
 `;
 
 export const Image = styled.img`
@@ -62,7 +64,7 @@ export const Contents = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   text-align: center;
-  color: ${({ theme }) => theme.palette.HOME_PURPLE};
+  color: ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
 `;
 
 export const Header = styled.div`
@@ -79,12 +81,7 @@ margin-top: 2.2rem;
   font-weight: 300;
   font-type: italic;
   color: transparent;
-  text-shadow: 0 0 .1rem ${({ theme }) => theme.palette.HOME_PURPLE};
-`;
-
-export const PinkText = styled.span`
-  color: ${({ theme }) => theme.palette.CHOCO_PURPLE};
-
+  text-shadow: 0 0 .1rem ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
 `;
 
 export const Text = styled.div`
@@ -93,12 +90,29 @@ export const Text = styled.div`
   font-weight: 500;
 `;
 
+export const ButtonContainer = styled.div`
+  ${FlexCenterStyle};
+  margin: .5rem 0;
+`;
+
 export const Button = styled.div`
+  margin: 1rem;
   margin-top: 1.3rem;
   margin-bottom: 1.5rem;
-  font-weight: 600;
-  padding: .5rem 1.9rem;
+  width: 5rem;
+  padding: .4rem .8rem;
+  // font-weight: 600;
   color: white;
-  background: ${({ theme }) => theme.palette.SOFTPASTEL_PURPLE};
-  box-shadow: 0 .3rem .6rem rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 0 1rem ${({ theme }) => theme.palette.CREAM_PURPLE};
+`;
+
+export const ButtonCancel = styled.div`
+  margin: 1rem;
+  margin-top: 1.3rem;
+  margin-bottom: 1.5rem;
+  width: 5rem;
+  padding: .4rem .8rem;
+  // font-weight: 600;
+  color: white;
+  box-shadow: inset 0 0 1rem ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
 `;

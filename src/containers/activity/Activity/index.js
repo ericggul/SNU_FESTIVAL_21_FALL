@@ -23,11 +23,9 @@ import ConstellationFive from '@I/activity/home/constellation5.png';
 // Mission
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
-import { useDispatch } from 'react-redux';
 import useModal from '@U/hooks/useModal';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import PropTypes from 'prop-types';
-import { actions } from '@/redux/mission/state';
 
 import * as S from './styles';
 import * as GS from './gridStyles';
@@ -36,25 +34,26 @@ export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function Activity({ theme, user, isAuthorized }) {
   const mission = useMission();
-  const dispatch = useDispatch();
   const [lightVisible, setLightVisible] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 0;
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, {
-    pageIndicator: PAGE_LIGHT_INDICATOR,
-  });
+  const PAGE_LIGHT_INDICATOR = 4;
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
 
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light && !mission.light[PAGE_LIGHT_INDICATOR]) {
       setLightVisible(true);
+    } else {
+      setLightVisible(false);
     }
-  }, [isAuthorized, mission]);
+  }, [isAuthorized, mission, setIsLightModalOpen]);
+
   const lightMissionClick = useCallback(() => {
     setIsLightModalOpen(true);
-    // temporary placed here
   }, [isAuthorized, mission, lightVisible]);
 
-  console.log(lightVisible);
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
 

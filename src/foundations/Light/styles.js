@@ -4,9 +4,25 @@ export const StyledLight1 = styled.div`
   position: absolute;
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
-  width: 5rem;
-  height: 5rem;
+  transform: translate(-50%, -50%);
+  width: 8rem;
+  height: 8rem;
   cursor: pointer;
+  z-index: ${({ theme }) => theme.zIndex.light};
+
+  @keyframes lightMove{
+    0%{
+    }
+    100%{
+      transform: translate(
+        ${({ theme, left }) => theme.windowWidth / 2 - left}px, 
+        ${({ theme, top }) => theme.windowHeight / 2 - top}px)
+      scale(1.5) rotate(360deg);
+      filter: brightness(3);
+    }
+  }
+
+  ${({ animate }) => animate && 'animation: lightMove 3s forwards;'}
 `;
 
 const CircleCommon = css`
@@ -162,10 +178,6 @@ export const Axis3 = styled.div`
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 3rem .5rem white;
   position: absolute;
-  @keyframes appear{
-    0%{opacity: 0;}
-    100%{opacity: 1;}
-  }
   ${appear};
   animation-delay: ${({ delay }) => delay}s;
 `;
