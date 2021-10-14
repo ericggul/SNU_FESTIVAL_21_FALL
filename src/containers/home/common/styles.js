@@ -114,25 +114,18 @@ export const LightImage = styled.img`
 
   @keyframes occassional{
     0%{ opacity: 0;}
-    1%{opacity: 1;}
-    1.5%{opacity: 0.4;}
-    2%{opacity: 0.8;}
-    2.5%{opacity: 0.2;}
-    3%{opaicty: 0.4;}
-    4%{opacity: 0;}
+    1.5%{opacity: 1;}
+    2.25%{opacity: 0.4;}
+    3%{opacity: 0.8;}
+    3.7%{opacity: 0.2;}
+    4.5%{opaicty: 0.4;}
+    6%{opacity: 0;}
   }
 
-  @keyframes occasionalTwo{
-    0%{ opacity: 0;}
-    1%{ opacity: 0.3;}
-    4%{ opacity: 0;}
-    6%{ opacity: 1;}
-    7%{ opacity: 0;}
-  }
 
   opacity: 1;
   ${props => !props.lightOn && css`opacity: 0;`};
-  ${props => !props.lightOn && css`animation: occassional 30s linear infinite;`};
+  ${props => !props.lightOn && css`animation: occassional 20s linear infinite;`};
   animation-delay: ${props => props.delay}s;
 `;
 

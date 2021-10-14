@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router';
 
-import Loading from '@I/home/desktop/background-bottom-light.png';
 import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
@@ -52,31 +51,32 @@ import WakeRio from '@I/home/mobile/wake-rio.png';
 import StandImage from '@I/home/desktop/stand.png';
 import StandLight from '@I/home/desktop/stand-light.png';
 
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import { useSelector } from 'react-redux';
+import { sumOfArray } from '@U/functions/array';
 import * as CS from '@C/home/common/styles';
 import * as S from './styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function Home({ theme }) {
+function Home({ theme, user, isAuthorized }) {
+  const mission = useMission();
+  const lightArray = useSelector(state => state.mission.light);
+  const isLightPlaying = useMemo(() => isAuthorized && lightArray !== null, [lightArray]);
+  const foundedLightNumbers = useMemo(() => (lightArray ? sumOfArray(lightArray) : 0), [lightArray]);
+  console.log(foundedLightNumbers);
+
   const [isLoading, setIsLoading] = useState(true);
   const [gateOn, setGateOn] = useState(false);
-  const [lightIsOn, setLightIsOn] = useState(false);
-  const [rioWaked, setRioWaked] = useState(false);
-
-  const ratio = useMemo(() => {
-    if (theme.windowWidth >= 1700) return 1;
-    if (theme.windowWidth >= 1600) return 1600 / 1700;
-    if (theme.windowWidth >= 1440) return 1440 / 1700;
-    if (theme.windowWidth >= 1024) return 1024 / 1700;
-    return 768 / 1700;
-  }, [theme.windowWidth]);
+  const [lightIsOn, setLightIsOn] = useState(foundedLightNumbers);
+  const [rioWaked, setRioWaked] = useState(isLightPlaying);
 
   const history = useHistory();
   const goToPage = useCallback((route) => {
     history.push(route);
   }, [history]);
 
-  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard);
   const onLoad = useCallback(() => {
     setIsLoading(false);
     [LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
@@ -92,6 +92,10 @@ function Home({ theme }) {
     </CS.StandContainer>
   );
 
+  // Light Mission
+  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, {
+    isAuthorized,
+  });
   const clickRio = useCallback(() => {
     setRioWaked(true);
     setTimeout(() => {
@@ -131,7 +135,7 @@ function Home({ theme }) {
           <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
-          {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          {LIGHT_LOC.map((pos, i) => <Stand lightOn={i < lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
@@ -149,7 +153,7 @@ function Home({ theme }) {
     </>
   );
 }
-export default Home;
+export default withUser(Home);
 
 Home.propTypes = {
   theme: PropTypes.shape({

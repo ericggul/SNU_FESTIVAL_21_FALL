@@ -37,23 +37,32 @@ import WakeRio from '@I/home/mobile/wake-rio.png';
 import StandImage from '@I/home/mobile/stand.png';
 import StandLight from '@I/home/mobile/stand-light.png';
 
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import { useSelector } from 'react-redux';
+import { sumOfArray } from '@U/functions/array';
 import * as CS from '@C/home/common/styles';
 import * as S from './styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function MobileHome({ theme }) {
+function MobileHome({ theme, user, isAuthorized }) {
+  const mission = useMission();
+  const lightArray = useSelector(state => state.mission.light);
+  const isLightPlaying = useMemo(() => isAuthorized && lightArray !== null, [lightArray]);
+  const foundedLightNumbers = useMemo(() => (lightArray ? sumOfArray(lightArray) : 0), [lightArray]);
+  console.log(foundedLightNumbers);
+
   const [isLoading, setIsLoading] = useState(true);
   const [gateOn, setGateOn] = useState(false);
-  const [lightIsOn, setLightIsOn] = useState(false);
-  const [rioWaked, setRioWaked] = useState(false);
+  const [lightIsOn, setLightIsOn] = useState(foundedLightNumbers);
+  const [rioWaked, setRioWaked] = useState(isLightPlaying);
 
   const history = useHistory();
   const goToPage = useCallback((route) => {
     history.push(route);
   }, [history]);
 
-  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, { width: '95%' });
   const onLoad = useCallback(() => {
     setIsLoading(false);
     [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
@@ -68,6 +77,11 @@ function MobileHome({ theme }) {
     </CS.StandContainer>
   );
 
+  // Light Mission
+  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, {
+    isAuthorized,
+  });
+
   const clickRio = useCallback(() => {
     setRioWaked(true);
     setTimeout(() => {
@@ -75,32 +89,17 @@ function MobileHome({ theme }) {
     }, 400);
   }, [rioWaked]);
 
-  // const Rio = ({
-  //   waked, top, left, width,
-  // }) => (
-  //   <CS.Rio
-  //     onClick={() => clickRio()}
-  //     src={waked ? WakeRio : SleepRio}
-  //     waked={waked}
-  //     top={top}
-  //     left={left}
-  //     width={width}
-  //   />
-  // );
-
   const LIGHT_LOC = [
     { x: 219, y: 273 },
     { x: 44, y: 501 },
     { x: 82, y: 611 },
     { x: 261, y: 641 },
-    // { x: 298, y: 715 },
     { x: 270, y: 839 },
     { x: 53, y: 1043 },
     { x: 242, y: 1098 },
     { x: 188, y: 1222 },
     { x: 313, y: 1199 },
     { x: 310, y: 1308 },
-    // { x: 143, y: 1339 },
   ];
 
   const speak = useCallback((text) => {
@@ -127,7 +126,7 @@ function MobileHome({ theme }) {
           <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1112)} left={convert(4)} width={convert(182)} onClick={() => goToPage('/introduction')} />
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/guest-book')} />
 
-          {LIGHT_LOC.map((pos, i) => <Stand lightOn={lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          {LIGHT_LOC.map((pos, i) => <Stand lightOn={i < lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
@@ -145,7 +144,7 @@ function MobileHome({ theme }) {
     </>
   );
 }
-export default MobileHome;
+export default withUser(MobileHome);
 
 MobileHome.propTypes = {
   theme: PropTypes.shape({

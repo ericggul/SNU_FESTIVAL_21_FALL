@@ -1,5 +1,4 @@
 import React from 'react';
-
 import * as CS from '@C/home/common/styles';
 import SleepRio from '@I/home/mobile/sleep-rio.png';
 import SleepRioTwo from '@I/home/mobile/sleep-rio2.png';

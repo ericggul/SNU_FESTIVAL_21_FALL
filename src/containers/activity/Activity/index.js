@@ -1,4 +1,6 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, {
+  useMemo, useState, useEffect, useCallback,
+} from 'react';
 import { HeaderContent } from '@F/layout/Header';
 import { useHistory } from 'react-router';
 import { withTheme } from 'styled-components';
@@ -8,7 +10,9 @@ import GroupIcon from '@I/activity/home/group.png';
 import RadioIcon from '@I/activity/home/radio.png';
 
 // import SparklySkull from '@F/animation/SparklySkull';
-import { Light2, LightSimple } from '@F/Light';
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
 import { LargeStarQuatro } from '@F/stars/StarComponents';
 import ConstellationOne from '@I/activity/home/constellation1.png';
 import ConstellationTwo from '@I/activity/home/constellation2.png';
@@ -16,13 +20,41 @@ import ConstellationThree from '@I/activity/home/constellation3.png';
 import ConstellationFour from '@I/activity/home/constellation4.png';
 import ConstellationFive from '@I/activity/home/constellation5.png';
 
+// Mission
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import { useDispatch } from 'react-redux';
+import useModal from '@U/hooks/useModal';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import PropTypes from 'prop-types';
+import { actions } from '@/redux/mission/state';
+
 import * as S from './styles';
 import * as GS from './gridStyles';
 
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 
-function Activity({ theme }) {
+function Activity({ theme, user, isAuthorized }) {
+  const mission = useMission();
+  const dispatch = useDispatch();
+  const [lightVisible, setLightVisible] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 0;
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, {
+    pageIndicator: PAGE_LIGHT_INDICATOR,
+  });
+
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light && !mission.light[PAGE_LIGHT_INDICATOR]) {
+      setLightVisible(true);
+    }
+  }, [isAuthorized, mission]);
+  const lightMissionClick = useCallback(() => {
+    setIsLightModalOpen(true);
+    // temporary placed here
+  }, [isAuthorized, mission, lightVisible]);
+
+  console.log(lightVisible);
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
 
@@ -49,43 +81,6 @@ function Activity({ theme }) {
     { x: 132, y: 665, w: 106 },
     { x: 65, y: 629, w: 111 },
     { x: 196, y: 624, w: 107 },
-  ];
-
-  const SUB_POS = [
-    {
-      x: 33, y: 56, w: 30, a: 35,
-    },
-
-    {
-      x: 130, y: 75, w: 40, a: -40,
-    },
-    {
-      x: 160, y: 65, w: 20, a: -40,
-    },
-    {
-      x: 310, y: 80, w: 50, a: 90,
-    },
-    {
-      x: 180, y: 180, w: 40, a: 70,
-    },
-
-    {
-      x: 23, y: 402, w: 24, a: 175,
-    },
-
-    {
-      x: 30, y: 600, w: 30, a: 96,
-    },
-    {
-      x: 280, y: 340, w: 30, a: -14,
-    },
-    {
-      x: 310, y: 680, w: 40, a: -24,
-    },
-    // {x: 33, y: 56, w: 30, a: 35},
-    // {x: 33, y: 56, w: 30, a: 35},
-    // {x: 33, y: 56, w: 30, a: 35},
-    // {x: 33, y: 56, w: 30, a: 35},
   ];
 
   const Constellation = (
@@ -149,13 +144,14 @@ function Activity({ theme }) {
 
         {iconGrid}
 
-        <Light2 top={100} left={100} />
+        <Light7 top={100} left={100} handleClick={lightMissionClick} />
       </S.StyledContainer>
       {Constellation}
+      {lightModalComponent}
     </S.StyledActivity>
   );
 }
-export default withTheme(Activity);
+export default withTheme(withUser(Activity));
 
 Activity.propTypes = {
 
