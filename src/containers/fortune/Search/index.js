@@ -6,7 +6,7 @@ import useInput from '@U/hooks/useInput';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function Search({ number, theme }) {
+function Search({ number, theme, backToMain }) {
   const width = useMemo(() => Math.min(theme.windowWidth, 700), [theme]);
   const { value, onChange, setValue } = useInput(number);
   useEffect(() => {
@@ -25,19 +25,24 @@ function Search({ number, theme }) {
       link: 'https://tallak.co.kr',
     },
     {
-      header: '지금은 \'존버\'할 때입니다.',
-      body: '지금은 ',
+      header: '어림도 없지',
+      body: '기분도 나쁜데 야비티아이나 한번 더하고 가지 그래? 난 순염빡택 나왔어! 설마 뼈는 아니겠지??',
       link: 'https://snufestival.com/jabti',
     },
     {
-      header: '재도전 할 수 있는 기회를 드립니다!',
-      body: '포추쿠키는 총 980개! 아직.. 몇 발 남았다...',
+      header: '지금은 \'존버\'할 때입니다.',
+      body: '포춘쿠키는 총 980개! 아직.. 몇 발 남았다...',
       link: 'https://zzang.com/jabti',
     },
     {
       header: '서울대학교 가을축제 관악의 밤',
       body: '10월 26일 - 10월 29일, 밝게 빛날 관악의 밤을 상상해보세요.',
-      link: 'https://snufestival.com/jabti',
+      link: 'https://ajik.gaebal.jung',
+    },
+    {
+      header: '서울대학교 겨울축제 관악의 눈',
+      body: '포스트-코로나 시대의 포스트-페스티벌, 관악의 눈을 통해 ',
+      link: 'https://snufestival.com/gwanak-eyes',
     },
     {
       header: '야비티아이',
@@ -49,16 +54,10 @@ function Search({ number, theme }) {
       body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
       link: 'https://snufestival.com/jabti',
     },
-    {
-      header: '야비티아이',
-      body: '다음 기회에. 오늘은 운수가 좋지 않은 날이군요',
-      link: 'https://snufestival.com/jabti',
-    },
-
   ];
   return (
     <S.StyledSearch>
-      <S.Text top={width * 0.6}>
+      <S.Text top={width * 0.6} onClick={backToMain}>
         <p>F</p>
         <p>o</p>
         <p>r</p>

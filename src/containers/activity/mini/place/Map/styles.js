@@ -46,7 +46,7 @@ export const Map = styled.img`
 
 export const PointerWrapper = styled.div`
 transform: translateY(-100vh);
-  @keyframes appear{
+  @keyframes appearPointer{
     0%{ transform: translateY(-100vh)};
     80%{transform: translateY(1vh)};
     90%{transform: translateY(-.5vh)};
@@ -55,7 +55,7 @@ transform: translateY(-100vh);
   }
 
   
-  animation: appear .5s forwards;
+  animation: appearPointer .5s forwards;
   animation-delay: ${props => props.delay}s;
 `;
 

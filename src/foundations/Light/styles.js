@@ -33,12 +33,12 @@ const CircleCommon = css`
   border-radius: 50%;
 `;
 
-const appear = css`
-  @keyframes appear{
+const appearLight = css`
+  @keyframes appearLight{
     0%{opacity: 0;}
     100%{opacity: 1;}
   }
-  animation: appear 3s linear alternate infinite backwards;
+  animation: appearLight 3s linear alternate infinite backwards;
 `;
 
 const appearSudden = css`
@@ -112,7 +112,7 @@ export const Circle31 = styled.div`
      0 0 1rem .4rem white,
      0 0 5rem 1rem white;
 
-  ${appear};
+  ${appearLight};
   animation-delay: ${({ delay }) => delay}s;
 `;
 
@@ -135,7 +135,7 @@ export const Circle5 = styled.div`
   box-shadow:
     inset 0 0 1rem white,
      0 0 .5rem .2rem white;
-  ${appear};
+     ${appearLight};
   animation-delay: ${({ delay }) => delay}s;
 `;
 
@@ -178,7 +178,7 @@ export const Axis3 = styled.div`
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 3rem .5rem white;
   position: absolute;
-  ${appear};
+  ${appearLight};
   animation-delay: ${({ delay }) => delay}s;
 `;
 

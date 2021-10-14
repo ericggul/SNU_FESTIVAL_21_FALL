@@ -8,11 +8,11 @@ export const MapContainer = styled.div`
   width:${({ width }) => width}px;
   height: ${({ height }) => height}px;
   margin-top: -${({ height }) => height * 0.11}px;
-  @keyframes appear{
+  @keyframes appearContainer{
     from{opacity: 0;}
     to{opacity: 1;}
   }
-  animation: appear 2s linear backwards;
+  animation: appearContainer 2s linear backwards;
   animation-delay: 1s;
 `;
 

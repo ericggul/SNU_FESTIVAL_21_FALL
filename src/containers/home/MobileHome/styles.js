@@ -23,11 +23,11 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
   overflow: hidden;
 
-  @keyframes appear{
+  @keyframes appearMobileHome{
 
     0%{ opacity: 0; filter: blur(50px);}
     100%{ opacity: 1;}
   }
-  animation: appear 1s linear backwards;
+  animation: appearMobileHome 1s linear backwards;
   animation-delay: .3s;
 `;

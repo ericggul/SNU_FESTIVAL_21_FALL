@@ -32,10 +32,10 @@ export const Wrapper = styled.div`
     ${({ theme }) => theme.palette.HOME_PURPLE2}, 
     ${({ theme }) => theme.palette.HOME_PURPLE3} 100%);
 
-  @keyframes appear{
+  @keyframes appearHome{
     0%{ opacity: 0; filter: blur(100px);}
     100%{ opacity: 1;}
   }
-  animation: appear 1s linear backwards;
+  animation: appearHome 1s linear backwards;
   animation-delay: .3s;
 `;
