@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { FlexCenterStyle } from '@S/responsive/display';
+import { IoMdClose } from 'react-icons/all';
 import media from 'styled-media-query';
 
 const disappear = css`
@@ -12,82 +13,55 @@ const disappear = css`
 export const StyledMissionCard = styled.div`
   position: relative;
 
-  min-width: 264px;
-  width: 30rem;
-  height: 30rem;
+  min-width: 260px;
+  min-height: 380px;
+  border-radius: .5rem;
 
-  // @media (orientation: landscape) {
-  //   width: 40vw;
-  //   height: 90vh;
-  // }
-  
-  // @media (orientation: portrait) {
-  //   width: 90vw;
-  //   height: auto;
-  // }
+  ${media.greaterThan('medium')`
+    width: 450px;
+    height: 450px;
+  `}
   
   ${disappear};
   animation: disappear 1s linear reverse backwards;
   ${FlexCenterStyle};
   background: ${({ theme }) => theme.palette.GUIDE_PURPLE};
-  box-shadow: 0 0 2rem .3rem ${({ theme }) => theme.palette.GUIDE_SHADOW_PURPLE};
+  box-shadow: 0 0 10rem .5rem ${({ theme }) => theme.palette.GUIDE_SHADOW_PURPLE};
 `;
 
-export const Image = styled.img`
-  width: 80%;
-  height: auto;
-  margin: auto;
-  left: 0;
-  right: 0;
-  margin-top: 3rem;
+export const CloseButton = styled.div`
+  z-index: ${({ theme }) => theme.zIndex.fullScreen + 1};
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+`;
 
-  @keyframes fun{
-    0%{ transform: rotate(-4deg);}
-    30%{transform: rotate(5deg) translateY(-10px);
-    filter: brightness(150%);
-    }
-    33%{transform: translateY(0);
-    }
-    35%{transform: rotate(-3deg);
-    filter: brightness(100%);}
-    38%{transform: rotate(3deg);}
-    40%{transform: rotate(-2.5deg);}
-    42%{transform: rotate(2deg);}
-    44%{transform: rotate(-2deg);}
-    46%{transform: rotate(0deg);}
-    100%{transform: rotate(-4deg);}
-  }
-  animation: fun 5s infinite;
+export const CloseIcon = styled(IoMdClose)`
+  width: 30px;
+  height: 30px;
+  color: white;
 `;
 
 export const Contents = styled.div`
   ${FlexCenterStyle};
+  margin-top: auto;
   flex-direction: column;
   text-align: center;
   color: ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
 `;
 
 export const Header = styled.div`
-  
   font-size: 1.5rem;
   font-weight: 500;
-  margin-bottom: .9rem;
-  text-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
-`;
-
-export const SubHeader = styled.div`
-margin-top: 2.2rem;
-  font-size: 1rem;
-  font-weight: 300;
-  font-type: italic;
-  color: transparent;
+  margin-bottom: .7rem;
   text-shadow: 0 0 .1rem ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
 `;
 
 export const Text = styled.div`
   ${FlexCenterStyle};
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: normal;
 `;
 
 export const ButtonContainer = styled.div`
@@ -100,19 +74,10 @@ export const Button = styled.div`
   margin-top: 1.3rem;
   margin-bottom: 1.5rem;
   width: 5rem;
-  padding: .4rem .8rem;
-  // font-weight: 600;
+  padding: .4rem 1.2rem;
+  border-radius: .3rem;
+  font-weight: 500;
   color: white;
-  box-shadow: inset 0 0 1rem ${({ theme }) => theme.palette.CREAM_PURPLE};
-`;
-
-export const ButtonCancel = styled.div`
-  margin: 1rem;
-  margin-top: 1.3rem;
-  margin-bottom: 1.5rem;
-  width: 5rem;
-  padding: .4rem .8rem;
-  // font-weight: 600;
-  color: white;
-  box-shadow: inset 0 0 1rem ${({ theme }) => theme.palette.GUIDE_TEXT_PURPLE};
+  background: ${({ theme }) => theme.palette.SOFTPASTEL_PURPLE};
+  box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
 `;

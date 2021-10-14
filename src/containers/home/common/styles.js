@@ -122,11 +122,28 @@ export const LightImage = styled.img`
     6%{opacity: 0;}
   }
 
-
+  @keyframes fromEventAnimate{
+    0%{ opacity: 0;}
+    5%{opacity: 0.5;}
+    10%{opacity: 0.1;}
+    15%{opacity: 0.7;}
+    20%{opacity: 0.3;}
+    25%{opacity: 0.6;}
+    30%{opacity: 0.2;}
+    33%{opacity: 0.7;}
+    35%{opacity: 0.4;}
+    37%{opacity: 0.6;}
+    39%{opacity: 0.2;}
+    41%{opacity: 0.5;}
+    43%{opacity: 0;}
+    70%{opacity: 0;}
+    100%{opacity: 1;}
+  }
   opacity: 1;
   ${props => !props.lightOn && css`opacity: 0;`};
   ${props => !props.lightOn && css`animation: occassional 20s linear infinite;`};
-  animation-delay: ${props => props.delay}s;
+  ${props => props.fromEvent && css`animation: fromEventAnimate 1.8s linear backwards;`}
+  animation-delay: ${props => (props.fromEvent ? 2 : props.delay)}s;
 `;
 
 export const Rio = styled.img`

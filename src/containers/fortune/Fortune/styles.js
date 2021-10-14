@@ -30,6 +30,7 @@ export const Login = styled.div`
     color: white;
     font-size: 14px;
     cursor: pointer;
+    z-index: 3;
 `;
 
 export const CookieContainer = styled.div`
@@ -45,6 +46,7 @@ export const Image = styled.img`
     width: 100%;
     height: auto;
     object-fit: cover;
+    pointer-events: none;
 `;
 
 export const Text = styled.div`

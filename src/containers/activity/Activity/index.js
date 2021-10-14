@@ -35,7 +35,8 @@ export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 function Activity({ theme, user, isAuthorized }) {
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 4;
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
@@ -43,14 +44,29 @@ function Activity({ theme, user, isAuthorized }) {
 
   useEffect(() => {
     // Doing Mission and not founded
-    if (isAuthorized && mission.light && !mission.light[PAGE_LIGHT_INDICATOR]) {
-      setLightVisible(true);
+
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
     } else {
       setLightVisible(false);
     }
-  }, [isAuthorized, mission, setIsLightModalOpen]);
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  console.log('light modal open', setIsLightModalOpen);
+  useEffect(() => {
+    if (!setIsLightModalOpen) {
+      setSustainLightTemp(false);
+    }
+  }, [setIsLightModalOpen]);
 
   const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
 
@@ -142,7 +158,6 @@ function Activity({ theme, user, isAuthorized }) {
         </S.Description> */}
 
         {iconGrid}
-
         <Light7 top={100} left={100} handleClick={lightMissionClick} />
       </S.StyledContainer>
       {Constellation}

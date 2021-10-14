@@ -60,17 +60,25 @@ import * as S from './styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function Home({ theme, user, isAuthorized }) {
+function Home({
+  theme, fromLightEvent, user, isAuthorized,
+}) {
   const mission = useMission();
-  const lightArray = useSelector(state => state.mission.light);
+  const lightArray = mission.light;
   const isLightPlaying = useMemo(() => isAuthorized && lightArray !== null, [lightArray]);
   const foundedLightNumbers = useMemo(() => (lightArray ? sumOfArray(lightArray) : 0), [lightArray]);
-  console.log(foundedLightNumbers);
+
+  const [brightenLights, setBrightenLights] = useState(foundedLightNumbers);
+  const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
+  const [rioWaked, setRioWaked] = useState(isLightPlaying);
+  const [gateOn, setGateOn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [gateOn, setGateOn] = useState(false);
-  const [lightIsOn, setLightIsOn] = useState(foundedLightNumbers);
-  const [rioWaked, setRioWaked] = useState(isLightPlaying);
+
+  useEffect(() => {
+    setBrightenLights(foundedLightNumbers);
+    setRioWaked(isLightPlaying);
+  }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
   const history = useHistory();
   const goToPage = useCallback((route) => {
@@ -85,10 +93,12 @@ function Home({ theme, user, isAuthorized }) {
     ].forEach(preloadImage);
   }, []);
 
-  const Stand = ({ lightOn, top, left }) => (
+  const Stand = ({
+    lightOn, top, left, fromEvent,
+  }) => (
     <CS.StandContainer top={top} left={left} width={convert(53)}>
       <CS.StandImage src={StandImage} width={convert(53)} />
-      <CS.LightImage lightOn={lightOn} delay={getRandom(-30, 0)} src={StandLight} top={-convert(35)} left={-convert(72)} width={convert(194)} />
+      <CS.LightImage lightOn={lightOn} fromEvent={fromEvent} delay={getRandom(-30, 0)} src={StandLight} top={-convert(35)} left={-convert(72)} width={convert(194)} />
     </CS.StandContainer>
   );
 
@@ -116,6 +126,20 @@ function Home({ theme, user, isAuthorized }) {
     { x: 1314, y: 2043 },
   ];
 
+  // Scroll when from Light Event
+  const scrollTo = useCallback((numbers) => {
+    window.scrollTo({ top: LIGHT_LOC[numbers].y, left: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    if (fromLightEvent) {
+      setAnimateSpecificLight(brightenLights - 1);
+      setTimeout(() => {
+        scrollTo(brightenLights - 1);
+      }, 1000);
+    }
+  }, [fromLightEvent, brightenLights]);
+
   const convert = useCallback((value) => (theme.windowWidth / 1920) * value, [theme]);
 
   return (
@@ -135,7 +159,15 @@ function Home({ theme, user, isAuthorized }) {
           <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
 
-          {LIGHT_LOC.map((pos, i) => <Stand lightOn={i < lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          {LIGHT_LOC.map((pos, i) => (
+            <Stand
+              lightOn={i < brightenLights}
+              top={convert(pos.y)}
+              left={convert(pos.x)}
+              fromEvent={animateSpecificLight === i}
+              key={i}
+            />
+          ))}
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />

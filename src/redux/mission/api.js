@@ -1,7 +1,6 @@
 import { missionCollectionRef } from '@U/initializer/firebase';
 
 export function fetchMissionsFromFirestore(user) {
-  console.log(missionCollectionRef.doc(user.uid).get());
   return missionCollectionRef.doc(user.uid).get().then((doc) => (doc.exists ? doc.data() : null));
 }
 

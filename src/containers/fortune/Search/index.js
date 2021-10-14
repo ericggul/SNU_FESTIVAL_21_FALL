@@ -32,7 +32,7 @@ function Search({ number, theme, backToMain }) {
     },
     {
       header: '어림도 없지',
-      body: '기분도 나쁜데 야비티아이나 한번 더하고 가지 그래? 난 순염빡택 나왔어! 설마 뼈는 아니겠지??',
+      body: '기분도 나쁜데 야비티아이나 한번 더하고 가지 그래? 난 순염빡택 나왔어!',
       link: 'https://snufestival.com/jabti',
     },
     {
@@ -75,17 +75,19 @@ function Search({ number, theme, backToMain }) {
   const LUCKY_DATA = [
     {
       header: 'I\'m Feeling Lucky!',
-      body: '축하합니다! 포춘쿠키 이벤츠에 당첨되셨습니다.',
+      body: '축하합니다! 포춘쿠키 이벤트에 당첨되셨습니다.',
       link: 'https://lucky.congrats',
     },
 
   ];
 
-  const [dataSet, setDataSet] = useState(DATA);
+  const [dataSet, setDataSet] = useState(null);
 
   useEffect(() => {
     if (lucky) {
       setDataSet(LUCKY_DATA);
+    } else {
+      setDataSet(DATA);
     }
   }, [lucky]);
 
@@ -108,7 +110,7 @@ function Search({ number, theme, backToMain }) {
       </S.SearchContainer>
       <S.MainContainer>
         <S.Result>검색결과 약 4,810개 (0.39초)</S.Result>
-        {dataSet.map((d, i) => (
+        {dataSet && dataSet.map((d, i) => (
           <a key={i} href={d.link} style={{ textDecoration: 'none' }}>
             <S.Component key={i}>
               <S.Link>{d.link}</S.Link>

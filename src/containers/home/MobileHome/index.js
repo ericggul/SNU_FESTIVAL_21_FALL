@@ -48,21 +48,25 @@ import * as S from './styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function MobileHome({ theme, user, isAuthorized }) {
+function MobileHome({
+  theme, fromLightEvent, user, isAuthorized,
+}) {
+  console.log('from light event', fromLightEvent);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Light Event Related
   const mission = useMission();
-  const lightArray = useSelector(state => state.mission.light);
+  const lightArray = mission.light;
   const isLightPlaying = useMemo(() => isAuthorized && lightArray !== null, [lightArray]);
   const foundedLightNumbers = useMemo(() => (lightArray ? sumOfArray(lightArray) : 0), [lightArray]);
-  console.log(isLightPlaying);
-  console.log(foundedLightNumbers);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [gateOn, setGateOn] = useState(false);
-  const [lightIsOn, setLightIsOn] = useState(foundedLightNumbers);
+  const [brightenLights, setBrightenLights] = useState(foundedLightNumbers);
+  const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
+  const [gateOn, setGateOn] = useState(false);
 
   useEffect(() => {
-    setLightIsOn(foundedLightNumbers);
+    setBrightenLights(foundedLightNumbers);
     setRioWaked(isLightPlaying);
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
@@ -78,10 +82,12 @@ function MobileHome({ theme, user, isAuthorized }) {
     ].forEach(preloadImage);
   }, []);
 
-  const Stand = ({ lightOn, top, left }) => (
+  const Stand = ({
+    lightOn, top, left, fromEvent,
+  }) => (
     <CS.StandContainer top={top} left={left} width={convert(18)}>
       <CS.StandImage src={StandImage} width={convert(18)} />
-      <CS.LightImage lightOn={lightOn} delay={getRandom(-30, 0)} src={StandLight} top={-convert(11)} left={-convert(23)} width={convert(62)} />
+      <CS.LightImage lightOn={lightOn} fromEvent={fromEvent} delay={getRandom(-30, 0)} src={StandLight} top={-convert(11)} left={-convert(23)} width={convert(62)} />
     </CS.StandContainer>
   );
 
@@ -110,6 +116,21 @@ function MobileHome({ theme, user, isAuthorized }) {
     { x: 310, y: 1308 },
   ];
 
+  // Scroll when from Light Event
+  const scrollTo = useCallback((numbers) => {
+    window.scrollTo({ top: LIGHT_LOC[numbers].y, left: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    if (fromLightEvent) {
+      setTimeout(() => {
+        scrollTo(brightenLights - 1);
+        setAnimateSpecificLight(brightenLights - 1);
+      }, 1000);
+    }
+  }, [fromLightEvent, brightenLights]);
+
+  // Speak
   const speak = useCallback((text) => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ko';
@@ -134,7 +155,15 @@ function MobileHome({ theme, user, isAuthorized }) {
           <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1112)} left={convert(4)} width={convert(182)} onClick={() => goToPage('/introduction')} />
           <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/guest-book')} />
 
-          {LIGHT_LOC.map((pos, i) => <Stand lightOn={i < lightIsOn} top={convert(pos.y)} left={convert(pos.x)} key={i} />)}
+          {LIGHT_LOC.map((pos, i) => (
+            <Stand
+              lightOn={i < brightenLights}
+              top={convert(pos.y)}
+              left={convert(pos.x)}
+              fromEvent={animateSpecificLight === i}
+              key={i}
+            />
+          ))}
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
