@@ -35,8 +35,12 @@ function LightGuide({
     }
   }, [isAuthorized, isPlaying, mission]);
 
+  // const TEXT_SETS = [
+  //   ''
+  // ]
+
   const REDUNDANT_TEXTS = [
-    `- 현재 찾은 빛 총 ${foundedLightNumbers}개!`,
+    `- ${foundedLightNumbers}번째 빛을 찾았습니다!`,
     `- 홈으로 가서 남은 ${10 - foundedLightNumbers}개를 찾아보세요!`,
   ];
 
