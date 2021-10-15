@@ -39,6 +39,8 @@ import WakeRio from '@I/home/mobile/wake-rio.png';
 import StandImage from '@I/home/mobile/stand.png';
 import StandLight from '@I/home/mobile/stand-light.png';
 
+import CustomPath from '@F/animation/CustomPath';
+
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
 import { useSelector } from 'react-redux';
@@ -169,7 +171,7 @@ function MobileHome({
           <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
           <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
           <CS.Bus index={2} src={BusThree} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />
-
+          <CustomPath isMobile busWidth={convert(67)} />
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1344)} left={convert(35)} width={convert(215)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />

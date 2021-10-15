@@ -19,12 +19,57 @@ import { withTheme } from 'styled-components';
 import MascotForMission from '@C/performance/common/MascotForMission';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
-import Image from '@/foundations/images/Image';
+
+// Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import useModal from '@U/hooks/useModal';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+import Image from '@F/images/Image';
+
 import * as S from '../common/styles';
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
-function HitTheStage({ theme }) {
+function HitTheStage({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(false);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
 
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
@@ -134,13 +179,12 @@ function HitTheStage({ theme }) {
 
         </S.MobileBody>
       )}
-      <MascotForMission
-        performance="hitTheStage"
-      />
+      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      {lightModalComponent}
     </S.Wrapper>
   );
 }
-export default withTheme(HitTheStage);
+export default withTheme(withUser(HitTheStage));
 
 HitTheStage.propTypes = {
   theme: PropTypes.shape({

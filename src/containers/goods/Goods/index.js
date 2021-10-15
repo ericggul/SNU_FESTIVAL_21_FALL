@@ -1,4 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+  useMemo, useState, useCallback, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
 import TextSection from '@C/goods/TextSection';
@@ -9,36 +11,66 @@ import { useUser } from '@U/hooks/useAuth';
 import { getPasswordFromEmail } from '@U/functions/password';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
-import TreasureGuide from '@C/activity/mini/treasure-hunt/TreasureGuide';
-import { actions } from '@/redux/mini-game/state';
 import withUser from '@U/hoc/withUser';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
 import { Balloon } from '@C/activity/group/Group/styles';
 import GreenBalloon from '@I/activity/treasure-hunt/balloon-green.png';
+
+// Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
+import useMission from '@U/hooks/useMission';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+import { actions } from '@/redux/mini-game/state';
+
 import * as S from './styles';
 
-function Goods() {
+function Goods({ user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(false);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   // TODO: 코드 중복
-  const [showTreasure, setShowTreasure] = useState(false);
   const treasureHunt = useSelector(state => state.miniGame.treasureHunt);
   const dispatch = useDispatch();
   const isPlaying = useMemo(() => (
     treasureHunt !== null && !treasureHunt.includes(2)
   ), []);
 
-  const { user, isAuthorized } = useUser();
   const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[1], [user]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-  const { modalComponent: treasureModalComponent, setIsModalOpen: setIsTreasureModalOpen } = useModal(TreasureGuide, { password, url: '/introduction' });
-
-  const findTreasure = () => {
-    if (isAuthorized) {
-      dispatch(actions.pushTreasureHunt(2));
-      setIsTreasureModalOpen(true);
-    } else {
-      setIsSignInModalOpen(true);
-    }
-  };
 
   return (
     <S.StyledGoods>
@@ -52,16 +84,10 @@ function Goods() {
         <ScrollTopButton />
       )}
 
-      {isPlaying && (
-        <S.FakeButton onClickCapture={(e) => { setShowTreasure(true); e.stopPropagation(); }}>
-          <ScrollTopButton />
-        </S.FakeButton>
-      )}
-      {showTreasure && isPlaying && (
-        <Balloon src={GreenBalloon} alt="" top={20} duration={2} onClick={findTreasure} />
-      )}
+      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      {lightModalComponent}
       {signInModalComponent}
-      {treasureModalComponent}
     </S.StyledGoods>
   );
 }

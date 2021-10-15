@@ -4,9 +4,10 @@ export const StyledLight1 = styled.div`
   position: absolute;
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  
+  width: 50px;
+  height: 50px;
+  transform: translate(-25px, -25px);
   cursor: pointer;
   z-index: ${({ theme }) => theme.zIndex.light};
 
@@ -15,8 +16,8 @@ export const StyledLight1 = styled.div`
     }
     100%{
       transform: translate(
-        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 40 : theme.windowWidth / 2 - left - 40)}px, 
-        ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 40 - 80 : theme.windowHeight / 2 - top - 40 - 50)}px)
+        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 25 : theme.windowWidth / 2 - left - 25)}px, 
+        ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 25 - 80 : theme.windowHeight / 2 - top - 25 - 50)}px)
       scale(1.5) rotate(360deg);
       filter: brightness(3);
     }
@@ -27,9 +28,13 @@ export const StyledLight1 = styled.div`
 
 const CircleCommon = css`
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; 
+  bottom: 0;
+  margin: auto;
   width: ${({ width }) => width}px;
   height: ${({ width }) => width}px;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
 `;
 

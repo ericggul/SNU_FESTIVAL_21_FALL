@@ -15,11 +15,52 @@ import useMiniGame from '@U/hooks/useMiniGame';
 
 import { useSelector } from 'react-redux';
 
+// Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
+import useMission from '@U/hooks/useMission';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+
 import FullScreen from '@/foundations/full-screen/HandwritingFullScreen';
 import * as S from './styles';
 
-function Handwriting({ theme }) {
-  const { user, isAuthorized } = useUser();
+function Handwriting({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(false);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   const miniGame = useMiniGame();
 
   const [sectorNum, setSectorNum] = useState(-1);
@@ -112,6 +153,9 @@ function Handwriting({ theme }) {
       >
         <QuestionSector sectorNum={sectorNum} />
       </FullScreen>
+      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      {lightModalComponent}
     </S.StyledHandwriting>
   );
 }

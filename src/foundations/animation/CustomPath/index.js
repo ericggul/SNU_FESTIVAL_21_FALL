@@ -6,28 +6,40 @@ import BusSample from '@I/home/mobile/bus1.png';
 import * as d3 from 'd3';
 import * as S from './styles';
 
-function CustomPath() {
-  const path = 'M247 1C187 25 71.8001 94.2 91.0001 179C115 285 118.5 263.5 171 337C223.5 410.5 253 456.5 130.5 571C7.99986 685.5 165.5 812 190 838C214.5 864 302 957 142.5 1087.5C14.8999 1191.9 -4.33346 1208.33 1.99988 1203.5';
+function CustomPath({ isMobile = false, busWidth = 50 }) {
+  const MobilePath = 'M247 1C187 25 71.8001 94.2 91.0001 179C115 285 118.5 263.5 171 337C223.5 410.5 253 456.5 130.5 571C7.99986 685.5 165.5 812 190 838C214.5 864 302 957 142.5 1087.5C14.8999 1191.9 -4.33346 1208.33 1.99988 1203.5';
+  const DesktopPath = 'M1697 1C1503.67 30.3333 1055.8 113.8 811 213C505 337 151 435 179 651C207 867 689 925 843 981C997 1037 1763 1277 1105 1579C447 1881 53 1867 1 1877';
+
+  const [path, setPath] = useState(isMobile ? MobilePath : DesktopPath);
+
+  useEffect(() => {
+    setPath(isMobile ? MobilePath : DesktopPath);
+  }, [isMobile]);
   const height = 1205;
   const width = 248;
-  const [scaledPath, setScaledPath] = useState('M 10.362');
+  const [scaledPath, setScaledPath] = useState(isMobile ? MobilePath : DesktopPath);
   const [windowWidth, windowHeight] = useResize();
 
   useEffect(() => {
     const container = document.querySelector('.result');
     const responsive = new Meanderer(height, path, width);
-    setScaledPath(responsive.generatePath(container.offsetWidth, container.offsetHeight));
+    setScaledPath(responsive.generatePath(container.offsetWidth));
     container.style.setProperty('--path', `${scaledPath}`);
     d3.select('.result path').attr('d', scaledPath);
   }, [scaledPath, windowWidth, windowHeight]);
 
   return (
     <S.StyledCustomPath>
-      <div className="result" style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+      <div className="result" style={{ position: 'relative', width: '100%', height: '321.3vw' }}>
         <svg className="svg" style={{ position: 'absolute', width: '100%', height: '100%' }}>
-          <path className="path" style={{ fill: 'none', stroke: 'black', strokeWidth: '12' }} />
+          <path
+            className="path"
+            style={{
+              fill: 'none', width: '100%', stroke: 'black', strokeWidth: '12',
+            }}
+          />
         </svg>
-        <S.Element path={scaledPath}>
+        <S.Element path={scaledPath} width={busWidth}>
           <S.BusObject src={BusSample} />
         </S.Element>
       </div>
@@ -37,7 +49,7 @@ function CustomPath() {
 export default CustomPath;
 
 class Meanderer {
-  constructor(height, path, width, threshold = 0.2) {
+  constructor(height, path, width, threshold = 0.1) {
     this.height = height;
     this.path = path;
     this.threshold = threshold;
@@ -57,7 +69,7 @@ class Meanderer {
     ];
   }
 
-  getRatios = (maxs, width, height) => [maxs[0] / width, maxs[1] / height];
+  getRatios = (maxs, width, height) => [maxs[0] / width, maxs[0] / width];
 
   convertPathToData = (path) => {
     const svgContainer = document.createElement('div');
@@ -73,27 +85,29 @@ class Meanderer {
     return DATA;
   }
 
-  generatePath = (containerWidth, containerHeight) => {
+  generatePath = (containerWidth) => {
     const OFFSETS = [0, 0];
-    const newAspectRatio = containerWidth / containerHeight;
+    const newAspectRatio = 1;
     if (Math.abs(newAspectRatio - this.aspect_ratio) > this.threshold) {
       if (this.width < this.height) {
         const ratio = (this.height - this.width) / this.height;
         OFFSETS[0] = (ratio * containerWidth) / 2;
       } else {
         const ratio = (this.width - this.height) / this.width;
-        OFFSETS[1] = (ratio * containerHeight) / 2;
+        OFFSETS[1] = (ratio * containerWidth) / 2;
       }
     }
+
+    console.log(OFFSETS);
 
     const xScale = d3
       .scaleLinear()
       .domain([0, this.maximums[0]])
-      .range([OFFSETS[0], containerWidth * this.range_ratios[0] - OFFSETS[0]]);
+      .range([0, containerWidth * this.range_ratios[0]]);
     const yScale = d3
       .scaleLinear()
       .domain([0, this.maximums[1]])
-      .range([OFFSETS[1], containerHeight * this.range_ratios[1] - OFFSETS[1]]);
+      .range([0, containerWidth * 4.8588 * this.range_ratios[0]]);
 
     const SCALED_POINTS = this.path_data.map(POINT => [
       xScale(POINT[0]), yScale(POINT[1]),

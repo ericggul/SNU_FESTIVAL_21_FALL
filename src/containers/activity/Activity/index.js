@@ -9,10 +9,6 @@ import MiniIcon from '@I/activity/home/mini.png';
 import GroupIcon from '@I/activity/home/group.png';
 import RadioIcon from '@I/activity/home/radio.png';
 
-// import SparklySkull from '@F/animation/SparklySkull';
-import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
-} from '@F/Light';
 import { LargeStarQuatro } from '@F/stars/StarComponents';
 import ConstellationOne from '@I/activity/home/constellation1.png';
 import ConstellationTwo from '@I/activity/home/constellation2.png';
@@ -21,6 +17,9 @@ import ConstellationFour from '@I/activity/home/constellation4.png';
 import ConstellationFive from '@I/activity/home/constellation5.png';
 
 // Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
 import useModal from '@U/hooks/useModal';
@@ -33,18 +32,21 @@ import * as GS from './gridStyles';
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function Activity({ theme, user, isAuthorized }) {
+  /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 5;
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false,
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     });
-
   useEffect(() => {
     // Doing Mission and not founded
-
     if (isAuthorized && mission.light) {
       if (!mission.light[PAGE_LIGHT_INDICATOR]) {
         setLightVisible(true);
@@ -58,18 +60,12 @@ function Activity({ theme, user, isAuthorized }) {
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
 
-  console.log('light modal open', setIsLightModalOpen);
-  useEffect(() => {
-    if (!setIsLightModalOpen) {
-      setSustainLightTemp(false);
-    }
-  }, [setIsLightModalOpen]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
 
+  /// ////////////////////
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
 
@@ -158,7 +154,7 @@ function Activity({ theme, user, isAuthorized }) {
         </S.Description> */}
 
         {iconGrid}
-        <Light7 top={100} left={100} handleClick={lightMissionClick} />
+        <Light2 top={150} left={150} handleClick={lightMissionClick} />
       </S.StyledContainer>
       {Constellation}
       {lightModalComponent}

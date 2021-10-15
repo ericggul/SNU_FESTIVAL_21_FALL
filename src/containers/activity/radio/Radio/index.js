@@ -10,10 +10,55 @@ import DummyImage from '@I/activity/riddle/black/black-opening.png';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
+
+// Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import useModal from '@U/hooks/useModal';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+
 import * as S from './styles';
 
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
-function Radio({ theme }) {
+function Radio({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(false);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [clicked, setClicked] = useState(false);
 
@@ -71,11 +116,13 @@ function Radio({ theme }) {
           <S.Button onClick={() => goToYoutube()} clicked={clicked}>지금 보러가기!</S.Button>
         </S.Container>
       </S.Contents>
-
+      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      {lightModalComponent}
     </S.StyledRadio>
   );
 }
-export default withTheme(Radio);
+export default withTheme(withUser(Radio));
 
 Radio.propTypes = {
   theme: PropTypes.shape({

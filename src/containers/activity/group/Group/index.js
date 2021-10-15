@@ -16,13 +16,56 @@ import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import withUser from '@U/hoc/withUser';
 import TreasureGuide from '@C/activity/mini/treasure-hunt/TreasureGuide';
-import { actions } from '@/redux/mini-game/state';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
+
+// Mission
+import {
+  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+} from '@F/Light';
+import useMission from '@U/hooks/useMission';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+import { actions } from '@/redux/mini-game/state';
+
 import * as S from './styles';
 
-function Group({ theme }) {
+function Group({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 5;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    });
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(false);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   // TODO: 미션 분리
   const [hideImage, setHideImage] = useState(false);
   const treasureHunt = useSelector(state => state.miniGame.treasureHunt);
@@ -32,7 +75,6 @@ function Group({ theme }) {
   ), []);
 
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-  const { user, isAuthorized } = useUser();
   const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[0], [user]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
   const { modalComponent: treasureModalComponent, setIsModalOpen: setIsTreasureModalOpen } = useModal(TreasureGuide, { password, url: '/goods' });
@@ -90,6 +132,9 @@ function Group({ theme }) {
         <RankingSection url={url} />
       </S.Body>
       <S.Button onClick={goToZoom}>줌 링크 바로가기</S.Button>
+      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      {lightModalComponent}
     </S.StyledGroup>
   );
 }

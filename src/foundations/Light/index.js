@@ -31,7 +31,9 @@ export function Light1({ top, left, size = 1 }) {
   );
 }
 
-export function Light2({ top, left, size = 1 }) {
+export function Light2({
+  top, left, size = 1, handleClick,
+}) {
   const width = useMemo(() => size * 10, [size]);
   const getRandom = useCallback((a, b) => Math.random() * (b - a) + a, []);
   const number = 10;
@@ -43,8 +45,17 @@ export function Light2({ top, left, size = 1 }) {
     }
     return array;
   }, []);
+
+  const [animate, setAnimate] = useState(false);
+  const onClick = useCallback(() => {
+    setAnimate(true);
+    setTimeout(() => {
+      handleClick();
+    }, 1000);
+  }, [animate]);
+
   return (
-    <S.StyledLight1 top={top} left={left} width={width}>
+    <S.StyledLight1 animate={animate} top={top} left={left} width={width} onClick={onClick}>
       {randomArray.map((pos, i) => (
         <S.Circle3 top={pos.top} left={pos.left} width={pos.size} delay={i * 0.1} key={i} />
       ))}

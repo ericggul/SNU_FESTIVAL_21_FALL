@@ -51,6 +51,8 @@ import WakeRio from '@I/home/mobile/wake-rio.png';
 import StandImage from '@I/home/desktop/stand.png';
 import StandLight from '@I/home/desktop/stand-light.png';
 
+import CustomPath from '@F/animation/CustomPath';
+
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
 import { useSelector } from 'react-redux';
@@ -174,7 +176,7 @@ function Home({
           <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
           <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />
           <CS.Bus index={3} src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />
-
+          {/* <CustomPath isMobile={false} busWidth={convert(166)} /> */}
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
