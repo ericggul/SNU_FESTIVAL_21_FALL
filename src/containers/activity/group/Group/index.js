@@ -22,7 +22,7 @@ import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light5,
 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
@@ -132,7 +132,7 @@ function Group({ theme, user, isAuthorized }) {
         <RankingSection url={url} />
       </S.Body>
       <S.Button onClick={goToZoom}>줌 링크 바로가기</S.Button>
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light5 top={150} left={150} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledGroup>

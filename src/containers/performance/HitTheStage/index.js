@@ -22,7 +22,7 @@ import { toast } from 'react-toastify';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light6,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
@@ -179,7 +179,7 @@ function HitTheStage({ theme, user, isAuthorized }) {
 
         </S.MobileBody>
       )}
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light6 top={200} left={50} handleClick={lightMissionClick} />
       {lightModalComponent}
     </S.Wrapper>
   );

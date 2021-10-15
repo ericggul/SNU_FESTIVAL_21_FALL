@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  LightSimple2,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
@@ -92,7 +92,7 @@ function Radio({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledRadio>
-      <HeaderContent backgroundColor={theme.palette.TALKSHOW_HEADER}>토크쇼</HeaderContent>
+      <HeaderContent backgroundColor="transparent">토크쇼</HeaderContent>
       {isMobile
         ? <S.Background src={BackMobile} alt="백야 배경" />
         : <S.Background src={BackDesktop} alt="백야 배경" />}
@@ -116,7 +116,7 @@ function Radio({ theme, user, isAuthorized }) {
           <S.Button onClick={() => goToYoutube()} clicked={clicked}>지금 보러가기!</S.Button>
         </S.Container>
       </S.Contents>
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledRadio>

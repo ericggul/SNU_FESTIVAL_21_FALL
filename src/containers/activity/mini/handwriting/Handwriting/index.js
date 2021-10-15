@@ -153,7 +153,7 @@ function Handwriting({ theme, user, isAuthorized }) {
       >
         <QuestionSector sectorNum={sectorNum} />
       </FullScreen>
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light7 top={theme.windowHeight * 0.8} left={theme.windowWidth * 0.3} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledHandwriting>

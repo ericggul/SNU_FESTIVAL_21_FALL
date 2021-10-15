@@ -22,7 +22,7 @@ export const StampDescriptionBoxWrapper = styled.div`
 export const WriteBoxWrapper = styled.div`
   width: 100%;
   height: ${({ theme }) => (theme.windowHeight - 65) * (1 / 4)}px;
-  min-height: 150px;
+  min-height: 15rem;
   padding: 1rem 2rem;
   box-sizing: border-box;
 `;

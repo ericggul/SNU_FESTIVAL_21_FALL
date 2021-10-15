@@ -7,7 +7,7 @@ import Lumination2 from '@F/animation/Lumination/Lumination2';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light4,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
@@ -59,7 +59,7 @@ function FestivalSection({ isMobile, user, isAuthorized }) {
       <PromotionVideoSection />
       <PublisherSection />
 
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light4 top={400} left={0} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledFestivalSection>

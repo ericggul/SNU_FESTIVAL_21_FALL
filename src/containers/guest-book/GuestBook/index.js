@@ -8,7 +8,7 @@ import { HeaderContent } from '@F/layout/Header';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light3,
 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import useModal from '@U/hooks/useModal';
@@ -72,7 +72,7 @@ function GuestBook({ user, isAuthorized }) {
       </S.Body>
       <Heart heartAnimate={heartAnimate} />
 
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light3 top={120} left={250} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledGuestBook>

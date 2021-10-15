@@ -1,6 +1,7 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
+import { withTheme } from 'styled-components';
 import withUser from '@U/hoc/withUser';
 import { HeaderContent } from '@F/layout/Header';
 import TextSection from '@C/activity/competition/TextSection';
@@ -24,14 +25,14 @@ import CompetitionStamp from '@I/icon/stamp/competition-stamp.png';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  LightLetter,
 } from '@F/Light';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 
 import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
-function Competition({ user, isAuthorized }) {
+function Competition({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
@@ -178,14 +179,14 @@ function Competition({ user, isAuthorized }) {
           onVoteForField={setHaveVotedForNewVote}
         />
       </S.Body>
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
       {missionModalComponent}
     </S.StyledCompetition>
   );
 }
-export default withUser(Competition);
+export default withUser(withTheme(Competition));
 
 Competition.propTypes = {
   user: PropTypes.shape({
