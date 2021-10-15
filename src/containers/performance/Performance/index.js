@@ -16,7 +16,7 @@ import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  LightSimple, Light7,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
@@ -34,7 +34,7 @@ function Performance({ theme, user, isAuthorized }) {
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 4;
+  const PAGE_LIGHT_INDICATOR = 0;
 
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
@@ -134,7 +134,7 @@ function Performance({ theme, user, isAuthorized }) {
         {iconGrid}
         {mainPoster}
       </S.StyledContainer>
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledPerformance>

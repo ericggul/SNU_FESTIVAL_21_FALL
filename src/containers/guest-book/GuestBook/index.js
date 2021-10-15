@@ -21,7 +21,7 @@ function GuestBook({ user, isAuthorized }) {
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 5;
+  const PAGE_LIGHT_INDICATOR = 3;
 
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);

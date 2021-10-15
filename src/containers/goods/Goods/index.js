@@ -17,9 +17,7 @@ import { Balloon } from '@C/activity/group/Group/styles';
 import GreenBalloon from '@I/activity/treasure-hunt/balloon-green.png';
 
 // Mission
-import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
-} from '@F/Light';
+import { Light2 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import { actions } from '@/redux/mini-game/state';
@@ -31,7 +29,7 @@ function Goods({ user, isAuthorized }) {
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 5;
+  const PAGE_LIGHT_INDICATOR = 2;
 
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
@@ -84,7 +82,7 @@ function Goods({ user, isAuthorized }) {
         <ScrollTopButton />
       )}
 
-      <Light7 top={150} left={150} handleClick={lightMissionClick} />
+      <Light2 top={150} left={150} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
       {signInModalComponent}

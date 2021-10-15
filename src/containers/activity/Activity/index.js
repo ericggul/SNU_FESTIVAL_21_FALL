@@ -18,7 +18,7 @@ import ConstellationFive from '@I/activity/home/constellation5.png';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light1,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';
@@ -36,7 +36,7 @@ function Activity({ theme, user, isAuthorized }) {
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 5;
+  const PAGE_LIGHT_INDICATOR = 1;
 
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
@@ -154,7 +154,7 @@ function Activity({ theme, user, isAuthorized }) {
         </S.Description> */}
 
         {iconGrid}
-        <Light2 top={150} left={150} handleClick={lightMissionClick} />
+        <Light1 top={theme.windowHeight - 10} left={-40} handleClick={lightMissionClick} />
       </S.StyledContainer>
       {Constellation}
       {lightModalComponent}
