@@ -15,10 +15,11 @@ import * as S from './styles';
 function Omok({ theme }) {
   const [mode, setMode] = useState(null);
   const mainRef = useRef();
-  const { modalComponent: omokModalComponent, setIsModalOpen: setIsOmokModalOpen } = useModal(OmokGuide, { mode });
+  const { modalComponent: omokModalComponent, setIsModalOpen: setIsOmokModalOpen } = useModal(OmokGuide, true, false, {
+    version: mode,
+  });
 
   const createOmok = useCallback((e) => {
-    console.log(e.x, e.y);
     const divider = theme.windowWidth < 768 ? 30 : 50;
     if (mainRef.current) {
       const n = document.createElement('div');
@@ -46,8 +47,11 @@ function Omok({ theme }) {
 
   const transit = useCallback((ver) => {
     setMode(ver);
+
     setIsOmokModalOpen(true);
   }, [mode, setIsOmokModalOpen]);
+
+  console.log(mode);
   return (
     <S.StyledOmok>
       <HeaderContent backgroundColor={theme.palette.OMOK_PURPLE}>
@@ -56,6 +60,7 @@ function Omok({ theme }) {
       <S.Container ref={mainRef}>
         <S.Sector>
           <S.Board src={Board} />
+
           <S.Info>
             <p>진행일시</p>
             <p>10월 26일(화) - 10월 29일(금)</p>
@@ -63,6 +68,10 @@ function Omok({ theme }) {
           </S.Info>
         </S.Sector>
         <S.Sector>
+          <S.Descp>
+            <p>관악의 숨겨진 오목 고수를 찾아라!</p>
+            <p>룰은 쉽지만 머리 좀 쓴다는 샤대생들끼리 붙는다면 예상 못한 진풍경이 펼쳐질지도 몰라요.</p>
+          </S.Descp>
           <S.Links>
             <S.SingleLink onClick={() => transit('black')}>
               <S.Image src={Black} />
@@ -77,6 +86,7 @@ function Omok({ theme }) {
         </S.Sector>
       </S.Container>
       {omokModalComponent}
+
     </S.StyledOmok>
   );
 }

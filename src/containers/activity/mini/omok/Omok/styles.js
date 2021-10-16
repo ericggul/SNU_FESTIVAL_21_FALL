@@ -4,12 +4,12 @@ import { FlexCenterStyle } from '@S/responsive/display';
 export const StyledOmok = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 export const Container = styled.div`
   width: 100%;
-  height: ${({ theme }) => theme.windowHeight - 65}px;
+  min-height: ${({ theme }) => theme.windowHeight - 65}px;
   background: ${({ theme }) => theme.palette.OMOK_PURPLE_BACKGROUND};
   ${FlexCenterStyle};
   flex-direction: column;
@@ -21,18 +21,27 @@ export const Container = styled.div`
 export const Sector = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
-  margin: 2rem;
+  margin: 1rem 2rem;
 `;
 
 export const Board = styled.img`
-  width: 70vw;
+  width: 60vw;
   max-width: 50vh;
   height: auto;
 `;
 
+export const Descp = styled.div`
+  margin-bottom: 0rem;
+  font-size: 0.9rem;
+  max-width: 27rem;
+  word-break: keep-all;
+  font-weight: 400;
+  opacity: .8;
+  p{margin: 0;}
+`;
 export const Info = styled.div`
-  margin: 1.5rem;
-  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   p{margin: 0;}
 `;
@@ -40,7 +49,7 @@ export const Info = styled.div`
 export const Links = styled.div`
   ${FlexCenterStyle};
   flex-direction: row;
-  margin-bottom: 4rem;
+  margin: 3rem;
 `;
 
 export const SingleLink = styled.div`

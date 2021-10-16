@@ -12,6 +12,7 @@ import RedBalloon from '@I/activity/treasure-hunt/balloon-red.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUser } from '@U/hooks/useAuth';
 import { getPasswordFromEmail } from '@U/functions/password';
+import GroupImage from '@I/activity/group/group.jpg';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import withUser from '@U/hoc/withUser';
@@ -40,10 +41,10 @@ function Group({ theme, user, isAuthorized }) {
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
   }, []);
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
-    });
+    }, onModalChange);
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -67,39 +68,47 @@ function Group({ theme, user, isAuthorized }) {
   /// //////////////////////////
 
   // TODO: 미션 분리
-  const [hideImage, setHideImage] = useState(false);
-  const treasureHunt = useSelector(state => state.miniGame.treasureHunt);
-  const dispatch = useDispatch();
-  const isPlaying = useMemo(() => (
-    treasureHunt !== null && !treasureHunt.includes(1)
-  ), []);
 
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-  const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[0], [user]);
-  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-  const { modalComponent: treasureModalComponent, setIsModalOpen: setIsTreasureModalOpen } = useModal(TreasureGuide, { password, url: '/goods' });
-
-  const findTreasure = () => {
-    if (isAuthorized) {
-      dispatch(actions.pushTreasureHunt(1));
-      setIsTreasureModalOpen(true);
-    } else {
-      setIsSignInModalOpen(true);
-    }
-  };
 
   // 링크
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState('https://docs.google.com/forms/d/e/1FAIpQLScyd8QKSfZfJ3RubLhmv0AmqrzGUpQWJYIPZeO8n-pWGmtDbg/viewform');
   const [youtubeUrl, setYoutubeUrl] = useState(null);
+  // useEffect(() => {
+  //   linkCollectionRef.doc('group-game').get()
+  //     .then((doc) => {
+  //       setUrl(doc.data().url);
+  //       setYoutubeUrl(doc.data().youtubeUrl);
+  //     })
+  //     .catch(() => (
+  //       toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+  // }, []);
+
+  const today = new Date();
+  const date = today.getDate();
+  const hours = today.getHours();
+
   useEffect(() => {
-    linkCollectionRef.doc('group-game').get()
-      .then((doc) => {
-        setUrl(doc.data().url);
-        setYoutubeUrl(doc.data().youtubeUrl);
-      })
-      .catch(() => (
-        toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+    if (date > 27) {
+      linkCollectionRef.doc('group-game').get()
+        .then((doc) => {
+          setUrl(doc.data().url);
+          setYoutubeUrl(doc.data().youtubeUrl);
+        })
+        .catch(() => (
+          toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+    } else if (date === 26 && hours > 15) {
+      linkCollectionRef.doc('group-game').get()
+        .then((doc) => {
+          setUrl(doc.data().url);
+          setYoutubeUrl(doc.data().youtubeUrl);
+        })
+        .catch(() => (
+          toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+    }
   }, []);
+
+  console.log(url);
 
   const goToZoom = useCallback(() => {
     if (url !== null && url.length > 0) {
@@ -114,24 +123,46 @@ function Group({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledGroup>
-      <HeaderContent>단체게임</HeaderContent>
+      <HeaderContent backgroundColor="#52cbb2">단체게임</HeaderContent>
       <S.Body>
-        <TextSection />
-        <S.ImageWrapper>
-          <S.Image src={Celebration} alt="물렁팥죽 축전" />
-          { isPlaying && (
-            <>
-              {!hideImage && <S.Image src={Celebration} alt="물렁팥죽 축전" isFake onClick={() => setHideImage(true)} />}
-              <S.Balloon src={RedBalloon} alt="" bottom={isMobile ? -15 : -10} left={5} duration={2} onClick={findTreasure} />
-            </>
-          )}
-          {signInModalComponent}
-          {treasureModalComponent}
-        </S.ImageWrapper>
-        <LiveSection url={youtubeUrl} />
-        <RankingSection url={url} />
+        <S.Poster src={GroupImage} />
+        <S.Title>모여밤, 외쳐밤, 맞춰밤!</S.Title>
+        <S.Descp>
+          “관악의 밤을 새로운 친구들과 맞이하는 법”
+          <br />
+          친구들과 함께 빙고판 미션을 수행하며 친해지고,
+          <br />
+          상대 팀의 마음을 읽는 최고의 독심술사가 되어라!
+          <br />
+          빙고판 미션과 팀 대항 게임에 참여해 우승하면 상품이 와르르!!
+        </S.Descp>
+        <S.Contents>
+          <S.Header>공지 사항</S.Header>
+          <S.Info>
+            **추가 신청은
+            {' '}
+            <S.Bold>10월 26일(화) 15:00까지만</S.Bold>
+            {' '}
+            받습니다!!
+            {' '}
+            <br />
+            개인 신청, 단체 신청 모두 가능합니다!
+          </S.Info>
+        </S.Contents>
+        <S.Contents>
+          <S.Header>일시</S.Header>
+          <S.Info>
+            신청: ~ 10.26(화) 15:00
+            <br />
+            조별 활동: 10.26(화) ~ 10.28(목)
+            <br />
+            줌 게임: 10.26(화), 10.28(목) 18:30~20:00
+
+          </S.Info>
+        </S.Contents>
+        <S.Button onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>
       </S.Body>
-      <S.Button onClick={goToZoom}>줌 링크 바로가기</S.Button>
+
       <Light5 top={150} left={150} handleClick={lightMissionClick} />
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}

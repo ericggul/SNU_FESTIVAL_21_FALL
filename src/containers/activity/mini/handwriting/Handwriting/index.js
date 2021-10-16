@@ -36,10 +36,10 @@ function Handwriting({ theme, user, isAuthorized }) {
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
   }, []);
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
-    });
+    }, onModalChange);
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {

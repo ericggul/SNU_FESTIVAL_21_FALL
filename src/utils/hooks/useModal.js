@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PopupModal from '@F/modal/PopupModal';
 
-const useModal = (ContentComponent, darkBackground = true, listenOpenChange = false, onModalChange, props) => {
+const useModal = (ContentComponent,
+  darkBackground = true,
+  listenOpenChange = false,
+  props,
+  onModalChange) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     if (listenOpenChange && !isModalOpen) {

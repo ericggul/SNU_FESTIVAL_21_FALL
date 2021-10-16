@@ -33,10 +33,10 @@ function Radio({ theme, user, isAuthorized }) {
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
   }, []);
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true, onModalChange,
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
-    });
+    }, onModalChange);
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -105,15 +105,17 @@ function Radio({ theme, user, isAuthorized }) {
         <S.Image src={DummyImage} />
         <S.Container>
           <S.Texts>
-            <p>with.</p>
-            <p>인플루언서</p>
+            <p>With. 진용진</p>
+            <p>이색 샤대생 인터뷰</p>
+            <p>진용진에 대해 알려드림</p>
+            <p>샤대생과 진용진님의 라이어 게임</p>
           </S.Texts>
-          <S.Paragraph>
-            <p>10월 25일</p>
-            <p>아래 링크 클릭</p>
-            <p>안녕하세요</p>
-          </S.Paragraph>
+
           <S.Button onClick={() => goToYoutube()} clicked={clicked}>지금 보러가기!</S.Button>
+          <S.Paragraph>
+            <p>10월 26일(화) 20:00 - 21:00</p>
+            <p>유튜브 라이브: 위 링크 클릭</p>
+          </S.Paragraph>
         </S.Container>
       </S.Contents>
       <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />

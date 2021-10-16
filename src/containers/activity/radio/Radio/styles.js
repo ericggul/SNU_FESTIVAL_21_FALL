@@ -50,20 +50,24 @@ export const Image = styled.img`
 
 export const Texts = styled.div`
   margin: 2rem 0;
-  font-size: 1.2rem;
-  font-weigth: 500;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weigth: 400;
+  opacity: .8;
   p{
     margin: 0;
   }
-  p:nth-of-type(2){
-    font-size: 2rem;
-    font-weigth: 500;
+  p:nth-of-type(1){
+    font-size: 1.4rem;
+    font-weight: 700;
+    opacity: 1;
   }
 `;
 
 export const Paragraph = styled.div`
-  font-size: 1.2rem;
-  font-weigth: 500;
+  font-size: 1rem;
+  opacity: .8;
+  font-weigth: 300;
   p{
     margin: 0;
   }

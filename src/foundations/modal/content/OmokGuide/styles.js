@@ -14,14 +14,16 @@ export const OmokBox = styled(motion.div)`
   flex-direction: column;
   background: white;
   border-radius: 2.4rem;
-  padding: 2.4rem;
+  padding: 2rem;
   justify-content: space-between;
+  ${({ theme }) => theme.windowWidth < 450 && 'height: 40vh'}
 `;
 
 export const Description = styled.div`
   color: ${({ theme }) => theme.palette.TEXT_GRAY};
-  font-size: 1.1rem;
+  font-size: .9rem;
   font-weight: 500;
+  word-break: keep-all;
   top: 0;
   text-align: left;
 `;
