@@ -1,4 +1,6 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, {
+  useMemo, useEffect, useState, useCallback,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { withTheme } from 'styled-components';
 import SearchLogo from '@I/fortune/Search.svg';
@@ -56,6 +58,16 @@ function Search({ number, theme, backToMain }) {
       link: 'https://snufestival.com/gwanak-eyes',
     },
     {
+      header: '본축제가 언제냐고요?',
+      body: '2021년 서울대학교 가을축제 <관악의 밤>은 10월 26일부터 10월 29일까지 개최됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '축하사 인스타그램이 어디있냐고요?',
+      body: '지금 이 링크를 바로 클릭하시면 서울대학교 축제하는사람들 인스타그램으로 연결됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
       header: '404 Page Not Found.',
       body: '죄송합니다. 방문하시려는 페이지의 주소가 잘못 입력된것 같습니다. 입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.',
       link: 'https://snufestival.com/404',
@@ -76,10 +88,59 @@ function Search({ number, theme, backToMain }) {
     {
       header: 'I\'m Feeling Lucky!',
       body: '축하합니다! 포춘쿠키 이벤트에 당첨되셨습니다.',
-      link: 'https://lucky.congrats',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '포춘쿠키 번호 종이를 사진으로 남겨주세요.',
+      body: '찍은 사진과 함께 본 화면을 캠쳐해서 축제하는사람들 인스타그램 계쩡으로 DM을 보내주시면 이벤트 응모가 완료됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '당첨을 축하드립니다!',
+      body: '포춘쿠키 이벤트 당첨을 축하드립니다!',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '축하사 인스타그램으로 사진을 보내주세요.',
+      body: '찍은 사진과 함께 본 화면을 캠쳐해서 축제하는사람들 인스타그램 계쩡으로 DM을 보내주시면 이벤트 응모가 완료됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '꼭 포춘쿠키 번호도 사진으로 찍어주세요!',
+      body: '사진으로 남겨진 포춘쿠키 번호를 인스타그램 DM으로 함께 제출해주셔야지 성공적으로 당첨됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '혹시 당신.. 인스타그램이 없으시다구여?',
+      body: '괜찮습니다! 아래 링크를 통해 카카오톡 플러스친구로 포춘쿠키 번호가 찍혀진 사진을 보내주세요.',
+      link: 'https://pf.kakao.com/_xeELIxd',
+    },
+    {
+      header: '축하사 인스타그램이 어디있냐고요?',
+      body: '지금 이 링크를 바로 클릭하시면 서울대학교 축제하는사람들 인스타그램으로 연결됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
+    },
+    {
+      header: '본축제가 언제냐고요?',
+      body: '2021년 서울대학교 가을축제 <관악의 밤>은 10월 26일부터 10월 29일까지 개최됩니다.',
+      link: 'https://www.instagram.com/snufestival/',
     },
 
   ];
+
+  const SEND_LINKS = ['https://www.instagram.com/snufestival/', 'https://pf.kakao.com/_xeELIxd'];
+
+  const linkConverter = useCallback((display) => {
+    if (display.includes('jabti') || display.includes('instagram') || display.includes('kakao')) {
+      return display;
+    }
+    const today = new Date();
+    const date = today.getDate();
+    if (date > 25) {
+      return 'https://snufestival.com';
+    }
+    return Math.random() < 0.5 ? SEND_LINKS[0] : SEND_LINKS[1];
+  }, []);
 
   const [dataSet, setDataSet] = useState(null);
 
@@ -111,7 +172,7 @@ function Search({ number, theme, backToMain }) {
       <S.MainContainer>
         <S.Result>검색결과 약 4,810개 (0.39초)</S.Result>
         {dataSet && dataSet.map((d, i) => (
-          <a key={i} href={d.link} style={{ textDecoration: 'none' }}>
+          <a key={i} href={linkConverter(d.link)} style={{ textDecoration: 'none' }}>
             <S.Component key={i}>
               <S.Link>{d.link}</S.Link>
               <S.Header>{d.header}</S.Header>
