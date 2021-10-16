@@ -51,7 +51,6 @@ class App {
   animate() {
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     this.waveGroup.draw(this.ctx);
-    console.log('11');
     this.animationRequest = requestAnimationFrame(this.animate.bind(this));
   }
 }

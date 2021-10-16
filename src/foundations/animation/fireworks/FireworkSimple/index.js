@@ -549,7 +549,6 @@ export default function Firework() {
           default:
             throw new Error('version switch should be exhaustive');
         }
-        console.log(`Loaded config (schema version ${schemaVersion})`);
       }
       // Deprecated data format. Checked with care (it's not namespaced).
       else if (localStorage.getItem('schemaVersion') === '1') {
@@ -632,8 +631,6 @@ export default function Firework() {
   const skyLightingSelector = () => +store.state.config.skyLighting;
   const scaleFactorSelector = () => store.state.config.scaleFactor;
 
-  console.log(store.state.config);
-
   // Render app UI / keep in sync with state
   const appNodes = {
     stageContainer: '.stage-container',
@@ -675,8 +672,6 @@ export default function Firework() {
     helpModalBody: '.help-modal__body',
     helpModalCloseBtn: '.help-modal__close-btn',
   };
-
-  console.log(appNodes.stageContainer);
 
   // Convert appNodes selectors to dom nodes
   // Object.keys(appNodes).forEach(key => {
@@ -1269,7 +1264,6 @@ export default function Firework() {
       stageH = containerH / scaleFactor;
     }
   }
-  console.log(appNodes.stageContainer);
 
   // Compute initial dimensions
 
@@ -1536,7 +1530,6 @@ export default function Firework() {
 
   // Helper used to create a spherical burst of particles
   function createBurst(count, particleFactory, startAngle = 0, arcLength = PI_2) {
-    console.log('create burst');
     // Assuming sphere with surface area of `count`, calculate various
     // properties of said sphere (unit is stars).
     // Radius
@@ -1572,7 +1565,6 @@ export default function Firework() {
 
   // Crossette breaks star into four same-color pieces which branch in a cross-like shape.
   function crossetteEffect(star) {
-    console.log('crossette');
     const startAngle = Math.random() * PI_HALF;
     createParticleArc(startAngle, PI_2, 4, 0.5, (angle) => {
       Star.add(
@@ -1588,7 +1580,6 @@ export default function Firework() {
 
   // Flower is like a mini shell
   function floralEffect(star) {
-    console.log('floral');
     const count = 12 + 6 * quality;
     createBurst(count, (angle, speedMult) => {
       Star.add(
@@ -1608,7 +1599,6 @@ export default function Firework() {
 
   // Floral burst with willow stars
   function fallingLeavesEffect(star) {
-    console.log('falling leaves');
     createBurst(7, (angle, speedMult) => {
       const newStar = Star.add(
         star.x,
@@ -1633,7 +1623,6 @@ export default function Firework() {
 
   // Crackle pops into a small cloud of golden sparks.
   function crackleEffect(star) {
-    console.log('crackle');
     const count = isHighQuality ? 32 : 16;
     createParticleArc(0, PI_2, count, 1.8, (angle) => {
       Spark.add(
@@ -1739,7 +1728,6 @@ export default function Firework() {
     }
 
     burst(x, y) {
-      console.log('burst');
       // Set burst speed so overall burst grows to set size. This specific formula was derived from testing, and is affected by simulated air drag.
       const speed = this.spreadSize / 96;
 
@@ -1888,7 +1876,6 @@ export default function Firework() {
         }
         // Normal burst
         else {
-          console.log('normal burst');
           createBurst(this.starCount, starFactory);
         }
       } else if (Array.isArray(this.color)) {
