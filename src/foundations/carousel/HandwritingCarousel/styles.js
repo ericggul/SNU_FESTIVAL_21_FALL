@@ -78,4 +78,7 @@ export const Image = styled.img`
   height: 100%;
   object-fit: contain;
   border-radius: 20px;
+  opacity: ${({ isLoading }) => (isLoading ? 0 : 1)};
+
+  transition: opacity 1s;
 `;
