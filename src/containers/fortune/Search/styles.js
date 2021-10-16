@@ -67,7 +67,7 @@ export const SearchLogo = styled.img`
 `;
 
 export const InputBox = styled.input`
-    height: calc(100% - 2px);
+    height: calc(100% - 6px);
     width: calc(100% - 5rem);
     outline: 0;
     border: 0px;

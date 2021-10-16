@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledGuestBook = styled.div`
-  height: ${({ theme }) => theme.windowHeight}px;
+  // min-height: ${({ theme }) => theme.windowHeight}px;
   background: ${({ theme }) => theme.palette.DARK_PURPLE};
   display: flex;
   flex-direction: column;

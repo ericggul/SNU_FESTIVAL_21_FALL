@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useResize from '@U/hooks/useResize';
 
-import BusSample from '@I/home/mobile/bus1.png';
+import BusMobile from '@I/home/mobile/bus1.png';
+import BusDesktop from '@I/home/desktop/bus1.png';
 import * as d3 from 'd3';
 import * as S from './styles';
 
@@ -11,40 +12,25 @@ function CustomPath({ isMobile = false, busWidth = 50 }) {
   const DesktopPath = 'M1697 1C1503.67 30.3333 1055.8 113.8 811 213C505 337 151 435 179 651C207 867 689 925 843 981C997 1037 1763 1277 1105 1579C447 1881 53 1867 1 1877';
 
   const initPath = isMobile ? MobilePath : DesktopPath;
-  console.log(initPath);
-  const height = 1205;
-  const width = 248;
+
+  const height = isMobile ? 1205 : 1876;
+  const width = isMobile ? 248 : 1696;
   const [scaledPath, setScaledPath] = useState(initPath);
   const [windowWidth, windowHeight] = useResize();
 
-  console.log(scaledPath);
   useEffect(() => {
     const container = document.querySelector('.result');
     const responsive = isMobile ? new Meanderer(isMobile, height, MobilePath, width) : new Meanderer(isMobile, height, DesktopPath, width);
-
     setScaledPath(responsive.generatePath(container.offsetWidth));
     container.style.setProperty('--path', `${scaledPath}`);
     d3.select('.result path').attr('d', scaledPath);
-  }, [windowWidth, windowHeight, isMobile]);
+  }, [windowWidth, windowHeight, isMobile, scaledPath]);
 
   return (
     <S.StyledCustomPath>
-      <div className="result" style={{ position: 'relative', width: '100%', height: '300vh' }}>
-        <svg
-          className="svg"
-          style={{
-            position: 'absolute', width: '100%', height: '100%',
-          }}
-        >
-          <path
-            className="path"
-            style={{
-              fill: 'none', width: '100%', stroke: 'black', strokeWidth: '12',
-            }}
-          />
-        </svg>
+      <div className="result" style={{ position: 'relative', width: '100%' }}>
         <S.Element path={scaledPath} width={busWidth}>
-          <S.BusObject src={BusSample} />
+          <S.BusObject src={isMobile ? BusMobile : BusDesktop} />
         </S.Element>
       </div>
     </S.StyledCustomPath>

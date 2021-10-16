@@ -4,6 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 
 import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
@@ -73,6 +74,8 @@ function Home({
   const [brightenLights, setBrightenLights] = useState(foundedLightNumbers);
   const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
+
+  const [missionCleared, setMissionCleared] = useState(false);
   const [gateOn, setGateOn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -80,6 +83,9 @@ function Home({
   useEffect(() => {
     setBrightenLights(foundedLightNumbers);
     setRioWaked(isLightPlaying);
+    if (foundedLightNumbers === 10) {
+      setMissionCleared(true);
+    }
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
   const history = useHistory();
@@ -142,6 +148,14 @@ function Home({
     }
   }, [fromLightEvent, brightenLights]);
 
+  // Event Guider
+  const busClick = useCallback(() => {
+    if (!isLightPlaying) {
+      toast('졸고있는 리오를 깨워보세요!');
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [isLightPlaying]);
+
   const convert = useCallback((value) => (theme.windowWidth / 1920) * value, [theme]);
 
   return (
@@ -153,6 +167,13 @@ function Home({
         <S.Wrapper width={convert(1920)} height={convert(2506)}>
 
           <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
+
+          {missionCleared && <CustomPath isMobile={false} busWidth={convert(180)} />}
+          {!missionCleared && <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />}
+          {!missionCleared && <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />}
+          {!missionCleared && <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />}
+          {!missionCleared && <CS.Bus index={3} src={BusFour} onClick={busClick} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />}
+
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
 
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
@@ -172,11 +193,7 @@ function Home({
           ))}
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
-          <CS.Bus index={0} src={BusOne} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />
-          <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />
-          <CS.Bus index={2} src={BusThree} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />
-          <CS.Bus index={3} src={BusFour} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />
-          {/* <CustomPath isMobile={false} busWidth={convert(166)} /> */}
+
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />

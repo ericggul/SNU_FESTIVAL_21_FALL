@@ -4,6 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 import Loading from '@I/home/mobile/background-bottom-light.png';
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 
 import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
@@ -141,6 +142,13 @@ function MobileHome({
     speechSynthesis.speak(utterance);
   });
 
+  const busClick = useCallback(() => {
+    if (!isLightPlaying) {
+      toast('졸고있는 리오를 깨워보세요!');
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }, [isLightPlaying]);
+
   const convert = useCallback((value) => (theme.windowWidth / 375) * value, [theme]);
 
   return (
@@ -168,9 +176,9 @@ function MobileHome({
           ))}
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
-          <CS.Bus index={0} src={BusOne} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
-          <CS.Bus index={1} src={BusTwo} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
-          <CS.Bus index={2} src={BusThree} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />
+          <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
+          <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
+          <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />
           <CustomPath isMobile busWidth={convert(67)} />
           <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1344)} left={convert(35)} width={convert(215)} />
 

@@ -16,7 +16,7 @@ import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
 
 // Mission
 import {
-  LightSimple, Light7,
+  LightSimple,
 } from '@F/Light';
 import withUser from '@U/hoc/withUser';
 import useMission from '@U/hooks/useMission';

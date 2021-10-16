@@ -20,6 +20,8 @@ export const StyledHome = styled.div`
   align-items: center;
   justify-content: center;
 
+  overflow-x: hidden;
+
 `;
 
 export const Wrapper = styled.div`

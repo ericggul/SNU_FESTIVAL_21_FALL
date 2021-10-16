@@ -20,6 +20,8 @@ export const NoticeWrapper = styled.div`
 `;
 
 export const Notice = styled.div`
+
+  overflow: hidden;
   width: 346px;
   @media screen and (max-width: 375px) {
     width: 300px;
@@ -47,10 +49,10 @@ export const Notice = styled.div`
     color: ${({ theme }) => theme.palette.PURPLE50};
 
     @keyframes passby{
-      0%{transform: translateY(-20px); opacity: 0;}
+      0%{transform: translateY(-20px); opacity: 1;}
       20%{transform: translateY(0px); opacity: 1;}
       80%{transform: translateY(0px); opacity: 1;}
-      100%{transform: translateY(20px); opacity: 0;} 
+      100%{transform: translateY(20px); opacity: 1;} 
     }
   
     animation: passby 3s linear infinite;
@@ -64,10 +66,10 @@ export const Indicator = styled.div`
   color: #4049DB;
 
   @keyframes passby{
-    0%{transform: translateY(-20px); opacity: 0;}
+    0%{transform: translateY(-20px); opacity: 1;}
     20%{transform: translateY(0px); opacity: 1;}
     80%{transform: translateY(0px); opacity: 1;}
-    100%{transform: translateY(20px); opacity: 0;} 
+    100%{transform: translateY(20px); opacity: 1;} 
   }
 
   animation: passby 3s linear infinite;

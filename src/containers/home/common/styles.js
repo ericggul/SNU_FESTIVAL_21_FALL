@@ -74,6 +74,7 @@ export const Image = styled.img`
 
 export const Bus = styled.img`
   position: absolute;
+  cursor: pointer;
   width: ${({ width }) => width}px;
   height: auto;
   ${props => props.top && css`top: ${props.top}px`};
@@ -124,25 +125,26 @@ export const LightImage = styled.img`
 
   @keyframes fromEventAnimate{
     0%{ opacity: 0;}
-    5%{opacity: 0.5;}
-    10%{opacity: 0.1;}
-    15%{opacity: 0.7;}
-    20%{opacity: 0.3;}
-    25%{opacity: 0.6;}
-    30%{opacity: 0.2;}
-    33%{opacity: 0.7;}
-    35%{opacity: 0.4;}
-    37%{opacity: 0.6;}
-    39%{opacity: 0.2;}
-    41%{opacity: 0.5;}
-    43%{opacity: 0;}
-    70%{opacity: 0;}
-    100%{opacity: 1;}
+    3%{opacity: 0.5;}
+    5%{opacity: 0.1;}
+    7.5%{opacity: 0.7;}
+    10%{opacity: 0.3;}
+    12.5%{opacity: 0.6;}
+    15%{opacity: 0.2;}
+    16.5%{opacity: 0.7;}
+    17.5%{opacity: 0.4;}
+    18.5%{opacity: 0.6;}
+    20%{opacity: 0.2;}
+    21%{opacity: 0.5;}
+    22%{opacity: 0;}
+    35%{opacity: 0; transform: scale(1);}
+    65%{opacity: 1; transform: scale(3);}
+    100%{transform: scale(1);}
   }
   opacity: 1;
   ${props => !props.lightOn && css`opacity: 0;`};
   ${props => !props.lightOn && css`animation: occassional 20s linear infinite;`};
-  ${props => props.fromEvent && css`animation: fromEventAnimate 1.8s linear backwards;`}
+  ${props => props.fromEvent && css`animation: fromEventAnimate 3s linear backwards;`}
   animation-delay: ${props => (props.fromEvent ? 2 : props.delay)}s;
 `;
 

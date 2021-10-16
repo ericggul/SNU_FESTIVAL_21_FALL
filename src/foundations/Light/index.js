@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useAudio from '@U/hooks/useAudio';
+import Light from '@/static/audio/light.mp3';
 import Zarathustra from '@/static/audio/Zarathustra.mp3';
 import * as S from './styles';
 
@@ -8,10 +9,11 @@ export function LightSimple({
   top, left, size = 1, handleClick,
 }) {
   const width = useMemo(() => size * 8, [size]);
-
+  const [, playAudio] = useAudio(Light);
   const [animate, setAnimate] = useState(false);
   const onClick = useCallback(() => {
     setAnimate(true);
+    console.log('light');
     setTimeout(() => {
       handleClick();
     }, 1000);

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const ContainerCommon = css`
-  position: absolute;
+  position: fixed;
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
   width: 50px;
@@ -12,7 +12,7 @@ const ContainerCommon = css`
 `;
 
 const CircleCommon = css`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0; 
@@ -138,7 +138,7 @@ export const Axis = styled.div`
     0 0 3rem 1rem #B6BCEE,
     0 0 5rem 1rem #9FA6E5,
     0 0 15rem 3rem #878ECC;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0; 
@@ -212,7 +212,7 @@ export const Container3 = styled.div`
     }
     100%{
       transform: translate(
-        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 50 : theme.windowWidth / 2 - left - 50 - 30)}px, 
+        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 50 - 30 : theme.windowWidth / 2 - left - 50 - 40)}px, 
         ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 50 - 90 : theme.windowHeight / 2 - top - 50 - 70)}px)
       scale(2.5);
     }
@@ -248,7 +248,7 @@ export const Container4 = styled.div`
     100%{
       transform: translate(
         ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 40 : theme.windowWidth / 2 - left - 40)}px, 
-        ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 40 - 120 : theme.windowHeight / 2 - top - 40 - 90)}px)
+        ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 40 - 100 : theme.windowHeight / 2 - top - 40 - 70)}px)
         scale(1.5);
     }
   }
@@ -257,7 +257,7 @@ export const Container4 = styled.div`
 `;
 
 export const Circle4 = styled.div`
-  position: absolute;
+  position: fixed;
   width: ${({ width }) => width}px;
   height: ${({ width }) => width}px;
   border-radius: 50%;
@@ -323,7 +323,7 @@ export const Container6 = styled.div`
 `;
 
 export const Circle6 = styled.div`
-  position: absolute;
+  position: fixed;
   width: ${({ width }) => width}px;
   height: ${({ width }) => width}px;
   border-radius: 50%;
@@ -346,7 +346,7 @@ export const StyledLight1 = styled.div`
     }
     100%{
       transform: translate(
-        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 25 : theme.windowWidth / 2 - left - 25)}px, 
+        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 25 - 40 : theme.windowWidth / 2 - left - 25)}px, 
         ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 25 - 80 : theme.windowHeight / 2 - top - 25 - 50)}px)
       scale(1.5) rotate(360deg);
     }
@@ -365,7 +365,7 @@ export const Axis2 = styled.div`
   background: rgba(255, 255, 255, 0.7);
   opacity: .8;
   box-shadow: 0 0 3rem .5rem white;
-  position: absolute;
+  position: fixed;
   
 `;
 
@@ -379,7 +379,7 @@ export const Axis3 = styled.div`
   transform: translate(-50%, -50%) rotate(${({ rotate }) => rotate}deg);
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 3rem .5rem white;
-  position: absolute;
+  position: fixed;
   ${appearLight};
   animation-delay: ${({ delay }) => delay}s;
 `;
@@ -405,7 +405,7 @@ export const LightLetter = styled.div`
   color: #F6F4DD;
   font-family: 'Bangers';
   text-shadow: 0 0 1rem #EAE4B5, 0 0 3rem #C2BF9C, 0 0 5rem #DED47B, 0 0 10rem #CB9C98;
-  position: absolute;
+  position: fixed;
   font-size: 6rem;
   transform: rotate(7deg);
 
