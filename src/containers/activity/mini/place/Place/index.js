@@ -46,7 +46,15 @@ function Place({ theme }) {
         </S.Text>
         <Map solvedArray={places} handleClick={handleClick} />
         <S.TextBottom>
-          이벤트: 9개 장소중 6곳 이상을 맞춰보세요!
+          이벤트:
+          {' '}
+          <S.EmphText>9개</S.EmphText>
+          {' '}
+          장소중
+          {' '}
+          <S.EmphText>6곳</S.EmphText>
+          {' '}
+          이상을 맞춰보세요!
         </S.TextBottom>
       </S.Container>
       <FullScreen

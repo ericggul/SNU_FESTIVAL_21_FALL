@@ -70,6 +70,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.div`
+cursor: pointer;
   margin: 1rem;
   margin-top: 1.3rem;
   margin-bottom: 1.5rem;

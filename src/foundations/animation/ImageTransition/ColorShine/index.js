@@ -118,7 +118,7 @@ class App {
       this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,
     );
 
-    this.imageData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
+    this.imageData = this.tmpCtx?.getImageData(0, 0, this.stageWidth, this.stageHeight);
     console.log(this.imageData);
     this.drawDots();
   }

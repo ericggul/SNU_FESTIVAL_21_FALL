@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 export default function WaveCanvas() {
   useEffect(() => {
     const wave = new App();
+    return () => {
+      wave.destroy();
+    };
   }, []);
 
   return (
@@ -30,6 +33,10 @@ class App {
     requestAnimationFrame(this.animate.bind(this));
   }
 
+  destroy() {
+    cancelAnimationFrame(this.animationRequest);
+  }
+
   resize() {
     this.stageWidth = this.wrapper.clientWidth;
     this.stageHeight = this.wrapper.clientHeight;
@@ -44,7 +51,8 @@ class App {
   animate() {
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     this.waveGroup.draw(this.ctx);
-    requestAnimationFrame(this.animate.bind(this));
+    console.log('11');
+    this.animationRequest = requestAnimationFrame(this.animate.bind(this));
   }
 }
 

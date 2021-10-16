@@ -14,10 +14,14 @@ function Carousel({
   const [animateDir, setAnimateDir] = useState(0);
   const length = useMemo(() => indexes.length, [indexes]);
 
+  // useEffect(() => {
+  //   console.log('index change detected');
+  //   setCurrentLoc(0);
+  // }, [indexes]);
+
   useEffect(() => {
-    console.log('index change detected');
     setCurrentLoc(0);
-  }, [indexes]);
+  }, [shouldChangeLoc]);
 
   useEffect(() => {
     emitCurrentIndex(currentLoc);

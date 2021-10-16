@@ -7,13 +7,13 @@ export const MapContainer = styled.div`
   position: relative;
   width:${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  margin-top: -${({ height }) => height * 0.11}px;
+  margin-top: ${({ height }) => height * 0.03}px;
+  opacity: 0;
   @keyframes appearContainer{
     from{opacity: 0;}
     to{opacity: 1;}
   }
-  animation: appearContainer 2s linear backwards;
-  animation-delay: 1s;
+  ${({ loaded }) => loaded && 'animation: appearContainer 2s linear forwards;'};
 `;
 
 export const Image = styled.img`

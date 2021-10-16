@@ -19,6 +19,7 @@ function Map({ theme, handleClick, solvedRates }) {
   console.log('inside solved rates', solvedRates);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
+  const [isLoading, setIsLoading] = useState(0);
 
   const rateToLevelConverter = useCallback((rates) => {
     let result = [];
@@ -68,14 +69,7 @@ function Map({ theme, handleClick, solvedRates }) {
     <S.MapContainer
       width={convert(375)}
       height={convert(1048)}
-      // initial={{ opacity: 0 }}
-      // animate={{ opacity: 1 }}
-      // exit={{ opacity: 0 }}
-      // transition={{
-      //   duration: 2,
-      //   ease: [0.43, 0.13, 0.23, 0.96],
-      //   delay: 1,
-      // }}
+      loaded={isLoading === 10}
     >
       <S.Image src={RoadImage} />
 
@@ -127,6 +121,7 @@ function Map({ theme, handleClick, solvedRates }) {
           width={convert(150)}
           onClick={() => handleClick(i)}
           jump={i * 0.2}
+          onLoad={() => setIsLoading(load => load + 1)}
         />
       ))}
       <S.Object src={Object3} left={convert(256)} top={convert(928)} width={convert(60)} />

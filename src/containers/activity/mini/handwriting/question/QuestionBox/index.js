@@ -15,13 +15,14 @@ import { CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
 import { withTheme } from 'styled-components';
 
 import Indicator from '@C/activity/mini/handwriting/question/Indicator';
+import HandwritingRules from '@C/activity/mini/handwriting/question/HandwritingRules';
 
 import { useUser } from '@U/hooks/useAuth';
 import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useSelector, useDispatch } from 'react-redux';
-import DiscreteCarousel from '@/foundations/carousel/HandwritingCarousel';
+import DiscreteCarousel from '@F/carousel/HandwritingCarousel';
 import { speakRightorWrong, confettiRightorWrong } from './reactions.js';
 import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
@@ -59,10 +60,6 @@ export function QuestionBox({
   console.log('handwriting', handwritingArray);
   console.log('solved', solvedIndicatorArray, solvedStorage, unSolvedStorage);
 
-  // useEffect(() => {
-  //   dispatch(actions.reset());
-  // }, []);
-
   // Unsolved problems: indexes --> Currently temporary implementation
   const shuffledIndexes = useMemo(() => shuffleArray(unSolvedStorage), [unSolvedStorage]);
   console.log('shuffledindex:', shuffledIndexes);
@@ -72,26 +69,25 @@ export function QuestionBox({
   const [currentShuffledLoc, setCurrentShuffledLoc] = useState(0);
   const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+  const { modalComponent: rulesModalComponent, setIsModalOpen: setIsRulesModalOpen } = useModal(HandwritingRules);
 
   const [shouldChangeLoc, setShouldChangeLoc] = useState(false);
-  // useEffect(() => {
-  //   console.log('shuffled index change!');
-  //   setShouldChangeLoc(true);
-  // }, [shuffledIndexes]);
 
   const submit = () => {
     if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
       const sectorBinary = handwritingArray[sectorNum].toString(2);
       const unsubmitted = sectorBinary.length > currentLoc
         ? parseInt(sectorBinary[sectorBinary.length - 1 - currentLoc], 10) : 0;
-      if (unsubmitted == 0) {
+      speakRightorWrong(true);
+      confettiRightorWrong(isMobile, true);
+      if (unsubmitted === 0) {
+        setShouldChangeLoc(true);
         toast('정답입니다🎉');
         clear();
+        setShouldChangeLoc(false);
       } else {
         toast('이미 클리어했습니다 ㅡ.ㅡ');
       }
-      speakRightorWrong(true);
-      confettiRightorWrong(isMobile, true);
     } else {
       toast('오답입니다😅');
       speakRightorWrong(false);
@@ -141,7 +137,9 @@ export function QuestionBox({
           <S.InputBox value={value} onChange={onChange} />
           <S.Button onClick={submit}>제출</S.Button>
         </S.Answer>
+        <S.Rules onClick={() => setIsRulesModalOpen(true)}>규칙 설명 보기</S.Rules>
       </S.Content>
+      {rulesModalComponent}
       {miniGameModalComponent}
       {signInModalComponent}
     </>

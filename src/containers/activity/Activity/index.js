@@ -56,7 +56,7 @@ function Activity({ theme, user, isAuthorized }) {
         setLightVisible(false);
       }
     } else {
-      setLightVisible(false);
+      setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
 
@@ -154,7 +154,7 @@ function Activity({ theme, user, isAuthorized }) {
         </S.Description> */}
 
         {iconGrid}
-        <Light1 top={theme.windowHeight - 10} left={-40} handleClick={lightMissionClick} />
+        {lightVisible && <Light1 top={theme.windowHeight - 10} left={-40} handleClick={lightMissionClick} />}
       </S.StyledContainer>
       {Constellation}
       {lightModalComponent}

@@ -57,7 +57,7 @@ function Competition({ theme, user, isAuthorized }) {
         setLightVisible(false);
       }
     } else {
-      setLightVisible(false);
+      setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
 
