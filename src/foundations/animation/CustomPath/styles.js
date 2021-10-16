@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledCustomPath = styled.div`
     position: absolute;
-    width: ${({ theme }) => (theme.windowWidth > 768 ? theme.windowWidth * 0.661 : theme.windowWidth * 0.661)}px;
+    width: ${({ theme }) => (theme.windowWidth > 768 ? theme.windowWidth * 0.883 : theme.windowWidth * 0.661)}px;
     top: ${({ theme }) => (theme.windowWidth > 768 ? 0 : theme.windowWidth * 1)}px;
     left:  ${({ theme }) => (theme.windowWidth > 768 ? 0 : theme.windowWidth * 0.1)}px;
     height: 100vh;
@@ -21,7 +21,7 @@ export const Element = styled.div`
             offset-distance: 100%;
         }
     }
-    animation: travel 5s linear forwards;
+    animation: travel 5s linear  infinite forwards;
     animation-delay: ${({ delay }) => delay}s;
 `;
 
