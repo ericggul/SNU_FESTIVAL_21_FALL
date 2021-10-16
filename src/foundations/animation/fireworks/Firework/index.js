@@ -138,25 +138,25 @@ export default function Firework() {
         this.canvas.style.height = `${this.height}px`;
       }
 
-//       // To any known illigitimate users...
-//       const badDomains = ['blackdiamondfireworks.de'];
-//       const { hostname } = document.location;
-//       if (badDomains.some(d => hostname.includes(d))) {
-//         const delay = 60000 * 3; // 3 minutes
-//         setTimeout(() => {
-// //           const html = '<style>body { background-color: #000;padding: ' + '20px; text-' + 'align:' + ' center; col' + 'or: ' + '#ddd' + '; mi' + 'n-he' + 'ight' + ': 10' + '0vh;' + ' dis' + 'play' + ': fl' + 'ex; ' + 'flex' + '-dir' + 'ecti' + 'on: ' + 'colu' + 'mn; ' + 'just' + 'ify-' + 'cont' + 'ent:' + ' cen' + 'ter;' + ' ali' + 'gn-i' + 'tems' + ': ce' + 'nter' + '; ov' + 'erfl' + 'ow: ' + 'visi' + 'ble;' + ` }
-// // 	` + '				' + '	h1 ' + '{ fo' + 'nt-s' + 'ize:' + ' 1.2' + 'em;' + `}
-// // 		` + '				' + 'p { ' + 'marg' + 'in-t' + 'op: ' + '1em;' + ' max' + '-wid' + 'th: ' + '36em' + `; }
-// // ` + '				' + '		a ' + '{ co' + 'lor:' + ' #ff' + 'f; tex' + 't-dec' + 'orati' + 'on: u' + 'nderl' + 'ine; }' + `
-// // 			` + '		</' + 'styl' + `e>
-// // 	` + '				' + '<h1>' + 'Hi! ' + 'Sorr' + 'y to' + ' int' + 'erru' + 'pt the fireworks.</h' + `1>
-// // 	` + '				' + '<p>M' + 'y na' + 'me i' + 's Ca' + 'leb.' + ' Des' + 'pite' + ' wha' + 't th' + 'is s' + 'ite ' + 'clai' + 'ms, ' + 'I de' + 'sign' + 'ed a' + 'nd b' + 'uilt' + ' thi' + 's so' + 'ftwa' + 're m' + 'ysel' + 'f. I' + '\'ve ' + 'spen' + 't a ' + 'coup' + 'le h' + 'undr' + 'ed h' + 'ours' + ' of ' + 'my o' + 'wn t' + 'ime, ' + 'over' + ' tw' + 'o ye' + 'ars, ' + 'maki' + 'ng i' + 't.</' + `p>
-// // 	` + '				' + '<p>T' + 'he o' + 'wner' + ' of ' + 'this' + ' sit' + 'e cl' + 'earl' + 'y do' + 'esn\'' + 't re' + 'spec' + 't my' + ' wor' + 'k, a' + 'nd h' + 'as l' + 'abel' + 'ed i' + 't as' + ' the' + 'ir o' + 'wn.<' + `/p>
-// // ` + '				' + '	<p>' + 'If y' + 'ou w' + 'ere ' + 'enjo' + 'ying' + ' the' + ' sho' + 'w, p' + 'leas' + 'e ch' + 'eck ' + 'out ' + '<a h' + 'ref=' + '"htt' + 'ps:/' + '/cod' + 'epen' + '.io/' + 'Mill' + 'erTi' + 'me/f' + 'ull/' + 'XgpN' + 'wb">' + 'my&n' + 'bsp;' + 'offi' + 'cial' + '&nbs' + 'p;ve' + 'rsio' + 'n&nb' + 'sp;h' + 'ere<' + '/a>!' + `</p>
-// // ` + '				' + '	<p>I' + 'f you' + '\'re th' + 'e ow' + 'ner, <a' + ' href="m' + 'ailt' + 'o:cal' + 'ebdotmi' + 'ller@' + 'gmai' + 'l.co' + 'm">cont' + 'act m' + 'e</a>' + '.</p>';
-// //           document.body.innerHTML = html;
-//         }, delay);
-//       }
+      //       // To any known illigitimate users...
+      //       const badDomains = ['blackdiamondfireworks.de'];
+      //       const { hostname } = document.location;
+      //       if (badDomains.some(d => hostname.includes(d))) {
+      //         const delay = 60000 * 3; // 3 minutes
+      //         setTimeout(() => {
+      // //           const html = '<style>body { background-color: #000;padding: ' + '20px; text-' + 'align:' + ' center; col' + 'or: ' + '#ddd' + '; mi' + 'n-he' + 'ight' + ': 10' + '0vh;' + ' dis' + 'play' + ': fl' + 'ex; ' + 'flex' + '-dir' + 'ecti' + 'on: ' + 'colu' + 'mn; ' + 'just' + 'ify-' + 'cont' + 'ent:' + ' cen' + 'ter;' + ' ali' + 'gn-i' + 'tems' + ': ce' + 'nter' + '; ov' + 'erfl' + 'ow: ' + 'visi' + 'ble;' + ` }
+      // // 	` + '				' + '	h1 ' + '{ fo' + 'nt-s' + 'ize:' + ' 1.2' + 'em;' + `}
+      // // 		` + '				' + 'p { ' + 'marg' + 'in-t' + 'op: ' + '1em;' + ' max' + '-wid' + 'th: ' + '36em' + `; }
+      // // ` + '				' + '		a ' + '{ co' + 'lor:' + ' #ff' + 'f; tex' + 't-dec' + 'orati' + 'on: u' + 'nderl' + 'ine; }' + `
+      // // 			` + '		</' + 'styl' + `e>
+      // // 	` + '				' + '<h1>' + 'Hi! ' + 'Sorr' + 'y to' + ' int' + 'erru' + 'pt the fireworks.</h' + `1>
+      // // 	` + '				' + '<p>M' + 'y na' + 'me i' + 's Ca' + 'leb.' + ' Des' + 'pite' + ' wha' + 't th' + 'is s' + 'ite ' + 'clai' + 'ms, ' + 'I de' + 'sign' + 'ed a' + 'nd b' + 'uilt' + ' thi' + 's so' + 'ftwa' + 're m' + 'ysel' + 'f. I' + '\'ve ' + 'spen' + 't a ' + 'coup' + 'le h' + 'undr' + 'ed h' + 'ours' + ' of ' + 'my o' + 'wn t' + 'ime, ' + 'over' + ' tw' + 'o ye' + 'ars, ' + 'maki' + 'ng i' + 't.</' + `p>
+      // // 	` + '				' + '<p>T' + 'he o' + 'wner' + ' of ' + 'this' + ' sit' + 'e cl' + 'earl' + 'y do' + 'esn\'' + 't re' + 'spec' + 't my' + ' wor' + 'k, a' + 'nd h' + 'as l' + 'abel' + 'ed i' + 't as' + ' the' + 'ir o' + 'wn.<' + `/p>
+      // // ` + '				' + '	<p>' + 'If y' + 'ou w' + 'ere ' + 'enjo' + 'ying' + ' the' + ' sho' + 'w, p' + 'leas' + 'e ch' + 'eck ' + 'out ' + '<a h' + 'ref=' + '"htt' + 'ps:/' + '/cod' + 'epen' + '.io/' + 'Mill' + 'erTi' + 'me/f' + 'ull/' + 'XgpN' + 'wb">' + 'my&n' + 'bsp;' + 'offi' + 'cial' + '&nbs' + 'p;ve' + 'rsio' + 'n&nb' + 'sp;h' + 'ere<' + '/a>!' + `</p>
+      // // ` + '				' + '	<p>I' + 'f you' + '\'re th' + 'e ow' + 'ner, <a' + ' href="m' + 'ailt' + 'o:cal' + 'ebdotmi' + 'ller@' + 'gmai' + 'l.co' + 'm">cont' + 'act m' + 'e</a>' + '.</p>';
+      // //           document.body.innerHTML = html;
+      //         }, delay);
+      //       }
 
       Stage.stages.push(this);
 
@@ -1599,8 +1599,7 @@ export default function Firework() {
 
     // altered appnodes.stageContainer --> document.getElements
     // console.log(appNodes.stageContainer.style)
-    if (stageContainerRef) {
-      console.log(stageContainerRef);
+    if (stageContainerRef && stageContainerRef.current) {
       stageContainerRef.current.style.width = `${containerW}px`;
       stageContainerRef.current.style.height = `${containerH}px`;
       stages.forEach(stage => stage.resize(containerW, containerH));

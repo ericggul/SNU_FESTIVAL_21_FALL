@@ -136,7 +136,7 @@ function Home({
 
   // Scroll when from Light Event
   const scrollTo = useCallback((numbers) => {
-    window.scrollTo({ top: LIGHT_LOC[numbers].y, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: LIGHT_LOC[numbers]?.y, left: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {

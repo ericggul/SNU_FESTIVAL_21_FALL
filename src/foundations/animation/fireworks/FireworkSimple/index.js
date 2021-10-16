@@ -1258,7 +1258,7 @@ export default function Firework() {
 
     // altered appnodes.stageContainer --> document.getElements
     // console.log(appNodes.stageContainer.style)
-    if (stageContainerRef) {
+    if (stageContainerRef && stageContainerRef.current) {
       console.log(stageContainerRef);
       stageContainerRef.current.style.width = `${containerW}px`;
       stageContainerRef.current.style.height = `${containerH}px`;

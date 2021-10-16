@@ -121,15 +121,6 @@ export function QuestionBox({
     console.log(i);
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      submit();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keypress', handleKeyPress);
-  }, []);
   return (
     <>
       <S.Content>
@@ -148,7 +139,7 @@ export function QuestionBox({
         </S.SliderContent>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
           <S.InputBox value={value} onChange={onChange} />
-          <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button>
+          <S.Button onClick={submit}>제출</S.Button>
         </S.Answer>
       </S.Content>
       {miniGameModalComponent}

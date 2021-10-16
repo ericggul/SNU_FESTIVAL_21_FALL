@@ -9,7 +9,8 @@ import MobileHomeContainer from '@C/home/MobileHome';
 
 function Home({ theme }) {
   const location = useLocation();
-  const { fromLightEvent } = location.state ? location.state : false;
+  const { fromLightEvent } = location.state?.fromLightEvent ?? false;
+  console.log(fromLightEvent);
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const isLoaded = useMemo(() => theme.windowWidth > 0, [theme.windowWidth]);
 
