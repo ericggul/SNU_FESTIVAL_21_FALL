@@ -8,6 +8,10 @@ function Stars2({
 }) {
   useEffect(() => {
     const app = new App(color, number, delay);
+
+    return () => {
+      app.destroy();
+    };
   }, []);
   return (
     <div
@@ -61,7 +65,11 @@ class App {
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     this.starSet.draw(this.ctx);
     this.starSet2.draw(this.ctx);
-    requestAnimationFrame(this.animate.bind(this));
+    this.animationRequest = requestAnimationFrame(this.animate.bind(this));
+  }
+
+  destroy() {
+    cancelAnimationFrame(this.animationRequest);
   }
 }
 

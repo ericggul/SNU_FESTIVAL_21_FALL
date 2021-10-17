@@ -18,7 +18,6 @@ function ActivityRouter({ match }) {
                 path={`${match.path}${route.path}`}
                 component={route.component}
               />
-
               { route.children && route.children.map((childRoute) => (
                 <Route
                   exact
@@ -27,7 +26,6 @@ function ActivityRouter({ match }) {
                   component={childRoute.component}
                 />
               ))}
-
               <Route component={NotFound} />
             </Switch>
           </AnimatePresence>

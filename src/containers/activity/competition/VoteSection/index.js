@@ -101,20 +101,21 @@ function VoteSection({
       <S.ItemSection>
         {items.map(item => (
           <S.Item key={item.title}>
-            <S.ImageWrapper>
-              <div onClick={() => onClickItem(item)}><Image src={item.thumbnail} alt="작품" /></div>
+            <S.ImageWrapper onClick={() => onClickItem(item)}>
+              <S.Image src={item.thumbnail} alt="작품" />
+            </S.ImageWrapper>
+            <S.InfoSection>
+              <p>
+                {item.title}
+                /
+                {item.author}
+              </p>
+              <p>{item.description}</p>
               <S.LikeButton onClick={() => onClickLikeButton(item.competitionId)}>
                 <img src={myLikesForCompetition.includes(item.competitionId) ? FilledHeart : EmptyHeart} alt="like" />
               </S.LikeButton>
-            </S.ImageWrapper>
-            <p>
-              {item.title}
-              {' '}
-              -
-              {' '}
-              {item.author}
-            </p>
-            <p>{item.description}</p>
+            </S.InfoSection>
+
           </S.Item>
         ))}
       </S.ItemSection>

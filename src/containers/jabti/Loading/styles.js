@@ -8,14 +8,4 @@ export const StyledLoading = styled.div`
     flex-direction: column;
     text-align: center;
     margin-top: ${({ theme }) => theme.windowHeight * 0.4}px;
-
-
-    // @keyframes appear {
-    //     from { opacity: 1; }
-    //     to { opacity: 0; }
-    // }
-    // animation-name: appear;
-    // animation-duration: 2s;
-    // animation-timing-function: linear;
-    // animation-fill-mode: forwards;
 `;

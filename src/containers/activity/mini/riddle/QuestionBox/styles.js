@@ -45,12 +45,12 @@ export const Question = styled.div`
     height: 80vw;
   `};
   
-  @keyframes appear {
+  @keyframes appearQuestion {
     0% { opacity: 1; }
     50% { opacity: 0; }
     100% { opacity: 1; }
   }
-  animation-name: appear;
+  animation-name: appearQuestion;
   animation-duration: 2s;
   
 `;
@@ -61,12 +61,12 @@ export const Image = styled.img`
   height: 100%;
   object-fit: scale-down;
   border-radius: 15px;
-  @keyframes appear {
+  @keyframes appearImage {
     0% { opacity: 0; }
     50% { opacity: 0; }
     100% { opacity: 1;}
   }
-  animation-name: appear;
+  animation-name: appearImage;
   animation-duration: 2s;
 `;
 

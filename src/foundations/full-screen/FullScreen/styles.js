@@ -16,9 +16,13 @@ export const StyledFullScreen = styled.div`
 
   transition: opacity 1s cubic-bezier(0.42, 0, 1, 0.49);
 
-  ${props => props.isFullScreen && css`
+  ${({ isFullScreen }) => isFullScreen && `
     opacity: 1;
     pointer-events: auto;
+  `};
+  ${({ isFullScreen }) => !isFullScreen && `
+    opacity: 0;
+    pointer-events: none;
   `};
 `;
 

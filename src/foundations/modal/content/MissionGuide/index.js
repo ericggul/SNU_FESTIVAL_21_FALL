@@ -32,7 +32,5 @@ function MissionGuide({ setIsModalOpen, stamp, name }) {
 export default MissionGuide;
 
 MissionGuide.propTypes = {
-  setIsModalOpen: PropTypes.func.isRequired,
-  stamp: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+
 };

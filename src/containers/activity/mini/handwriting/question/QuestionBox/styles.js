@@ -69,3 +69,14 @@ export const Button = styled.div`
   cursor: pointer;
   box-shadow: 0 0 0.5rem white;
 `;
+
+export const Rules = styled.div`
+  ${FlexCenterStyle};
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  opacity: .8;
+  margin-top: .5rem;
+  color: white;
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
+`;

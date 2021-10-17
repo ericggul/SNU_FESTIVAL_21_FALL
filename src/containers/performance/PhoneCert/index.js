@@ -7,21 +7,22 @@ import { confettiFire, confettiSpread } from '@C/performance/common/confettiFire
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import PhoneCertImage from '@I/performance/phone-cert.png';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
-import Stars from '@/foundations/stars/Performance/PerformanceStars';
-import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
 import { PhoneCertData } from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
 import Title from '@C/performance/common/Title';
 import Bubble from '@C/performance/common/Bubble';
 import Date from '@C/performance/common/Date';
 import Guide from '@C/performance/common/Guide';
+import Youtube from '@C/performance/common/Youtube';
 import Starring from '@C/performance/common/Starring';
 import Fade from 'react-reveal/Fade';
 import MascotForMission from '@C/performance/common/MascotForMission';
-import Image from '@/foundations/images/Image';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { transition } from '@C/performance/Performance';
 import { toast } from 'react-toastify';
+import Image from '@/foundations/images/Image';
+import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
+import Stars from '@/foundations/stars/Performance/PerformanceStars';
 import * as S from '../common/styles';
 
 function PhoneCert({ theme }) {
@@ -33,8 +34,6 @@ function PhoneCert({ theme }) {
   const [confettiPos, setConfettiPos] = useState({ x: 0.5, y: 0.5 });
 
   const clickforConfetti = useCallback((e) => {
-    console.log(theme.windowWidth);
-    console.log(e.clientX / theme.windowWidth);
     setConfettiPos({ x: e.clientX / theme.windowWidth, y: e.clientY / theme.windowHeight });
     setConfettiEnabled(true);
   }, [theme]);
@@ -44,11 +43,6 @@ function PhoneCert({ theme }) {
     return () => window.removeEventListener('click', clickforConfetti);
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setConfettiEnabled(true);
-    }, 3000);
-  }, []);
   useEffect(() => {
     if (confettiEnabled) {
       confettiFire(confettiPos.x, confettiPos.y);
@@ -75,26 +69,12 @@ function PhoneCert({ theme }) {
   const bubble = <Bubble decoration="관악의 밴드 실력자들과 함께하는" title="폰서트 LIVE" speak={speak} />;
   const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={26} />;
-  const youTube = (
-    <S.YouTube
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 3,
-        ease: [0.43, 0.13, 0.23, 0.96],
-        delay: 1.5,
-      }}
-    >
-      <iframe width={theme.windowWidth * 0.8} height={theme.windowWidth * 0.45} src="https://www.youtube.com/embed/phnjI5IfelQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-    </S.YouTube>
-  );
+  const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={PhoneCertData} />;
   const image = (
     <S.Image>
-      <Fade left distance="30px" delay={200}>
-        <Image src={PhoneCertImage} alt="" objectFit="scale-down" />
-      </Fade>
+      {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={PhoneCertImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
     </S.Image>
   );
 
@@ -102,9 +82,17 @@ function PhoneCert({ theme }) {
     <S.Wrapper>
       <HeaderContent>폰서트 LIVE</HeaderContent>
       <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
-      {/* <Stars /> */}
       {isMobile && (
-        <S.MobileBody>
+        <S.MobileBody
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+            ease: [0.43, 0.13, 0.23, 0.96],
+            delay: 1,
+          }}
+        >
           <S.IconBubble>
             {icon}
             {bubble}
@@ -118,7 +106,16 @@ function PhoneCert({ theme }) {
         </S.MobileBody>
       )}
       {!isMobile && (
-        <S.MobileBody>
+        <S.MobileBody
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+            ease: [0.43, 0.13, 0.23, 0.96],
+            delay: 1,
+          }}
+        >
           <S.DesktopWrapper>
             <S.IconBubble>
               {icon}

@@ -20,12 +20,12 @@ export const Container = styled.div`
     ${appear};
 `;
 export const StarContainer = styled.div`
-    @keyframes appear{
+    @keyframes appearJabtiStar{
         from{ opacity: 0}
         to{opacity: 1}
     }
     opacity: 0;
-    animation: appear ${({ time }) => time}s infinite alternate;
+    animation: appearJabtiStar ${({ time }) => time}s infinite alternate;
     animation-delay: ${({ delay }) => delay}s;
 `;
 

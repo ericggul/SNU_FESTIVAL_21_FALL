@@ -7,21 +7,23 @@ export const StyledRiddle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   transition: all 0.5s ease-out;
 `;
 
 export const Body = styled.div`
   width: 100%;
-
+  ${FlexCenterStyle};
+  overflow: hidden;
   transition: background 1s linear;
-  min-height: ${({ theme }) => theme.windowHeight}px;
+  height: ${({ theme }) => theme.windowHeight - 65}px;
   ${FlexCenterStyle};
   flex-direction: column;
   overflow-y: hidden;
   
   @media (orientation: landscape) {
     height: 100%;
-    padding: 2rem 0;
+    padding: 4rem 0;
   }
 `;
 
@@ -32,12 +34,18 @@ export const Background = styled.div`
   width: 100%;
   height: 550vh;
   
-  background: linear-gradient(#83AAE2 0%, rgb(228, 232, 249) 40% 60%, #06102E  77% 100% );
-  background-position: 0 50%;
-  ${props => props.background === 'White' && 'transform: translateY(200vh);'}
-  ${props => props.background === 'Black' && 'transform: translateY(-200vh);'}
+  background: rgb(228, 232, 249);
   transition: all 1s;
+`;
 
+export const Expl = styled.div`
+  color: #586BBB;
+  // text-align: center;
+  width: 70vw;
+  max-width: 50rem;
+  font-size: .9rem;
+  font-weight: 400;
+  word-break: keep-all;
 `;
 
 export const OpeningWrapper = styled.div`
@@ -50,7 +58,7 @@ export const OpeningWrapper = styled.div`
 
 export const Opening = styled.div`
   position: relative;
-  margin: 4rem 4rem;
+  margin: 3rem 3rem;
 
   border-radius: 7%;
   width: ${({ theme }) => theme.windowHeight * (4 / 10)}px;
@@ -59,7 +67,7 @@ export const Opening = styled.div`
     width: ${({ theme }) => theme.windowHeight * (2.8 / 10)}px;
     height: ${({ theme }) => theme.windowHeight * (2.8 / 10)}px;
   `};
-  
+
 `;
 
 export const Image = styled.img`

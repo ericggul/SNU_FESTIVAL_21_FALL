@@ -26,7 +26,4 @@ export const Item = styled(motion.div)`
   
   cursor: pointer;
   transition: transform 0.5s;
-  // &:hover {
-  //   transform: scale(1.05);
-  // }
 `;

@@ -29,7 +29,33 @@ function Place({ theme }) {
         서울대 장소 찾기
       </HeaderContent>
       <S.Container isMobile={isMobile}>
+        <S.Text>
+          <S.EmphText>서울대 곳곳의 모습, 너 조금 낯설다?</S.EmphText>
+          <br />
+          <br />
+          비대면 수업으로 인해 오랫동안 보지 못한 학교의 모습...
+          {' '}
+          학교 이곳저곳도 살펴볼 수 있는,
+          {' '}
+          <S.EmphText>비대면 소풍</S.EmphText>
+          의 기회!
+          {' '}
+          캠퍼스 사진 보며 헌내기들한테는 추억이,
+          {' '}
+          새내기들한테는 설렘이 피어오를거에요.
+        </S.Text>
         <Map solvedArray={places} handleClick={handleClick} />
+        <S.TextBottom>
+          이벤트:
+          {' '}
+          <S.EmphText>9개</S.EmphText>
+          {' '}
+          장소중
+          {' '}
+          <S.EmphText>6곳</S.EmphText>
+          {' '}
+          이상을 맞춰보세요!
+        </S.TextBottom>
       </S.Container>
       <FullScreen
         isFullScreen={sectorNum !== -1}

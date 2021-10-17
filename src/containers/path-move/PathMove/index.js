@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wave from '@/foundations/animation/CustomPath';
+import Wave from '@F/animation/CustomPath';
 import * as S from './styles';
 
 function PathMove() {

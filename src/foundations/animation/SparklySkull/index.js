@@ -7,8 +7,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { a as aw, useSpring as useSpringWeb } from '@react-spring/web';
 import { a as a3, useSpring as useSpringThree } from '@react-spring/three';
 
-import Noise from '@I/sparkyskull/noise.jpg';
-import Noise3D from '@I/sparkyskull/noise3D.jpg';
+import Noise from '@I/sparklyskull/noise.jpg';
+import Noise3D from '@I/sparklyskull/noise3D.jpg';
 
 // HSL values
 const options = [
@@ -27,12 +27,18 @@ export default function App() {
   });
   const springyGradient = hsl.to((h, s, l) => `radial-gradient(hsl(${h}, ${s * 0.7}%, ${l}%), hsl(${h},${s * 0.4}%, ${l * 0.2}%))`);
   return (
-    <aw.div style={{ background: springyGradient, width: '100vw', height: '100vh' }}>
+    <aw.div style={{
+      background: 'transparent',
+      width: '100vw',
+      height: '100vh',
+      position: 'absolute',
+    }}
+    >
       <Canvas camera={{ position: [0, 0, 2] }}>
         <Suspense fallback={null}>
           <OrbitControls autoRotate enableRotate={false} enablePan={false} enableZoom={false} />
           <Marble step={step} setStep={setStep} />
-          <Environment preset="warehouse" />
+          <Environment preset="sunset" />
         </Suspense>
       </Canvas>
     </aw.div>

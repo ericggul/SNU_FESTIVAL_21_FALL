@@ -4,11 +4,11 @@ import { FlexCenterStyle } from '@S/responsive/display';
 import { HoverStyle } from '@S/responsive/mouse';
 import { motion } from 'framer-motion';
 
-export const StyledGuide = styled(motion.div)`
+export const StyledGuide = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1.3rem;
+  margin-top: 5rem;
 `;
 
 export const Texts = styled.div`

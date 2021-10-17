@@ -34,13 +34,23 @@ function Riddle({ theme }) {
       <HeaderContent backgroundColor="transparent">미궁게임</HeaderContent>
       <S.Body background={backgroundTransit}>
         <S.Background background={backgroundTransit} />
+        <S.Expl>
+          관악의 밤에서 펼쳐지는 치열한 두뇌 싸움!
+          <br />
+          <br />
+          백야는 가볍게 머리를 풀 수 있는 정도의 난이도!
+          <br />
+          흑야에서는 불같은 난이도 때문에 고민하다가 마음이 시커멓게 탈 수 있어요….!
+          <br />
+          미궁게임 풀며 깊어지는 생각과 함께 깊어지는 밤을 보내보세요!
+        </S.Expl>
         <S.OpeningWrapper>
           <S.Opening onClick={() => handleClick('White')}>
-            <LightChange1 image={WhiteOpening} index={0} reRender={!riddleTheme} backgroundColor="white" />
+            <LightChange1 image={WhiteOpening} index={0} backgroundColor="white" />
             <S.Image src={WhiteOpeningFont} />
           </S.Opening>
           <S.Opening onClick={() => handleClick('Black')}>
-            <LightChange1 image={BlackOpening} index={1} reRender={!riddleTheme} backgroundColor="black" />
+            <LightChange1 image={BlackOpening} index={1} backgroundColor="black" />
             <S.Image src={BlackOpeningFont} />
           </S.Opening>
         </S.OpeningWrapper>

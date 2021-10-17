@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { CenterImageStyle } from '@S/responsive/display';
+import { FlexCenterStyle, CenterImageStyle } from '@S/responsive/display';
 
 const appear = keyframes`
   from{ opacity: 0; }
@@ -123,11 +123,16 @@ export const LikesText = styled.div`
 
 export const LikeBox = styled.div`
   right: 0;
+  ${FlexCenterStyle};
+  flex-direction: column;
 `;
 
 export const Delete = styled.div`
-  margin-right: 0.6rem;
 
+  width: 1.1rem;
+  text-align: center;
+  margin-bottom: .5rem;
+  height: .6rem;
   font-size: 0.6rem;
   cursor: pointer;
 `;
@@ -140,13 +145,15 @@ export const LikeButton = styled.div`
 
   width: 1.1rem;
   height: 1.1rem;
+  border-radius: .6rem;
   border: 0.3px solid #aaa;
-  border-radius: 50%;
+
   cursor: pointer;
 `;
 
 export const HeartImage2 = styled.img`
   ${CenterImageStyle};
-  width: 60%;
-  height: 60%;
+  width: 64%;
+  height: 54%;
+  // margin-left: 16%;
 `;

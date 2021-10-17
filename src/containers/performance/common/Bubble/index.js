@@ -16,15 +16,7 @@ function Bubble({ title, decoration, speak }) {
 
   return (
     <S.StyledBubble
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        ...transition,
-        delay: 0.3,
-      }}
+      long={decoration.length > 15}
     >
       <p>{decoration}</p>
       <p>{title}</p>

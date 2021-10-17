@@ -1,6 +1,7 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
+import { withTheme } from 'styled-components';
 import withUser from '@U/hoc/withUser';
 import { HeaderContent } from '@F/layout/Header';
 import TextSection from '@C/activity/competition/TextSection';
@@ -16,15 +17,57 @@ import {
 import { shuffleArray } from '@U/functions/array';
 import PropTypes from 'prop-types';
 import { competitionCollectionRef } from '@U/initializer/firebase';
-import { actions } from '@/redux/mission/state';
 import useMission from '@U/hooks/useMission';
 import { useDispatch } from 'react-redux';
 import useModal from '@U/hooks/useModal';
 import MissionGuide from '@F/modal/content/MissionGuide';
 import CompetitionStamp from '@I/icon/stamp/competition-stamp.png';
+
+// Mission
+import {
+  LightLetter,
+} from '@F/Light';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+
+import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
-function Competition({ user, isAuthorized }) {
+function Competition({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 6;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    }, onModalChange);
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(true);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   // firestore 불러오기
   const [cartoonListIHaveVoted, setCartoonListIHaveVoted] = useState([]);
   const [isCartoonLoaded, setIsCartoonLoaded] = useState(false);
@@ -94,7 +137,6 @@ function Competition({ user, isAuthorized }) {
   }, []);
 
   // 미션
-  const mission = useMission();
   const dispatch = useDispatch();
   const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
     name: '공모전',
@@ -111,7 +153,7 @@ function Competition({ user, isAuthorized }) {
 
   return (
     <S.StyledCompetition>
-      <HeaderContent>공모전</HeaderContent>
+      <HeaderContent backgroundColor="#e694a2">공모전</HeaderContent>
       <S.Body>
         <TextSection />
         <S.Tab>
@@ -123,7 +165,6 @@ function Competition({ user, isAuthorized }) {
               >
                 {fieldName}
               </S.TabItem>
-              {FIELDS[fieldName] !== 2 && <p>|</p>}
             </React.Fragment>
           ))}
         </S.Tab>
@@ -138,12 +179,14 @@ function Competition({ user, isAuthorized }) {
           onVoteForField={setHaveVotedForNewVote}
         />
       </S.Body>
-
+      <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
+      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      {lightModalComponent}
       {missionModalComponent}
     </S.StyledCompetition>
   );
 }
-export default withUser(Competition);
+export default withUser(withTheme(Competition));
 
 Competition.propTypes = {
   user: PropTypes.shape({

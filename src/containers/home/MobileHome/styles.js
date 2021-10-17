@@ -6,6 +6,13 @@ import { FluctuationAnimation, VibrateAnimation } from '@S/responsive/animation'
 export const StyledMobileHome = styled.div`
   position: relative;
   width: 100%;
+  // height: ${({ theme }) => theme.windowHeight}px;
+
+  @keyframes change-color{
+    0%{ background-color: black;}
+    100%{ background-color: ${({ theme }) => theme.palette.HOME_PURPLE};}
+  }
+  animation: change-color 2s linear forwards;
 `;
 
 export const Wrapper = styled.div`
@@ -15,4 +22,12 @@ export const Wrapper = styled.div`
   height: ${({ height }) => height}px;
   background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
   overflow: hidden;
+
+  @keyframes appearMobileHome{
+
+    0%{ opacity: 0; filter: blur(50px);}
+    100%{ opacity: 1;}
+  }
+  animation: appearMobileHome 1s linear backwards;
+  animation-delay: .3s;
 `;

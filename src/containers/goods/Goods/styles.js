@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledGoods = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   // background: ${({ theme }) => theme.palette.DARK_PURPLE};

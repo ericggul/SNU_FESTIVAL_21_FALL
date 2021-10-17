@@ -16,19 +16,15 @@ import SignInGuide from '@F/modal/content/SignInGuide';
 import { useUser } from '@U/hooks/useAuth';
 import useMission from '@U/hooks/useMission';
 import { useDispatch } from 'react-redux';
-import { actions } from '@/redux/mission/state';
-import MissionGuide from '@F/modal/content/MissionGuide';
 import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
+import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
 export function Comment({
-  user, comments, mission, handleHeartClick,
+  user, comments, handleHeartClick,
 }) {
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-  const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
-    name: '방명록',
-    stamp: GuestBookStamp,
-  });
+
   const { isAuthorized } = useUser();
 
   // 내가 좋아하는 방명록 목록
@@ -50,15 +46,15 @@ export function Comment({
   ), [comments, user.uid]);
 
   // 방명록 미션
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (isAuthorized && mission.isLoaded && !mission.guestBook) {
-      if (myLikesForComment.length >= 3 && myComments.length >= 1) {
-        dispatch(actions.setFirestoreMission(user, 'guestBook', true));
-        setIsMissionModalOpen(true);
-      }
-    }
-  }, [myLikesForComment, myComments, mission, user, isAuthorized, setIsMissionModalOpen, dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (isAuthorized && mission.isLoaded && !mission.guestBook) {
+  //     if (myLikesForComment.length >= 3 && myComments.length >= 1) {
+  //       dispatch(actions.setFirestoreMission(user, 'guestBook', true));
+  //       setIsMissionModalOpen(true);
+  //     }
+  //   }
+  // }, [myLikesForComment, myComments, mission, user, isAuthorized, setIsMissionModalOpen, dispatch]);
 
   const deleteComment = useCallback((commentId) => {
     guestBookCollectionRef.doc(commentId)
@@ -140,7 +136,6 @@ export function Comment({
       })}
 
       {signInModalComponent}
-      {missionModalComponent}
     </S.StyledComment>
   );
 }
@@ -159,10 +154,7 @@ Comment.propTypes = {
       seconds: PropTypes.number, // unix time
     }),
   })).isRequired,
-  mission: PropTypes.shape({
-    isLoaded: PropTypes.bool,
-    guestBook: PropTypes.bool,
-  }).isRequired,
+
 };
 
 function CommentParent({ user, handleHeartClick }) {
@@ -205,10 +197,7 @@ function CommentParent({ user, handleHeartClick }) {
     return () => unsubscribe();
   }, [subscribeComments]);
 
-  // mission redux
-  const mission = useMission();
-
-  return <Comment comments={[...bestComments, ...normalComments]} user={user} mission={mission} handleHeartClick={handleHeartClick} />;
+  return <Comment comments={[...bestComments, ...normalComments]} user={user} handleHeartClick={handleHeartClick} />;
 }
 export default CommentParent;
 

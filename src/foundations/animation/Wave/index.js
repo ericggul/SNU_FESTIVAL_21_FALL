@@ -3,12 +3,15 @@ import React, { useEffect } from 'react';
 export default function WaveCanvas() {
   useEffect(() => {
     const wave = new App();
+    return () => {
+      wave.destroy();
+    };
   }, []);
 
   return (
     <div
       id="CanvasWrapper"
-      style={{ width: '100vw', height: '100vh' }}
+      style={{ width: '100vw', height: 'calc(100vh - 65px)' }}
     />
   );
 }
@@ -30,6 +33,10 @@ class App {
     requestAnimationFrame(this.animate.bind(this));
   }
 
+  destroy() {
+    cancelAnimationFrame(this.animationRequest);
+  }
+
   resize() {
     this.stageWidth = this.wrapper.clientWidth;
     this.stageHeight = this.wrapper.clientHeight;
@@ -44,7 +51,7 @@ class App {
   animate() {
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     this.waveGroup.draw(this.ctx);
-    requestAnimationFrame(this.animate.bind(this));
+    this.animationRequest = requestAnimationFrame(this.animate.bind(this));
   }
 }
 
@@ -85,7 +92,7 @@ class Wave {
     this.stageHeight = stageHeight;
 
     this.centerX = stageWidth / 2;
-    this.centerY = stageHeight / 1.25;
+    this.centerY = stageHeight / 1.2;
 
     this.pointGap = this.stageWidth * 1.2 / (this.totalPoints - 1);
 

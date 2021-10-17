@@ -67,7 +67,7 @@ export const SearchLogo = styled.img`
 `;
 
 export const InputBox = styled.input`
-    height: calc(100% - 2px);
+    height: calc(100% - 6px);
     width: calc(100% - 5rem);
     outline: 0;
     border: 0px;
@@ -98,6 +98,8 @@ export const Component = styled.div`
   margin-top: 12px;
   flex-direction: column;
   align-items: flex-start;
+  color: black;
+  text-decoration: none;
 `;
 
 export const Link = styled.div`
@@ -115,5 +117,5 @@ export const Header = styled.div`
 `;
 export const Body = styled.div`
   font-size: 12px;
-  line-height: 1.58;
+  line-height: 1.4;
 `;

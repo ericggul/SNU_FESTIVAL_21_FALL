@@ -5,7 +5,7 @@ export const MapContainer = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-
+  margin-top: ${({ height }) => height * 0.1}px;
 `;
 
 export const Map = styled.img`
@@ -18,21 +18,35 @@ export const Map = styled.img`
 
   @keyframes earthquake{
     0%{ transform: rotate(-0deg);}
-    20%{ transform: rotate(-1deg);}
-    40%{ transform: rotate(.75deg);}
-    60%{ transform: rotate(-.5deg);}
-    80%{ transform: rotate(0.25deg);}
+    5%{ transform: rotate(-3deg);}
+    10%{ transform: rotate(2deg);}
+    15%{ transform: rotate(-1.8deg);}
+    20%{ transform: rotate(1.4deg);}
+    25%{ transform: rotate(-1.2deg);}
+    30%{ transform: rotate(1deg);}
+    35%{ transform: rotate(-.75deg);}
+    40%{ transform: rotate(.5deg);}
+    45%{ transform: rotate(-.5deg);}
+    50%{ transform: rotate(.4deg);}
+    55%{ transform: rotate(-.4deg);}
+    60%{ transform: rotate(.3deg);}
+    65%{ transform: rotate(-.3deg);}
+    70%{ transform: rotate(.3deg);}
+    75%{ transform: rotate(-.27deg);}
+    80%{ transform: rotate(.2deg);}
+    85%{ transform: rotate(-.2deg);}
+    90%{ transform: rotate(.1deg);}
+    95%{ transform: rotate(-.1deg);}
     100%{ transform: rotate(0deg);}
-
   }
 
-  animation: earthquake .4s linear;
+  animation: earthquake 1.2s linear;
   animation-delay: .9s;
 `;
 
 export const PointerWrapper = styled.div`
 transform: translateY(-100vh);
-  @keyframes appear{
+  @keyframes appearPointer{
     0%{ transform: translateY(-100vh)};
     80%{transform: translateY(1vh)};
     90%{transform: translateY(-.5vh)};
@@ -41,7 +55,7 @@ transform: translateY(-100vh);
   }
 
   
-  animation: appear .5s forwards;
+  animation: appearPointer .5s forwards;
   animation-delay: ${props => props.delay}s;
 `;
 

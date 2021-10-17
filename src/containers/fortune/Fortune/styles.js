@@ -30,6 +30,7 @@ export const Login = styled.div`
     color: white;
     font-size: 14px;
     cursor: pointer;
+    z-index: 3;
 `;
 
 export const CookieContainer = styled.div`
@@ -45,6 +46,7 @@ export const Image = styled.img`
     width: 100%;
     height: auto;
     object-fit: cover;
+    pointer-events: none;
 `;
 
 export const Text = styled.div`
@@ -104,12 +106,10 @@ export const SearchLogo = styled.img`
 `;
 
 export const InputBox = styled.input`
-    height: calc(100% - 2px);
+    height: calc(100% - 6px);
     width: calc(100% - 5rem);
     outline: 0;
     border: 0px;
-    border-top: 1px solid #DADCE0;
-    border-bottom: 1px solid #DADCE0;
     &::placeholder {
     color: ${props => rgba(props.color || props.theme.palette.GRAY80, 0.4)};
   }

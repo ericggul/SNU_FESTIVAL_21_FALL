@@ -16,6 +16,7 @@ export const palette = {
   // 홈화면
   HOME_PURPLE: '#260f63',
   HOME_PURPLE2: '#1C0A4D',
+  HOME_PURPLE3: '#040036',
 
   // 행사팀
 
@@ -56,6 +57,26 @@ export const palette = {
   FORTUNE_RED: '#EA4335',
   FORTUNE_YELLOW: '#FBBC05',
   FORTUNE_GREEN: '#34A853',
+
+  // 공모전
+  COMPETITION_RED: '#e694a2',
+  HIGHLIGHT_RED: '#d9699d',
+  TEXT_GRAY: '#707070',
+  TEXT_LIGHTGRAY: '#9c9c9c',
+  BACKGROUND_LIGHTPINK: '#E7D1D7',
+  BACKGROUND_LIGHTORANGE: '#EFD5B7',
+
+  // 오목
+  OMOK_PURPLE_BACKGROUND: '#c498ff',
+  OMOK_PURPLE: '#9c65f1',
+  OMOK_POPUP_PURPLE: '#b286ed',
+
+  // 빛 찾기
+  CREAM_PURPLE: '#e5ddff',
+  SOFTPASTEL_PURPLE: '#a494d9',
+  GUIDE_PURPLE: '#14122D',
+  GUIDE_SHADOW_PURPLE: '#434064',
+  GUIDE_TEXT_PURPLE: '#CCD3F5',
 
   WHITE: '#fff',
 
@@ -115,6 +136,7 @@ export const zIndex = {
   fullScreen: 100,
   mouseTrail: 200,
   loading: 1000,
+  light: 2000,
 };
 
 export const theme = {

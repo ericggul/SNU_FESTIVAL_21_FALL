@@ -14,10 +14,14 @@ function Carousel({
   const [animateDir, setAnimateDir] = useState(0);
   const length = useMemo(() => indexes.length, [indexes]);
 
+  // useEffect(() => {
+  //   console.log('index change detected');
+  //   setCurrentLoc(0);
+  // }, [indexes]);
+
   useEffect(() => {
-    console.log('index change detected');
     setCurrentLoc(0);
-  }, [indexes]);
+  }, [shouldChangeLoc]);
 
   useEffect(() => {
     emitCurrentIndex(currentLoc);
@@ -34,6 +38,20 @@ function Carousel({
     }
   }, [currentLoc, length]);
 
+  const LOADING_TEXT = ['LOADING...', 'BE PATIENT', 'LIFE IS LONG'];
+  const [loadingTextNumber, setLoadingTextNumber] = useState(0);
+
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setLoadingTextNumber(ltx => (ltx + 1) % LOADING_TEXT.length);
+      }, 1000);
+      return () => clearInterval(interval);
+    } if (!isLoading) {
+      setLoadingTextNumber(0);
+    }
+  }, [isLoading, loadingTextNumber]);
+
   return (
     <S.Wrapper width={width}>
       <S.ArrowButton animate={animateDir === -1} onClick={() => handleClick(-1)}>{'<'}</S.ArrowButton>
@@ -41,15 +59,13 @@ function Carousel({
         {indexes.map((index, i) => (
           index === indexes[currentLoc] && (
           <S.Box itemWidth={width * 0.7} key={i}>
-            {isLoading && <S.Skeleton>LOADING...</S.Skeleton>}
+            {isLoading && <S.Skeleton>{LOADING_TEXT[loadingTextNumber]}</S.Skeleton>}
             <MapInteractionCSS>
-
               <S.Image
                 isLoading={isLoading}
                 onLoad={() => setIsLoading(false)}
                 src={`https://snufestival-e9a04.web.app/images/handwriting/writings/${sectorNum}${index.toString(16)}.png`}
               />
-
             </MapInteractionCSS>
           </S.Box>
           )

@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import { rgba } from 'polished';
 
 function PopupModal({
-  isModalOpen, setIsModalOpen, children, closeOnDocumentClick, width,
+  isModalOpen, setIsModalOpen, children, darkBackground, closeOnDocumentClick, width,
 }) {
   return (
     <Popup
@@ -13,10 +13,10 @@ function PopupModal({
       open={isModalOpen}
       closeOnDocumentClick={closeOnDocumentClick}
       onClose={() => setIsModalOpen(false)}
-      overlayStyle={{
+      overlayStyle={darkBackground ? {
         background: rgba(0, 0, 0, 0.7),
         overflow: 'auto',
-      }}
+      } : { background: 'transparent' }}
       contentStyle={{
         width,
         margin: 'auto',

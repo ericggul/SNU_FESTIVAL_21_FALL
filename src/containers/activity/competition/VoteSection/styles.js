@@ -12,44 +12,21 @@ export const StyledVoteSection = styled.div`
 `;
 
 export const ItemSection = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  margin: 1rem 0;
 `;
 
 export const Item = styled.div`
-  width: 50%;
-  height: 50%;
-  
-  ${media.lessThan('medium')`
-    width: 100%;
-    height: 100%;
-  `};
-
-  padding: 1rem 1rem 2rem;
+  width: 100%;
+  padding: 1rem;
+  position: relative;
   box-sizing: border-box;
-  
-  p {
-    font-size: 1rem;
-    text-align: left;
-    font-weight: 500;
-    margin: 0;
-    line-height: 1.75;
-    word-break: keep-all;
-  }
-  p:nth-of-type(1), p:nth-of-type(2) {
-    color: ${({ theme }) => theme.palette.PURPLE50};
-  }
-  p:last-of-type {
-    color: ${({ theme }) => theme.palette.GRAY80};
-  }
 `;
 
 export const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
-  margin-bottom: 1rem;
   
   img {
     width: 100%;
@@ -57,40 +34,81 @@ export const ImageWrapper = styled.div`
   }
 `;
 
+export const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 1.4rem;
+  box-shadow: 0 0 .4rem rgba(0, 0, 0, .16);
+`;
+
+export const InfoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+  p {
+    font-size: 1rem;
+    text-align: left;
+    font-weight: 600;
+    margin: 0;
+    margin: 0.2rem 0.3rem;
+    margin-right: 1.6rem;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+  p:nth-of-type(1) {
+    margin-top: 0.6rem;
+    color: ${({ theme }) => theme.palette.HIGHLIGHT_RED};
+  }
+  p:last-of-type {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: ${({ theme }) => theme.palette.TEXT_GRAY};
+  }
+`;
+
 export const LikeButton = styled.div`
   position: absolute;
-  bottom: 2%;
-  right: 2%;
+  top: 0.6rem;
+  right: 0.1rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   cursor: pointer;
 
   & > img {
-    width: 70%;
-    height: 65%;
+    width: 100%;
+    height: 100%;
   }
 `;
 
 export const SubmitSection = styled.div`
+  ${FlexCenterStyle};
+  flex-direction: column;
   & p {
+    margin: .7rem;
+    font-size: 0.75rem;
+    font-weight: 300;
     text-align: center;
-    color: ${({ theme }) => theme.palette.PURPLE50};
+    color: #828282;
   }
 `;
 
 export const SubmitButton = styled.div`
   ${FlexCenterStyle};
-  width: 100%;
+  width: 50%;
+  max-width: 300px;
   height: 4rem;
+  margin-top: 2rem;
   
-  font-size: 1.5rem;
-  border-radius: 5px;
-  background-color: ${({ theme }) => theme.palette.PURPLE50};
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 2rem;
+  background: ${({ theme }) => theme.palette.COMPETITION_RED};
   color: white;
   cursor: pointer;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);

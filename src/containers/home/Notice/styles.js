@@ -4,11 +4,11 @@ import { FlexCenterStyle } from '@S/responsive/display';
 
 export const NoticeWrapper = styled.div`
   position: fixed;
-  top: 65px;
+  top: 70px;
   left: 0;
  
   ${media.greaterThan('medium')`
-    top: 75px;
+    top: 85px;
   `};
   
   width: 100%;
@@ -20,6 +20,8 @@ export const NoticeWrapper = styled.div`
 `;
 
 export const Notice = styled.div`
+
+  overflow: hidden;
   width: 346px;
   @media screen and (max-width: 375px) {
     width: 300px;
@@ -27,7 +29,7 @@ export const Notice = styled.div`
   
   height: 100%;
   background-color: white;
-  padding: 11px 25px 11px 25px;
+  padding: 11px 15px 11px 15px;
   box-sizing: border-box;
   border-radius: 18px;
   box-shadow: 0 3px 6px 0 rgba(147, 151, 214, 0.45);
@@ -39,18 +41,38 @@ export const Notice = styled.div`
   
   cursor: pointer;
 
-  img {
-    width: 10%;
-    height: 130%;
-  }
-
   p {
     text-align: center;
     margin: 0;
-    width: 90%;
+    width: 85%;
     font-weight: 500;
     color: ${({ theme }) => theme.palette.PURPLE50};
+
+    @keyframes passby{
+      0%{transform: translateY(-20px); opacity: 1;}
+      20%{transform: translateY(0px); opacity: 1;}
+      80%{transform: translateY(0px); opacity: 1;}
+      100%{transform: translateY(20px); opacity: 1;} 
+    }
+  
+    animation: passby 3s linear infinite;
   }
+`;
+
+export const Indicator = styled.div`
+  width: 15%;
+  font-weight: 500;
+  ${FlexCenterStyle};
+  color: #4049DB;
+
+  @keyframes passby{
+    0%{transform: translateY(-20px); opacity: 1;}
+    20%{transform: translateY(0px); opacity: 1;}
+    80%{transform: translateY(0px); opacity: 1;}
+    100%{transform: translateY(20px); opacity: 1;} 
+  }
+
+  animation: passby 3s linear infinite;
 `;
 
 export const TimeTable = styled.img`

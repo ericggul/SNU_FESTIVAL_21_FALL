@@ -3,17 +3,21 @@ import { FlexCenterStyle } from '@S/responsive/display';
 import { motion } from 'framer-motion';
 
 export const StyledBubble = styled(motion.div)`
-text-align: center;
+  text-align: center;
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;
   background: ${({ theme }) => theme.palette.WHITE};
   width: calc(min(50vw, 300px));
+  word-break: break-word;
+  padding: 0 calc(min(3vw, 18px));
   height: calc(min(14vw, 60px));
-  border-radius: calc(min(5vw, 30px));
+  ${({ long }) => long && 'font-size: 0.9rem;'}
+  border-radius: calc(min(7vw, 30px));
   box-shadow: 
       0 0 3px ${({ theme }) => theme.palette.WHITE},
-      0 0 5px ${({ theme }) => theme.palette.WHITE};
+      0 0 5px ${({ theme }) => theme.palette.WHITE},
+      0 0 8px ${({ theme }) => theme.palette.WHITE};
 
   p {
     margin: 0;
@@ -46,23 +50,6 @@ text-align: center;
     margin-left: -0.5rem;
   }
 
-  &:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: calc(min(5vw, 30px));
-    box-shadow: 
-      0 0 8px ${({ theme }) => theme.palette.WHITE},
-      0 0 15px ${({ theme }) => theme.palette.WHITE};
-    opacity: 0.3;
-    @keyframes opacity{
-      from{ opacity: 0.3; }
-      to{opacity: 1; }
-    }
-    animation: opacity 4s infinite alternate;
-  }
+
 
 `;

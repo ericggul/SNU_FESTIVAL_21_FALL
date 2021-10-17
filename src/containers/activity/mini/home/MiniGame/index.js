@@ -25,76 +25,45 @@ function MiniGame({ theme }) {
     history.push(`/activity/mini/${location}`);
   }, [history]);
 
-  function Item({
-    url, src, text, i, sendFunction,
-  }) {
-    return (
-      <GS.GridItem
-        onClick={() => sendFunction(url, i)}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{
-          opacity: selected === i ? 1 : 0,
-        }}
-        transition={{
-          ...transition,
-          delay: (i + 1) * 0.2,
-        }}
-      >
-        <GS.ImageContainer>
-          <GS.IconImage
-            src={src}
-            duration={getRandom(0.5, 2)}
-            delay={getRandom(-5, 0)}
-          />
-        </GS.ImageContainer>
-        <GS.IconDescription shine={selected === i}>
-          {text}
-        </GS.IconDescription>
-      </GS.GridItem>
-    );
-  }
+  const Item = (url, src, text, i) => (
+    <GS.GridItem
+      onClick={() => send(url, i)}
+      initial={{ opacity: 0, filter: 'blur(10px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      exit={{
+        opacity: selected === i ? 1 : 0,
+      }}
+      transition={{
+        ...transition,
+        delay: (i) * 0.2 + 0.1,
+      }}
+    >
+      <GS.ImageContainer>
+        <GS.IconImage
+          src={src}
+          duration={getRandom(0.5, 2)}
+          delay={getRandom(-5, 0)}
+        />
+      </GS.ImageContainer>
+      <GS.IconDescription shine={selected === i}>
+        {text}
+      </GS.IconDescription>
+    </GS.GridItem>
+  );
 
   const iconGrid = (
     <S.IconGrid isMobile={isMobile}>
-      <Item
-        url="omok"
-        src={OmokIcon}
-        text="오목게임"
-        i={0}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="riddle"
-        src={RiddleIcon}
-        text="미궁게임"
-        i={1}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="handwriting"
-        src={HandwritingIcon}
-        text="필기 맞추기"
-        i={2}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="place"
-        src={PlaceIcon}
-        text="장소 맞추기"
-        i={3}
-        selected={selected}
-        sendFunction={send}
-      />
+
+      {Item('omok', OmokIcon, '오목게임', 0, selected)}
+      {Item('riddle', RiddleIcon, '미궁게임', 1, selected)}
+      {Item('handwriting', HandwritingIcon, '필기 맞추기', 2, selected)}
+      {Item('place', PlaceIcon, '장소 맞추기', 3, selected)}
     </S.IconGrid>
   );
 
   return (
     <S.StyledMiniGame>
-      <HeaderContent backgroundColor={theme.palette.SOFTLIGHT_PURPLE}>미니게임</HeaderContent>
+      <HeaderContent backgroundColor="transparent">미니게임</HeaderContent>
       <Wave />
       <S.StyledContainer>
         <S.Description>

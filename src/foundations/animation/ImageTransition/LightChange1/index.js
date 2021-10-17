@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import ClosingFestival from '@I/jpg/closing-festival.jpg';
 import * as S from './styles';
 
-function getRandom(a, b) { return Math.random() * (b - a) + a; }
-
 function LightChange({
-  image, index = 0, reRender = true, backgroundColor = 'black',
+  image, index = 0, backgroundColor = 'black',
 }) {
   useEffect(() => {
-    if (reRender) {
-      const render = new App(image, index, backgroundColor);
-    }
+    const render = new App(image, index, backgroundColor);
     return () => {
-      const render = new App(image, index, backgroundColor);
+      render.destroy();
     };
   }, []);
   return (
@@ -79,6 +75,10 @@ class App {
     this.canvas.addEventListener('click', this.onClick.bind(this), false);
   }
 
+  destroy() {
+    cancelAnimationFrame(this.animationRequest);
+  }
+
   resize() {
     this.stageWidth = this.wrapper.clientWidth;
     this.stageHeight = this.wrapper.clientHeight;
@@ -137,7 +137,7 @@ class App {
       this.imgPos.x, this.imgPos.y, this.imgPos.width, this.imgPos.height,
     );
 
-    this.imageData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight);
+    this.imageData = this.tmpCtx?.getImageData(0, 0, this.stageWidth, this.stageHeight);
   }
 
   drawDots() {
@@ -171,7 +171,7 @@ class App {
 
   animate() {
     this.ripple.animate(this.ctx);
-    window.requestAnimationFrame(this.animate.bind(this));
+    this.animationRequest = window.requestAnimationFrame(this.animate.bind(this));
     for (let i = 0; i < this.dots.length; i += 1) {
       const dot = this.dots[i];
       if (collide(dot.x, dot.y, this.ripple.x, this.ripple.y, this.ripple.radius)) {
@@ -195,6 +195,16 @@ class App {
     );
 
     this.ripple.start(e.offsetX, e.offsetY);
+
+    setTimeout(() => {
+      this.ripple.stop();
+
+      for (let i = 0; i < this.dots.length; i += 1) {
+        this.dots[i].reset();
+      }
+      this.dots = [];
+      this.drawImage();
+    }, 2000);
   }
 }
 
@@ -253,6 +263,12 @@ class Dot {
     ctx.fill();
   }
 
+  stop() {
+    this.radius = 0;
+    this.radiusV = 0;
+    this.targetRadius = 0;
+  }
+
   reset() {
     this.radius = 0;
     this.radiusV = 0;
@@ -278,7 +294,16 @@ class Ripple {
     this.x = x;
     this.y = y;
     this.radius = 0;
+    this.speed = 6;
     this.maxRadius = this.getMax(x, y);
+  }
+
+  stop() {
+    this.x = 0;
+    this.y = 0;
+    this.radius = 0;
+    this.speed = 0;
+    this.maxRadius = 0;
   }
 
   animate(ctx) {

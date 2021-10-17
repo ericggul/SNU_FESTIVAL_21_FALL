@@ -2,16 +2,14 @@
 import React, { useEffect, useRef } from 'react';
 import * as S from './styles';
 
-export default function Firework({isRunning}) {
-
+export default function Firework({ isRunning }) {
   console.log(isRunning);
 
-  //isRunning --> updateGlobals --> startSequence --> sequences(pyramid, two random, triple,) --> launcShell
+  // isRunning --> updateGlobals --> startSequence --> sequences(pyramid, two random, triple,) --> launcShell
 
   // const isRunning = true;
   const stageContainerRef = useRef();
   const canvasContainerRef = useRef();
-
 
   const crossetteShell = (size = 1) => {
     const color = randomColor({ limitWhite: true });
@@ -68,8 +66,6 @@ export default function Firework({isRunning}) {
     // Strobe: strobeShell,
     // Willow: willowShell,
   };
-
-
 
   const Ticker = (function TickerFactory(window) {
     const Ticker = {};
@@ -507,13 +503,12 @@ export default function Firework({isRunning}) {
   let stages;
 
   useEffect(() => {
-
-      trailsStage = new Stage('trails-canvas');
-      mainStage = new Stage('main-canvas');
-      stages = [
-        trailsStage,
-        mainStage,
-      ];
+    trailsStage = new Stage('trails-canvas');
+    mainStage = new Stage('main-canvas');
+    stages = [
+      trailsStage,
+      mainStage,
+    ];
   }, []);
 
   // Fullscreen helpers, using Fscreen for prefixes.
@@ -680,8 +675,6 @@ export default function Firework({isRunning}) {
     }
   }
 
-
-
   // Selectors
   // -----------
 
@@ -697,7 +690,6 @@ export default function Firework({isRunning}) {
   const scaleFactorSelector = () => store.state.config.scaleFactor;
 
   console.log(store.state.config);
-
 
   // Render app UI / keep in sync with state
   const appNodes = {
@@ -752,7 +744,6 @@ export default function Firework({isRunning}) {
   if (!fullscreenEnabled()) {
     appNodes.fullscreenFormOption.classList.add('remove');
   }
-
 
   // store.subscribe(renderApp);
 
@@ -934,7 +925,6 @@ export default function Firework({isRunning}) {
       glitterColor: color === COLOR.Gold ? COLOR.Gold : COLOR.White,
       streamers: Math.random() < 0.3,
     };
-  
   };
 
   // const crossetteShell = (size = 1) => {
@@ -1077,7 +1067,6 @@ export default function Firework({isRunning}) {
     return position * 0.75;
   }
 
-
   function getRandomShellSize() {
     const baseSize = shellSizeSelector();
     const maxVariance = Math.min(2.5, baseSize);
@@ -1092,8 +1081,6 @@ export default function Firework({isRunning}) {
       height: fitShellPositionInBoundsV(height),
     };
   }
-
-
 
   // Sequences
   // -----------
@@ -1316,8 +1303,6 @@ export default function Firework({isRunning}) {
 
   let isUpdatingSpeed = false;
 
-
-
   // Key commands are likely unwanted when fireworks are just an overlay.
   // window.addEventListener('keydown', handleKeydown);
 
@@ -1332,7 +1317,7 @@ export default function Firework({isRunning}) {
 
     // altered appnodes.stageContainer --> document.getElements
     // console.log(appNodes.stageContainer.style)
-    if (stageContainerRef) {
+    if (stageContainerRef && stageContainerRef.current) {
       console.log(stageContainerRef);
       stageContainerRef.current.style.width = `${containerW}px`;
       stageContainerRef.current.style.height = `${containerH}px`;
@@ -1365,7 +1350,7 @@ export default function Firework({isRunning}) {
     // auto launch shells
     if (store.state.config.autoLaunch) {
       // autoLaunchTime -= timeStep;
-      
+
       if (autoLaunchTime <= 0) {
         autoLaunchTime = startSequence() * 1.25;
       }
@@ -1874,7 +1859,7 @@ export default function Firework({isRunning}) {
         // For non-horsetail shells, compute an initial vertical speed to add to star burst.
         // The magic number comes from testing what looks best. The ideal is that all shell
         // bursts appear visually centered for the majority of the star life (exc
-        
+
         const standardInitialSpeed = this.spreadSize / 1800;
 
         const star = Star.add(
@@ -1962,15 +1947,14 @@ export default function Firework({isRunning}) {
           console.log('normal burst');
           createBurst(this.starCount, starFactory);
         }
-      } 
-      else if (Array.isArray(this.color)) {
+      } else if (Array.isArray(this.color)) {
         if (Math.random() < 0.5) {
           const start = Math.random() * Math.PI;
           const start2 = start + Math.PI;
           const arc = Math.PI;
           color = this.color[0];
           // Not creating a full arc automatically reduces star count.
-  
+
           createBurst(this.starCount, starFactory, start, arc);
           color = this.color[1];
           createBurst(this.starCount, starFactory, start2, arc);
@@ -1980,8 +1964,7 @@ export default function Firework({isRunning}) {
           color = this.color[1];
           createBurst(this.starCount / 2, starFactory);
         }
-      } 
-      else {
+      } else {
         throw new Error(`Invalid shell color. Expected string or array of strings, but got: ${this.color}`);
       }
 
@@ -2159,8 +2142,6 @@ export default function Firework({isRunning}) {
       this._pool.push(instance);
     },
   };
-
-
 
   // Kick things off.
 

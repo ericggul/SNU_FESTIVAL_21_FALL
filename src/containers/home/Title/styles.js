@@ -14,11 +14,11 @@ export const Title = styled.div`
     font-weight: lighter;
     
     &:first-child {
-      font-size: 14px;
+      font-size: 12px;
     }
     
     &:last-child {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.2;
     }
   }
