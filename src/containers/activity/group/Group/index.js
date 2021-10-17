@@ -22,9 +22,7 @@ import { toast } from 'react-toastify';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 // Mission
-import {
-  Light5,
-} from '@F/Light';
+import Light5 from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import { actions } from '@/redux/mini-game/state';
@@ -33,14 +31,43 @@ import * as S from './styles';
 
 function Group({ theme, user, isAuthorized }) {
   /// //////////////////////////
-  const mission = useMission();
+  const [lighted, setLighted] = useState(true);
   const [lightVisible, setLightVisible] = useState(false);
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
+
+  console.log('sustain', sustainLightTemp);
+  console.log('light', lighted);
+
+  useEffect(() => {
+    if (!sustainLightTemp) {
+      if (lightVisible) {
+        const interval = setInterval(() => {
+          setLighted(light => !light);
+        }, 1500);
+        return () => clearInterval(interval);
+      } if (!lightVisible) {
+        console.log('here2');
+        setLighted(false);
+      }
+    }
+  }, [sustainLightTemp, lightVisible]);
+
+  useEffect(() => {
+    if (sustainLightTemp) {
+      setLighted(true);
+    } else {
+      setLighted(false);
+    }
+  }, [sustainLightTemp]);
+
+  /// //////////////////////////
+  const mission = useMission();
   const PAGE_LIGHT_INDICATOR = 7;
 
   const onModalChange = useCallback(() => {
     setSustainLightTemp(false);
   }, []);
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
@@ -61,6 +88,7 @@ function Group({ theme, user, isAuthorized }) {
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
 
   const lightMissionClick = useCallback(() => {
+    setLighted(true);
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
@@ -108,8 +136,6 @@ function Group({ theme, user, isAuthorized }) {
     }
   }, []);
 
-  console.log(url);
-
   const goToZoom = useCallback(() => {
     if (url !== null && url.length > 0) {
       EventBehavior('Activity', `Click Youtube Link: ${url}`, `go to ${url} by activity page`);
@@ -123,8 +149,8 @@ function Group({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledGroup>
-      <HeaderContent backgroundColor="#52cbb2">단체게임</HeaderContent>
-      <S.Body>
+      <HeaderContent backgroundColor={lighted ? '#171d2b' : '#52cbb2'}>단체게임</HeaderContent>
+      <S.Body lighted={lighted}>
         <S.Poster src={GroupImage} />
         <S.Title>모여밤, 외쳐밤, 맞춰밤!</S.Title>
         <S.Descp>
@@ -160,10 +186,10 @@ function Group({ theme, user, isAuthorized }) {
 
           </S.Info>
         </S.Contents>
-        <S.Button onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>
+        <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>
       </S.Body>
 
-      <Light5 top={150} left={150} handleClick={lightMissionClick} />
+      {lighted && <Light5 handleClick={lightMissionClick} />}
       {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledGroup>

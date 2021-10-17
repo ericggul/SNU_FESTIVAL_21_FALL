@@ -10,12 +10,17 @@ export const StyledGroup = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  max-width: 750px;
-  height: ${({ theme }) => theme.windowHeight - 65}px;
+  // max-width: 750px;
+  padding: 2rem;
+  min-height: ${({ theme }) => theme.windowHeight - 65}px;
   ${FlexCenterStyle};
   flex-direction: column;
   background-image: linear-gradient(to top, #abebe3, #d8f1da 50%, #abebe3 100%);
   color: #707070;
+
+  ${({ lighted }) => lighted && 'background: #171D2B;'};
+  ${({ lighted }) => lighted && 'color: #A0C2D8;'};
+  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;
 
 export const Poster = styled.img`
@@ -42,6 +47,7 @@ export const Descp = styled.div`
 export const Contents = styled.div`
   display: flex;
   width: 80vw;
+  max-width: 600px;
   text-align: left;
   flex-direction: column;
   margin-top: 1rem;
@@ -78,4 +84,8 @@ export const Button = styled.div`
   cursor: pointer;
   border-radius: 2rem;
   box-shadow: 0 .3rem .6rem rgba(0, 0, 0, 0.15);
+
+  ${({ lighted }) => lighted && 'background: #171D2B;'};
+  ${({ lighted }) => lighted && 'color: #A0C2D8;'};
+  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;

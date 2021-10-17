@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useAudio from '@U/hooks/useAudio';
+import { withTheme } from 'styled-components';
 import Light from '@/static/audio/light.mp3';
 import Zarathustra from '@/static/audio/Zarathustra.mp3';
 import * as S from './styles';
@@ -13,7 +14,6 @@ export function LightSimple({
   const [animate, setAnimate] = useState(false);
   const onClick = useCallback(() => {
     setAnimate(true);
-    console.log('light');
     setTimeout(() => {
       handleClick();
     }, 1000);
@@ -160,21 +160,48 @@ export function Light4({
   );
 }
 
-export function Light5({
-  top, left, size = 1, handleClick,
+function Light5({
+  size = 1, handleClick, theme,
 }) {
   const width = useMemo(() => size * 70, [size]);
   const [animate, setAnimate] = useState(false);
   const onClick = useCallback(() => {
     setAnimate(true);
-    setTimeout(() => {
-      handleClick();
-    }, 1000);
+    handleClick();
   }, [animate]);
+
+  console.log('animate', animate);
+
+  const getRandom = useCallback((a, b) => Math.random() * (b - a) + a, []);
+  const number = 50;
+  const randomArray = useMemo(() => {
+    const array = [];
+    for (let i = 0; i < number; i += 1) {
+      array.push({
+        x: getRandom(0, theme.windowWidth), y: getRandom(0, theme.windowHeight), size: getRandom(0.5, 1.4),
+      });
+    }
+    return array;
+  }, []);
+
   return (
-    <S.Container5 animate={animate} onClick={onClick} top={top} left={left} width={width / 5} />
+    <S.Container5 animate={animate}>
+      {randomArray.map((pos, i) => (
+        <S.Circle5
+          onClick={onClick}
+          animate={animate}
+          key={i}
+          width={pos.size}
+          top={pos.y}
+          left={pos.x}
+          delay={i * 0.1}
+        />
+      ))}
+    </S.Container5>
   );
 }
+
+export default withTheme(Light5);
 
 export function Light6({
   top, left, size = 1, handleClick,

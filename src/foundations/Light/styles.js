@@ -285,21 +285,36 @@ export const Circle4 = styled.div`
 
 export const Container5 = styled.div`
   ${ContainerCommon};
-  @keyframes lightMove4{
-    0%{
-    }
-    100%{
-      transform: translate(
-        ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 40 : theme.windowWidth / 2 - left - 40)}px, 
-        ${({ theme, top }) => (theme.windowWidth > 768 ? theme.windowHeight / 2 - top - 40 - 120 : theme.windowHeight / 2 - top - 40 - 90)}px)
-        scale(1.5);
-    }
-  }
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
 
-  ${({ animate }) => animate && 'animation: lightMove4 3s forwards;'}
+  ${({ animate }) => animate && 'pointer-events: none;'}
 `;
 
-export const Bright = styled.div`
+export const Circle5 = styled.div`
+  position: fixed;
+  width: ${({ width }) => width}px;
+  height: ${({ width }) => width}px;
+  border-radius: 50%;
+  top: ${({ top }) => top}px;
+  left: ${({ left }) => left}px;
+  background: #A0C2D8;
+  box-shadow:
+     0 0 .2rem .1rem #C8DDEB,
+     0 0 1rem .2rem white,
+     0 0 1.5rem .2rem #8EC1E0,
+     0 0 3rem .5rem white,
+     0 0 5rem 1rem #A9CADF;
+
+  ${appearLight};
+  animation: appearLight .4s linear alternate infinite backwards;
+  animation-delay: -${({ delay }) => delay}s;
+
+  cursor: pointer;
+  ${({ animate }) => animate && 'pointer-events: none;'}
 
 `;
 
