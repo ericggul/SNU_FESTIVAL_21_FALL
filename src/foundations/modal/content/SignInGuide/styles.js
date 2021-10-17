@@ -1,78 +1,67 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
+import { FlexCenterStyle } from '@S/responsive/display';
+import { IoMdClose } from 'react-icons/all';
 
 export const SignInGuideBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 65%;
-  min-width: 264px;
-  height: 100%;
+  min-width: 25rem;
+  min-height: 24rem;
   
-  background-color: ${({ theme }) => rgba(theme.palette.PURPLE50, 0.45)};
-  border: 1px solid ${({ theme }) => theme.palette.PURPLE80};
-  
-  padding: 5px 8px 6px 7px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.3);
-`;
+  background-color: white;
+  border-radius: .5rem;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .16);
 
-export const ContentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-  width: 100%;
-  height: 100%;
-  
-  padding: 2rem 0;
-  box-sizing: border-box;
-
-  background-color: ${rgba('#faf8fb', 0.95)};
-  border: 1px solid ${({ theme }) => theme.palette.PURPLE80};
+  ${FlexCenterStyle};
+  text-align: center;
 `;
 
 export const Image = styled.img`
-  width: 15px;
-  height: 15px;
-  align-self: flex-end;
-  margin-bottom: 5px;
-  cursor: pointer;
+  width: 16rem;
+  height: auto;
 `;
 
-export const MainSpan = styled.span`
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.43;
-  color: ${({ theme }) => theme.palette.GRAY80};
+export const Header = styled.div`
+  font-weight: 500;
+  width: 15rem;
+  font-size: 1.5rem;
+  margin: .5rem;
+  margin-top: 0;
+  line-height: 1.3;
+  color: #4f30b3;
 `;
-
-export const SubSpan = styled.span`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: ${({ theme }) => rgba(theme.palette.GRAY80, 0.55)};
-  line-height: 1.43;
-  
-  &:nth-of-type(3) {
-    color: ${({ theme }) => rgba(theme.palette.ORANGE_NEWTRO, 0.55)};
-  }
+export const Subheader = styled.div`
+  color: #7f68c7;
+  font-size: .9rem;
+  // margin: .2rem;
+  font-weight: 500;
 `;
 
 export const Button = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16px;
-  
-  width: 164px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: ${rgba('#aeb0cc', 0.4)};
-  color: ${({ theme }) => theme.palette.GRAY80};
+  background: #a494d9;
   font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  padding: .5rem 2.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 2rem;
+  box-shadow: 0 .3rem .6rem 0 rgba(0, 0, 0, .16);
   cursor: pointer;
+`;
+
+export const CloseButton = styled.div`
+  z-index: ${({ theme }) => theme.zIndex.fullScreen + 1};
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+`;
+
+export const CloseIcon = styled(IoMdClose)`
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #a494d9;
 `;
