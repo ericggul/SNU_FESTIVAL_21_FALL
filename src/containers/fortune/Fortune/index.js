@@ -67,7 +67,7 @@ function Fortune({ theme, user, isAuthorized }) {
             <S.LogoContainer onClick={() => handleSearch(value)}>
               <S.SearchLogo src={SearchLogo} />
             </S.LogoContainer>
-            <S.InputBox placeholder="숫자를 입력하세요" value={value} onChange={onChange} />
+            <S.InputBox placeholder="숫자를 입력하세요 (1-980)" value={value} onChange={onChange} />
           </S.SearchContainer>
           <S.Button onClick={() => handleSearch(value)}>I'm Feeling Lucky</S.Button>
           <a

@@ -119,3 +119,14 @@ export const Body = styled.div`
   font-size: 12px;
   line-height: 1.4;
 `;
+
+export const Image = styled.img`
+  width: 50%;
+  max-width: 300px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: 2rem;
+`;
