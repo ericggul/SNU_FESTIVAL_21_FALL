@@ -10,6 +10,7 @@ import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
 import MissionCard from '@C/home/MissionCard';
+import MissionCompleteCard from '@C/home/MissionCompleteCard';
 import Rio from '@C/home/common/Rio';
 
 import Skeleton from '@I/skeleton/skeleton.png';
@@ -54,7 +55,8 @@ const getRandom = (a, b) => Math.random() * (b - a) + a;
 function MobileHome({
   theme, fromLightEvent, user, isAuthorized,
 }) {
-  console.log('from light event', fromLightEvent);
+  const convert = useCallback((value) => (theme.windowWidth / 375) * value, [theme]);
+
   const [isLoading, setIsLoading] = useState(true);
 
   // Light Event Related
@@ -66,12 +68,33 @@ function MobileHome({
   const [brightenLights, setBrightenLights] = useState(foundedLightNumbers);
   const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
+
+  const [missionCleared, setMissionCleared] = useState(true);
   const [gateOn, setGateOn] = useState(false);
 
   useEffect(() => {
     setBrightenLights(foundedLightNumbers);
     setRioWaked(isLightPlaying);
+    if (foundedLightNumbers === 10) {
+      setMissionCleared(true);
+    }
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
+
+  useEffect(() => {
+    if (missionCleared) {
+      setTimeout(() => {
+        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
+      }, 1000);
+
+      setTimeout(() => {
+        setGateOn(true);
+      }, 4500);
+
+      setTimeout(() => {
+        setIsMissionCompleteModalOpen(true);
+      }, 6000);
+    }
+  }, [missionCleared]);
 
   const history = useHistory();
   const goToPage = useCallback((route) => {
@@ -95,14 +118,17 @@ function MobileHome({
   );
 
   // Light Mission
-  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, {
-    isAuthorized,
-  });
+  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard);
+  const { modalComponent: missionCompleteComponent, setIsModalOpen: setIsMissionCompleteModalOpen } = useModal(MissionCompleteCard);
 
   const clickRio = useCallback(() => {
     setRioWaked(true);
     setTimeout(() => {
-      setIsMissionModalOpen(true);
+      if (!missionCleared) {
+        setIsMissionModalOpen(true);
+      } else {
+        setIsMissionCompleteModalOpen(true);
+      }
     }, 400);
   }, [rioWaked]);
 
@@ -149,8 +175,6 @@ function MobileHome({
     }
   }, [isLightPlaying]);
 
-  const convert = useCallback((value) => (theme.windowWidth / 375) * value, [theme]);
-
   return (
     <>
       <S.StyledMobileHome>
@@ -158,6 +182,12 @@ function MobileHome({
         <S.Wrapper width={convert(375)} height={convert(1555)}>
           <Notice />
           <CS.Background src={BackgroundBottom} top={convert(112)} left={0} width={convert(374)} onLoad={onLoad} />
+
+          {missionCleared && <CustomPath isMobile busWidth={convert(67)} />}
+          {!missionCleared && <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
+          {!missionCleared && <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />}
+          {!missionCleared && <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
+
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
           <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(446)} left={convert(153)} width={convert(222)} onClick={() => goToPage('/activity')} />
@@ -170,21 +200,19 @@ function MobileHome({
               lightOn={i < brightenLights}
               top={convert(pos.y)}
               left={convert(pos.x)}
-              fromEvent={animateSpecificLight === i}
+              fromEvent={animateSpecificLight === i && i !== 9}
               key={i}
             />
           ))}
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
-          <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} onClick={() => speak('이번 정류소는 제2 공학관 입니다.')} />
-          <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />
-          <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />
-          <CustomPath isMobile busWidth={convert(67)} />
-          <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1344)} left={convert(35)} width={convert(215)} />
+
+          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={busClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
           <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>
           {missionComponent}
+          {missionCompleteComponent}
           {isLoading && <CS.Background src={Loading} top={convert(112)} left={0} width={convert(374)} alt="" />}
         </S.Wrapper>
       </S.StyledMobileHome>

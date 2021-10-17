@@ -64,12 +64,13 @@ export const Landmark = styled.img`
   }
 `;
 
-export const Image = styled.img`
+export const Door = styled.img`
   position: absolute;
   width: ${({ width }) => width}px;
   height: auto;
   ${props => props.top && css`top: ${props.top}px`};
   ${props => props.left && css`left: ${props.left}px`};
+
 `;
 
 export const Bus = styled.img`

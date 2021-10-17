@@ -7,11 +7,12 @@ import { sumOfArray } from '@U/functions/array';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
+import withUser from '@U/hoc/withUser';
 import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
-function MissionCard({ setIsModalOpen, isAuthorized }) {
+function MissionCard({ setIsModalOpen, user, isAuthorized }) {
   const mission = useMission();
   const lightArray = useSelector(state => state.mission.light);
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ function MissionCard({ setIsModalOpen, isAuthorized }) {
     </>
   );
 }
-export default MissionCard;
+export default withUser(MissionCard);
 
 MissionCard.propTypes = {
 

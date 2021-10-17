@@ -16,6 +16,12 @@ export const MapContainer = styled.div`
   ${({ loaded }) => loaded && 'animation: appearContainer 2s linear forwards;'};
 `;
 
+export const Text = styled.div`
+  font-size: 1.5rem;
+  color: white;
+  ${FlexCenterStyle};
+  font-weight: 500;
+`;
 export const Image = styled.img`
   position: absolute;
   width: 100%;

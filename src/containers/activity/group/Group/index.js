@@ -43,7 +43,7 @@ function Group({ theme, user, isAuthorized }) {
       if (lightVisible) {
         const interval = setInterval(() => {
           setLighted(light => !light);
-        }, 1500);
+        }, 2000);
         return () => clearInterval(interval);
       } if (!lightVisible) {
         console.log('here2');

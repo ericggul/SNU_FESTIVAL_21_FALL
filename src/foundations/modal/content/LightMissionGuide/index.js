@@ -33,8 +33,8 @@ function LightGuide({
       dispatch(actions.setFirestoreLight(user, newArray));
     } else if (!isAuthorized) {
       setFoundState(15);
-    } else {
-      setFoundState(10);
+    } else if (isAuthorized && !mission.light) {
+      setFoundState(11);
     }
   }, [isAuthorized, isPlaying, mission]);
 
@@ -59,7 +59,12 @@ function LightGuide({
     `- 홈으로 가서 남은 ${10 - foundedLightNumbers}개를 찾아보세요!`,
   ];
 
-  const TEXTS = useMemo(() => (foundState === 15 ? LOGIN_TEXTS : (foundState === 10 ? START_EVENT_TEXTS : REDUNDANT_TEXTS)), [foundState]);
+  const END_TEXTS = [
+    '축하합니다! 10개의 빛 모두 찾으셨습니다!',
+    '잠시후 메인으로 이동합니다.',
+  ];
+
+  const TEXTS = useMemo(() => (foundState === 15 ? LOGIN_TEXTS : (foundState === 11 ? START_EVENT_TEXTS : (foundState === 10 ? END_TEXTS : REDUNDANT_TEXTS))), [foundState]);
 
   const BUTTON_TEXTS = ['시작하기', '더 찾기', '로그인'];
   const history = useHistory();
@@ -74,6 +79,18 @@ function LightGuide({
       setIsSignInModalOpen(true);
     }
   }, [isAuthorized, mission]);
+
+  useEffect(() => {
+    if (foundedLightNumbers === 10) {
+      setFoundState(10);
+      setTimeout(() => {
+        history.push({
+          pathname: '/',
+          state: { fromLightEvent: true },
+        });
+      }, 3000);
+    }
+  }, [foundedLightNumbers]);
 
   const cancelButtonClick = useCallback(() => {
     setIsModalOpen(false);

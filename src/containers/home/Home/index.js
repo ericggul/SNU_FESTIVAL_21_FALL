@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Title from '@C/home/Title';
 import Notice from '@C/home/Notice';
 import useModal from '@U/hooks/useModal';
+import MissionCompleteCard from '@C/home/MissionCompleteCard';
 import MissionCard from '@C/home/MissionCard';
 import Rio from '@C/home/common/Rio';
 
@@ -75,7 +76,7 @@ function Home({
   const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
 
-  const [missionCleared, setMissionCleared] = useState(false);
+  const [missionCleared, setMissionCleared] = useState(true);
   const [gateOn, setGateOn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -88,6 +89,20 @@ function Home({
     }
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
+  useEffect(() => {
+    if (missionCleared) {
+      setTimeout(() => {
+        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
+      }, 1000);
+      setTimeout(() => {
+        setGateOn(true);
+      }, 4500);
+      setTimeout(() => {
+        setIsMissionCompleteModalOpen(true);
+      }, 6000);
+    }
+  }, [missionCleared]);
+
   const history = useHistory();
   const goToPage = useCallback((route) => {
     history.push(route);
@@ -97,7 +112,7 @@ function Home({
     setIsLoading(false);
     [LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
       CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
-      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon,
+      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
     ].forEach(preloadImage);
   }, []);
 
@@ -111,13 +126,17 @@ function Home({
   );
 
   // Light Mission
-  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard, {
-    isAuthorized,
-  });
+  const { modalComponent: missionComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionCard);
+  const { modalComponent: missionCompleteComponent, setIsModalOpen: setIsMissionCompleteModalOpen } = useModal(MissionCompleteCard);
+
   const clickRio = useCallback(() => {
     setRioWaked(true);
     setTimeout(() => {
-      setIsMissionModalOpen(true);
+      if (!missionCleared) {
+        setIsMissionModalOpen(true);
+      } else {
+        setIsMissionCompleteModalOpen(true);
+      }
     }, 400);
   }, [rioWaked]);
 
@@ -187,17 +206,18 @@ function Home({
               lightOn={i < brightenLights}
               top={convert(pos.y)}
               left={convert(pos.x)}
-              fromEvent={animateSpecificLight === i}
+              fromEvent={animateSpecificLight === i && i !== 9}
               key={i}
             />
           ))}
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
 
-          <CS.Image src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
+          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={busClick} top={convert(1775)} left={convert(351)} width={convert(649)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}
+          {missionCompleteComponent}
           {isLoading && <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} alt="" />}
         </S.Wrapper>
       </S.StyledHome>

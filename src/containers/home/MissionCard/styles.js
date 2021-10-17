@@ -13,10 +13,10 @@ export const StyledMissionCard = styled.div`
   position: relative;
 
   min-width: 264px;
-  // width: 70vw;
 
   @media (orientation: landscape) {
     min-width: 10rem;
+    max-width: 30rem;
     min-height: 20rem;
   }
   
