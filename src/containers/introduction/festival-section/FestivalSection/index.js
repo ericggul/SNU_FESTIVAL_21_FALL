@@ -60,7 +60,7 @@ function FestivalSection({ isMobile, user, isAuthorized }) {
       <PublisherSection />
 
       <Light4 top={400} left={0} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+
       {lightModalComponent}
     </S.StyledFestivalSection>
   );

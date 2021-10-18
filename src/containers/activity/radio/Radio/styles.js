@@ -6,12 +6,12 @@ export const StyledRadio = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
   height: ${({ theme }) => theme.windowHeight}px;
 `;
 
 export const Background = styled.img`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   bottom: 0px;
@@ -28,7 +28,7 @@ export const Contents = styled(motion.div)`
   width: 80%;
   text-align: center;
   color: white;
-  margin-top: 0;
+  margin-top: 10rem;
   margin-bottom: 15rem;
   ${({ theme }) => theme.windowWidth > 500 && 'margin-bottom: 5rem;'}
   ${({ theme }) => theme.windowWidth > 768 && 'flex-direction: row;'}

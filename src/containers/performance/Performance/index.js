@@ -135,7 +135,6 @@ function Performance({ theme, user, isAuthorized }) {
         {mainPoster}
       </S.StyledContainer>
       <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledPerformance>
   );

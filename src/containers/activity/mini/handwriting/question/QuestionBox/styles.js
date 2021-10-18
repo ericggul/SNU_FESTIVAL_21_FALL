@@ -18,7 +18,7 @@ export const Content = styled.div`
 export const SliderContent = styled.div`
   width: 100%;
   overflow: hidden;
-  margin: 2rem 0;
+  margin: 1rem 0;
   ${({ theme }) => theme.windowWidth > 768 && 'margin: 0.5rem 0;'}
   ${FlexCenterStyle};
   z-index:${({ theme }) => theme.zIndex.fullScreen};

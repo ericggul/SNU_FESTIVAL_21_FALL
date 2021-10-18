@@ -21,7 +21,7 @@ export const GridItem = styled(motion.div)`
 `;
 
 export const ImageContainer = styled.div`
-    max-width: calc(min(44vw, 430px));
+    max-width: calc(min(35vw, 430px));
     height: auto;
     position: relativve;
 `;

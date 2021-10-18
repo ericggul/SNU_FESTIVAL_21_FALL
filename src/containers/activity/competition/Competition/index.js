@@ -180,7 +180,6 @@ function Competition({ theme, user, isAuthorized }) {
         />
       </S.Body>
       <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
       {missionModalComponent}
     </S.StyledCompetition>

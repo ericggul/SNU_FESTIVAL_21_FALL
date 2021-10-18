@@ -226,11 +226,11 @@ export const Circle31 = styled.div`
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
 
-  background: rgba(255, 255, 255, 0.8);
+  background: #EFDADA;
   box-shadow:
-    inset 0 0 1rem 1rem white,
-     0 0 1rem .4rem white,
-     0 0 5rem 1rem white;
+    inset 0 0 1rem 1rem #E8A5A5,
+     0 0 1rem .4rem #EEBDBD,
+     0 0 5rem 1rem #E98154;
 
   ${appearLight};
   animation-delay: ${({ delay }) => delay}s;

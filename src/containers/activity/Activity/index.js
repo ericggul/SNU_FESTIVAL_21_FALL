@@ -88,11 +88,11 @@ function Activity({ theme, user, isAuthorized }) {
   }, []);
 
   const POS = [
-    { x: 67, y: 81, w: 107 },
-    { x: 160, y: 77, w: 130 },
-    { x: 132, y: 665, w: 106 },
-    { x: 65, y: 629, w: 111 },
-    { x: 196, y: 624, w: 107 },
+    { x: 67, y: 61, w: 107 },
+    { x: 160, y: 57, w: 130 },
+    { x: 132, y: 675, w: 106 },
+    { x: 65, y: 639, w: 111 },
+    { x: 196, y: 634, w: 107 },
   ];
 
   const Constellation = (

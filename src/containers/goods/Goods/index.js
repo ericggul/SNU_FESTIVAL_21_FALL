@@ -83,7 +83,6 @@ function Goods({ user, isAuthorized }) {
       )}
 
       <Light2 top={150} left={200} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
       {signInModalComponent}
     </S.StyledGoods>

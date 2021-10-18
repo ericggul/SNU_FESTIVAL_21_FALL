@@ -9,7 +9,7 @@ function Title() {
       fixed
     >
       <S.Title>
-        <p>가을축제</p>
+        <p>가을축제(10/26 - 29)</p>
         <p>관악의 밤</p>
       </S.Title>
     </HeaderContent>

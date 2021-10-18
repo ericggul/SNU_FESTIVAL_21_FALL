@@ -190,7 +190,7 @@ function Group({ theme, user, isAuthorized }) {
       </S.Body>
 
       {lighted && <Light5 handleClick={lightMissionClick} />}
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+
       {lightModalComponent}
     </S.StyledGroup>
   );
