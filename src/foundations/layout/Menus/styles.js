@@ -4,7 +4,8 @@ import { FlexCenterStyle } from '@S/responsive/display';
 export const StyledMenus = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.windowHeight}px;
-
+  position: relative;
+  top: 0;
   opacity: 1;
 `;
 
@@ -12,8 +13,9 @@ export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1.8rem;
+  top: 0;
   margin-top: 110px;
-  margin-left: 2rem;
+  margin-left: 2.5rem;
   ${({ theme }) => theme.windowWidth > 768 && 'margin-left: 4rem;'}
 `;
 
@@ -31,6 +33,7 @@ export const LeftSector = styled.div`
   width: 5.8rem;
   font-weight: 600;
   margin-right: 1rem;
+  margin-bottom: .5rem;
   cursor: pointer;
 `;
 
@@ -61,8 +64,10 @@ export const Line = styled.div`
 
 export const Background = styled.img`
   position: fixed;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: ${({ theme }) => theme.windowHeight}px;
   bottom: 0px;
   object-fit: cover;
   object-position: center bottom;
@@ -70,9 +75,10 @@ export const Background = styled.img`
 `;
 
 export const SignButton = styled.div`
-  position: absolute;
-  bottom: 5vw;
-  right: 10vw;
+  position: fixed;
+  bottom: 5rem;
+  
+  ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'left: 3.4rem')};
   
   display: flex;
   flex-direction: column;
@@ -80,9 +86,10 @@ export const SignButton = styled.div`
   
   p {
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 600;
     color: white;
   }
+  z-index: ${({ theme }) => theme.zIndex.header};
 `;
 
 export const SignImage = styled.img`

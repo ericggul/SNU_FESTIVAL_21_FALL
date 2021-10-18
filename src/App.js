@@ -1,16 +1,17 @@
 import React, { Suspense, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import routes from '@/routes';
-import GaAnalytics from '@/UserAnalytics';
-import { GA_TRACKING_KEY } from '@/config';
 import { GlobalStyle, theme } from '@S/index';
-import NotFound from '@/pages/NotFound';
 
 import Toast from '@F/Toast';
 import styled, { ThemeProvider } from 'styled-components';
 import useResize from '@U/hooks/useResize';
 import LoadingMascot from '@F/loading/LoadingMascot';
+import PageLoading from '@F/loading/PageLoading';
 import { FlexCenterStyle } from '@S/responsive/display';
+import NotFound from '@/pages/NotFound';
+import { GA_TRACKING_KEY } from '@/config';
+import GaAnalytics from '@/UserAnalytics';
+import routes from '@/routes';
 
 function App() {
   useEffect(() => {
@@ -28,7 +29,7 @@ function App() {
 
       <Router>
         <Suspense
-          fallback={<LoadingWrapper height={windowHeight}><LoadingMascot /></LoadingWrapper>}
+          fallback={<LoadingWrapper height={windowHeight}><PageLoading /></LoadingWrapper>}
         >
           <Switch>
             { routes.map((route) => (
