@@ -90,6 +90,7 @@ export const MenuButtonBar = styled.div`
 export const BasicText = styled.div`
   height: 100%;
   display: flex;
+  margin-left: 1.4rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
@@ -104,8 +105,8 @@ export const BasicText = styled.div`
     }
     
     &:last-child {
+      margin-top: 2px;
       font-size: 16px;
-      font-family: 'PFStardust', sans-serif;
       line-height: 1.2;
     }
   }

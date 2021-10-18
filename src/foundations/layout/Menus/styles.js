@@ -1,58 +1,72 @@
 import styled from 'styled-components';
+import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledMenus = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.windowHeight}px;
-  background-image: linear-gradient(
-    ${({ theme }) => theme.palette.PURPLE50},
-    ${({ theme }) => theme.palette.GREEN80}
-  );
-  opacity: 0.98;
+
+  opacity: 1;
 `;
 
-export const OpenedMenu = styled.div`
+export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 1.8rem;
+  margin-top: 110px;
+  margin-left: 2rem;
+  ${({ theme }) => theme.windowWidth > 768 && 'margin-left: 4rem;'}
+`;
 
-  padding-top: ${({ theme }) => theme.windowHeight * (1.5 / 10)}px;
-  padding-left: 10vw;
-  box-sizing: border-box;
-  
+export const Sector = styled.div`
+  display: flex;
+  margin: .9rem;
+  color: white;
+  z-index: ${({ theme }) => theme.zIndex.header};
+  text-align: left;
+`;
+
+export const LeftSector = styled.div`
+  display: flex;
+  font-size: 1.8rem;
+  width: 5.8rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  cursor: pointer;
+`;
+
+export const RightSector = styled.div`
+  display: grid;
+  grid-template-columns: 6.8rem 0.1rem 10rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-wieght: 600;
+`;
+
+export const RightComp = styled.div`
+  display: flex;
+  text-align: left;
+  margin-left: .8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-wieght: 600;
+`;
+
+export const Line = styled.div`
+  display: flex;
+  ${FlexCenterStyle};
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: -.15rem;
+`;
+
+export const Background = styled.img`
+  position: fixed;
   width: 100%;
-  height: ${({ theme }) => theme.windowHeight * (7.5 / 10)}px;
-  overflow-y: scroll;
-`;
-
-export const InlineMenu = styled.div`
-  display: inline-flex;
-  align-items: center;
-`;
-
-export const NaviText = styled.p`
-  margin: 1rem 0;
-  font-size: 1.4rem;
-  max-width: 5rem;
-  white-space: nowrap;
-  
-  color: white;
-  cursor: pointer;
-  transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-export const SmallNaviText = styled.p`
-  margin: 8px 0;
-  font-size: 1.0rem;
-  padding-left: 1.5rem;
-  
-  color: white;
-  cursor: pointer;
-  transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.15);
-  }
+  height: 100%;
+  bottom: 0px;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: ${({ theme }) => theme.zIndex.header - 1};
 `;
 
 export const SignButton = styled.div`
