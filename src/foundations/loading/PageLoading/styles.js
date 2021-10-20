@@ -56,8 +56,8 @@ export const ConstellationConatiner = styled.div`
   pointer-events: none;
   position: absolute;
   ${FlexCenterStyle};
-  width: calc(min(100%, 768px));
-  margin-left: calc(max(0px, ${({ theme }) => theme.windowWidth / 2 - 250}px));
+  width: calc(min(100%, 500px));
+  // margin-left: calc(max(0px, ${({ theme }) => theme.windowWidth / 2 - 250}px));
   ${({ isMobile }) => isMobile && 'margin-left: 0px;'}
   height: ${({ theme }) => theme.windowHeight - 65}px;
   z-index: ${({ theme }) => theme.zIndex.loading};

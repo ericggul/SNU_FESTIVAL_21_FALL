@@ -17,7 +17,6 @@ export function confettiSpread(xPos, yPos) {
 }
 
 export function confettiFire(xPos, yPos) {
-  let pos = { x: xPos, y: yPos };
   fire(0.4, {
     origin: { x: xPos, y: yPos },
     spread: 360,
@@ -36,26 +35,57 @@ export function confettiFire(xPos, yPos) {
     startVelocity: 30,
     ticks: 300,
   });
-  // fire(0.2, {
-  //   origin: pos,
-  //   spread: 60,
-  // });
-  // fire(0.35, {
-  //   origin: pos,
-  //   spread: 100,
-  //   decay: 0.91,
-  //   scalar: 0.8,
-  // });
-  // fire(0.1, {
-  //   origin: pos,
-  //   spread: 120,
-  //   startVelocity: 25,
-  //   decay: 0.92,
-  //   scalar: 1.2,
-  // });
-  // fire(0.1, {
-  //   origin: pos,
-  //   spread: 120,
-  //   startVelocity: 45,
-  // });
+}
+
+let end = Date.now() + (15 * 1000);
+let colors = ['#C845454', '#38ED87', '#3855ED', '#ED38E6'];
+
+export function schoolPride() {
+  confetti({
+    particleCount: 2,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.3 },
+    colors,
+  });
+  confetti({
+    particleCount: 2,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.3 },
+    colors,
+  });
+  confetti({
+    particleCount: 2,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.5 },
+    colors,
+  });
+  confetti({
+    particleCount: 2,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.5 },
+    colors,
+  });
+  confetti({
+    particleCount: 2,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.8 },
+    colors,
+  });
+  confetti({
+    particleCount: 2,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.8 },
+    colors,
+  });
+
+  if (Date.now() < end) {
+    requestAnimationFrame(schoolPride);
+  }
+  return () => cancelAnimationFrame(schoolPride);
 }

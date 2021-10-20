@@ -75,13 +75,13 @@ function Menus({ theme, setMenuIsOpen }) {
       >
         {sector.header.name}
       </S.LeftSector>
+
       <S.RightSector>
         {sector.children
         && sector.children.map((child, j) => (
           <>
             <S.RightComp
               onClick={() => goToPage(`${sector.header.link}${child.link}`)}
-              key={j}
             >
               {child.name}
             </S.RightComp>
@@ -91,6 +91,7 @@ function Menus({ theme, setMenuIsOpen }) {
             && <S.Line>|</S.Line>}
           </>
         ))}
+
       </S.RightSector>
 
     </S.Sector>

@@ -20,7 +20,7 @@ export const Body = styled.div`
 
   ${({ lighted }) => lighted && 'background: #171D2B;'};
   ${({ lighted }) => lighted && 'color: #A0C2D8;'};
-  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
+  // ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;
 
 export const Poster = styled.img`
@@ -87,5 +87,5 @@ export const Button = styled.div`
 
   ${({ lighted }) => lighted && 'background: #171D2B;'};
   ${({ lighted }) => lighted && 'color: #A0C2D8;'};
-  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
+  // ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;

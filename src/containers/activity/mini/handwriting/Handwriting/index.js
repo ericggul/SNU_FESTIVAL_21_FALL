@@ -8,6 +8,7 @@ import Map from '@C/activity/mini/handwriting/Map';
 import QuestionSector from '@C/activity/mini/handwriting/question/QuestionSector';
 import PropTypes from 'prop-types';
 import { COLLEGES, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import { schoolPride } from '@C/performance/common/confettiFire';
 import withUser from '@U/hoc/withUser';
 import { sumOfArray } from '@U/functions/array';
 import SignInGuide from '@F/modal/content/SignInGuide';
@@ -26,6 +27,7 @@ import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import FullScreen from '@/foundations/full-screen/HandwritingFullScreen';
 import * as S from './styles';
 
+const getRandom = (a, b) => Math.random() * (b - a) + a;
 function Handwriting({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
@@ -114,12 +116,12 @@ function Handwriting({ theme, user, isAuthorized }) {
     }
   }, [sectorNum]);
 
-  const [wait, setWait] = useState(false);
   useEffect(() => {
-    setTimeout(() => {
-      setWait(true);
-    }, 500);
-  }, []);
+    if (sumOfArray(solvedNumbers) === 82) {
+      console.log('spread!');
+      schoolPride();
+    }
+  }, [solvedNumbers]);
 
   console.log('solvedNumbers', solvedNumbers, solvedRates);
   return (
@@ -137,19 +139,22 @@ function Handwriting({ theme, user, isAuthorized }) {
           아니, 다들 이렇게 열심히 공부했을 줄 몰랐네요...
           <br />
           <br />
-          <S.EmphText>10개 단과대, 82개 과. 30개 이상 맞춰보세요!</S.EmphText>
-          <br />
           <S.EmphText>
-            {`${sumOfArray(solvedNumbers)}/82개 해결`}
+            이벤트: 10개 단과대, 82개 과, 30개 이상 맞추기!
             {' '}
+            <br />
+            (현재 해결
+            {' '}
+            {`${sumOfArray(solvedNumbers)}/82`}
+            )
           </S.EmphText>
         </S.Description>
-        {wait && (
+
         <Map
           handleClick={handleClick}
           solvedRates={solvedRates}
         />
-        )}
+
       </S.Container>
       <FullScreen
         isFullScreen={sectorNum !== -1}
@@ -157,7 +162,7 @@ function Handwriting({ theme, user, isAuthorized }) {
         backgroundColor={theme.palette.HANDWRITING_PURPLE}
         headerName={COLLEGES[sectorNum]}
       >
-        <QuestionSector sectorNum={sectorNum} />
+        <QuestionSector sectorNum={sectorNum} goBackToMain={() => setSectorNum(-1)} />
       </FullScreen>
       <Light7 top={theme.windowHeight * 0.8} left={theme.windowWidth * 0.3} handleClick={lightMissionClick} />
       {lightModalComponent}

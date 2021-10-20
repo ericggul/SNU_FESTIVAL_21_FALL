@@ -10,7 +10,7 @@ import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
-import { CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import { COLLEGES, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
 
 import { withTheme } from 'styled-components';
 
@@ -28,7 +28,7 @@ import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  sectorNum, user, isAuthorized, theme,
+  sectorNum, user, isAuthorized, theme, goBackToMain,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const { value, onChange, setValue } = useInput('');
@@ -41,7 +41,7 @@ export function QuestionBox({
     for (let idx = 0; idx < totalLength; idx += 1) {
       if (idx < inputString.length) {
         array[idx] = parseInt(inputString[inputString.length - 1 - idx], 10);
-        if (array[idx] == 1) {
+        if (array[idx] === 1) {
           solvedIndexesStorage.push(idx);
         } else {
           unSolvedIndexesStorage.push(idx);
@@ -75,25 +75,29 @@ export function QuestionBox({
 
   const submit = () => {
     if (sha256(value.toLowerCase()) === CONVERTED_MAJORS[sectorNum][currentLoc]) {
-      const sectorBinary = handwritingArray[sectorNum].toString(2);
-      const unsubmitted = sectorBinary.length > currentLoc
-        ? parseInt(sectorBinary[sectorBinary.length - 1 - currentLoc], 10) : 0;
       speakRightorWrong(true);
       confettiRightorWrong(isMobile, true);
-      if (unsubmitted === 0) {
-        setShouldChangeLoc(true);
-        toast('정답입니다🎉');
-        clear();
+      setShouldChangeLoc(true);
+      toast('정답입니다🎉');
+      clear();
+      setTimeout(() => {
         setShouldChangeLoc(false);
-      } else {
-        toast('이미 클리어했습니다 ㅡ.ㅡ');
-      }
+      }, 100);
     } else {
       toast('오답입니다😅');
       speakRightorWrong(false);
       confettiRightorWrong(isMobile, false);
     }
   };
+
+  useEffect(() => {
+    if (unSolvedStorage.length === 0) {
+      toast(`${COLLEGES[sectorNum]} 완료했습니다!`);
+      setTimeout(() => {
+        goBackToMain();
+      }, 500);
+    }
+  }, [unSolvedStorage]);
 
   const clear = () => {
     if (isAuthorized) {

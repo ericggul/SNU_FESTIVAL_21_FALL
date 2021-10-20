@@ -5,11 +5,11 @@ import { useUser } from '@U/hooks/useAuth';
 import withUser from '@U/hoc/withUser';
 import * as S from './styles';
 
-function QuestionSector({ sectorNum }) {
+function QuestionSector({ sectorNum, goBackToMain }) {
   const { user, isAuthorized } = useUser();
   return (
     <S.StyledQuestionSector>
-      <QuestionBox sectorNum={sectorNum} user={user} isAuthorized={isAuthorized} />
+      <QuestionBox sectorNum={sectorNum} user={user} isAuthorized={isAuthorized} goBackToMain={goBackToMain} />
     </S.StyledQuestionSector>
   );
 }

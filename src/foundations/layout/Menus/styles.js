@@ -38,9 +38,9 @@ export const LeftSector = styled.div`
 `;
 
 export const RightSector = styled.div`
+  font-size: 1rem;
   display: grid;
   grid-template-columns: 6.8rem 0.1rem 10rem;
-  font-size: 1rem;
   cursor: pointer;
   font-wieght: 600;
 `;
@@ -77,7 +77,7 @@ export const Background = styled.img`
 export const SignButton = styled.div`
   position: fixed;
   bottom: 5rem;
-  
+  z-index: ${({ theme }) => theme.zIndex.header + 1};
   ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'left: 3.4rem')};
   
   display: flex;

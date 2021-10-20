@@ -4,6 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { MapInteractionCSS } from 'react-map-interaction';
 
+import { preloadImage } from '@U/functions/preload';
 import * as S from './styles';
 
 function Carousel({
@@ -14,13 +15,12 @@ function Carousel({
   const [animateDir, setAnimateDir] = useState(0);
   const length = useMemo(() => indexes.length, [indexes]);
 
-  // useEffect(() => {
-  //   console.log('index change detected');
-  //   setCurrentLoc(0);
-  // }, [indexes]);
+  const PATH = `https://snufestival-e9a04.web.app/images/handwriting/writings/${sectorNum}`;
 
   useEffect(() => {
-    setCurrentLoc(0);
+    if (shouldChangeLoc) {
+      setCurrentLoc(0);
+    }
   }, [shouldChangeLoc]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function Carousel({
               <S.Image
                 isLoading={isLoading}
                 onLoad={() => setIsLoading(false)}
-                src={`https://snufestival-e9a04.web.app/images/handwriting/writings/${sectorNum}${index.toString(16)}.png`}
+                src={`${PATH}${index.toString(16)}.png`}
               />
             </MapInteractionCSS>
           </S.Box>

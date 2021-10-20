@@ -296,6 +296,7 @@ export const Container5 = styled.div`
 
 export const Circle5 = styled.div`
   position: fixed;
+  ${({ visible }) => !visible && 'opacity: 0'};
   width: ${({ width }) => width}px;
   height: ${({ width }) => width}px;
   border-radius: 50%;
@@ -306,12 +307,12 @@ export const Circle5 = styled.div`
      0 0 .2rem .1rem #C8DDEB,
      0 0 1rem .2rem white,
      0 0 1.5rem .2rem #8EC1E0,
-     0 0 3rem .5rem white,
-     0 0 5rem 1rem #A9CADF;
+     0 0 3rem .5rem white;
+    //  0 0 5rem 1rem #A9CADF;
 
   ${appearLight};
-  animation: appearLight .4s linear alternate infinite backwards;
-  animation-delay: -${({ delay }) => delay}s;
+  // animation: appearLight .6s linear alternate infinite backwards;
+  // animation-delay: -${({ delay }) => delay}s;
 
   cursor: pointer;
   ${({ animate }) => animate && 'pointer-events: none;'}

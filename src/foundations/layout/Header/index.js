@@ -55,9 +55,7 @@ function Header({ hamburgerColor, backVisible = true }) {
   );
 
   const openedMenu = (
-    <Fade duration={800}>
-      <Menus setMenuIsOpen={setMenuIsOpen} />
-    </Fade>
+    <Menus setMenuIsOpen={setMenuIsOpen} />
   );
 
   return (

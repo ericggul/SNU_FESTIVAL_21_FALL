@@ -43,7 +43,7 @@ function Group({ theme, user, isAuthorized }) {
       if (lightVisible) {
         const interval = setInterval(() => {
           setLighted(light => !light);
-        }, 2000);
+        }, 3000);
         return () => clearInterval(interval);
       } if (!lightVisible) {
         console.log('here2');
@@ -189,7 +189,7 @@ function Group({ theme, user, isAuthorized }) {
         <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>
       </S.Body>
 
-      {lighted && <Light5 handleClick={lightMissionClick} />}
+      <Light5 handleClick={lightMissionClick} visible={lighted} />
 
       {lightModalComponent}
     </S.StyledGroup>

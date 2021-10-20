@@ -161,7 +161,7 @@ export function Light4({
 }
 
 function Light5({
-  size = 1, handleClick, theme,
+  size = 1, handleClick, theme, visible,
 }) {
   const width = useMemo(() => size * 70, [size]);
   const [animate, setAnimate] = useState(false);
@@ -178,20 +178,21 @@ function Light5({
     const array = [];
     for (let i = 0; i < number; i += 1) {
       array.push({
-        x: getRandom(0, theme.windowWidth), y: getRandom(0, theme.windowHeight), size: getRandom(0.5, 1.4),
+        x: getRandom(0, theme.windowWidth), y: getRandom(0, theme.windowHeight),
+        // size: getRandom(0.5, 1.4),
       });
     }
     return array;
   }, []);
 
   return (
-    <S.Container5 animate={animate}>
+    <S.Container5 animate={animate} visible={visible}>
       {randomArray.map((pos, i) => (
         <S.Circle5
           onClick={onClick}
           animate={animate}
           key={i}
-          width={pos.size}
+          width={1}
           top={pos.y}
           left={pos.x}
           delay={i * 0.1}
