@@ -43,19 +43,15 @@ ActivityRouter.propTypes = {
 };
 
 const ActivityMain = lazy(() => import('@/pages/activity/Activity'));
-const MiniGameRouter = lazy(() => import('@/pages/activity/mini/MiniRouter'));
 const Radio = lazy(() => import('@/pages/activity/Radio'));
 const Competition = lazy(() => import('@/pages/activity/Competition'));
 const Group = lazy(() => import('@/pages/activity/Group'));
 const GroupImages = lazy(() => import('@/pages/activity/GroupImages'));
 const MiniGame = lazy(() => import('@/pages/activity/mini/MiniGame'));
-const GuessTheSong = lazy(() => import('@/pages/activity/mini/GuessTheSong'));
-const TreasureHunt = lazy(() => import('@/pages/activity/mini/TreasureHunt'));
 const Riddle = lazy(() => import('@/pages/activity/mini/Riddle'));
 const Handwriting = lazy(() => import('@/pages/activity/mini/Handwriting'));
 const Place = lazy(() => import('@/pages/activity/mini/Place'));
 const Omok = lazy(() => import('@/pages/activity/mini/Omok'));
-const BlackAndWhite = lazy(() => import('@/pages/activity/mini/BlackAndWhite'));
 
 const activityRoutes = [
   {

@@ -8,8 +8,8 @@ import {
   CARTOON, FIELDS_IN_ENGLISH, LITERATURE, REVERSED_FIELDS, VIDEO,
 } from '@C/activity/competition/variables';
 
-import FilledHeart from '@I/icon/filled-heart.svg';
-import EmptyHeart from '@I/icon/empty-heart.svg';
+import HeartClicked from '@I/activity/competition/heart-clicked.png';
+import HeartDefault from '@I/activity/competition/heart.png';
 import PopupModal from '@F/modal/PopupModal';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
@@ -21,7 +21,7 @@ import Image from '@/foundations/images/Image';
 import * as S from './styles';
 
 function VoteSection({
-  field, items, isLoaded, listIHaveVoted, theme, isAuthorized, user, onVoteForField,
+  field = 0, items, isLoaded, listIHaveVoted, theme, isAuthorized, user, onVoteForField,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setSignInModalComponent } = useModal(SignInGuide);
@@ -52,10 +52,10 @@ function VoteSection({
       toast('이미 투표에 참여했습니다.');
     } else if (myLikesForCompetition.includes(competitionId)) {
       setMyLikesForCompetition([]);
-    } else if (myLikesForCompetition.length > 0) {
-      toast('한 작품에만 투표할 수 있습니다.');
+    } else if (myLikesForCompetition.length > 1) {
+      toast('최대 두 작품에만 투표할 수 있습니다.');
     } else {
-      setMyLikesForCompetition([competitionId]);
+      setMyLikesForCompetition(array => [...array, competitionId]);
     }
   };
 
@@ -70,16 +70,12 @@ function VoteSection({
       return;
     }
 
-    if (!email.endsWith('@snu.ac.kr')) {
-      toast('SNU 계정만 투표에 반영됩니다.');
-      onVoteForField(field, myLikesForCompetition);
-      return;
-    }
-
+    console.log(field, FIELDS_IN_ENGLISH);
+    console.log(FIELDS_IN_ENGLISH[field]);
     competitionCollectionRef.doc(FIELDS_IN_ENGLISH[field]).update({
-      [myLikesForCompetition[0]]: firebase.firestore.FieldValue.arrayUnion(uid),
+      [myLikesForCompetition]: firebase.firestore.FieldValue.arrayUnion(uid),
     }).then(() => {
-      toast(`${REVERSED_FIELDS[field]} 부문 투표에 참여되었습니다.`);
+      toast('투표에 참여되었습니다.');
       onVoteForField(field, myLikesForCompetition);
     }).catch(() => {
       toast('인터넷이 불안정합니다. 다시 시도해주세요.');
@@ -112,7 +108,7 @@ function VoteSection({
               </p>
               <p>{item.description}</p>
               <S.LikeButton onClick={() => onClickLikeButton(item.competitionId)}>
-                <img src={myLikesForCompetition.includes(item.competitionId) ? FilledHeart : EmptyHeart} alt="like" />
+                <img src={myLikesForCompetition.includes(item.competitionId) ? HeartClicked : HeartDefault} alt="like" />
               </S.LikeButton>
             </S.InfoSection>
 

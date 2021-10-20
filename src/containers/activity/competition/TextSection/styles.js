@@ -25,6 +25,10 @@ export const Title = styled.p`
   word-break: keep-all;
 `;
 
+export const EmphText = styled.span`
+  font-weight: bold;
+`;
+
 export const Notice = styled.p`
   margin: 3rem 1.3rem;
   line-height: 1.5;

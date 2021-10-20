@@ -1,14 +1,14 @@
-import LiteratureOnePdf from '@/static/pdf/literature-1.pdf';
 import LiteratureOneImage from '@I/activity/competition/literature-1.png';
-import CartoonOnePdf from '@/static/pdf/cartoon-1.pdf';
 import CartoonOneImage from '@I/activity/competition/cartoon-1.png';
-import CartoonTwoPdf from '@/static/pdf/cartoon-2.pdf';
 import CartoonTwoImage from '@I/activity/competition/cartoon-2.png';
-import CartoonThreePdf from '@/static/pdf/cartoon-3.pdf';
 import CartoonThreeImage from '@I/activity/competition/cartoon-3.png';
-import CartoonFourPdf from '@/static/pdf/cartoon-4.pdf';
 import CartoonFourImage from '@I/activity/competition/cartoon-4.png';
 import VideoOneImage from '@I/activity/competition/video-1.png';
+import CartoonFourPdf from '@/static/pdf/cartoon-4.pdf';
+import CartoonThreePdf from '@/static/pdf/cartoon-3.pdf';
+import CartoonTwoPdf from '@/static/pdf/cartoon-2.pdf';
+import CartoonOnePdf from '@/static/pdf/cartoon-1.pdf';
+import LiteratureOnePdf from '@/static/pdf/literature-1.pdf';
 
 export const CARTOON = 0;
 export const LITERATURE = 1;
@@ -17,7 +17,7 @@ export const FIELDS = { 만화: CARTOON, 문학: LITERATURE, 영상: VIDEO };
 export const FIELDS_IN_ENGLISH = { [CARTOON]: 'cartoon', [LITERATURE]: 'literature', [VIDEO]: 'video' };
 export const REVERSED_FIELDS = { [CARTOON]: '만화', [LITERATURE]: '문학', [VIDEO]: '영상' };
 
-export const CARTOON_LIST = [
+export const LIST = [
   {
     competitionId: 1, title: '마스크랑 김태우', author: '유혜인', description: '태우가 짱인 이유!', type: 'pdf', file: CartoonOnePdf, thumbnail: CartoonOneImage, thumbnailSmall: CartoonOneImage, scale: 0.8,
   },
