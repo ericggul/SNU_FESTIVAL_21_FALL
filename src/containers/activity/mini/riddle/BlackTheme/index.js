@@ -23,11 +23,11 @@ const answers = [
   '6f36e2f8e26faceb02f501ffa0661e003a32ec7d19470000d4425ce2822047d3',
 ];
 const hints = [
-  '뭐게',
-  '뭐게',
-  '뭐게',
-  '뭐게',
-  '뭐게',
+  '다른 언어로',
+  '♪',
+  '<흑야> 1번',
+  '수학',
+  '인스타그램',
 ];
 const questions = [
   BlackOne,

@@ -23,11 +23,11 @@ const answers = [
   '8b49bda2606fd82b02065c7a4a6215fd76159579f0a46afb19af9c29139ebf1b',
 ];
 const hints = [
-  '뭐게',
-  '뭐게',
-  '뭐게',
-  '뭐게',
-  '뭐게',
+  '시각을 나타내는 다른 방법',
+  'U = Up',
+  '한자',
+  '키보드',
+  '아이는 신동',
 ];
 const questions = [
   WhiteOne,

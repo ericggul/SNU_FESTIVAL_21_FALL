@@ -137,16 +137,7 @@ function VoteSection({
             </S.Pagination>
           </Document>
         )}
-          { clickedItem?.type === 'youtube' && (
-          <iframe
-            width={isMobile ? theme.windowWidth : theme.windowWidth * (2 / 3)}
-            height={isMobile ? theme.windowWidth / 1.77 : (theme.windowWidth * (2 / 3)) / 1.77}
-            src={clickedItem.youtubeUrl}
-            title={clickedItem.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          />
-        )}
+
         </>
       </PopupModal>
 

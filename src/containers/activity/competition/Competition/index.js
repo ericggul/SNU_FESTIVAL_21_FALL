@@ -73,12 +73,7 @@ function Competition({ theme, user, isAuthorized }) {
 
   const [iHaveVoted, setIHaveVoted] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [cartoonListIHaveVoted, setCartoonListIHaveVoted] = useState([]);
-  const [isCartoonLoaded, setIsCartoonLoaded] = useState(false);
-  const [literatureListIHaveVoted, setLiteratureListIHaveVoted] = useState([]);
-  const [isLiteratureLoaded, setIsLiteratureLoaded] = useState(false);
-  const [videoListIHaveVoted, setVideoListIHaveVoted] = useState([]);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
   useEffect(() => {
     if (isAuthorized) {
       const { uid } = user;
@@ -101,9 +96,7 @@ function Competition({ theme, user, isAuthorized }) {
 
   // 새로 투표했을 때
   const setHaveVotedForNewVote = useCallback((field, newLikes) => {
-    if (field === CARTOON) setCartoonListIHaveVoted(newLikes);
-    else if (field === LITERATURE) setLiteratureListIHaveVoted(newLikes);
-    else setVideoListIHaveVoted(newLikes);
+    setIHaveVoted(list => [...list, newLikes]);
   }, []);
 
   // 미션

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
@@ -14,7 +14,7 @@ import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  textImg, answerColor, questions, answers, user, isAuthorized, isNotCompleted, hints,
+  textImg, answerColor, questions, answers, user, isAuthorized, hints, isNotCompleted,
 }) {
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
@@ -66,6 +66,13 @@ export function QuestionBox({
     }
   };
 
+  useEffect(() => {
+    const today = new Date();
+    if (today.getDate() === 4 || today.getDate() === 5) {
+      setTimeout(() => { toast(hints[step]); }, 1000);
+    }
+  }, [step]);
+
   return (
     <>
       <S.Content>
@@ -74,7 +81,7 @@ export function QuestionBox({
           <S.Image src={questions[step]} alt="문제" />
         </S.Question>
         <S.Answer>
-          <S.InputBox value={value} onChange={onChange} color={answerColor} placeholder={hints[step]} />
+          <S.InputBox value={value} onChange={onChange} color={answerColor} placeholder="뭐게" />
           <S.Button onClick={submit}>등록</S.Button>
         </S.Answer>
       </S.Content>
