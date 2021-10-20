@@ -9,13 +9,13 @@ export const MiniGameGuideBox = styled.div`
   min-width: 264px;
   height: 100%;
   
-  background-color: ${({ theme }) => rgba(theme.palette.PURPLE50, 0.45)};
-  border: 1px solid ${({ theme }) => theme.palette.PURPLE80};
+  background-color: white;
+  border-radius: .5rem;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .16);
   
   padding: 5px 8px 6px 7px;
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 3px 0 6px 0 rgba(0, 0, 0, 0.3);
 `;
 
 export const ContentBox = styled.div`
@@ -29,28 +29,24 @@ export const ContentBox = styled.div`
   
   padding: 1.5rem 0;
   box-sizing: border-box;
-
-  background-color: ${rgba('#faf8fb', 0.95)};
-  border: 1px solid ${({ theme }) => theme.palette.PURPLE80};
   
+  color: #4f30b3;
+
   p {
     margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+
   }
 
-  p:nth-of-type(1) {
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 500;
-    color: ${({ theme }) => theme.palette.GRAY80};
-    margin-bottom: 0.5rem;
-  }
-  
   p:nth-of-type(2) {
     text-align: center;
     font-size: 1rem;
-    color: ${({ theme }) => theme.palette.PURPLE50};
-    line-height: 1.4;
+    font-weight: 400;
+    margin-top: 0.6rem;
+    margin-bottom: 0.2rem;
   }
+
 `;
 
 export const Image = styled.img`

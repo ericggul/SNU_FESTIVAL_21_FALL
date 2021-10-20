@@ -35,7 +35,7 @@ function Riddle({ theme }) {
       <S.Body background={backgroundTransit}>
         <S.Background background={backgroundTransit} />
         <S.Expl>
-          관악의 밤에서 펼쳐지는 치열한 두뇌 싸움!
+          <S.EmphText>관악의 밤에서 펼쳐지는 치열한 두뇌 싸움!</S.EmphText>
           <br />
           <br />
           백야는 가볍게 머리를 풀 수 있는 정도의 난이도!
@@ -43,6 +43,13 @@ function Riddle({ theme }) {
           흑야에서는 불같은 난이도 때문에 고민하다가 마음이 시커멓게 탈 수 있어요….!
           <br />
           미궁게임 풀며 깊어지는 생각과 함께 깊어지는 밤을 보내보세요!
+          <br />
+          <S.EmphText>이벤트</S.EmphText>
+          : 백야 혹은 흑야 세트에서
+          {' '}
+          <S.EmphText>3문제</S.EmphText>
+          {' '}
+          이상 맞춰보세요!(택 1)
         </S.Expl>
         <S.OpeningWrapper>
           <S.Opening onClick={() => handleClick('White')}>

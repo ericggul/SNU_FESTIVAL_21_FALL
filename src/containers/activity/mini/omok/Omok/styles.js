@@ -18,6 +18,11 @@ export const Container = styled.div`
   color: white;
 `;
 
+export const EmphText = styled.span`
+  font-weight: 700;
+  font-size: 1rem;
+`;
+
 export const Sector = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;

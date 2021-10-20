@@ -143,10 +143,12 @@ function Handwriting({ theme, user, isAuthorized }) {
             이벤트: 10개 단과대, 82개 과, 30개 이상 맞추기!
             {' '}
             <br />
-            (현재 해결
+            (현재
             {' '}
             {`${sumOfArray(solvedNumbers)}/82`}
             )
+            {' '}
+            {sumOfArray(solvedNumbers) >= 30 && '미션 완료!'}
           </S.EmphText>
         </S.Description>
 

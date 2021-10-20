@@ -71,6 +71,7 @@ function Omok({ theme }) {
           <S.Descp>
             <p>관악의 숨겨진 오목 고수를 찾아라!</p>
             <p>룰은 쉽지만 머리 좀 쓴다는 샤대생들끼리 붙는다면 예상 못한 진풍경이 펼쳐질지도 몰라요.</p>
+            <S.EmphText>이벤트: 오목 게임에 최소 1번 참여하세요!</S.EmphText>
           </S.Descp>
           <S.Links>
             <S.SingleLink onClick={() => transit('black')}>

@@ -7,6 +7,7 @@ import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
+import { sumOfArray } from '@U/functions/array';
 import Map from '@C/activity/mini/place/Map';
 import FullScreen from '@F/full-screen/PlaceFullScreen';
 import QuestionSector from '@C/activity/mini/place/question/QuestionSector';
@@ -55,6 +56,10 @@ function Place({ theme }) {
           <S.EmphText>6곳</S.EmphText>
           {' '}
           이상을 맞춰보세요!
+          {' '}
+          <S.EmphText>
+            {sumOfArray(places) >= 6 && '미션 완료!'}
+          </S.EmphText>
         </S.TextBottom>
       </S.Container>
       <FullScreen

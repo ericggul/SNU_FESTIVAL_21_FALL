@@ -37,11 +37,15 @@ export const Background = styled.div`
   background: rgb(228, 232, 249);
   transition: all 1s;
 `;
+export const EmphText = styled.span`
+  word-break: keep-all;
+  font-weight: 600;
+`;
 
 export const Expl = styled.div`
   color: #586BBB;
   // text-align: center;
-  width: 70vw;
+  width: 85vw;
   max-width: 50rem;
   font-size: .9rem;
   font-weight: 400;

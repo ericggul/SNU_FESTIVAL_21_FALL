@@ -34,12 +34,18 @@ export function QuestionBox({
   const dispatch = useDispatch();
   const clear = () => {
     if (isAuthorized) {
-      if (isNotCompleted) {
-        dispatch(actions.setFirestoreStage(user, 'stage3', true));
-        setIsMiniGameModalOpen(true);
-      } else {
-        toast('이미 클리어하셨습니다 😇');
-      }
+      // if (isNotCompleted)
+
+      dispatch(actions.setFirestoreStage(user, 'riddle', true));
+      setIsMiniGameModalOpen(true);
+      toast('미션 클리어!');
+      setTimeout(() => {
+        setIsMiniGameModalOpen(false);
+      }, 2500);
+
+      // else {
+      //   toast('이미 클리어하셨습니다 😇');
+      // }
     } else {
       toast('정답입니다🎉');
       setIsSignInModalOpen(true);
@@ -48,11 +54,12 @@ export function QuestionBox({
 
   const submit = () => {
     if (sha256(value.toLowerCase()) === answers[step]) {
-      if (step < questions.length - 1) {
+      if (step !== 2) {
         toast('정답입니다🎉');
         goToNextStep();
       } else {
         clear();
+        goToNextStep();
       }
     } else {
       toast('오답입니다😅');
@@ -99,7 +106,7 @@ function QuestionBoxParent(props) {
   const { user, isAuthorized } = useUser();
   const miniGame = useMiniGame();
   const isNotCompleted = useMemo(() => (
-    miniGame.isLoaded && !miniGame.stage3), [miniGame.isLoaded, miniGame.stage3]);
+    miniGame.isLoaded && !miniGame.riddle), [miniGame.isLoaded, miniGame.riddle]);
 
   return <QuestionBox {...props} user={user} isAuthorized={isAuthorized} isNotCompleted={isNotCompleted} />;
 }

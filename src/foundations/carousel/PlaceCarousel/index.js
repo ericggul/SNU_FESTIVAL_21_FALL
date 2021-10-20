@@ -28,13 +28,13 @@ function Carousel({
 
   useEffect(() => {
     const today = new Date();
-    if (today.getDate() === 26) {
+    if (today.getDate() === 2) {
       setDate(1);
-    } else if (today.getDate() === 27) {
+    } else if (today.getDate() === 3) {
       setDate(2);
-    } else if (today.getDate() === 28) {
+    } else if (today.getDate() === 4) {
       setDate(3);
-    } else if (today.getDate() === 29) {
+    } else if (today.getDate() === 5) {
       setDate(4);
     }
   }, []);
