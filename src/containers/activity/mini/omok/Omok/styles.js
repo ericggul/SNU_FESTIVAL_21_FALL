@@ -5,12 +5,14 @@ export const StyledOmok = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   overflow-x: hidden;
+    
+  background: ${({ theme }) => theme.palette.OMOK_PURPLE_BACKGROUND};
 `;
 
 export const Container = styled.div`
   width: 100%;
-  min-height: ${({ theme }) => theme.windowHeight - 65}px;
-  background: ${({ theme }) => theme.palette.OMOK_PURPLE_BACKGROUND};
+  min-height: ${({ theme }) => theme.windowHeight}px;
+
   ${FlexCenterStyle};
   flex-direction: column;
   ${({ theme }) => theme.windowWidth > 768 && 'flex-direction: row;'}

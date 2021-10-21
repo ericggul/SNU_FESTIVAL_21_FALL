@@ -12,7 +12,8 @@ export const Body = styled.div`
   width: 100%;
   // max-width: 750px;
   padding: 2rem;
-  min-height: ${({ theme }) => theme.windowHeight - 65}px;
+  min-height: ${({ theme }) => theme.windowHeight}px;
+  margin-top: -65px;
   ${FlexCenterStyle};
   flex-direction: column;
   background-image: linear-gradient(to top, #abebe3, #d8f1da 50%, #abebe3 100%);
@@ -25,6 +26,7 @@ export const Body = styled.div`
 
 export const Poster = styled.img`
   width: 80%;
+  margin-top: 5rem;
   height: auto;
   max-width: 500px;
 `;

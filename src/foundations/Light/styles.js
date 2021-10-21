@@ -291,7 +291,7 @@ export const Container5 = styled.div`
   left: 0;
   transform: translate(0, 0);
 
-  ${({ animate }) => animate && 'pointer-events: none;'}
+  ${({ visible }) => !visible && 'pointer-events: none;'}
 `;
 
 export const Circle5 = styled.div`
@@ -315,7 +315,6 @@ export const Circle5 = styled.div`
   // animation-delay: -${({ delay }) => delay}s;
 
   cursor: pointer;
-  ${({ animate }) => animate && 'pointer-events: none;'}
 
 `;
 

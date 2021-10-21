@@ -26,7 +26,7 @@ function Menus({ theme, setMenuIsOpen }) {
 
   const DATA = [
     {
-      header: { name: '공연', link: '/performane' },
+      header: { name: '공연', link: '/performance' },
       children: [
         { name: '씽스틸러', link: '/sing-staler' },
         { name: '힛더스테이지', link: '/hit-the-stage' },
