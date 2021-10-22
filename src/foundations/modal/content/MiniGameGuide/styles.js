@@ -69,6 +69,13 @@ export const Body = styled.div`
   color: #260f63;
 `;
 
+export const SemiText = styled.div`
+  font-size: .6rem;
+  font-weight: 300;
+  margin-top: 1.5rem;
+  color: #260f63;
+`;
+
 export const CloseButton = styled.div`
   z-index: ${({ theme }) => theme.zIndex.fullScreen + 2};
   position: absolute;

@@ -28,6 +28,7 @@ function MiniGameGuide({ setIsModalOpen }) {
             <S.Body>{data.rule}</S.Body>
           </S.Row>
         ))}
+        <S.SemiText>* 줌으로 진행되는 게임 특성상, 오목게임은 미션 완수 후에도 웹사이트에 미션 완료 도장이 보여지지 않습니다.</S.SemiText>
       </S.ContentBox>
       <S.CloseButton
         onClick={() => setIsModalOpen(false)}
