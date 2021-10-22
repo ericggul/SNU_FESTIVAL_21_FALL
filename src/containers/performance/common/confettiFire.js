@@ -37,55 +37,58 @@ export function confettiFire(xPos, yPos) {
   });
 }
 
-let end = Date.now() + (15 * 1000);
 let colors = ['#C845454', '#38ED87', '#3855ED', '#ED38E6'];
 
-export function schoolPride() {
-  confetti({
-    particleCount: 2,
-    angle: 60,
-    spread: 55,
-    origin: { x: 0, y: 0.3 },
-    colors,
-  });
-  confetti({
-    particleCount: 2,
-    angle: 120,
-    spread: 55,
-    origin: { x: 1, y: 0.3 },
-    colors,
-  });
-  confetti({
-    particleCount: 2,
-    angle: 60,
-    spread: 55,
-    origin: { x: 0, y: 0.5 },
-    colors,
-  });
-  confetti({
-    particleCount: 2,
-    angle: 120,
-    spread: 55,
-    origin: { x: 1, y: 0.5 },
-    colors,
-  });
-  confetti({
-    particleCount: 2,
-    angle: 60,
-    spread: 55,
-    origin: { x: 0, y: 0.8 },
-    colors,
-  });
-  confetti({
-    particleCount: 2,
-    angle: 120,
-    spread: 55,
-    origin: { x: 1, y: 0.8 },
-    colors,
-  });
+export function schoolPride(sec) {
+  let end = Date.now() + sec;
+  schoolConfetti();
+  function schoolConfetti() {
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.3 },
+      colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.3 },
+      colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.5 },
+      colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.5 },
+      colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 0.8 },
+      colors,
+    });
+    confetti({
+      particleCount: 2,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 0.8 },
+      colors,
+    });
 
-  if (Date.now() < end) {
-    requestAnimationFrame(schoolPride);
+    if (Date.now() < end) {
+      requestAnimationFrame(schoolConfetti);
+    }
+    return () => cancelAnimationFrame(schoolConfetti);
   }
-  return () => cancelAnimationFrame(schoolPride);
 }

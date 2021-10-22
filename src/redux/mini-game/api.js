@@ -17,6 +17,7 @@ export function setHandwritingInFirestore(user, handwritings) {
 }
 
 export function setStageInFirestore(user, stage, isCompleted) {
+  console.log(stage);
   miniGameCollectionRef.doc(user.uid).set({
     [stage]: isCompleted,
   }, { merge: true }).then();

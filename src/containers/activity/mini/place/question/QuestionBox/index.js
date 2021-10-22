@@ -6,7 +6,6 @@ import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
-import MiniGameGuide from '@F/modal/content/MiniGameGuide';
 import { CONVERTED_PLACES, DIGITS } from '@C/activity/mini/place/data';
 
 import { getRandomElementFromArray } from '@U/functions/array';
@@ -52,7 +51,6 @@ export function QuestionBox({
 
   const [indexes, setIndexes] = useState(incrementArrayConverter(sectorNum === 5 ? 3 : 4));
 
-  const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
   const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '학교 와본거 맞아? 🤔'];
@@ -114,7 +112,6 @@ export function QuestionBox({
         </S.Answer>
 
       </S.Content>
-      {miniGameModalComponent}
       {signInModalComponent}
     </>
   );

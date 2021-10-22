@@ -35,3 +35,15 @@ export const IconGrid = styled.div`
     ? 'repeat(2, calc(min(46vw, 40vh)));'
     : 'repeat(4, calc(min(23vw, 350px)));')};
 `;
+
+export const EventText = styled.div`
+  position: absolute;
+  z-index: 100;
+  bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+`;

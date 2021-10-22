@@ -12,13 +12,20 @@ import Map from '@C/activity/mini/place/Map';
 import FullScreen from '@F/full-screen/PlaceFullScreen';
 import QuestionSector from '@C/activity/mini/place/question/QuestionSector';
 import PropTypes from 'prop-types';
+import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
-function Place({ theme }) {
+function Place({ theme, user, isAuthorized }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [sectorNum, setSectorNum] = useState(-1);
 
   let places = useSelector(state => state.miniGame.place);
+  const dispatch = useDispatch();
+  const miniGame = useMiniGame();
+
+  if (sumOfArray(places) >= 6 && !miniGame.placeAccomplished) {
+    dispatch(actions.setFirestoreStage(user, 'placeAccomplished', true));
+  }
 
   const handleClick = useCallback((i) => {
     setSectorNum(i);
@@ -58,7 +65,7 @@ function Place({ theme }) {
           이상을 맞춰보세요!
           {' '}
           <S.EmphText>
-            {sumOfArray(places) >= 6 && '미션 완료!'}
+            {miniGame.placeAccomplished && '미션 완료!'}
           </S.EmphText>
         </S.TextBottom>
       </S.Container>

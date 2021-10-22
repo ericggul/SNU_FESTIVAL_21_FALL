@@ -15,7 +15,6 @@ import * as S from './styles';
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 
 function Map({ theme, handleClick, solvedRates }) {
-  console.log('inside solved rates', solvedRates);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [isLoading, setIsLoading] = useState(0);
@@ -31,7 +30,6 @@ function Map({ theme, handleClick, solvedRates }) {
   useEffect(() => {
     setCurrentSolved(rateToLevelConverter(solvedRates));
   }, [solvedRates]);
-  console.log('currentSolved', currentSolved);
 
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (768 / 375) * value;
@@ -63,11 +61,9 @@ function Map({ theme, handleClick, solvedRates }) {
     [3, 8],
     [1, 9],
   ];
-
-  console.log(isLoading);
   return (
     <>
-      {isLoading !== 10 && <S.Text>Loading...</S.Text>}
+      {isLoading < 10 && <S.Text>Loading...</S.Text>}
       <S.MapContainer
         width={convert(375)}
         height={convert(1048)}

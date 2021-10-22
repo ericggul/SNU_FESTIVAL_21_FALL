@@ -172,6 +172,8 @@ export const GlobalStyle = createGlobalStyle`
     & ::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera*/
     }
+
+    overscroll-behavior-y: none;
   }
   
   input, textarea, button {

@@ -10,6 +10,8 @@ const INITIAL_STATE = {
   place: [0, 0, 0, 0, 0, 0, 0, 0, 0],
   handwriting: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   riddle: false,
+  placeAccomplished: false,
+  handwritingAccomplished: false,
   treasureHunt: null, // NOTE: null 이 아닌 배열이면 보물찾기 진행 중
 };
 
@@ -67,7 +69,8 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.SET_LOADED]: (draft, action) => { draft.isLoaded = action.isLoaded; },
   [types.SET_MINI_GAME]: (draft, action) => {
     draft.place = action.stages.place; draft.handwriting = action.stages.handwriting;
-    draft.riddle = action.stages.riddle;
+    draft.riddle = action.stages.riddle; draft.placeAccomplished = action.stages.placeAccomplished;
+    draft.handwritingAccomplished = action.stages.handwritingAccomplished;
   },
   [types.SET_PLACE]: (draft, action) => { draft.place = action.places; },
   [types.SET_HANDWRITING]: (draft, action) => { draft.handwriting = action.handwritings; },

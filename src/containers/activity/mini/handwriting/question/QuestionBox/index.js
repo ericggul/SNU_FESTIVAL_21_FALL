@@ -7,7 +7,7 @@ import Slider from 'react-slick';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
-import MiniGameGuide from '@F/modal/content/MiniGameGuide';
+
 import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
 import { COLLEGES, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
@@ -67,7 +67,7 @@ export function QuestionBox({
   const [currentLoc, setCurrentLoc] = useState(shuffledIndexes[0]);
   // Shuffled Location
   const [currentShuffledLoc, setCurrentShuffledLoc] = useState(0);
-  const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
+
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
   const { modalComponent: rulesModalComponent, setIsModalOpen: setIsRulesModalOpen } = useModal(HandwritingRules);
 
@@ -144,7 +144,6 @@ export function QuestionBox({
         <S.Rules onClick={() => setIsRulesModalOpen(true)}>규칙 설명 보기</S.Rules>
       </S.Content>
       {rulesModalComponent}
-      {miniGameModalComponent}
       {signInModalComponent}
     </>
   );

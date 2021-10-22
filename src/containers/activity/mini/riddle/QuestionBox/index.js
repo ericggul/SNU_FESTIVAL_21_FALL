@@ -4,7 +4,7 @@ import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
-import MiniGameGuide from '@F/modal/content/MiniGameGuide';
+import RiddleCompleteGuide from '@F/modal/content/RiddleCompleteGuide';
 import { useUser } from '@U/hooks/useAuth';
 import useMiniGame from '@U/hooks/useMiniGame';
 import withUser from '@U/hoc/withUser';
@@ -18,7 +18,7 @@ export function QuestionBox({
 }) {
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
-  const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
+  const { modalComponent: riddleCompleteComponent, setIsModalOpen: setIsRiddleCompleteOpen } = useModal(RiddleCompleteGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
   const goToNextStep = () => {
@@ -37,10 +37,10 @@ export function QuestionBox({
       // if (isNotCompleted)
 
       dispatch(actions.setFirestoreStage(user, 'riddle', true));
-      setIsMiniGameModalOpen(true);
+      setIsRiddleCompleteOpen(true);
       toast('미션 클리어!');
       setTimeout(() => {
-        setIsMiniGameModalOpen(false);
+        setIsRiddleCompleteOpen(false);
       }, 2500);
 
       // else {
@@ -85,7 +85,7 @@ export function QuestionBox({
           <S.Button onClick={submit}>등록</S.Button>
         </S.Answer>
       </S.Content>
-      {miniGameModalComponent}
+      {riddleCompleteComponent}
       {signInModalComponent}
     </>
   );

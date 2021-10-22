@@ -13,9 +13,8 @@ import withUser from '@U/hoc/withUser';
 import { sumOfArray } from '@U/functions/array';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useUser } from '@U/hooks/useAuth';
+import { useDispatch, useSelector } from 'react-redux';
 import useMiniGame from '@U/hooks/useMiniGame';
-
-import { useSelector } from 'react-redux';
 
 // Mission
 import {
@@ -23,6 +22,7 @@ import {
 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+import { actions } from '@/redux/mini-game/state';
 
 import FullScreen from '@/foundations/full-screen/HandwritingFullScreen';
 import * as S from './styles';
@@ -65,6 +65,7 @@ function Handwriting({ theme, user, isAuthorized }) {
   /// //////////////////////////
 
   const miniGame = useMiniGame();
+  const dispatch = useDispatch();
 
   const [sectorNum, setSectorNum] = useState(-1);
   const handleClick = useCallback((i) => {
@@ -72,7 +73,6 @@ function Handwriting({ theme, user, isAuthorized }) {
   }, [isAuthorized]);
 
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
-  console.log('hand', handwritingArray);
   const solvedArrayMultipleSectors = useCallback((handwritings) => {
     const solvedNumberArray = [];
     const solvedRateArray = [];
@@ -118,12 +118,12 @@ function Handwriting({ theme, user, isAuthorized }) {
 
   useEffect(() => {
     if (sumOfArray(solvedNumbers) === 82) {
-      console.log('spread!');
-      schoolPride();
+      schoolPride((sumOfArray(solvedNumbers) - 30) * 50);
+    } if (sumOfArray(solvedNumbers) >= 30 && !miniGame.handwritingAccomplished) {
+      dispatch(actions.setFirestoreStage(user, 'handwritingAccomplished', true));
     }
-  }, [solvedNumbers]);
+  }, [solvedNumbers, miniGame.handwritingAccomplished]);
 
-  console.log('solvedNumbers', solvedNumbers, solvedRates);
   return (
     <S.StyledHandwriting>
       <HeaderContent backgroundColor="transparent">미니게임</HeaderContent>
@@ -148,7 +148,7 @@ function Handwriting({ theme, user, isAuthorized }) {
             {`${sumOfArray(solvedNumbers)}/82`}
             )
             {' '}
-            {sumOfArray(solvedNumbers) >= 30 && '미션 완료!'}
+            {miniGame.handwritingAccomplished && '미션 완료!'}
           </S.EmphText>
         </S.Description>
 
