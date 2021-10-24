@@ -17,6 +17,13 @@ export const NoticeWrapper = styled.div`
   ${FlexCenterStyle};
   z-index: ${({ theme }) => theme.zIndex.base};
   font-size: 12px;
+
+  @keyframes appear{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+  animation: appear 3s linear backwards;
+  animation-delay: 3s;
 `;
 
 export const Notice = styled.div`

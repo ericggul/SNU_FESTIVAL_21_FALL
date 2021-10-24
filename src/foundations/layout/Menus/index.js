@@ -19,6 +19,7 @@ function Menus({ theme, setMenuIsOpen }) {
   const history = useHistory();
   const { isAuthorized } = useUser();
   const { signIn, signOut } = useAuth();
+  const [backgroundLoaded, setBackgroundLoaded] = useState(false);
   const [openedTab, setOpenedTab] = useState(null);
   const [transition, setTransition] = useState(false);
 
@@ -97,7 +98,7 @@ function Menus({ theme, setMenuIsOpen }) {
 
   return (
     <S.StyledMenus>
-      <S.Background src={isMobile ? MenuMobile : MenuDestkop} />
+      <S.Background src={isMobile ? MenuMobile : MenuDestkop} onLoad={() => setBackgroundLoaded(true)} />
       { isAuthorized && (
         <S.SignButton onClick={signOut}>
           <S.SignImage src={SignOut} alt="signOut" />
@@ -120,7 +121,7 @@ function Menus({ theme, setMenuIsOpen }) {
         ) : <p>PAGE</p>} */}
       </S.CharacterEvent>
       <S.MenuContainer>
-        {DATA.map((sector, i) => sectorComp(sector, i))}
+        {backgroundLoaded && DATA.map((sector, i) => sectorComp(sector, i))}
       </S.MenuContainer>
     </S.StyledMenus>
   );

@@ -20,6 +20,7 @@ function Omok({ theme }) {
   });
 
   const createOmok = useCallback((e) => {
+    console.log(e);
     const divider = theme.windowWidth < 768 ? 30 : 50;
     if (mainRef.current) {
       const n = document.createElement('div');
@@ -27,8 +28,8 @@ function Omok({ theme }) {
       const color = Math.random() < 0.5 ? 'black' : '#ddd';
       n.setAttribute('style',
         `position: absolute;
-        left: ${Math.round(e.x / divider) * divider}px;
-        top: ${Math.round(e.y / divider) * divider}px; 
+        left: ${Math.round(e.pageX / divider) * divider}px;
+        top: ${Math.round(e.pageY / divider) * divider}px; 
         width: 1.5rem; 
         height: 1.5rem; 
         border-radius: .75rem;

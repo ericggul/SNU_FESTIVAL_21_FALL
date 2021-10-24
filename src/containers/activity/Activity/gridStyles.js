@@ -7,6 +7,7 @@ export const GridItem = styled(motion.div)`
     ${FlexCenterStyle};
     flex-direction: column;
     margin: 2.5vw;
+    position: relative;
     cursor: pointer;
 `;
 

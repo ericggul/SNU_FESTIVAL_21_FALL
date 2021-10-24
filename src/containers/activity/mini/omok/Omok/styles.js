@@ -87,6 +87,7 @@ export const Button = styled.div`
   padding: .8rem 4rem;
   border-radius: 1.7rem;
   box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
+  margin-bottom: 3rem;
 `;
 
 export const BlackDot = styled.div`

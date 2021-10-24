@@ -29,9 +29,9 @@ function PageLoading({ message, theme }) {
   const POS = [
     { x: 111, y: 239, w: 60 },
     { x: 204, y: 235, w: 60 },
-    { x: 159, y: 557, w: 60 },
-    { x: 92, y: 521, w: 60 },
-    { x: 223, y: 516, w: 60 },
+    { x: 159, y: 597, w: 60 },
+    { x: 92, y: 561, w: 60 },
+    { x: 223, y: 556, w: 60 },
   ];
 
   return (

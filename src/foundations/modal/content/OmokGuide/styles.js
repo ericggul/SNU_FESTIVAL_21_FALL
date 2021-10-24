@@ -6,10 +6,11 @@ export const StyledOmokGuide = styled.div`
 
 `;
 export const OmokBox = styled(motion.div)`
-  width: 55vw;
-  height: 55vw;
+  width: 75vw;
+  height: 90vw;
+  position: relative;
   max-width: 400px;
-  max-height: 400px;
+  max-height: 50rem;
   ${FlexCenterStyle};
   flex-direction: column;
   background: white;
