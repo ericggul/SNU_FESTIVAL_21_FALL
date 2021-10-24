@@ -1,11 +1,13 @@
 import React, {
-  useState, useEffect, useCallback, useMemo,
+  useState, useEffect, useCallback, useMemo, useRef,
 } from 'react';
 import withUser from '@U/hoc/withUser';
 import PropTypes from 'prop-types';
+import html2canvas from 'html2canvas';
 
 import Basic from '@I/clothing/basic.png';
 
+import KakaoIcon from '@I/icon/kakao.svg';
 import Loading from '@C/clothing/Loading';
 import Visualizer from '@C/clothing/Visualizer';
 import Name from '@C/clothing/Name';
@@ -59,6 +61,7 @@ function Clothing({ theme }) {
   const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
   const [imageArray, setImageArray] = useState([]);
 
+  // loading and calling image
   useEffect(() => {
     if (loaded === 0 && imageArray.length === 0) {
       CLOTHING_DATA.forEach((cld, i) => {
@@ -81,8 +84,10 @@ function Clothing({ theme }) {
     }
   }, [loaded]);
 
+  // size converter
   const convert = useCallback((value) => (containerWidth < 500 ? (containerWidth / 375) * value : (500 / 375) * value), [theme, containerWidth]);
 
+  // changing clothings
   // sl: Current Selected index of Selected Part
   // pr: Current Selected Part
 
@@ -98,13 +103,24 @@ function Clothing({ theme }) {
     setCurrentPr(pr);
   }, [selectedClothings]);
 
+  // capturing clothings
+  const characterRef = useRef();
+  const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
+  useEffect(() => {
+    if (characterRef && characterRef.current) {
+      html2canvas(characterRef.current).then(canvas => setScreenShottedCharacter(canvas.toDataURL('image/jpeg')));
+    }
+  }, [characterRef, selectedClothings]);
+
+  console.log(screenShottedCharacter);
+
   return (
     <S.StyledClothing>
       <HeaderContent>옷입히기</HeaderContent>
 
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
-          <S.Container width={Math.min(containerWidth, 500)}>
+          <S.Container width={Math.min(containerWidth, 500)} ref={characterRef}>
             <S.Body src={Basic} top={convert(-8)} left={convert(0)} width={convert(375)} />
             {selectedClothings.map((sl, pr) => (
               <S.Element
