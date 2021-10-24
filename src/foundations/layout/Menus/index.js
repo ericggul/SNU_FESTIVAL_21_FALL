@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 
+import RandomTextShuffle from '@F/animation/text-animation/random-text-shuffle/RandomTextShuffle';
+
 import MenuDestkop from '@I/layout/menu-desktop.png';
 import MenuMobile from '@I/layout/menu-mobile.png';
 import SignIn from '@I/icon/sign-in.svg';
@@ -18,6 +20,7 @@ function Menus({ theme, setMenuIsOpen }) {
   const { isAuthorized } = useUser();
   const { signIn, signOut } = useAuth();
   const [openedTab, setOpenedTab] = useState(null);
+  const [transition, setTransition] = useState(false);
 
   const goToPage = useCallback((route) => {
     history.push(route);
@@ -50,13 +53,6 @@ function Menus({ theme, setMenuIsOpen }) {
     //     { name: '미궁게임', link: '/riddle' }],
     // },
     {
-      header: { name: '이벤트', link: '' },
-      children: [
-        { name: '빛찾기', link: '' },
-        { name: '옷입히기', link: '/404' },
-        { name: '야비티아이', link: '/jabti' }],
-    },
-    {
       header: { name: '굿즈', link: '/goods' },
     },
 
@@ -65,6 +61,9 @@ function Menus({ theme, setMenuIsOpen }) {
     },
     {
       header: { name: '소개', link: '/introduction' },
+    },
+    {
+      header: { name: `${String.fromCharCode(0x591C)}BTI`, link: '/jabti' },
     },
   ];
 
@@ -91,7 +90,6 @@ function Menus({ theme, setMenuIsOpen }) {
             && <S.Line>|</S.Line>}
           </>
         ))}
-
       </S.RightSector>
 
     </S.Sector>
@@ -112,6 +110,15 @@ function Menus({ theme, setMenuIsOpen }) {
           <p>로그인</p>
         </S.SignButton>
       )}
+      <S.CharacterEvent onClick={() => setTransition(true)}>
+        <p>MY</p>
+        <p>PAGE</p>
+        {/* {transition ? (
+          <>
+            <RandomTextShuffle initialText="PAGE" changeText="HAGE" delayTime={0} />
+          </>
+        ) : <p>PAGE</p>} */}
+      </S.CharacterEvent>
       <S.MenuContainer>
         {DATA.map((sector, i) => sectorComp(sector, i))}
       </S.MenuContainer>

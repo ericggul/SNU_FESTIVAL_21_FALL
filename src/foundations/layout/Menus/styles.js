@@ -83,11 +83,40 @@ export const SignButton = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
   
   p {
     font-size: 1.3rem;
     font-weight: 600;
     color: white;
+    margin: 0;
+    margin-top: .8rem;
+    padding: 0;
+  }
+  z-index: ${({ theme }) => theme.zIndex.header};
+`;
+
+export const CharacterEvent = styled.div`
+  position: fixed;
+  text-align: right;
+  z-index: ${({ theme }) => theme.zIndex.header + 1};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 8rem' : 'bottom: 5rem')};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'right: 3.4rem')};
+  
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  p:nth-of-type(1){
+    font-size: 2rem;
   }
   z-index: ${({ theme }) => theme.zIndex.header};
 `;
