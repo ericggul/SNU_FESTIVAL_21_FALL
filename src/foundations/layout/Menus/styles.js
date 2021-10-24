@@ -12,16 +12,16 @@ export const StyledMenus = styled.div`
 export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1.8rem;
+  margin: 0 1.8rem;
   top: 0;
-  margin-top: 110px;
+  margin-top: 80px;
   margin-left: 2.5rem;
   ${({ theme }) => theme.windowWidth > 768 && 'margin-left: 4rem;'}
 `;
 
 export const Sector = styled.div`
   display: flex;
-  margin: .9rem;
+  margin: .5rem .9rem;
   color: white;
   z-index: ${({ theme }) => theme.zIndex.header};
   text-align: left;
@@ -32,15 +32,15 @@ export const LeftSector = styled.div`
   font-size: 1.8rem;
   width: 5.8rem;
   font-weight: 600;
-  margin-right: 1rem;
-  margin-bottom: .5rem;
+  margin-right: .5rem;
+  margin-bottom: .3rem;
   cursor: pointer;
 `;
 
 export const RightSector = styled.div`
-  font-size: 1rem;
+  font-size: 1.3rem;
   display: grid;
-  grid-template-columns: 6.8rem 0.1rem 10rem;
+  grid-template-columns: 8rem 0.1rem 10rem;
   cursor: pointer;
   font-wieght: 600;
 `;
@@ -48,8 +48,9 @@ export const RightSector = styled.div`
 export const RightComp = styled.div`
   display: flex;
   text-align: left;
+  margin: .1rem;
   margin-left: .8rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   font-wieght: 600;
 `;
@@ -76,7 +77,7 @@ export const Background = styled.img`
 
 export const SignButton = styled.div`
   position: fixed;
-  bottom: 5rem;
+  bottom: 2rem;
   z-index: ${({ theme }) => theme.zIndex.header + 1};
   ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'left: 3.4rem')};
   
@@ -100,7 +101,7 @@ export const CharacterEvent = styled.div`
   position: fixed;
   text-align: right;
   z-index: ${({ theme }) => theme.zIndex.header + 1};
-  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 8rem' : 'bottom: 5rem')};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 7rem' : 'bottom: 2rem')};
   ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'right: 3.4rem')};
   
   display: flex;

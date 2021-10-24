@@ -30,6 +30,9 @@ function Menus({ theme, setMenuIsOpen }) {
 
   const DATA = [
     {
+      header: { name: '홈', link: '/' },
+    },
+    {
       header: { name: '공연', link: '/performance' },
       children: [
         { name: '씽스틸러', link: '/sing-staler' },
@@ -45,18 +48,9 @@ function Menus({ theme, setMenuIsOpen }) {
         { name: '공모전', link: '/competition' },
         { name: '토크쇼', link: '/radio' }],
     },
-    // {
-    //   header: { name: '미니게임', link: '/activity/mini' },
-    //   children: [
-    //     { name: '필기 맞추기', link: '/handwriting' },
-    //     { name: '장소 맞추기', link: '/place' },
-    //     { name: '오목게임', link: '/omok' },
-    //     { name: '미궁게임', link: '/riddle' }],
-    // },
     {
       header: { name: '굿즈', link: '/goods' },
     },
-
     {
       header: { name: '방명록', link: '/guest-book' },
     },
@@ -75,7 +69,6 @@ function Menus({ theme, setMenuIsOpen }) {
       >
         {sector.header.name}
       </S.LeftSector>
-
       <S.RightSector>
         {sector.children
         && sector.children.map((child, j) => (
@@ -92,7 +85,6 @@ function Menus({ theme, setMenuIsOpen }) {
           </>
         ))}
       </S.RightSector>
-
     </S.Sector>
   );
 
@@ -114,11 +106,6 @@ function Menus({ theme, setMenuIsOpen }) {
       <S.CharacterEvent onClick={() => setTransition(true)}>
         <p>MY</p>
         <p>PAGE</p>
-        {/* {transition ? (
-          <>
-            <RandomTextShuffle initialText="PAGE" changeText="HAGE" delayTime={0} />
-          </>
-        ) : <p>PAGE</p>} */}
       </S.CharacterEvent>
       <S.MenuContainer>
         {backgroundLoaded && DATA.map((sector, i) => sectorComp(sector, i))}

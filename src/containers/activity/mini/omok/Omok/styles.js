@@ -43,6 +43,7 @@ export const Descp = styled.div`
   max-width: 27rem;
   word-break: keep-all;
   font-weight: 400;
+  width: 80vw;
   opacity: .8;
   p{margin: 0;}
 `;

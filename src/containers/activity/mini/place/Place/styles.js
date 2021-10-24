@@ -22,9 +22,14 @@ export const Container = styled.div`
 export const Text = styled.div`
   position: absolute;
   top: 10vh;
-  ${({ theme }) => theme.windowWidth < 768 && 'top: 20vh;'}
-  width: 70vw;
+  ${({ theme }) => theme.windowWidth < 768 && 'top: 13vh;'}
+  width: 80vw;
+  margin: auto;
+  left: 0;
+  right: 0;
   max-width: 40rem;
+  justify-content; center;
+  align-items: center;
   text-align: center;
   word-break: keep-all;
   font-size: .9rem;
@@ -32,7 +37,7 @@ export const Text = styled.div`
   font-weight: 300;
 
   @keyframes reveal{
-    from{opacity: 0; filter: blur(10px);}
+    from{opacity: 0;}
     to{opacity: 1; filter: blur(0px);}
   }
   animation: reveal 1s backwards;
@@ -48,9 +53,8 @@ export const EmphText = styled.span`
 export const TextBottom = styled.div`
   position: absolute;
   bottom: 3vh;
-  ${({ theme }) => theme.windowWidth < 768 && 'bottom: 12vh;'}
-  ${({ theme }) => theme.windowWidth < 400 && 'bottom: 18vh;'}
-  width: 70vw;
+  ${({ theme }) => theme.windowWidth < 768 && 'bottom: 11vh;'}
+  width: 90vw;
   max-width: 40rem;
   text-align: center;
   word-break: keep-all;

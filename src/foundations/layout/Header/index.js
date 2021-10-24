@@ -24,12 +24,12 @@ function Header({ hamburgerColor, backVisible = true }) {
   }, []);
 
   const Logo = (
-    <S.Logo onClick={backClick}>
-      {backVisible && <S.LogoImage src={Back} backAnimation={backAnimation} />}
+    <S.Logo>
+      {backVisible && <S.LogoImage onClick={backClick} src={Back} backAnimation={backAnimation} />}
       { menuIsOpen && (
         <Fade duration={800}>
-          <S.BasicText>
-            <p>서울대학교 2021 가을축제</p>
+          <S.BasicText onClick={() => history.push('/')}>
+            <p>서울대학교 가을축제 (11.2-5)</p>
             <p>관악의 밤</p>
           </S.BasicText>
         </Fade>

@@ -38,7 +38,7 @@ export const IconGrid = styled.div`
 
 export const EventText = styled.div`
   position: absolute;
-  z-index: 100;
+  z-index: 40;
   bottom: 1.5rem;
   text-align: center;
   width: 100%;

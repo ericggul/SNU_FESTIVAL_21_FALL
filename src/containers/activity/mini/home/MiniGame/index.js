@@ -56,8 +56,7 @@ function MiniGame({ theme }) {
       <GS.IconDescription>
         {text}
       </GS.IconDescription>
-      {/* {accomplished && <GS.Accomplished src={Complete} />} */}
-      <GS.Accomplished src={Complete} />
+      {accomplished && <GS.Accomplished src={Complete} />}
 
     </GS.GridItem>
   );

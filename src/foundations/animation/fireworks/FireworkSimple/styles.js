@@ -6,6 +6,7 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	pointer-events: none;
 `;
 
 export const StageContainer = styled.div`
