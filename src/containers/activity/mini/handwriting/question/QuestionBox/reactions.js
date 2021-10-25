@@ -20,14 +20,14 @@ export const confettiRightorWrong = (isMobile, tf) => {
   let rightColors = ['#ffffff', '#bb0000'];
   if (tf) {
     confetti({
-      typeparticleCount: 20,
+      typeparticleCount: 50,
       angle: 60,
       spread: 55,
       origin: { x: 0 },
       colors: ['#ffffff'],
     });
     confetti({
-      typeparticleCount: 20,
+      typeparticleCount: 50,
       angle: 120,
       spread: 55,
       origin: { x: 1 },

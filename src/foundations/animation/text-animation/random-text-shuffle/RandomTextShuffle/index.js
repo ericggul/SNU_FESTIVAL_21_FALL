@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function RandomTextShuffle({ text }) {
+function RandomTextShuffle({ initialText, changeText, delayTime }) {
+  const [execute, setExecute] = useState(false);
   function WordShuffler(giventext, ref) {
     let time = 0;
     let now;
@@ -11,33 +12,27 @@ function RandomTextShuffle({ text }) {
     let delta;
     let currentTimeOffset = 0;
 
-    let currentWord = null;
-    let currentCharacter = 0;
-    let currentWordLength = 0;
-
     const options = {
-      fps: 10,
-      timeOffset: 5,
+      fps: 100,
+      timeOffset: 30,
       textColor: '#fff',
       needUpdate: true,
       colors: [
-        '#111', '#222', '#333', '#444',
+        '#555', '#666', '#777', '#888', '#999', '#aaa', '#bbb',
       ],
     };
 
-    let needUpdate = true;
+    let needUpdate = execute;
     const interval = 500 / options.fps;
 
     const chars = [
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', '!', '§',
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     ];
 
     const getRandomColor = () => {
       const randNum = Math.floor(Math.random() * options.colors.length);
       return options.colors[randNum];
     };
-
-    const holder = ref;
 
     const getRandCharacter = (characterToReplace) => {
       if (characterToReplace === ' ') {
@@ -49,17 +44,19 @@ function RandomTextShuffle({ text }) {
       return lowChoice < 0 ? picketCharacter.toLowerCase() : picketCharacter;
     };
 
-    const writeWord = (inputText) => {
-      currentWord = giventext;
-      currentWordLength = currentWord.length;
-    };
-
     const generateSingleCharacter = (color, character) => {
       const span = document.createElement('span');
       span.style.color = color;
       span.innerHTML = character;
       return span;
     };
+
+    const holder = ref;
+    for (let i = 0; i < initialText.length; i += 1) {
+      if (!needUpdate) {
+        holder.current.appendChild(generateSingleCharacter('white', initialText[i]));
+      }
+    }
 
     const updateCharacter = () => {
       now = Date.now();
@@ -68,54 +65,42 @@ function RandomTextShuffle({ text }) {
       if (delta > interval) {
         currentTimeOffset += 1;
 
-        const words = [];
-        if (currentTimeOffset === options.timeOffset
-        && currentCharacter !== currentWordLength) {
-          currentCharacter += 1;
-          currentTimeOffset = 0;
-        }
-        for (let k = 0; k < currentCharacter; k += 1) {
-          words.push(currentWord[k]);
-        }
-
-        for (let i = 0; i < currentWordLength - currentCharacter; i += 1) {
-          words.push(getRandCharacter(currentWord[currentCharacter + i]));
-        }
-
-        if (currentCharacter === currentWordLength) {
+        if (currentTimeOffset === options.timeOffset && holder.current !== null) {
+          holder.current.removeChild(holder.current.firstChild);
+          holder.current.prepend(generateSingleCharacter('white', changeText.charAt(0)));
           needUpdate = false;
         }
-        holder.current.innerHTML = '';
-        words.forEach((w, index) => {
-          let color;
-          if (index > currentCharacter) {
-            color = getRandomColor();
-          } else {
-            color = options.textColor;
-          }
-          holder.current.appendChild(generateSingleCharacter(color, w));
-        });
-
-        then = now - (delta % interval);
+        if (currentTimeOffset < options.timeOffset && holder.current !== null) {
+          holder.current.removeChild(holder.current.firstChild);
+          let color = getRandomColor();
+          let w = getRandCharacter('P');
+          holder.current.prepend(generateSingleCharacter(color, w));
+        }
       }
     };
 
     function update() {
       time += 1;
-      if (needUpdate) {
-        updateCharacter();
-      }
+      updateCharacter();
       requestAnimationFrame(update);
     }
-    writeWord(text);
-    update(time);
+
+    if (needUpdate) {
+      update(time);
+    }
   }
 
   const textRef = useRef();
 
   useEffect(() => {
-    WordShuffler(text, textRef);
-  }, [text, textRef, WordShuffler]);
+    setTimeout(() => {
+      setExecute(true);
+    }, delayTime);
+  }, []);
+
+  useEffect(() => {
+    WordShuffler(changeText, textRef);
+  }, [changeText, textRef, execute]);
 
   return (
     <S.StyledRandomTextShuffle>
@@ -126,5 +111,5 @@ function RandomTextShuffle({ text }) {
 export default RandomTextShuffle;
 
 RandomTextShuffle.propTypes = {
-  text: PropTypes.string.isRequired,
+  changeText: PropTypes.string.isRequired,
 };

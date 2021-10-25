@@ -4,6 +4,7 @@ export const StyledIndicator = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 17px);
     align-items: center;
+    margin-top: .5rem;
 `;
 
 export const LightBulb = styled.div`

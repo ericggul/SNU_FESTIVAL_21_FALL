@@ -7,6 +7,7 @@ import { HeaderContent } from '@F/layout/Header';
 import TextSection from '@C/activity/competition/TextSection';
 import VoteSection from '@C/activity/competition/VoteSection';
 import {
+  LIST,
   CARTOON,
   CARTOON_LIST,
   FIELDS,
@@ -69,12 +70,10 @@ function Competition({ theme, user, isAuthorized }) {
   /// //////////////////////////
 
   // firestore 불러오기
-  const [cartoonListIHaveVoted, setCartoonListIHaveVoted] = useState([]);
-  const [isCartoonLoaded, setIsCartoonLoaded] = useState(false);
-  const [literatureListIHaveVoted, setLiteratureListIHaveVoted] = useState([]);
-  const [isLiteratureLoaded, setIsLiteratureLoaded] = useState(false);
-  const [videoListIHaveVoted, setVideoListIHaveVoted] = useState([]);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  const [iHaveVoted, setIHaveVoted] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     if (isAuthorized) {
       const { uid } = user;
@@ -85,55 +84,19 @@ function Competition({ theme, user, isAuthorized }) {
             newListIHaveVoted.push(Number(key));
           }
         });
-        setCartoonListIHaveVoted(newListIHaveVoted);
-        setIsCartoonLoaded(true);
-      });
-      competitionCollectionRef.doc('literature').get().then((doc) => {
-        const newListIHaveVoted = [];
-        Object.entries(doc.data()).forEach(([key, likes]) => {
-          if (likes.includes(uid)) {
-            newListIHaveVoted.push(Number(key));
-          }
-        });
-        setLiteratureListIHaveVoted(newListIHaveVoted);
-        setIsLiteratureLoaded(true);
-      });
-      competitionCollectionRef.doc('video').get().then((doc) => {
-        const newListIHaveVoted = [];
-        Object.entries(doc.data()).forEach(([key, likes]) => {
-          if (likes.includes(uid)) {
-            newListIHaveVoted.push(Number(key));
-          }
-        });
-        setVideoListIHaveVoted(newListIHaveVoted);
-        setIsVideoLoaded(true);
+        setIHaveVoted(newListIHaveVoted);
+        setIsLoaded(true);
       });
     }
   }, [isAuthorized]); // NOTE: dependency 로 firestore 호출량 조절
 
   // current 값
   const [currentField, setCurrentField] = useState(CARTOON);
-  const currentItems = useMemo(() => {
-    if (currentField === CARTOON) return shuffleArray(CARTOON_LIST);
-    if (currentField === LITERATURE) return shuffleArray(LITERATURE_LIST);
-    return shuffleArray(VIDEO_LIST);
-  }, [currentField]);
-  const isCurrentLoaded = useMemo(() => {
-    if (currentField === CARTOON) return isCartoonLoaded;
-    if (currentField === LITERATURE) return isLiteratureLoaded;
-    return isVideoLoaded;
-  }, [currentField, isCartoonLoaded, isLiteratureLoaded, isVideoLoaded]);
-  const currentListIHaveVoted = useMemo(() => {
-    if (currentField === CARTOON) return cartoonListIHaveVoted;
-    if (currentField === LITERATURE) return literatureListIHaveVoted;
-    return videoListIHaveVoted;
-  }, [currentField, cartoonListIHaveVoted, literatureListIHaveVoted, videoListIHaveVoted]);
+  const currentItems = useMemo(() => shuffleArray(LIST), [currentField]);
 
   // 새로 투표했을 때
   const setHaveVotedForNewVote = useCallback((field, newLikes) => {
-    if (field === CARTOON) setCartoonListIHaveVoted(newLikes);
-    else if (field === LITERATURE) setLiteratureListIHaveVoted(newLikes);
-    else setVideoListIHaveVoted(newLikes);
+    setIHaveVoted(list => [...list, newLikes]);
   }, []);
 
   // 미션
@@ -144,43 +107,29 @@ function Competition({ theme, user, isAuthorized }) {
   });
   useEffect(() => {
     if (isAuthorized && mission.isLoaded && !mission.competition) {
-      if (currentListIHaveVoted.length > 0) {
+      if (iHaveVoted.length > 0) {
         dispatch(actions.setFirestoreMission(user, 'competition', true));
         setIsMissionModalOpen(true);
       }
     }
-  }, [isAuthorized, mission.isLoaded, mission.competition, currentListIHaveVoted, dispatch]);
+  }, [isAuthorized, mission.isLoaded, mission.competition, iHaveVoted, dispatch]);
 
   return (
     <S.StyledCompetition>
       <HeaderContent backgroundColor="#e694a2">공모전</HeaderContent>
       <S.Body>
         <TextSection />
-        <S.Tab>
-          {Object.keys(FIELDS).map(fieldName => (
-            <React.Fragment key={fieldName}>
-              <S.TabItem
-                onClick={() => setCurrentField(FIELDS[fieldName])}
-                isSelected={currentField === FIELDS[fieldName]}
-              >
-                {fieldName}
-              </S.TabItem>
-            </React.Fragment>
-          ))}
-        </S.Tab>
 
         <VoteSection
-          field={currentField}
           items={currentItems}
-          isLoaded={isCurrentLoaded}
-          listIHaveVoted={currentListIHaveVoted}
+          isLoaded={isLoaded}
+          listIHaveVoted={iHaveVoted}
           isAuthorized={isAuthorized}
           user={user}
           onVoteForField={setHaveVotedForNewVote}
         />
       </S.Body>
       <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
       {missionModalComponent}
     </S.StyledCompetition>

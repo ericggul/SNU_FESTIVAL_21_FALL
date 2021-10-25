@@ -73,7 +73,6 @@ function GuestBook({ user, isAuthorized }) {
       <Heart heartAnimate={heartAnimate} />
 
       <Light3 top={120} left={250} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledGuestBook>
   );

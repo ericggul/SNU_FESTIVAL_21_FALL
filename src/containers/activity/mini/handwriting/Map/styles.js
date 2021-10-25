@@ -7,7 +7,7 @@ export const MapContainer = styled.div`
   position: relative;
   width:${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  margin-top: ${({ height }) => height * 0.03}px;
+  margin-top: ${({ height }) => height * 0.08}px;
   opacity: 0;
   @keyframes appearContainer{
     from{opacity: 0;}
@@ -35,14 +35,14 @@ export const Object = styled.img`
   ${props => props.left && css`left: ${props.left}px`};
   ${props => props.width && css`width: ${props.width}px`};
 
-  @keyframes jump{
-    97%{ transform: translateY(0)};
-    99%{transform: translateY(-8px)};
-    100%{transform: translateY(0)};
-  }
+  // @keyframes jump{
+  //   97%{ transform: translateY(0)};
+  //   99%{transform: translateY(-8px)};
+  //   100%{transform: translateY(0)};
+  // }
 
-  animation: jump 10s infinite;
-  animation-delay: -${props => props.jump}s;
+  // animation: jump 10s infinite;
+  // animation-delay: -${props => props.jump}s;
 `;
 
 export const Building = styled.img`
@@ -52,12 +52,12 @@ export const Building = styled.img`
   ${props => props.top && css`top: ${props.top}px`};
   ${props => props.left && css`left: ${props.left}px`};
   ${props => props.width && css`width: ${props.width}px`};
-  @keyframes jump-bld{
-    97%{ transform: translateY(0)};
-    99%{transform: translateY(-30px)};
-    100%{transform: translateY(0)};
-  }
+  // @keyframes jump-bld{
+  //   97%{ transform: translateY(0)};
+  //   99%{transform: translateY(-30px)};
+  //   100%{transform: translateY(0)};
+  // }
 
-  animation: jump-bld 10s infinite;
-  animation-delay: -${props => props.jump}s;
+  // animation: jump-bld 10s infinite;
+  // animation-delay: -${props => props.jump}s;
 `;

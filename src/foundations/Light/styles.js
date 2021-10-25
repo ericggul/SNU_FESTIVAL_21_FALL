@@ -226,11 +226,11 @@ export const Circle31 = styled.div`
   top: ${({ top }) => top}px;
   left: ${({ left }) => left}px;
 
-  background: rgba(255, 255, 255, 0.8);
+  background: #EFDADA;
   box-shadow:
-    inset 0 0 1rem 1rem white,
-     0 0 1rem .4rem white,
-     0 0 5rem 1rem white;
+    inset 0 0 1rem 1rem #E8A5A5,
+     0 0 1rem .4rem #EEBDBD,
+     0 0 5rem 1rem #E98154;
 
   ${appearLight};
   animation-delay: ${({ delay }) => delay}s;
@@ -291,11 +291,12 @@ export const Container5 = styled.div`
   left: 0;
   transform: translate(0, 0);
 
-  ${({ animate }) => animate && 'pointer-events: none;'}
+  ${({ visible }) => !visible && 'pointer-events: none;'}
 `;
 
 export const Circle5 = styled.div`
   position: fixed;
+  ${({ visible }) => !visible && 'opacity: 0'};
   width: ${({ width }) => width}px;
   height: ${({ width }) => width}px;
   border-radius: 50%;
@@ -306,15 +307,14 @@ export const Circle5 = styled.div`
      0 0 .2rem .1rem #C8DDEB,
      0 0 1rem .2rem white,
      0 0 1.5rem .2rem #8EC1E0,
-     0 0 3rem .5rem white,
-     0 0 5rem 1rem #A9CADF;
+     0 0 3rem .5rem white;
+    //  0 0 5rem 1rem #A9CADF;
 
   ${appearLight};
-  animation: appearLight .4s linear alternate infinite backwards;
-  animation-delay: -${({ delay }) => delay}s;
+  // animation: appearLight .6s linear alternate infinite backwards;
+  // animation-delay: -${({ delay }) => delay}s;
 
   cursor: pointer;
-  ${({ animate }) => animate && 'pointer-events: none;'}
 
 `;
 

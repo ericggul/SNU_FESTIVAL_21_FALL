@@ -6,8 +6,7 @@ import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
-import MiniGameGuide from '@F/modal/content/MiniGameGuide';
-import { CONVERTED_PLACES } from '@C/activity/mini/place/data.js';
+import { CONVERTED_PLACES, DIGITS } from '@C/activity/mini/place/data';
 
 import { getRandomElementFromArray } from '@U/functions/array';
 import { withTheme } from 'styled-components';
@@ -17,9 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import NeutralRio from '@I/activity/place/NeutralRio.png';
 import RightRio from '@I/activity/place/RightRio.png';
 import WrongRio from '@I/activity/place/WrongRio.png';
+import DiscreteCarousel from '@F/carousel/PlaceCarousel';
 import { actions } from '@/redux/mini-game/state';
-import DiscreteCarousel from '@/foundations/carousel/PlaceCarousel';
-import { speakRightorWrong, ConfettiRightorWrong } from './reactions.js';
+import { speakRightorWrong, ConfettiRightorWrong } from './reactions';
 
 import * as S from './styles';
 
@@ -52,7 +51,6 @@ export function QuestionBox({
 
   const [indexes, setIndexes] = useState(incrementArrayConverter(sectorNum === 5 ? 3 : 4));
 
-  const { modalComponent: miniGameModalComponent, setIsModalOpen: setIsMiniGameModalOpen } = useModal(MiniGameGuide);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
   const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '학교 와본거 맞아? 🤔'];
@@ -102,7 +100,7 @@ export function QuestionBox({
         </S.SliderContent>
         <S.Description>{lastAttemptRight === 1 ? '정답입니다!' : (lastAttemptRight === 0 ? '어디일까요?' : wrongTextArray[wrongAttempt])}</S.Description>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
-          <S.InputBox placeholder="백퍼 자하연 아님?" value={value} onChange={onChange} />
+          <S.InputBox placeholder={`백퍼 총장잔디 아님? (${DIGITS[sectorNum]}글자)`} value={value} onChange={onChange} />
           {/* <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button> */}
           <S.Image
             src={lastAttemptRight === 1 ? RightRio : (lastAttemptRight === 0 ? NeutralRio : WrongRio)}
@@ -114,7 +112,6 @@ export function QuestionBox({
         </S.Answer>
 
       </S.Content>
-      {miniGameModalComponent}
       {signInModalComponent}
     </>
   );

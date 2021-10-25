@@ -1,74 +1,125 @@
 import styled from 'styled-components';
+import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledMenus = styled.div`
   width: 100%;
   height: ${({ theme }) => theme.windowHeight}px;
-  background-image: linear-gradient(
-    ${({ theme }) => theme.palette.PURPLE50},
-    ${({ theme }) => theme.palette.GREEN80}
-  );
-  opacity: 0.98;
+  position: relative;
+  top: 0;
+  opacity: 1;
 `;
 
-export const OpenedMenu = styled.div`
+export const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-  padding-top: ${({ theme }) => theme.windowHeight * (1.5 / 10)}px;
-  padding-left: 10vw;
-  box-sizing: border-box;
-  
-  width: 100%;
-  height: ${({ theme }) => theme.windowHeight * (7.5 / 10)}px;
-  overflow-y: scroll;
+  margin: 0 1.8rem;
+  top: 0;
+  margin-top: 80px;
+  margin-left: 2.5rem;
+  ${({ theme }) => theme.windowWidth > 768 && 'margin-left: 4rem;'}
 `;
 
-export const InlineMenu = styled.div`
-  display: inline-flex;
-  align-items: center;
-`;
-
-export const NaviText = styled.p`
-  margin: 1rem 0;
-  font-size: 1.4rem;
-  max-width: 5rem;
-  white-space: nowrap;
-  
+export const Sector = styled.div`
+  display: flex;
+  margin: .5rem .9rem;
   color: white;
-  cursor: pointer;
-  transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.1);
-  }
+  z-index: ${({ theme }) => theme.zIndex.header};
+  text-align: left;
 `;
 
-export const SmallNaviText = styled.p`
-  margin: 8px 0;
-  font-size: 1.0rem;
-  padding-left: 1.5rem;
-  
-  color: white;
+export const LeftSector = styled.div`
+  display: flex;
+  font-size: 1.8rem;
+  width: 5.8rem;
+  font-weight: 600;
+  margin-right: .5rem;
+  margin-bottom: .3rem;
   cursor: pointer;
-  transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.15);
-  }
+`;
+
+export const RightSector = styled.div`
+  font-size: 1.3rem;
+  display: grid;
+  grid-template-columns: 8rem 0.1rem 10rem;
+  cursor: pointer;
+  font-wieght: 600;
+`;
+
+export const RightComp = styled.div`
+  display: flex;
+  text-align: left;
+  margin: .1rem;
+  margin-left: .8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-wieght: 600;
+`;
+
+export const Line = styled.div`
+  display: flex;
+  ${FlexCenterStyle};
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: -.15rem;
+`;
+
+export const Background = styled.img`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: ${({ theme }) => theme.windowHeight}px;
+  bottom: 0px;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: ${({ theme }) => theme.zIndex.header - 1};
 `;
 
 export const SignButton = styled.div`
-  position: absolute;
-  bottom: 5vw;
-  right: 10vw;
+  position: fixed;
+  bottom: 2rem;
+  z-index: ${({ theme }) => theme.zIndex.header + 1};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'left: 3.4rem')};
+  
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  
+  p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    margin-top: .8rem;
+    padding: 0;
+  }
+  z-index: ${({ theme }) => theme.zIndex.header};
+`;
+
+export const CharacterEvent = styled.div`
+  position: fixed;
+  text-align: right;
+  z-index: ${({ theme }) => theme.zIndex.header + 1};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 7rem' : 'bottom: 2rem')};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'right: 3.4rem')};
   
   display: flex;
   flex-direction: column;
   cursor: pointer;
   
   p {
-    font-size: 1.3rem;
-    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    font-weight: 600;
     color: white;
   }
+
+  p:nth-of-type(1){
+    font-size: 2rem;
+  }
+  z-index: ${({ theme }) => theme.zIndex.header};
 `;
 
 export const SignImage = styled.img`

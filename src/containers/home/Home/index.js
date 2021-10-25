@@ -15,6 +15,7 @@ import Rio from '@C/home/common/Rio';
 
 import { preloadImage } from '@U/functions/preload';
 
+import MenuDesktop from '@I/layout/menu-desktop.png';
 import LightRio from '@I/home/LightRio.png';
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import HitTheStageIcon from '@I/performance/icon/hit-the-stage-icon.png';
@@ -27,9 +28,14 @@ import RadioIcon from '@I/activity/home/radio.png';
 import OmokIcon from '@I/activity/home/omok.png';
 import RiddleIcon from '@I/activity/home/riddle.png';
 import HandwritingIcon from '@I/activity/home/handwriting.png';
+import ConstellationOne from '@I/activity/home/constellation1.png';
+import ConstellationTwo from '@I/activity/home/constellation2.png';
+import ConstellationThree from '@I/activity/home/constellation3.png';
+import ConstellationFour from '@I/activity/home/constellation4.png';
+import ConstellationFive from '@I/activity/home/constellation5.png';
+
 import PlaceIcon from '@I/activity/home/place.png';
 
-// import BackgroundTop from '@I/home/desktop/background-top.png';
 import BackgroundTop from '@I/home/desktop/background-top-light.png';
 // import BackgroundMiddle from '@I/home/desktop/background-middle.png';
 import BackgroundMiddle from '@I/home/desktop/background-middle-light.png';
@@ -76,7 +82,8 @@ function Home({
   const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
 
-  const [missionCleared, setMissionCleared] = useState(true);
+  const [missionCleared, setMissionCleared] = useState(false);
+  const [busMove, setBusMove] = useState(false);
   const [gateOn, setGateOn] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -89,20 +96,6 @@ function Home({
     }
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
-  useEffect(() => {
-    if (missionCleared) {
-      setTimeout(() => {
-        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
-      }, 1000);
-      setTimeout(() => {
-        setGateOn(true);
-      }, 4500);
-      setTimeout(() => {
-        setIsMissionCompleteModalOpen(true);
-      }, 6000);
-    }
-  }, [missionCleared]);
-
   const history = useHistory();
   const goToPage = useCallback((route) => {
     history.push(route);
@@ -110,9 +103,10 @@ function Home({
 
   const onLoad = useCallback(() => {
     setIsLoading(false);
-    [LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+    [MenuDesktop, LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
       CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
       OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
+      ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
     ].forEach(preloadImage);
   }, []);
 
@@ -167,13 +161,24 @@ function Home({
     }
   }, [fromLightEvent, brightenLights]);
 
-  // Event Guider
-  const busClick = useCallback(() => {
+  const mainGateClick = useCallback(() => {
+    if (missionCleared) {
+      setBusMove(true);
+      setTimeout(() => {
+        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
+      }, 2000);
+      setTimeout(() => {
+        setGateOn(true);
+      }, 4700);
+      setTimeout(() => {
+        setIsMissionCompleteModalOpen(true);
+      }, 6300);
+    }
     if (!isLightPlaying) {
       toast('졸고있는 리오를 깨워보세요!');
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
-  }, [isLightPlaying]);
+  }, [missionCleared, isLightPlaying]);
 
   const convert = useCallback((value) => (theme.windowWidth / 1920) * value, [theme]);
 
@@ -187,11 +192,11 @@ function Home({
 
           <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
 
-          {missionCleared && <CustomPath isMobile={false} busWidth={convert(180)} />}
-          {!missionCleared && <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />}
-          {!missionCleared && <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />}
-          {!missionCleared && <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />}
-          {!missionCleared && <CS.Bus index={3} src={BusFour} onClick={busClick} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />}
+          {busMove && <CustomPath isMobile={false} busWidth={convert(180)} />}
+          {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />}
+          {!busMove && <CS.Bus index={1} src={BusTwo} onClick={mainGateClick} alt="버스" top={convert(856)} left={convert(400)} width={convert(106)} />}
+          {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />}
+          {!busMove && <CS.Bus index={3} src={BusFour} onClick={mainGateClick} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />}
 
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
 
@@ -213,7 +218,7 @@ function Home({
           <Rio waked={rioWaked} top={convert(67)} left={convert(161)} width={convert(280)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1770)} left={convert(60)} width={convert(100)} clickRio={clickRio} withText={false} />
 
-          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={busClick} top={convert(1775)} left={convert(351)} width={convert(649)} />
+          <CS.Door onClick={mainGateClick} src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
           {missionComponent}

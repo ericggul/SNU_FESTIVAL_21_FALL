@@ -37,11 +37,15 @@ export const Background = styled.div`
   background: rgb(228, 232, 249);
   transition: all 1s;
 `;
+export const EmphText = styled.span`
+  word-break: keep-all;
+  font-weight: 600;
+`;
 
 export const Expl = styled.div`
   color: #586BBB;
-  // text-align: center;
-  width: 70vw;
+  text-align: center;
+  width: 90vw;
   max-width: 50rem;
   font-size: .9rem;
   font-weight: 400;
@@ -58,14 +62,14 @@ export const OpeningWrapper = styled.div`
 
 export const Opening = styled.div`
   position: relative;
-  margin: 3rem 3rem;
+  margin: 1rem 2rem;
 
   border-radius: 7%;
   width: ${({ theme }) => theme.windowHeight * (4 / 10)}px;
   height: ${({ theme }) => theme.windowHeight * (4 / 10)}px;
   ${media.lessThan('medium')`
-    width: ${({ theme }) => theme.windowHeight * (2.8 / 10)}px;
-    height: ${({ theme }) => theme.windowHeight * (2.8 / 10)}px;
+    width: ${({ theme }) => theme.windowHeight * (3 / 10)}px;
+    height: ${({ theme }) => theme.windowHeight * (3 / 10)}px;
   `};
 
 `;

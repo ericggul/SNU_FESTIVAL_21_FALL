@@ -5,17 +5,24 @@ export const StyledOmok = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   overflow-x: hidden;
+    
+  background: ${({ theme }) => theme.palette.OMOK_PURPLE_BACKGROUND};
 `;
 
 export const Container = styled.div`
   width: 100%;
-  min-height: ${({ theme }) => theme.windowHeight - 65}px;
-  background: ${({ theme }) => theme.palette.OMOK_PURPLE_BACKGROUND};
+  min-height: ${({ theme }) => theme.windowHeight}px;
+
   ${FlexCenterStyle};
   flex-direction: column;
   ${({ theme }) => theme.windowWidth > 768 && 'flex-direction: row;'}
   text-align: center;
   color: white;
+`;
+
+export const EmphText = styled.span`
+  font-weight: 700;
+  font-size: 1rem;
 `;
 
 export const Sector = styled.div`
@@ -36,6 +43,7 @@ export const Descp = styled.div`
   max-width: 27rem;
   word-break: keep-all;
   font-weight: 400;
+  width: 80vw;
   opacity: .8;
   p{margin: 0;}
 `;
@@ -80,6 +88,7 @@ export const Button = styled.div`
   padding: .8rem 4rem;
   border-radius: 1.7rem;
   box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
+  margin-bottom: 3rem;
 `;
 
 export const BlackDot = styled.div`

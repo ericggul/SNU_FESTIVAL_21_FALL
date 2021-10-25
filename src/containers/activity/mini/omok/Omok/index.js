@@ -20,6 +20,7 @@ function Omok({ theme }) {
   });
 
   const createOmok = useCallback((e) => {
+    console.log(e);
     const divider = theme.windowWidth < 768 ? 30 : 50;
     if (mainRef.current) {
       const n = document.createElement('div');
@@ -27,8 +28,8 @@ function Omok({ theme }) {
       const color = Math.random() < 0.5 ? 'black' : '#ddd';
       n.setAttribute('style',
         `position: absolute;
-        left: ${Math.round(e.x / divider) * divider}px;
-        top: ${Math.round(e.y / divider) * divider}px; 
+        left: ${Math.round(e.pageX / divider) * divider}px;
+        top: ${Math.round(e.pageY / divider) * divider}px; 
         width: 1.5rem; 
         height: 1.5rem; 
         border-radius: .75rem;
@@ -71,6 +72,7 @@ function Omok({ theme }) {
           <S.Descp>
             <p>관악의 숨겨진 오목 고수를 찾아라!</p>
             <p>룰은 쉽지만 머리 좀 쓴다는 샤대생들끼리 붙는다면 예상 못한 진풍경이 펼쳐질지도 몰라요.</p>
+            <S.EmphText>이벤트: 오목 게임에 최소 1번 참여하세요!</S.EmphText>
           </S.Descp>
           <S.Links>
             <S.SingleLink onClick={() => transit('black')}>

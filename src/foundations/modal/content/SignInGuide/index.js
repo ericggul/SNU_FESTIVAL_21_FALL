@@ -24,7 +24,7 @@ function SignInGuide({ setIsModalOpen }) {
       </S.Header>
       <S.Subheader>* 구글 연동한 스누 메일</S.Subheader>
       <S.Subheader>* 카카오톡내 브라우저 불가</S.Subheader>
-      <S.Button>로그인 하러 가기</S.Button>
+      <S.Button onClick={signIn}>로그인 하러 가기</S.Button>
     </S.SignInGuideBox>
   );
 }

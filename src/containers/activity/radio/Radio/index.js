@@ -119,7 +119,6 @@ function Radio({ theme, user, isAuthorized }) {
         </S.Container>
       </S.Contents>
       <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledRadio>
   );

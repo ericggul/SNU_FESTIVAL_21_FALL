@@ -12,7 +12,8 @@ export const Body = styled.div`
   width: 100%;
   // max-width: 750px;
   padding: 2rem;
-  min-height: ${({ theme }) => theme.windowHeight - 65}px;
+  min-height: ${({ theme }) => theme.windowHeight}px;
+  margin-top: -65px;
   ${FlexCenterStyle};
   flex-direction: column;
   background-image: linear-gradient(to top, #abebe3, #d8f1da 50%, #abebe3 100%);
@@ -20,11 +21,12 @@ export const Body = styled.div`
 
   ${({ lighted }) => lighted && 'background: #171D2B;'};
   ${({ lighted }) => lighted && 'color: #A0C2D8;'};
-  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
+  // ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;
 
 export const Poster = styled.img`
   width: 80%;
+  margin-top: 5rem;
   height: auto;
   max-width: 500px;
 `;
@@ -87,5 +89,5 @@ export const Button = styled.div`
 
   ${({ lighted }) => lighted && 'background: #171D2B;'};
   ${({ lighted }) => lighted && 'color: #A0C2D8;'};
-  ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
+  // ${({ lighted }) => lighted && 'text-shadow: 0 0 2rem #8EC1E0;'};
 `;

@@ -52,7 +52,7 @@ export const InfoSection = styled.div`
     font-weight: 600;
     margin: 0;
     margin: 0.2rem 0.3rem;
-    margin-right: 1.6rem;
+    margin-right: 2.2rem;
     line-height: 1.3;
     word-break: keep-all;
   }
@@ -76,8 +76,8 @@ export const LikeButton = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.75rem;
+  height: 1.75rem;
   cursor: pointer;
 
   & > img {

@@ -137,6 +137,7 @@ export const zIndex = {
   mouseTrail: 200,
   loading: 1000,
   light: 2000,
+  menu: 3000,
 };
 
 export const theme = {
@@ -171,6 +172,8 @@ export const GlobalStyle = createGlobalStyle`
     & ::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera*/
     }
+
+    overscroll-behavior-y: none;
   }
   
   input, textarea, button {

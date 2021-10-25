@@ -4,6 +4,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import { withTheme } from 'styled-components';
 import SearchLogo from '@I/fortune/Search.svg';
+import ChukLogo from '@I/jabti/Logo.png';
 import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
 import { ANSWERS } from '@C/fortune/Search/data';
@@ -181,6 +182,7 @@ function Search({ number, theme, backToMain }) {
           </a>
         ))}
       </S.MainContainer>
+      <S.Image src={ChukLogo} />
     </S.StyledSearch>
   );
 }

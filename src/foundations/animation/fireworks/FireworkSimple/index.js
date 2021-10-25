@@ -679,9 +679,9 @@ export default function Firework() {
   // });
 
   // Remove fullscreen control if not supported.
-  if (!fullscreenEnabled()) {
-    appNodes.fullscreenFormOption.classList.add('remove');
-  }
+  // if (!fullscreenEnabled()) {
+  //   appNodes.fullscreenFormOption.classList.add('remove');
+  // }
 
   // store.subscribe(renderApp);
 

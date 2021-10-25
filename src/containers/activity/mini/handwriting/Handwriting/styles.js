@@ -8,7 +8,7 @@ export const StyledHandwriting = styled.div`
 `;
 
 export const Container = styled.div`
-    width: 100%;
+    width: 100vw;
     height: 100%;
     top: 0;
     min-height: 100vh;
@@ -28,6 +28,7 @@ export const Description = styled.div`
   margin-bottom: 0;
   width: 70vw;
   ${({ theme }) => theme.windowWidth < 768 && 'width: 85vw;'};
+  ${({ theme }) => theme.windowWidth < 768 && 'margin: 6rem .8rem;'};
   max-width: 50rem;
   word-break: keep-all;
 `;
@@ -36,4 +37,5 @@ export const EmphText = styled.span`
   word-break: keep-all;
   font-size: 1.3rem;
   font-weight: 600;
+  max-width: 50rem;
 `;

@@ -4,11 +4,7 @@ import React, {
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
-import TextSection from '@C/activity/group/TextSection';
-import Celebration from '@I/activity/group/celebration.png';
-import LiveSection from '@C/activity/group/LiveSection';
-import RankingSection from '@C/activity/group/RankingSection';
-import RedBalloon from '@I/activity/treasure-hunt/balloon-red.png';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useUser } from '@U/hooks/useAuth';
 import { getPasswordFromEmail } from '@U/functions/password';
@@ -16,7 +12,6 @@ import GroupImage from '@I/activity/group/group.jpg';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import withUser from '@U/hoc/withUser';
-import TreasureGuide from '@C/activity/mini/treasure-hunt/TreasureGuide';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
@@ -43,7 +38,7 @@ function Group({ theme, user, isAuthorized }) {
       if (lightVisible) {
         const interval = setInterval(() => {
           setLighted(light => !light);
-        }, 2000);
+        }, 3000);
         return () => clearInterval(interval);
       } if (!lightVisible) {
         console.log('here2');
@@ -189,8 +184,8 @@ function Group({ theme, user, isAuthorized }) {
         <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>
       </S.Body>
 
-      {lighted && <Light5 handleClick={lightMissionClick} />}
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
+      <Light5 handleClick={lightMissionClick} visible={lighted} />
+
       {lightModalComponent}
     </S.StyledGroup>
   );

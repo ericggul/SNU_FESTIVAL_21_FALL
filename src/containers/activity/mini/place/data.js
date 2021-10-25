@@ -10,6 +10,10 @@ export const PLACES = [
   '학생회관',
 ];
 
+export const DIGITS = [
+  7, 3, 2, 3, 5, 6, 3, 2, 4,
+];
+
 export const CONVERTED_PLACES = [
   '91cccb3fa598e3732a8715cf70735dc7e057b1f4b645d091247aa3120dfdcd39',
   '2dac0a1a2c32c6fd7de85bd194d691033d0bca46c2597a5e430f638756a33276',

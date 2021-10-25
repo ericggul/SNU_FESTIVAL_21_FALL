@@ -16,7 +16,7 @@ export const Description = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   margin: 2rem;
-  margin-top: 5rem;
+  margin-top: 2.2rem;
   text-align: center;
 
   p{
@@ -38,7 +38,7 @@ export const PosterWrapper = styled.div`
   height: auto;
   display: grid;
   grid-template-columns: repeat(3, 33.333vw);
-  margin-top: ${({ theme }) => theme.windowHeight * 0.5}px;
+  margin-top: ${({ theme }) => theme.windowHeight * 1.3}px;
   margin-bottom: ${({ theme }) => theme.windowHeight * 2}px;
 `;
 

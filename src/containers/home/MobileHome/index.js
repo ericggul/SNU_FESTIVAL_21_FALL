@@ -13,12 +13,26 @@ import MissionCard from '@C/home/MissionCard';
 import MissionCompleteCard from '@C/home/MissionCompleteCard';
 import Rio from '@C/home/common/Rio';
 
-import Skeleton from '@I/skeleton/skeleton.png';
-import FestivalBackground from '@I/introduction/festival-background.jpg';
-import Poster21SpringCastle from '@I/poster/21springCastle.png';
-import Poster21Spring from '@I/poster/21spring.png';
-import Riddle from '@I/activity/home/riddle.png';
-import TreasureHunt from '@I/activity/home/treasure-hunt.png';
+import MenuMobile from '@I/layout/menu-mobile.png';
+import LightRio from '@I/home/LightRio.png';
+import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
+import HitTheStageIcon from '@I/performance/icon/hit-the-stage-icon.png';
+import GameTournamentIcon from '@I/performance/icon/game-tournament-icon.png';
+import SingStealerIcon from '@I/performance/icon/sing-stealer-icon.png';
+import CompetitionIcon from '@I/activity/home/competition.png';
+import MiniIcon from '@I/activity/home/mini.png';
+import GroupIcon from '@I/activity/home/group.png';
+import RadioIcon from '@I/activity/home/radio.png';
+import OmokIcon from '@I/activity/home/omok.png';
+import RiddleIcon from '@I/activity/home/riddle.png';
+import HandwritingIcon from '@I/activity/home/handwriting.png';
+import PlaceIcon from '@I/activity/home/place.png';
+import ConstellationOne from '@I/activity/home/constellation1.png';
+import ConstellationTwo from '@I/activity/home/constellation2.png';
+import ConstellationThree from '@I/activity/home/constellation3.png';
+import ConstellationFour from '@I/activity/home/constellation4.png';
+import ConstellationFive from '@I/activity/home/constellation5.png';
+
 import { preloadImage } from '@U/functions/preload';
 
 import BackgroundTop from '@I/home/mobile/background-top.png';
@@ -69,7 +83,8 @@ function MobileHome({
   const [animateSpecificLight, setAnimateSpecificLight] = useState(-1);
   const [rioWaked, setRioWaked] = useState(isLightPlaying);
 
-  const [missionCleared, setMissionCleared] = useState(true);
+  const [missionCleared, setMissionCleared] = useState(false);
+  const [busMove, setBusMove] = useState(false);
   const [gateOn, setGateOn] = useState(false);
 
   useEffect(() => {
@@ -80,22 +95,6 @@ function MobileHome({
     }
   }, [lightArray, isLightPlaying, foundedLightNumbers]);
 
-  useEffect(() => {
-    if (missionCleared) {
-      setTimeout(() => {
-        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
-      }, 1000);
-
-      setTimeout(() => {
-        setGateOn(true);
-      }, 4500);
-
-      setTimeout(() => {
-        setIsMissionCompleteModalOpen(true);
-      }, 6000);
-    }
-  }, [missionCleared]);
-
   const history = useHistory();
   const goToPage = useCallback((route) => {
     history.push(route);
@@ -103,8 +102,10 @@ function MobileHome({
 
   const onLoad = useCallback(() => {
     setIsLoading(false);
-    [Skeleton, FestivalBackground, Poster21SpringCastle, Poster21Spring, Title,
-      Riddle, TreasureHunt,
+    [MenuMobile, LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+      CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
+      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
+      ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
     ].forEach(preloadImage);
   }, []);
 
@@ -168,25 +169,37 @@ function MobileHome({
     speechSynthesis.speak(utterance);
   });
 
-  const busClick = useCallback(() => {
+  const mainGateClick = useCallback(() => {
+    if (missionCleared) {
+      setBusMove(true);
+      setTimeout(() => {
+        window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
+      }, 2000);
+      setTimeout(() => {
+        setGateOn(true);
+      }, 4700);
+      setTimeout(() => {
+        setIsMissionCompleteModalOpen(true);
+      }, 6300);
+    }
     if (!isLightPlaying) {
       toast('졸고있는 리오를 깨워보세요!');
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
-  }, [isLightPlaying]);
+  }, [missionCleared, isLightPlaying]);
 
   return (
     <>
       <S.StyledMobileHome>
         <Title />
         <S.Wrapper width={convert(375)} height={convert(1555)}>
-          <Notice />
+          {!isLoading && <Notice />}
           <CS.Background src={BackgroundBottom} top={convert(112)} left={0} width={convert(374)} onLoad={onLoad} />
 
-          {missionCleared && <CustomPath isMobile busWidth={convert(67)} />}
-          {!missionCleared && <CS.Bus index={0} src={BusOne} onClick={busClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
-          {!missionCleared && <CS.Bus index={1} src={BusTwo} onClick={busClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />}
-          {!missionCleared && <CS.Bus index={2} src={BusThree} onClick={busClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
+          {busMove && <CustomPath isMobile busWidth={convert(67)} />}
+          {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
+          {!busMove && <CS.Bus index={1} src={BusTwo} onClick={mainGateClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />}
+          {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
 
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
@@ -207,7 +220,7 @@ function MobileHome({
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
 
-          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={busClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
+          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={mainGateClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
 
           <CS.BackgroundFront src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
           <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>

@@ -7,21 +7,12 @@ export const GridItem = styled(motion.div)`
     ${FlexCenterStyle};
     flex-direction: column;
     margin: 2.5vw;
+    position: relative;
     cursor: pointer;
-
-    @keyframes occasional{
-        0%{ filter: contrast(100%);}
-        60%{filter: contrast(100%);}
-        90%{ filter: contrast(300%);}
-        100%{ filter: contrast(300%); }
-      }
-
-    ${props => props.fromActivity && 'animation: occasional 3s infinite linear alternate backwards;'}
-    animation-delay: ${props => props.delay}s;
 `;
 
 export const ImageContainer = styled.div`
-    max-width: calc(min(44vw, 430px));
+    max-width: calc(min(35vw, 430px));
     height: auto;
     position: relativve;
 `;
@@ -41,9 +32,6 @@ export const IconImage = styled.img`
     animation: swing ${({ duration }) => duration}s infinite linear alternate;
     animation-delay: ${({ delay }) => delay}s;
     filter: drop-shadow(0 0 2px white) drop-shadow(0 0 5px white);
-
-
-
 `;
 
 export const IconDescription = styled.div`
@@ -59,11 +47,17 @@ export const IconDescription = styled.div`
     color: ${({ theme }) => theme.palette.BLACK_PURPLE};
     border-radius: 0.9rem;
 
+
     box-shadow: 
-        0 0 1px white,
-        0 0 2px white,
-        0 0 5px white,
-        0 0 8px white,
-        0 0 10px white,
-        0 0 20px white;
+        0 0 .1rem .1rem white,
+        0 0 .5rem .2rem white,
+        0 0 1rem .5rem white;
+        
+`;
+
+export const Accomplished = styled.img`
+    position: absolute;
+    right: 1rem;
+    bottom: -1.5rem;
+    width: 8rem;
 `;

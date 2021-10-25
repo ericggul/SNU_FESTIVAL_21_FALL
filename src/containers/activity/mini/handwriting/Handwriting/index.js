@@ -8,13 +8,13 @@ import Map from '@C/activity/mini/handwriting/Map';
 import QuestionSector from '@C/activity/mini/handwriting/question/QuestionSector';
 import PropTypes from 'prop-types';
 import { COLLEGES, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import { schoolPride } from '@C/performance/common/confettiFire';
 import withUser from '@U/hoc/withUser';
 import { sumOfArray } from '@U/functions/array';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useUser } from '@U/hooks/useAuth';
+import { useDispatch, useSelector } from 'react-redux';
 import useMiniGame from '@U/hooks/useMiniGame';
-
-import { useSelector } from 'react-redux';
 
 // Mission
 import {
@@ -22,10 +22,12 @@ import {
 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+import { actions } from '@/redux/mini-game/state';
 
 import FullScreen from '@/foundations/full-screen/HandwritingFullScreen';
 import * as S from './styles';
 
+const getRandom = (a, b) => Math.random() * (b - a) + a;
 function Handwriting({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
@@ -63,6 +65,7 @@ function Handwriting({ theme, user, isAuthorized }) {
   /// //////////////////////////
 
   const miniGame = useMiniGame();
+  const dispatch = useDispatch();
 
   const [sectorNum, setSectorNum] = useState(-1);
   const handleClick = useCallback((i) => {
@@ -70,7 +73,6 @@ function Handwriting({ theme, user, isAuthorized }) {
   }, [isAuthorized]);
 
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
-  console.log('hand', handwritingArray);
   const solvedArrayMultipleSectors = useCallback((handwritings) => {
     const solvedNumberArray = [];
     const solvedRateArray = [];
@@ -114,14 +116,14 @@ function Handwriting({ theme, user, isAuthorized }) {
     }
   }, [sectorNum]);
 
-  const [wait, setWait] = useState(false);
   useEffect(() => {
-    setTimeout(() => {
-      setWait(true);
-    }, 500);
-  }, []);
+    if (sumOfArray(solvedNumbers) === 82) {
+      schoolPride((sumOfArray(solvedNumbers) - 30) * 50);
+    } if (sumOfArray(solvedNumbers) >= 30 && !miniGame.handwritingAccomplished) {
+      dispatch(actions.setFirestoreStage(user, 'handwritingAccomplished', true));
+    }
+  }, [solvedNumbers, miniGame.handwritingAccomplished]);
 
-  console.log('solvedNumbers', solvedNumbers, solvedRates);
   return (
     <S.StyledHandwriting>
       <HeaderContent backgroundColor="transparent">미니게임</HeaderContent>
@@ -137,19 +139,24 @@ function Handwriting({ theme, user, isAuthorized }) {
           아니, 다들 이렇게 열심히 공부했을 줄 몰랐네요...
           <br />
           <br />
-          <S.EmphText>10개 단과대, 82개 과. 30개 이상 맞춰보세요!</S.EmphText>
-          <br />
           <S.EmphText>
-            {`${sumOfArray(solvedNumbers)}/82개 해결`}
+            이벤트: 10개 단과대, 82개 과, 30개 이상 맞추기!
             {' '}
+            <br />
+            (현재
+            {' '}
+            {`${sumOfArray(solvedNumbers)}/82`}
+            )
+            {' '}
+            {miniGame.handwritingAccomplished && '미션 완료!'}
           </S.EmphText>
         </S.Description>
-        {wait && (
+
         <Map
           handleClick={handleClick}
           solvedRates={solvedRates}
         />
-        )}
+
       </S.Container>
       <FullScreen
         isFullScreen={sectorNum !== -1}
@@ -157,10 +164,9 @@ function Handwriting({ theme, user, isAuthorized }) {
         backgroundColor={theme.palette.HANDWRITING_PURPLE}
         headerName={COLLEGES[sectorNum]}
       >
-        <QuestionSector sectorNum={sectorNum} />
+        <QuestionSector sectorNum={sectorNum} goBackToMain={() => setSectorNum(-1)} />
       </FullScreen>
       <Light7 top={theme.windowHeight * 0.8} left={theme.windowWidth * 0.3} handleClick={lightMissionClick} />
-      {/* {lightVisible && <Light7 top={150} left={150} handleClick={lightMissionClick} />} */}
       {lightModalComponent}
     </S.StyledHandwriting>
   );
