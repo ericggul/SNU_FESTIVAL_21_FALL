@@ -7,7 +7,7 @@ import html2canvas from 'html2canvas';
 
 import Basic from '@I/clothing/basic.png';
 
-import KakaoIcon from '@I/icon/kakao.svg';
+import Kakao from '@C/clothing/Kakao';
 import Loading from '@C/clothing/Loading';
 import Visualizer from '@C/clothing/Visualizer';
 import Name from '@C/clothing/Name';
@@ -16,6 +16,8 @@ import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 
+import { CLOTHING_DATA } from '@C/clothing/data';
+
 import * as S from './styles';
 
 function Clothing({ theme }) {
@@ -23,39 +25,11 @@ function Clothing({ theme }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
 
+  const BACKGROUND_PALETTES = ['#c5c5c5', '#fadbd7', '#ffe2bd', '#f8c4f2', '#c6d5ff', '#fff4bb', '#eddbf9', '#cef1e4', '#f8ffdb', '#d9d3f0', '#e1ecfc'];
+
   // container size adjust state
-  const [containerWidth, setContainerWidth] = useState(theme.windowWidth * 0.8);
-
-  const CLOTHING_DATA = [
-    {
-      hangeul: '헤어', english: 'hair', number: 43, xPos: -42.5, yPos: 20, width: 460,
-    },
-
-    {
-      hangeul: '눈', english: 'eyes', number: 12, xPos: 97.5, yPos: 228, width: 180,
-    },
-    {
-      hangeul: '눈쎱', english: 'eyebrow', number: 10, xPos: 77.5, yPos: 198, width: 220,
-    },
-    // {
-    //   hangeul: '악세사리', english: 'accessories', number: 33, xPos: 0, yPos: 0, width: 375,
-    // },
-    {
-      hangeul: '입', english: 'lip', number: 17, xPos: 137.5, yPos: 266, width: 100,
-    },
-    {
-      hangeul: '코', english: 'nose', number: 8, xPos: 160.55, yPos: 247, width: 55,
-    },
-    {
-      hangeul: '신발', english: 'shoes', number: 15, xPos: 102, yPos: 621, width: 165,
-    },
-    {
-      hangeul: '하의', english: 'bottomwear', number: 35, xPos: 77.5, yPos: 505, width: 220,
-    },
-    {
-      hangeul: '상의', english: 'topwear', number: 44, xPos: 52.5, yPos: 351, width: 270,
-    },
-  ];
+  const [containerSizeUnit, setContainerSizeUnit] = useState(0.5);
+  const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
 
   // selected data set state
   const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
@@ -84,6 +58,9 @@ function Clothing({ theme }) {
     }
   }, [loaded]);
 
+  // eyebrow visible(=== hair on top)
+  const [hairOnTop, setHairOnTop] = useState(false);
+
   // size converter
   const convert = useCallback((value) => (containerWidth < 500 ? (containerWidth / 375) * value : (500 / 375) * value), [theme, containerWidth]);
 
@@ -106,13 +83,17 @@ function Clothing({ theme }) {
   // capturing clothings
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
-  useEffect(() => {
-    if (characterRef && characterRef.current) {
-      html2canvas(characterRef.current).then(canvas => setScreenShottedCharacter(canvas.toDataURL('image/jpeg')));
+
+  const handleKakaoClick = useCallback(() => {
+    if (characterRef.current) {
+      html2canvas(characterRef.current).then(canvas => {
+        console.log('hey');
+        setScreenShottedCharacter(canvas.toDataURL());
+      });
     }
   }, [characterRef, selectedClothings]);
 
-  console.log(screenShottedCharacter);
+  console.log(selectedClothings.slice(1));
 
   return (
     <S.StyledClothing>
@@ -120,20 +101,36 @@ function Clothing({ theme }) {
 
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
-          <S.Container width={Math.min(containerWidth, 500)} ref={characterRef}>
-            <S.Body src={Basic} top={convert(-8)} left={convert(0)} width={convert(375)} />
-            {selectedClothings.map((sl, pr) => (
+          <S.MidContainer ref={characterRef}>
+            <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
+            <S.ControlUnit>
+              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit + 0.001)}>+</S.ControlIcon>
+              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit - 0.001)}>-</S.ControlIcon>
+            </S.ControlUnit>
+            <S.Container width={Math.min(containerWidth, 500)}>
+              <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
+
               <S.Element
-                src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr].english}/${sl + 1}.png`}
-                top={convert(CLOTHING_DATA[pr].yPos)}
-                left={convert(CLOTHING_DATA[pr].xPos)}
-                width={convert(CLOTHING_DATA[pr].width)}
-                key={pr}
-                onClick={() => changePr(sl, pr)}
+                src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+                top={convert(CLOTHING_DATA[0].yPos)}
+                left={convert(CLOTHING_DATA[0].xPos)}
+                width={convert(CLOTHING_DATA[0].width)}
+                onClick={() => changePr(selectedClothings[0], 0)}
+                zIndexOnTop={hairOnTop}
               />
-            ))}
-          </S.Container>
-          <Name />
+              {selectedClothings.slice(1).map((sl, pr) => (
+                <S.Element
+                  src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+                  top={convert(CLOTHING_DATA[pr + 1].yPos)}
+                  left={convert(CLOTHING_DATA[pr + 1].xPos)}
+                  width={convert(CLOTHING_DATA[pr + 1].width)}
+                  key={pr + 1}
+                  onClick={() => changePr(sl, pr + 1)}
+                />
+              ))}
+            </S.Container>
+            <Name />
+          </S.MidContainer>
           <Visualizer
             CLOTHING_DATA={CLOTHING_DATA}
             imageArray={imageArray}
@@ -144,6 +141,7 @@ function Clothing({ theme }) {
 
         </S.Content>
       )}
+      <Kakao onClick={handleKakaoClick} url={screenShottedCharacter} />
     </S.StyledClothing>
   );
 }

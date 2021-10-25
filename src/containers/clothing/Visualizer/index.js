@@ -1,5 +1,5 @@
 import React, {
-  useState, useCallback, useEffect, useRef,
+  useState, useCallback, useEffect, useRef, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
@@ -12,6 +12,10 @@ function Visualizer({
   const thisImageArray = imageArray[pr];
   const [expanded, setExpanded] = useState(false);
   const [arrangedArray, setArrangedArray] = useState(thisImageArray);
+
+  const SINGLE_COLUMN_NUMBER = 7;
+  const ALL_COLUMNS_SIZE = useMemo(() => (theme.windowWidth < 768 ? theme.windowWidth : 768), [theme]);
+  const SINGLE_COLUMN_SIZE = useMemo(() => ALL_COLUMNS_SIZE / SINGLE_COLUMN_NUMBER, [theme]);
 
   const narrowRef = useRef();
 
@@ -26,21 +30,22 @@ function Visualizer({
 
   useEffect(() => {
     if (narrowRef && narrowRef.current) {
+      const indicator = SINGLE_COLUMN_SIZE;
       narrowRef.current.scrollTo({
         top: 0,
-        left: (current - 2) * theme.windowWidth * 0.2,
+        left: (current - 3) * indicator,
       });
     }
-  }, [current, narrowRef, expanded]);
+  }, [current, narrowRef, expanded, sl, pr]);
 
   const Expanded = () => (
-    <S.ExpandedGrid width={theme.windowWidth < 768 ? theme.windowWidth * 0.2 : 768 * 0.2}>
+    <S.ExpandedGrid width={SINGLE_COLUMN_SIZE}>
       {thisImageArray.map((img, imgIdx) => (
         <S.ImageContainer key={imgIdx} selected={imgIdx === current}>
           <S.ImageBubble
             src={img}
             onClick={() => handleClick(imgIdx)}
-            width={theme.windowWidth < 768 ? theme.windowWidth * 0.2 : 768 * 0.2}
+            width={SINGLE_COLUMN_SIZE}
           />
         </S.ImageContainer>
       ))}
@@ -49,7 +54,8 @@ function Visualizer({
 
   const Narrowed = () => (
     <S.NarrowFlex
-      width={theme.windowWidth < 768 ? theme.windowWidth : 768}
+      elements={SINGLE_COLUMN_NUMBER}
+      width={ALL_COLUMNS_SIZE}
       ref={narrowRef}
       // translateX={theme.windowWidth < 768 ? theme.windowWidth * 0.2 * (current - 1) : 768 * 0.2 * (current - 1)}
     >
@@ -58,7 +64,7 @@ function Visualizer({
           <S.ImageBubble
             src={img}
             onClick={() => handleClick(imgIdx)}
-            width={theme.windowWidth < 768 ? theme.windowWidth * 0.2 : 768 * 0.2}
+            width={SINGLE_COLUMN_SIZE}
           />
         </S.ImageContainer>
       ))}
@@ -67,13 +73,13 @@ function Visualizer({
 
   return (
     <S.Visualizer>
-
       {expanded ? <Expanded /> : <Narrowed />}
       <S.Expander expanded={expanded} onClick={() => setExpanded(exp => !exp)}>
         <p>
           {CLOTHING_DATA[pr].hangeul}
-          {' '}
-          더보기
+        </p>
+        <p>
+          {expanded ? '접기' : '모두보기'}
         </p>
       </S.Expander>
 

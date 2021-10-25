@@ -6,7 +6,7 @@ import * as S from './styles';
 function Name() {
   const { name, onChangeName } = useInput();
 
-  const SCRIPTS = ['입고싶은 상의, 하의', '눈, 눈썹, 코, 입 모두 골라봐', '닉네임도 주는거 잊지 말구', '카카오톡으로 공유도 해봐!'];
+  const SCRIPTS = ['상의, 하의, 눈, 눈썹, 코, 입 ', '닉네임도 주는거 잊지 말구', '카카오톡으로 공유도 해봐!'];
   const [placeholder, setPlaceholder] = useState('');
   const [dir, setDir] = useState(1);
   const [index, setIndex] = useState(0);
@@ -35,7 +35,7 @@ function Name() {
 
   return (
     <S.Name>
-      <S.Input onChange={onChangeName} placeholder={placeholder}>{name}</S.Input>
+      <S.Input onChange={onChangeName} placeholder="닉네임">{name}</S.Input>
     </S.Name>
   );
 }
