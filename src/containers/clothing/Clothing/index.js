@@ -2,6 +2,7 @@ import React, {
   useState, useEffect, useCallback, useMemo, useRef,
 } from 'react';
 import withUser from '@U/hoc/withUser';
+import useLongPress from '@U/hooks/useLongPress';
 import PropTypes from 'prop-types';
 import html2canvas from 'html2canvas';
 
@@ -16,7 +17,7 @@ import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 
-import { CLOTHING_DATA } from '@C/clothing/data';
+import { CLOTHING_DATA, ACCESSORIES_DATA } from '@C/clothing/data';
 
 import * as S from './styles';
 
@@ -25,11 +26,54 @@ function Clothing({ theme }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
 
+  // background
   const BACKGROUND_PALETTES = ['#c5c5c5', '#fadbd7', '#ffe2bd', '#f8c4f2', '#c6d5ff', '#fff4bb', '#eddbf9', '#cef1e4', '#f8ffdb', '#d9d3f0', '#e1ecfc'];
+  const [selectedBackground, setSelectedBackground] = useState(0);
 
   // container size adjust state
-  const [containerSizeUnit, setContainerSizeUnit] = useState(0.5);
+  const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
+  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.5, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
+  const [touched, setTouched] = useState(0);
+  const timer = useRef(null);
+  const alterValue = (sign) => {
+    if (!timer.current) {
+      setTouched(sign);
+      timer.current = setInterval(() => {
+        setContainerSizeUnit(unit => unit + sign * 0.001);
+      }, 30);
+    }
+  };
+  const clearAlter = () => {
+    setTouched(0);
+    clearInterval(timer.current);
+    timer.current = null;
+  };
+  const ControlPanel = () => (
+    <S.ControlUnit>
+      <S.ControlIcon
+        onMouseDown={() => alterValue(1)}
+        onMouseLeave={() => clearAlter()}
+        onMouseUp={() => clearAlter()}
+        onTouchStart={() => alterValue(1)}
+        onTouchEnd={() => clearAlter()}
+        onTouchCancel={() => clearAlter()}
+        clickable={containerSizeUnit < maxWidth}
+      >
+        {touched === 1 ? <p>||</p> : <>+</>}
+      </S.ControlIcon>
+      <S.ControlIcon
+        onMouseDown={() => alterValue(-1)}
+        onMouseLeave={clearAlter}
+        onMouseUp={clearAlter}
+        onTouchStart={() => alterValue(-1)}
+        onTouchEnd={clearAlter}
+        onTouchCancel={clearAlter}
+      >
+        {touched === -1 ? <p>||</p> : <>-</>}
+      </S.ControlIcon>
+    </S.ControlUnit>
+  );
 
   // selected data set state
   const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
@@ -49,8 +93,6 @@ function Clothing({ theme }) {
       });
     }
   }, [imageArray]);
-
-  console.log(loaded);
 
   useEffect(() => {
     if (loaded >= CLOTHING_DATA.length) {
@@ -88,25 +130,20 @@ function Clothing({ theme }) {
     if (characterRef.current) {
       html2canvas(characterRef.current).then(canvas => {
         console.log('hey');
-        setScreenShottedCharacter(canvas.toDataURL());
+        setScreenShottedCharacter(canvas.toDataURL('image/jpg'));
       });
     }
   }, [characterRef, selectedClothings]);
 
-  console.log(selectedClothings.slice(1));
-
   return (
-    <S.StyledClothing>
+    <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>옷입히기</HeaderContent>
 
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
           <S.MidContainer ref={characterRef}>
             <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
-            <S.ControlUnit>
-              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit + 0.001)}>+</S.ControlIcon>
-              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit - 0.001)}>-</S.ControlIcon>
-            </S.ControlUnit>
+            <ControlPanel />
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
 
@@ -132,7 +169,6 @@ function Clothing({ theme }) {
             <Name />
           </S.MidContainer>
           <Visualizer
-            CLOTHING_DATA={CLOTHING_DATA}
             imageArray={imageArray}
             sl={selectedClothings[currentPr]}
             pr={currentPr}

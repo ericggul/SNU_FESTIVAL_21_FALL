@@ -29,6 +29,7 @@ export const ExpandedGrid = styled.div`
     grid-template-columns: repeat(7, ${({ width }) => width}px);
     position: relative;
     box-shadow: 0 0 1rem .5rem rgba(0, 0, 0, .16);
+    background: white;
 `;
 
 export const ImageContainer = styled.div`
@@ -45,6 +46,7 @@ export const ImageBubble = styled.img`
 `;
 
 export const NarrowFlex = styled.div`
+    background: white;
     margin: 2rem 0;
     display: flex;
     width: ${({ width }) => width}px;
@@ -55,7 +57,7 @@ export const NarrowFlex = styled.div`
 
     &::-webkit-scrollbar {
         display: inline; /* Chrome, Safari, Opera*/
-        width: .7rem;
+        width: .3rem;
     }
 
     &::-webkit-scrollbar-track {

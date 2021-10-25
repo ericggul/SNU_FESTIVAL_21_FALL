@@ -3,10 +3,13 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
+
+import { CLOTHING_DATA } from '@C/clothing/data';
+
 import * as S from './styles';
 
 function Visualizer({
-  theme, CLOTHING_DATA, imageArray, sl, pr, changeSl,
+  theme, imageArray, sl, pr, changeSl,
 }) {
   const [current, setCurrent] = useState(sl);
   const thisImageArray = imageArray[pr];

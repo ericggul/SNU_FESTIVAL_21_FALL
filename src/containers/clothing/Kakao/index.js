@@ -7,7 +7,6 @@ import * as S from './styles';
 function Kakao({ onClick, url }) {
   const [waitingForCapture, setWaitingForCapture] = useState(false);
 
-  console.log(url);
   useEffect(() => {
     if (waitingForCapture && url) {
       uploadImgur();

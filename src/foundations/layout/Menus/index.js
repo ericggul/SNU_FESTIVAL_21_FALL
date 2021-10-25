@@ -62,7 +62,7 @@ function Menus({ theme, setMenuIsOpen }) {
     },
   ];
 
-  const sectorComp = (sector, i) => (
+  const SectorComp = ({ sector, i }) => (
     <S.Sector key={i}>
       <S.LeftSector
         onClick={() => goToPage(sector.header?.link)}
@@ -74,6 +74,7 @@ function Menus({ theme, setMenuIsOpen }) {
         && sector.children.map((child, j) => (
           <>
             <S.RightComp
+              key={j}
               onClick={() => goToPage(`${sector.header.link}${child.link}`)}
             >
               {child.name}
@@ -81,7 +82,7 @@ function Menus({ theme, setMenuIsOpen }) {
 
             {j % 2 === 0
             && j !== sector.children.length - 1
-            && <S.Line>|</S.Line>}
+            && <S.Line key={j + 30}>|</S.Line>}
           </>
         ))}
       </S.RightSector>
@@ -108,7 +109,7 @@ function Menus({ theme, setMenuIsOpen }) {
         <p>PAGE</p>
       </S.CharacterEvent>
       <S.MenuContainer>
-        {backgroundLoaded && DATA.map((sector, i) => sectorComp(sector, i))}
+        {backgroundLoaded && DATA.map((sector, i) => <SectorComp sector={sector} i={i} key={i} />)}
       </S.MenuContainer>
     </S.StyledMenus>
   );

@@ -8,9 +8,6 @@ export const CLOTHING_DATA = [
   {
     hangeul: '눈쎱', english: 'eyebrow', number: 10, xPos: 77.5, yPos: 198, width: 220,
   },
-  // {
-  //   hangeul: '악세사리', english: 'accessories', number: 33, xPos: 0, yPos: 0, width: 375,
-  // },
   {
     hangeul: '입', english: 'lip', number: 17, xPos: 137.5, yPos: 266, width: 100,
   },
@@ -25,5 +22,11 @@ export const CLOTHING_DATA = [
   },
   {
     hangeul: '상의', english: 'topwear', number: 44, xPos: 52.5, yPos: 351, width: 270,
+  },
+];
+
+export const ACCESSORIES_DATA = [
+  {
+    hangeul: '악세사리', english: 'accessories', number: 33, xPos: 0, yPos: 0, width: 375,
   },
 ];
