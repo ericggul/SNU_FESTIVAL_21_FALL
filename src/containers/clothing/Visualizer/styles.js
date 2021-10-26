@@ -6,7 +6,7 @@ export const Visualizer = styled.div`
     width: 100vw;
     justify-items: center;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: auto;
     margin: 1rem 0;
 `;
 

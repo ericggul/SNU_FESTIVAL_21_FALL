@@ -137,18 +137,17 @@ function Clothing({ theme }) {
 
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
+          <ControlArea
+            touched={touched}
+            alterValue={alterValue}
+            clearAlter={clearAlter}
+            currentBackground={selectedBackground}
+            onBackgroundClick={handleBackgroundChange}
+          />
           <S.MidContainer ref={characterRef}>
             <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
-            <ControlArea
-              touched={touched}
-              alterValue={alterValue}
-              clearAlter={clearAlter}
-              currentBackground={selectedBackground}
-              onBackgroundClick={handleBackgroundChange}
-            />
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
-
               <S.Element
                 src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
                 top={convert(CLOTHING_DATA[0].yPos)}
@@ -190,7 +189,6 @@ function Clothing({ theme }) {
           />
         </S.Content>
       )}
-      <Kakao onClick={handleKakaoClick} url={screenShottedCharacter} />
     </S.StyledClothing>
   );
 }

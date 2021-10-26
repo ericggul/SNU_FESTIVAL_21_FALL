@@ -14,7 +14,7 @@ function ControlArea({
       >
         <S.Text>{expanded ? '>' : '<'}</S.Text>
       </S.ExpandButton>
-      <S.ControlUnit>
+      <S.ControlUnit expanded={expanded}>
         <S.BackgroundUnit>
           <S.Text>배경</S.Text>
           <S.BackgroundGrid>

@@ -3,7 +3,7 @@ import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledMenus = styled.div`
   width: 100%;
-  height: ${({ theme }) => theme.windowHeight}px;
+  height: ${({ theme }) => theme.windowHeight - 65}px;
   position: relative;
   top: 0;
   opacity: 1;

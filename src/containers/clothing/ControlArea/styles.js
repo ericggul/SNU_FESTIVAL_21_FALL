@@ -3,13 +3,13 @@ import { FlexCenterStyle } from '@S/responsive/display';
 
 export const Container = styled.div`
     ${FlexCenterStyle};
-    position: absolute;
+    position: fixed;
     top: 6rem;
-    right: 0;
-
+    right: 0rem;
+    ${({ expanded }) => !expanded && 'right: -5rem;'}
     transition: all 1s;
-    transform: translateX(5rem);
-    ${({ expanded }) => expanded && 'transform: translateX(0);'}
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
 `;
 
 export const ExpandButton = styled.div`
@@ -21,6 +21,7 @@ export const ExpandButton = styled.div`
 `;
 
 export const ControlUnit = styled.div`
+    transition: all 1s;
     ${FlexCenterStyle};
     flex-direction: column;
     width: 5rem;

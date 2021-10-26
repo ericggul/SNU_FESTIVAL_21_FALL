@@ -3,21 +3,23 @@ import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledClothing = styled.div`
     width: 100vw;
+    max-width: ${({ theme }) => theme.windowWidth}px;
+    display: flex;
+    flex-direction: column;
     min-height: ${({ theme }) => theme.windowHeight}px;
     background: ${({ background }) => background};
     overflow-x: hidden;
+    transition: background 1s;
 `;
 
 export const Content = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
-    overflow-x: hidden;
 `;
 
 export const MidContainer = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
-    overflow-x: hidden;
 `;
 
 export const Text = styled.div`
@@ -28,9 +30,14 @@ export const Container = styled.div`
     ${FlexCenterStyle};
     position: relative;
     width: ${({ width }) => width}px;
-    height: ${({ width }) => width * 2}px;
+    height: ${({ width }) => width * 2.174}px;
     overflow-x: hidden;
-    overflow-y: hidden;
+
+    // @keyframes jump{
+    //     from{transform: translateY(0);}
+    //     to{transform: translateY(-2rem);}
+    // }
+    // animation: jump .5s infinite alternate;
 `;
 
 export const Body = styled.img`
