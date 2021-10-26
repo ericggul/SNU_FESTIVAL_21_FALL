@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 import Basic from '@I/clothing/basic.png';
 
 import Kakao from '@C/clothing/Kakao';
+import ControlArea from '@C/clothing/ControlArea';
 import Loading from '@C/clothing/Loading';
 import Visualizer from '@C/clothing/Visualizer';
 import Name from '@C/clothing/Name';
@@ -17,7 +18,7 @@ import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 
-import { CLOTHING_DATA, ACCESSORIES_DATA } from '@C/clothing/data';
+import { CLOTHING_DATA, ACCESSORIES_DATA, BACKGROUND_PALETTES } from '@C/clothing/data';
 
 import * as S from './styles';
 
@@ -27,8 +28,12 @@ function Clothing({ theme }) {
   const [loaded, setLoaded] = useState(0);
 
   // background
-  const BACKGROUND_PALETTES = ['#c5c5c5', '#fadbd7', '#ffe2bd', '#f8c4f2', '#c6d5ff', '#fff4bb', '#eddbf9', '#cef1e4', '#f8ffdb', '#d9d3f0', '#e1ecfc'];
+
   const [selectedBackground, setSelectedBackground] = useState(0);
+
+  const handleBackgroundChange = useCallback((i) => {
+    setSelectedBackground(i);
+  }, []);
 
   // container size adjust state
   const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
@@ -49,34 +54,12 @@ function Clothing({ theme }) {
     clearInterval(timer.current);
     timer.current = null;
   };
-  const ControlPanel = () => (
-    <S.ControlUnit>
-      <S.ControlIcon
-        onMouseDown={() => alterValue(1)}
-        onMouseLeave={() => clearAlter()}
-        onMouseUp={() => clearAlter()}
-        onTouchStart={() => alterValue(1)}
-        onTouchEnd={() => clearAlter()}
-        onTouchCancel={() => clearAlter()}
-        clickable={containerSizeUnit < maxWidth}
-      >
-        {touched === 1 ? <p>||</p> : <>+</>}
-      </S.ControlIcon>
-      <S.ControlIcon
-        onMouseDown={() => alterValue(-1)}
-        onMouseLeave={clearAlter}
-        onMouseUp={clearAlter}
-        onTouchStart={() => alterValue(-1)}
-        onTouchEnd={clearAlter}
-        onTouchCancel={clearAlter}
-      >
-        {touched === -1 ? <p>||</p> : <>-</>}
-      </S.ControlIcon>
-    </S.ControlUnit>
-  );
 
   // selected data set state
+  // Clothings: One selection for each part
+  // Accessories: Multiple accessories possible
   const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
+  const [selectedAccessories, setSelectedAccessories] = useState(Array(ACCESSORIES_DATA.number).fill(0));
   const [imageArray, setImageArray] = useState([]);
 
   // loading and calling image
@@ -91,11 +74,18 @@ function Clothing({ theme }) {
         [newArray].forEach(preloadImage);
         setLoaded(ld => ld + 1);
       });
+      let accArray = [];
+      for (let k = 0; k < ACCESSORIES_DATA.number; k += 1) {
+        accArray.push(`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${k + 1}.png`);
+      }
+      imageArray.push(accArray);
+      [accArray].forEach(preloadImage);
+      setLoaded(ld => ld + 1);
     }
   }, [imageArray]);
 
   useEffect(() => {
-    if (loaded >= CLOTHING_DATA.length) {
+    if (loaded >= CLOTHING_DATA.length + 1) {
       setIsLoading(false);
     }
   }, [loaded]);
@@ -122,6 +112,12 @@ function Clothing({ theme }) {
     setCurrentPr(pr);
   }, [selectedClothings]);
 
+  // adding accessories
+
+  const changeSlAccessories = useCallback(() => {
+    console.log('change');
+  }, [selectedClothings]);
+
   // capturing clothings
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
@@ -143,7 +139,13 @@ function Clothing({ theme }) {
         <S.Content>
           <S.MidContainer ref={characterRef}>
             <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
-            <ControlPanel />
+            <ControlArea
+              touched={touched}
+              alterValue={alterValue}
+              clearAlter={clearAlter}
+              currentBackground={selectedBackground}
+              onBackgroundClick={handleBackgroundChange}
+            />
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
 
@@ -165,6 +167,18 @@ function Clothing({ theme }) {
                   onClick={() => changePr(sl, pr + 1)}
                 />
               ))}
+              {selectedAccessories.map((haveOrNot, sl) => (
+                haveOrNot === 1
+                && (
+                <S.Element
+                  src={`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${sl + 1}.png`}
+                  top={convert(ACCESSORIES_DATA.yPos)}
+                  left={convert(ACCESSORIES_DATA.xPos)}
+                  width={convert(ACCESSORIES_DATA.width)}
+                  key={sl}
+                />
+                )
+              ))}
             </S.Container>
             <Name />
           </S.MidContainer>
@@ -174,7 +188,6 @@ function Clothing({ theme }) {
             pr={currentPr}
             changeSl={changeSl}
           />
-
         </S.Content>
       )}
       <Kakao onClick={handleKakaoClick} url={screenShottedCharacter} />

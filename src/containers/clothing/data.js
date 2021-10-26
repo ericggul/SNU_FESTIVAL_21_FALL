@@ -25,8 +25,8 @@ export const CLOTHING_DATA = [
   },
 ];
 
-export const ACCESSORIES_DATA = [
-  {
-    hangeul: '악세사리', english: 'accessories', number: 33, xPos: 0, yPos: 0, width: 375,
-  },
-];
+export const ACCESSORIES_DATA = {
+  hangeul: '악세사리', english: 'accessories', number: 33, xPos: -72.5, yPos: -202, width: 520,
+};
+
+export const BACKGROUND_PALETTES = ['#c5c5c5', '#fadbd7', '#ffe2bd', '#f8c4f2', '#c6d5ff', '#fff4bb', '#eddbf9', '#cef1e4', '#f8ffdb', '#d9d3f0', '#e1ecfc'];
