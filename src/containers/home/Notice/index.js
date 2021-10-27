@@ -14,7 +14,8 @@ function Notice() {
   const today = new Date();
   const date = today.getDate();
   const hours = today.getHours();
-  const minuite = today.getMinutes();
+  const minute = today.getMinutes();
+  const convertedTime = hours * 60 + minute;
   const history = useHistory();
 
   /// 방명록
@@ -60,41 +61,50 @@ function Notice() {
     return { descriptions, indicators, links };
   }, [bestComments]);
 
-  // const performanceList = useCallback(() => {
-  //   let descriptions = [];
-  //   let indicators = [];
-  //   let links = [];
-  //   if (date === 26) {
-  //     descriptions.push('');
-  //   }
-  //   return descriptions, indicators, links;
-  // }, [hours]);
+  const PERFORMANCES = [
+    ['보컬/힙합공연 씽스틸러', 2, 930, 1080, '/performance/sing-stealer'],
+    ['밴드공연 폰서트 LIVE 1부', 4, 1065, 1300, '/performance/phone-cert'],
+    ['밴드공연 폰서트 LIVE 2부', 5, 1080, 1200, '/performance/phone-cert'],
+    ['댄스공연 힛 더 스테이지', 5, 750, 770, '/performance/hit-the-stage'],
+  ];
 
-  const [INDICATORS, setINDICATORS] = useState(['공연', '공연', '공연', '공연', '게임', '토크쇼', '오목']);
-  const [LINKS, setLINKS] = useState([
-    '/performance/phone-cert', '/performance/hit-the-stage',
-    '/performance/sing-stealer', '/performance/game-tournament',
-    '/activity/group', '/activity/radio', '/activity/mini/omok']);
+  const performanceList = useCallback(() => {
+    let pDescriptions = [];
+    let pIndicators = [];
+    let pLinks = [];
+    PERFORMANCES.map((pf) => {
+      if (convertedTime < pf[3]) {
+        pIndicators.push('공연');
+        pLinks.push(pf[4]);
+        let description = '';
+        if (convertedTime > pf[2]) {
+          description = `${pf[0]} NOW LIVE`;
+        } else if (convertedTime > pf[2] - 60) {
+          description = `${pf[2] - convertedTime}분 후 ${pf[0]}`;
+        } else {
+          description = `${Math.floor((pf[2] - convertedTime) / 60)}시간 후 ${pf[0]}`;
+        }
+        pDescriptions.push(description);
+      }
+    });
+
+    return { pDescriptions, pIndicators, pLinks };
+  }, [hours]);
+
+  const { pDescriptions, pIndicators, pLinks } = performanceList();
+
+  const [INDICATORS, setINDICATORS] = useState(['오목', ...pIndicators]);
+  const [LINKS, setLINKS] = useState(['/activity/mini/omok', ...pLinks]);
   const [DESCRIPTIONS, setDESCRIPTIONS] = useState([
-    `${26 - date}일 후 폰서트 LIVE 밴드 무대`,
-    `${26 - date}일 후 힛더스테이지 댄스 무대`,
-    `${26 - date}일 후 매력적인 목소리가 가득 찬 씽스틸러`,
-    `${26 - date}일 후 관악게임토너먼트`,
-    `단체게임 신청 ${26 - date}일 남음`,
-    `${26 - date}일 후 토크쇼`,
-    '오목 오후 5시까지 진행',
+    '오목 오후 5시까지 진행', ...pDescriptions,
   ]);
 
   useEffect(() => {
-    console.log(commentsList());
     const { descriptions, indicators, links } = commentsList();
-    console.log(descriptions, indicators);
     setINDICATORS(ind => [...ind, ...indicators]);
     setDESCRIPTIONS(des => [...des, ...descriptions]);
     setLINKS(lnk => [...lnk, links]);
   }, [bestComments]);
-
-  console.log(INDICATORS);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,7 +116,7 @@ function Notice() {
   return (
     <>
       <S.NoticeWrapper>
-        {INDICATORS.map((e, i) => (
+        { bestComments.length > 0 && INDICATORS.map((e, i) => (
           i === currentDisplay
             && (
             <S.Notice onClick={() => history.push(LINKS[currentDisplay])} key={i}>

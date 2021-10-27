@@ -115,7 +115,7 @@ function HitTheStage({ theme, user, isAuthorized }) {
   const title = <Title title="힛더스테이지" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[5]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
-  const guide = <Guide date="11월 5일(금)" times={['12:30 - 13:00']} />;
+  const guide = <Guide type="댄스공연 힛 더 스테이지" date="11월 5일(금)" times={['12:30 - 13:00']} />;
   const starring = <Starring data={HitTheStageData} />;
   const image = (
     <S.Image>

@@ -68,7 +68,7 @@ function PhoneCert({ theme }) {
   const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[4, 5]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
-  const guide = <Guide date="11월 4일 - 5일 (목, 금)" times={['1부 목: 17:45~21:40', '2부 금: 18:00~20:00']} />;
+  const guide = <Guide type="밴드공연 폰서트" date="11월 4일 - 5일 (목, 금)" times={['1부 목: 17:45~21:40', '2부 금: 18:00~20:00']} />;
   const starring = (
     <StarringDouble DATA={[PhoneCertDataOne, PhoneCertDataTwo]} />
   );
