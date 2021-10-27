@@ -89,7 +89,7 @@ function GameTournament({ theme }) {
   );
   const bubble = <Bubble decoration="카트라이더 슝슝~" title="관악게임토너먼트!" speak={speak} />;
   const title = <Title title="관악게임토너먼트" handleClick={() => setConfettiEnabled(true)} />;
-  const date = <Date date={29} />;
+  const date = <Date date={[3]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
   const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
   const starring = <Starring data={GameTournamentData} />;

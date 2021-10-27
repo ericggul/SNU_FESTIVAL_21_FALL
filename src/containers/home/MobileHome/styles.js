@@ -6,6 +6,7 @@ import { FluctuationAnimation, VibrateAnimation } from '@S/responsive/animation'
 export const StyledMobileHome = styled.div`
   position: relative;
   width: 100%;
+  overscroll-behavior-y: none;
   // height: ${({ theme }) => theme.windowHeight}px;
 
   @keyframes change-color{
@@ -28,6 +29,6 @@ export const Wrapper = styled.div`
     0%{ opacity: 0; filter: blur(50px);}
     100%{ opacity: 1;}
   }
-  animation: appearMobileHome 1s linear backwards;
-  animation-delay: .3s;
+  animation: appearMobileHome 2.5s linear backwards;
+  animation-delay: .5s;
 `;

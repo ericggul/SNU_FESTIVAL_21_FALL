@@ -58,7 +58,7 @@ function Menus({ theme, setMenuIsOpen }) {
       header: { name: '소개', link: '/introduction' },
     },
     {
-      header: { name: `${String.fromCharCode(0x591C)}BTI`, link: '/jabti' },
+      header: { name: '야BTI', link: '/jabti' },
     },
   ];
 

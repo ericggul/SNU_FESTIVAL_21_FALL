@@ -24,9 +24,7 @@ function App() {
   return (
     <ThemeProvider theme={themeWithWindowSize}>
       <GlobalStyle />
-
       <Toast />
-
       <Router>
         <Suspense
           fallback={<LoadingWrapper height={windowHeight}><PageLoading /></LoadingWrapper>}

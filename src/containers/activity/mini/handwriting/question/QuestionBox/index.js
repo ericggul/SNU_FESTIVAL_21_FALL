@@ -84,9 +84,8 @@ export function QuestionBox({
         setShouldChangeLoc(false);
       }, 100);
     } else {
-      toast('오답입니다😅');
-      speakRightorWrong(false);
       confettiRightorWrong(isMobile, false);
+      speakRightorWrong(false);
     }
   };
 

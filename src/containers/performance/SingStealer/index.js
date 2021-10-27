@@ -17,10 +17,9 @@ import Starring from '@C/performance/common/Starring';
 import Fade from 'react-reveal/Fade';
 
 import { withTheme } from 'styled-components';
-import MascotForMission from '@C/performance/common/MascotForMission';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
-import Image from '@/foundations/images/Image';
+import Image from '@F/images/Image';
 import * as S from '../common/styles';
 
 function SingStealer({ theme }) {
@@ -131,9 +130,6 @@ function SingStealer({ theme }) {
 
         </S.MobileBody>
       )}
-      <MascotForMission
-        performance="singStealer"
-      />
     </S.Wrapper>
   );
 }

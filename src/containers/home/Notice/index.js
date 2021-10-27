@@ -73,7 +73,7 @@ function Notice() {
     let pIndicators = [];
     let pLinks = [];
     PERFORMANCES.map((pf) => {
-      if (convertedTime < pf[3]) {
+      if (convertedTime < pf[3] && date === pf[1]) {
         pIndicators.push('공연');
         pLinks.push(pf[4]);
         let description = '';

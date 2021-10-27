@@ -77,6 +77,8 @@ class App {
 
   destroy() {
     cancelAnimationFrame(this.animationRequest);
+    this.imageData = null;
+    this.isLoaded = false;
     this.canvas.removeEventListener('click', this.onClick.bind(this), false);
     window.removeEventListener('resize', this.resize.bind(this), false);
   }

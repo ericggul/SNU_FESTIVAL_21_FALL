@@ -7,6 +7,14 @@ export const StyledMenus = styled.div`
   position: relative;
   top: 0;
   opacity: 1;
+
+  @keyframes appear{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+
+  animation: appear 1s;
+  animtaion-delay: .8s;
 `;
 
 export const MenuContainer = styled.div`
@@ -101,7 +109,7 @@ export const CharacterEvent = styled.div`
   position: fixed;
   text-align: right;
   z-index: ${({ theme }) => theme.zIndex.header + 1};
-  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 7rem' : 'bottom: 2rem')};
+  ${({ theme }) => (theme.windowWidth > 768 ? 'bottom: 9rem' : 'bottom: 2rem')};
   ${({ theme }) => (theme.windowWidth > 768 ? 'right: 5vw' : 'right: 3.4rem')};
   
   display: flex;
