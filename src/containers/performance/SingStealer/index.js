@@ -65,9 +65,9 @@ function SingStealer({ theme }) {
   );
   const bubble = <Bubble decoration="매력적인 목소리들로 채워가는~" title="씽스틸러!" speak={speak} />;
   const title = <Title title="씽스틸러" handleClick={() => setConfettiEnabled(true)} />;
-  const date = <Date date={28} />;
+  const date = <Date date={[2]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
-  const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
+  const guide = <Guide date="11월 2일(화)" times={['15:00 - 18:10']} />;
   const starring = <Starring data={SingStealerData} />;
   const image = (
     <S.Image>

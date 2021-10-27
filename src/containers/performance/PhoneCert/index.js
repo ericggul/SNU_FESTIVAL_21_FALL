@@ -7,25 +7,23 @@ import { confettiFire, confettiSpread } from '@C/performance/common/confettiFire
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
 import PhoneCertImage from '@I/performance/phone-cert.png';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
-import { PhoneCertData } from '@C/performance/Data';
+import {
+  parser, dummy, PhoneCertDataOne, PhoneCertDataTwo,
+} from '@C/performance/Data';
 import { HeaderContent } from '@F/layout/Header';
 import Title from '@C/performance/common/Title';
 import Bubble from '@C/performance/common/Bubble';
 import Date from '@C/performance/common/Date';
 import Guide from '@C/performance/common/Guide';
 import Youtube from '@C/performance/common/Youtube';
-import Starring from '@C/performance/common/Starring';
-import Fade from 'react-reveal/Fade';
-import MascotForMission from '@C/performance/common/MascotForMission';
+import StarringDouble from '@C/performance/common/StarringDouble';
 import { linkCollectionRef } from '@U/initializer/firebase';
-import { transition } from '@C/performance/Performance';
 import { toast } from 'react-toastify';
-import Image from '@/foundations/images/Image';
-import LightChange1 from '@/foundations/animation/ImageTransition/LightChange1';
-import Stars from '@/foundations/stars/Performance/PerformanceStars';
+import Image from '@F/images/Image';
 import * as S from '../common/styles';
 
 function PhoneCert({ theme }) {
+  // console.log(parser(dummy));
   const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
 
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
@@ -68,10 +66,12 @@ function PhoneCert({ theme }) {
   );
   const bubble = <Bubble decoration="관악의 밴드 실력자들과 함께하는" title="폰서트 LIVE" speak={speak} />;
   const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
-  const date = <Date date={26} />;
+  const date = <Date date={[4, 5]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
-  const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
-  const starring = <Starring data={PhoneCertData} />;
+  const guide = <Guide date="11월 4일 - 5일 (목, 금)" times={['1부 목: 17:45~21:40', '2부 금: 18:00~20:00']} />;
+  const starring = (
+    <StarringDouble DATA={[PhoneCertDataOne, PhoneCertDataTwo]} />
+  );
   const image = (
     <S.Image>
       {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={PhoneCertImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
