@@ -1,18 +1,15 @@
 import React, {
   useState, useEffect, useCallback, useMemo, useRef,
 } from 'react';
-import withUser from '@U/hoc/withUser';
-import useLongPress from '@U/hooks/useLongPress';
+
 import PropTypes from 'prop-types';
 import html2canvas from 'html2canvas';
 
 import Basic from '@I/clothing/basic.png';
 
-import Kakao from '@C/clothing/Kakao';
 import ControlArea from '@C/clothing/ControlArea';
 import Loading from '@C/clothing/Loading';
 import Visualizer from '@C/clothing/Visualizer';
-import Name from '@C/clothing/Name';
 
 import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
@@ -20,16 +17,29 @@ import { withTheme } from 'styled-components';
 
 import { CLOTHING_DATA, ACCESSORIES_DATA, BACKGROUND_PALETTES } from '@C/clothing/data';
 
+import useModal from '@U/hooks/useModal';
+import SignInGuide from '@F/modal/content/SignInGuide';
+
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { actions } from '@/redux/mission/state';
+
 import * as S from './styles';
 
-function Clothing({ theme }) {
+function Clothing({ theme, user, isAuthorized }) {
+  const mission = useMission();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const hadPlayed = useMemo(() => isAuthorized && mission.clothing.length !== 0, [isAuthorized, mission]);
+  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+
   // loading state
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
-
   // background
-
-  const [selectedBackground, setSelectedBackground] = useState(0);
+  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 0);
 
   const handleBackgroundChange = useCallback((i) => {
     setSelectedBackground(i);
@@ -58,8 +68,8 @@ function Clothing({ theme }) {
   // selected data set state
   // Clothings: One selection for each part
   // Accessories: Multiple accessories possible
-  const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
-  const [selectedAccessories, setSelectedAccessories] = useState([]);
+  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+  const [selectedAccessories, setSelectedAccessories] = useState(hadPlayed ? mission.accessorie : []);
   const [imageArray, setImageArray] = useState([]);
 
   // loading and calling image
@@ -131,21 +141,40 @@ function Clothing({ theme }) {
     }
   }, [characterRef, selectedClothings]);
 
+  const save = useCallback(() => {
+    if (isAuthorized) {
+      dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
+      setTimeout(() => {
+        history.push('/clothing/result');
+      }, 300);
+    } else {
+      setIsSignInModalOpen(true);
+    }
+  }, [selectedClothings, selectedAccessories, actions, isAuthorized]);
+
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
-      <HeaderContent>옷입히기</HeaderContent>
+      <HeaderContent>MY CHARACTER</HeaderContent>
 
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
+
           <ControlArea
             touched={touched}
             alterValue={alterValue}
             clearAlter={clearAlter}
             currentBackground={selectedBackground}
             onBackgroundClick={handleBackgroundChange}
+            onHairClose={() => setHairOnTop(hr => !hr)}
           />
+          <S.Text>
+            나만의 캐릭터를 만들고,
+            {' '}
+            <br />
+            {' '}
+            웹사이트에 숨어있는 빛을 모아보세요!
+          </S.Text>
           <S.MidContainer ref={characterRef}>
-            <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
               <S.Element
@@ -198,8 +227,11 @@ function Clothing({ theme }) {
             changeSl={changeSl}
             changeSlAccessories={changeSlAccessories}
           />
+          <S.Save onClick={() => save()}>저장하기</S.Save>
+          {!isAuthorized && <S.SaveText>로그인 후에 저장해 주세요</S.SaveText>}
         </S.Content>
       )}
+      {signInModalComponent}
     </S.StyledClothing>
   );
 }

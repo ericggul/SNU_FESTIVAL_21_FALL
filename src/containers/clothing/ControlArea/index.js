@@ -4,7 +4,7 @@ import { BACKGROUND_PALETTES } from '@C/clothing/data';
 import * as S from './styles';
 
 function ControlArea({
-  touched, alterValue, clearAlter, currentBackground, onBackgroundClick,
+  touched, alterValue, clearAlter, currentBackground, onBackgroundClick, onHairClose,
 }) {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -52,6 +52,12 @@ function ControlArea({
             {touched === -1 ? <p>||</p> : <>-</>}
           </S.ControlIcon>
         </S.SizeUnit>
+        <S.Text onClick={onHairClose}>
+          눈썹
+          {' '}
+          <br />
+          가리기
+        </S.Text>
 
       </S.ControlUnit>
     </S.Container>

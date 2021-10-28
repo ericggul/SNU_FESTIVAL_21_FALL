@@ -4,6 +4,8 @@ export const Name = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
+    z-index: 15;
 `;
 
 export const Input = styled.input`
@@ -13,7 +15,8 @@ export const Input = styled.input`
     outline: 0;
     font-weight: 700;
     font-size: 1.8rem;
-    padding: .5rem 0;
+    padding-bottom: .5rem;
+    height: 3rem;
     background: transparent;
     transition: border-color 0.2s;
     spellcheck: false;

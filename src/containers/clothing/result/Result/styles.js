@@ -17,26 +17,44 @@ export const Content = styled.div`
     flex-direction: column;
 `;
 
+export const ImageContainer = styled.div`
+    ${FlexCenterStyle};
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 2rem;
+    margin-top: 2rem;
+`;
+
+export const Image = styled.img`
+    height: 44px;
+    width: auto;
+    margin: 5px;
+    ${({ jump }) => jump && 'filter: drop-shadow(0 0 1rem yellow);'}
+`;
+
 export const MidContainer = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
+    background: ${({ background }) => background};
 `;
 
 export const Text = styled.div`
     ${FlexCenterStyle};
-    text-align: center;
-    padding: .3rem 1.3rem;
-    background: white;
-    font-size: 500;
-    border-radius: .5rem;
-    border: .5rem solid rgba(255, 255, 255, 0.5);
 `;
 
 export const Container = styled.div`
     ${FlexCenterStyle};
     position: relative;
     width: ${({ width }) => width}px;
-    height: ${({ width }) => width * 2.174}px;
+    height: ${({ width }) => width * 2.18}px;
+
+    pointer-events: none;
+    
+    @keyframes jumping{
+        from{transform: translateY(0);}
+        to{transform: translateY(-3rem);}
+    }
+    ${({ jump }) => jump && 'animation: jumping .5s infinite alternate;'}
 `;
 
 export const Body = styled.img`
@@ -82,6 +100,6 @@ export const Save = styled.div`
 
 export const SaveText = styled.div`
     color: #707070;
+    font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 3rem;
 `;

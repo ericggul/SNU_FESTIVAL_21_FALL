@@ -13,7 +13,7 @@ export const Expander = styled.div`
     text-align: center;
     font-size: 1.2rem;
     color: #707070;
-    font-weight: 300;
+    font-weight: 500;
 `;
 
 export const ExpandedGrid = styled.div`

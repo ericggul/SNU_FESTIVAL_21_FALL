@@ -8,6 +8,7 @@ const ActivityRouter = lazy(() => import('@/pages/activity/ActivityRouter'));
 const PerformanceRouter = lazy(() => import('@/pages/performance/PerformanceRouter'));
 const Apply = lazy(() => import('@/pages/Apply'));
 const Clothing = lazy(() => import('@/pages/Clothing'));
+const ClothingResult = lazy(() => import('@/pages/ClothingResult'));
 const Fortune = lazy(() => import('@P/Fortune'));
 const Introduction = lazy(() => import('@/pages/Introduction'));
 const GuestBook = lazy(() => import('@/pages/GuestBook'));
@@ -56,6 +57,11 @@ const routes = [
   {
     path: '/clothing',
     component: Clothing,
+    exact: true,
+  },
+  {
+    path: '/clothing/result',
+    component: ClothingResult,
     exact: true,
   },
   {
