@@ -103,7 +103,7 @@ function Notice() {
     const { descriptions, indicators, links } = commentsList();
     setINDICATORS(ind => [...ind, ...indicators]);
     setDESCRIPTIONS(des => [...des, ...descriptions]);
-    setLINKS(lnk => [...lnk, links]);
+    setLINKS(lnk => [...lnk, ...links]);
   }, [bestComments]);
 
   useEffect(() => {

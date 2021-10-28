@@ -36,8 +36,8 @@ function Menus({ theme, setMenuIsOpen }) {
       header: { name: '공연', link: '/performance' },
       children: [
         { name: '씽스틸러', link: '/sing-stealer' },
-        { name: '힛더스테이지', link: '/hit-the-stage' },
         { name: '폰서트 LIVE', link: '/phone-cert' },
+        { name: '힛더스테이지', link: '/hit-the-stage' },
       ],
     },
     {

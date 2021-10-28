@@ -45,7 +45,9 @@ export const ContainerSimple = styled.div`
     0%{
     }
     70%{
-      transform: translate(0, -${({ theme }) => theme.windowHeight + 30}px) scale(5);
+      transform: translate( 
+      ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 25 : theme.windowWidth / 2 - left - 25)}px 
+      , -${({ theme }) => theme.windowHeight + 30}px) scale(5);
     }
     100%{
       transform: translate(
@@ -76,8 +78,7 @@ export const Circle1 = styled.div`
 export const ContainerSimple2 = styled.div`
   ${ContainerCommon};
   @keyframes lightMoveSimple2{
-    0%{
-    }
+    0%{}
     100%{
       transform: translate(
         ${({ theme, left }) => (theme.windowWidth > 768 ? theme.windowWidth / 2 - left - 25 : theme.windowWidth / 2 - left - 25)}px, 
