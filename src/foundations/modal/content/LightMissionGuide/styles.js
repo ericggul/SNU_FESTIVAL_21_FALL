@@ -45,6 +45,8 @@ export const CloseIcon = styled(IoMdClose)`
 
 export const Contents = styled.div`
   ${FlexCenterStyle};
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   margin-top: auto;
   flex-direction: column;
   text-align: center;
@@ -62,6 +64,7 @@ export const Text = styled.div`
   ${FlexCenterStyle};
   font-size: .9rem;
   font-weight: normal;
+  word-break: keep-all;
 `;
 
 export const ButtonContainer = styled.div`

@@ -5,6 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 import html2canvas from 'html2canvas';
 
+import { toast } from 'react-toastify';
 import Basic from '@I/clothing/basic.png';
 
 import ControlArea from '@C/clothing/ControlArea';
@@ -30,8 +31,10 @@ import * as S from './styles';
 
 function Clothing({ theme, user, isAuthorized }) {
   const mission = useMission();
+
   const dispatch = useDispatch();
   const history = useHistory();
+
   const hadPlayed = useMemo(() => isAuthorized && mission.clothing.length !== 0, [isAuthorized, mission]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
@@ -72,6 +75,14 @@ function Clothing({ theme, user, isAuthorized }) {
   const [selectedAccessories, setSelectedAccessories] = useState(hadPlayed ? mission.accessorie : []);
   const [imageArray, setImageArray] = useState([]);
 
+  useEffect(() => {
+    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+    setSelectedAccessories(hadPlayed ? mission.accessorie : []);
+  }, [hadPlayed]);
+
+  console.log(hadPlayed, mission.clothing);
+  console.log(selectedClothings);
+
   // loading and calling image
   useEffect(() => {
     if (loaded === 0 && imageArray.length === 0) {
@@ -97,6 +108,10 @@ function Clothing({ theme, user, isAuthorized }) {
   useEffect(() => {
     if (loaded >= CLOTHING_DATA.length + 1) {
       setIsLoading(false);
+      toast('나만의 캐릭터를 만들고, 웹사이트에 숨어있는 빛을 모아보세요!',
+        {
+          autoClose: 4000, draggable: true,
+        });
     }
   }, [loaded]);
 
@@ -150,15 +165,13 @@ function Clothing({ theme, user, isAuthorized }) {
     } else {
       setIsSignInModalOpen(true);
     }
-  }, [selectedClothings, selectedAccessories, actions, isAuthorized]);
+  }, [selectedClothings, selectedAccessories, selectedBackground, actions, isAuthorized]);
 
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>MY CHARACTER</HeaderContent>
-
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
-
           <ControlArea
             touched={touched}
             alterValue={alterValue}
@@ -167,13 +180,13 @@ function Clothing({ theme, user, isAuthorized }) {
             onBackgroundClick={handleBackgroundChange}
             onHairClose={() => setHairOnTop(hr => !hr)}
           />
-          <S.Text>
+          {/* <S.Text>
             나만의 캐릭터를 만들고,
             {' '}
             <br />
             {' '}
             웹사이트에 숨어있는 빛을 모아보세요!
-          </S.Text>
+          </S.Text> */}
           <S.MidContainer ref={characterRef}>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />

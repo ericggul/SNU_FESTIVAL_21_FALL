@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   isLoaded: false,
   // if null or not: is playing or not
   light: null,
-  clothing: Array(9).fill(0),
+  clothing: Array(8).fill(0),
   accessorie: [],
   background: 0,
   performance: false,
@@ -64,6 +64,9 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.SET_LOADED]: (draft, action) => { draft.isLoaded = action.isLoaded; },
   [types.SET_MISSIONS]: (draft, action) => {
     draft.light = action.missions.light;
+    draft.clothing = action.missions.clothing;
+    draft.accessorie = action.missions.accessorie;
+    draft.background = action.missions.background;
     draft.performance = action.missions.performance;
     draft.competition = action.missions.competition;
     draft.miniOne = action.missions.miniOne;
@@ -80,7 +83,7 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.SET_MISSION]: (draft, action) => { draft[action.mission] = action.isCompleted; },
   [types.RESET]: (draft) => {
     draft.light = null;
-    draft.clothing = Array(9).fill(0); draft.accessorie = []; draft.background = 0;
+    draft.clothing = Array(8).fill(0); draft.accessorie = []; draft.background = 0;
     draft.isLoaded = false; draft.performance = false;
     draft.competition = false; draft.miniOne = false; draft.miniTwo = false;
   },

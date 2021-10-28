@@ -89,27 +89,20 @@ function Performance({ theme, user, isAuthorized }) {
         selected={selected}
         sendFunction={send}
       />
+
       <Item
-        url="hit-the-stage"
-        src={HitTheStageIcon}
-        text="힛더스테이지"
+        url="sing-stealer"
+        src={SingStealerIcon}
+        text="씽스틸러"
         i={1}
         selected={selected}
         sendFunction={send}
       />
       <Item
-        url="sing-stealer"
-        src={SingStealerIcon}
-        text="씽스틸러"
+        url="hit-the-stage"
+        src={HitTheStageIcon}
+        text="힛더스테이지"
         i={2}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="game-tournament"
-        src={GameTournamentIcon}
-        text="관악게임토너먼트"
-        i={3}
         selected={selected}
         sendFunction={send}
       />

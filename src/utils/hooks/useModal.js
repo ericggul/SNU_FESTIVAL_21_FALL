@@ -10,7 +10,6 @@ const useModal = (ContentComponent,
   useEffect(() => {
     if (listenOpenChange && !isModalOpen) {
       onModalChange();
-      console.log(isModalOpen);
     }
   }, [listenOpenChange, isModalOpen]);
   const modalComponent = (

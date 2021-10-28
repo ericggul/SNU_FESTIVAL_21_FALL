@@ -19,10 +19,55 @@ import Youtube from '@C/performance/common/Youtube';
 import StarringDouble from '@C/performance/common/StarringDouble';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
+
+// Mission
+import {
+  Light6,
+} from '@F/Light';
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import useModal from '@U/hooks/useModal';
+import LightMissionGuide from '@F/modal/content/LightMissionGuide';
 import Image from '@F/images/Image';
+
 import * as S from '../common/styles';
 
-function PhoneCert({ theme }) {
+function PhoneCert({ theme, user, isAuthorized }) {
+  /// //////////////////////////
+  const mission = useMission();
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 8;
+
+  const onModalChange = useCallback(() => {
+    setSustainLightTemp(false);
+  }, []);
+  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
+    {
+      pageIndicator: PAGE_LIGHT_INDICATOR,
+    }, onModalChange);
+  useEffect(() => {
+    // Doing Mission and not founded
+    if (isAuthorized && mission.light) {
+      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
+        setLightVisible(true);
+      } else if (sustainLightTemp) {
+        setLightVisible(true);
+      } else {
+        setLightVisible(false);
+      }
+    } else {
+      setLightVisible(true);
+    }
+  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
+  const lightMissionClick = useCallback(() => {
+    setSustainLightTemp(true);
+    setIsLightModalOpen(true);
+  }, [isAuthorized, mission, lightVisible]);
+
+  /// //////////////////////////
+
   // console.log(parser(dummy));
   const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
 
@@ -134,13 +179,12 @@ function PhoneCert({ theme }) {
 
         </S.MobileBody>
       )}
-      {/* <MascotForMission
-        performance="phoneCert"
-      /> */}
+      <Light6 top={200} left={50} handleClick={lightMissionClick} />
+      {lightModalComponent}
     </S.Wrapper>
   );
 }
-export default withTheme(PhoneCert);
+export default withTheme(withUser(PhoneCert));
 
 PhoneCert.propTypes = {
   theme: PropTypes.shape({

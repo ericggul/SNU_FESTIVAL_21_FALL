@@ -78,8 +78,6 @@ function Clothing({ theme, user, isAuthorized }) {
     }
   }, [characterRef, name, selectedClothings]);
 
-  console.log(jump);
-
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>MY CHARACTER</HeaderContent>

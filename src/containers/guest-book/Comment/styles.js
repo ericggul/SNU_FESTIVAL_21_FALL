@@ -57,7 +57,7 @@ export const BestLabel = styled.div`
 
   color: white;
   background-color: ${({ theme }) => theme.palette.PASTEL_PURPLE};
-  font-size: 5px;
+  font-size: .5rem;
 
 `;
 
@@ -88,6 +88,7 @@ export const LastRow = styled.div`
   align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 0.3rem;
+  height: 1.5rem;
 `;
 
 export const InfoBox = styled.div`
@@ -131,10 +132,11 @@ export const Delete = styled.div`
 
   width: 1.1rem;
   text-align: center;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
   height: .6rem;
   font-size: 0.6rem;
   cursor: pointer;
+
 `;
 
 export const LikeButton = styled.div`
@@ -144,16 +146,13 @@ export const LikeButton = styled.div`
   justify-content: center;
 
   width: 1.1rem;
-  height: 1.1rem;
+  height: auto;
   border-radius: .6rem;
-  border: 0.3px solid #aaa;
-
   cursor: pointer;
 `;
 
 export const HeartImage2 = styled.img`
   ${CenterImageStyle};
   width: 64%;
-  height: 54%;
-  // margin-left: 16%;
+  height: auto;
 `;

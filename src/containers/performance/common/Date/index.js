@@ -17,7 +17,7 @@ function Date({ date }) {
         <S.Day>화</S.Day>
         <S.Date isSelected={date.includes(2)}>2</S.Date>
       </S.SingleDate>
-      <S.SingleDate onClick={() => send('game-tournament')}>
+      <S.SingleDate onClick={() => toast('3일에는 공연이 없습니다!')}>
         <S.Day>수</S.Day>
         <S.Date isSelected={date.includes(3)}>3</S.Date>
       </S.SingleDate>
