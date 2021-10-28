@@ -12,10 +12,7 @@ const INITIAL_STATE = {
   clothing: Array(8).fill(0),
   accessorie: [],
   background: 0,
-  performance: false,
-  competition: false,
-  miniOne: false,
-  miniTwo: false,
+
 };
 
 /** type */
@@ -67,10 +64,6 @@ const reducer = createReducer(INITIAL_STATE, {
     draft.clothing = action.missions.clothing;
     draft.accessorie = action.missions.accessorie;
     draft.background = action.missions.background;
-    draft.performance = action.missions.performance;
-    draft.competition = action.missions.competition;
-    draft.miniOne = action.missions.miniOne;
-    draft.miniTwo = action.missions.miniTwo;
   },
   [types.SET_LIGHT]: (draft, action) => { draft.light = action.lights; },
   [types.INITIALIZE_LIGHT]: (draft) => { draft.light = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; },
@@ -84,8 +77,7 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.RESET]: (draft) => {
     draft.light = null;
     draft.clothing = Array(8).fill(0); draft.accessorie = []; draft.background = 0;
-    draft.isLoaded = false; draft.performance = false;
-    draft.competition = false; draft.miniOne = false; draft.miniTwo = false;
+    draft.isLoaded = false;
   },
 });
 export default reducer;

@@ -71,12 +71,12 @@ export const ConverterCell = styled.div`
 export const Save = styled.div`
     margin: 2rem;
     margin-bottom: .8rem;
-    padding: .4rem 1rem;
+    padding: .4rem 1.5rem;
     border-radius: 3rem;
     border: .2rem solid #707070;
     color: black;
-    font-size: 1.7rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 700;
     cursor: pointer;
 `;
 

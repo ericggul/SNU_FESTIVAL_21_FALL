@@ -38,7 +38,7 @@ function Menus({ theme, setMenuIsOpen }) {
         { name: '씽스틸러', link: '/sing-stealer' },
         { name: '힛더스테이지', link: '/hit-the-stage' },
         { name: '폰서트 LIVE', link: '/phone-cert' },
-        { name: '관악게임토너먼트', link: '/game-tournament' }],
+      ],
     },
     {
       header: { name: '행사', link: '/activity' },

@@ -60,13 +60,6 @@ function Goods({ user, isAuthorized }) {
 
   /// //////////////////////////
 
-  // TODO: 코드 중복
-  const treasureHunt = useSelector(state => state.miniGame.treasureHunt);
-  const dispatch = useDispatch();
-  const isPlaying = useMemo(() => (
-    treasureHunt !== null && !treasureHunt.includes(2)
-  ), []);
-
   const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[1], [user]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
@@ -78,9 +71,7 @@ function Goods({ user, isAuthorized }) {
         <TextSection />
         <DisplaySection />
       </S.Body>
-      {!isPlaying && (
-        <ScrollTopButton />
-      )}
+      <ScrollTopButton />
 
       <Light2 top={150} left={200} handleClick={lightMissionClick} />
       {lightModalComponent}
