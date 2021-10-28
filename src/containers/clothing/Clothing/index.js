@@ -59,7 +59,7 @@ function Clothing({ theme }) {
   // Clothings: One selection for each part
   // Accessories: Multiple accessories possible
   const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
-  const [selectedAccessories, setSelectedAccessories] = useState(Array(ACCESSORIES_DATA.number).fill(0));
+  const [selectedAccessories, setSelectedAccessories] = useState([]);
   const [imageArray, setImageArray] = useState([]);
 
   // loading and calling image
@@ -114,8 +114,8 @@ function Clothing({ theme }) {
 
   // adding accessories
 
-  const changeSlAccessories = useCallback(() => {
-    console.log('change');
+  const changeSlAccessories = useCallback((accArray) => {
+    setSelectedAccessories(accArray);
   }, [selectedClothings]);
 
   // capturing clothings
@@ -166,26 +166,37 @@ function Clothing({ theme }) {
                   onClick={() => changePr(sl, pr + 1)}
                 />
               ))}
-              {selectedAccessories.map((haveOrNot, sl) => (
-                haveOrNot === 1
-                && (
-                <S.Element
-                  src={`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${sl + 1}.png`}
-                  top={convert(ACCESSORIES_DATA.yPos)}
-                  left={convert(ACCESSORIES_DATA.xPos)}
-                  width={convert(ACCESSORIES_DATA.width)}
-                  key={sl}
-                />
+              {selectedAccessories.map((sl, i) => (
+                (
+                  <S.Element
+                    src={`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${sl + 1}.png`}
+                    top={convert(ACCESSORIES_DATA.yPos)}
+                    left={convert(ACCESSORIES_DATA.xPos)}
+                    width={convert(ACCESSORIES_DATA.width)}
+                    key={i}
+                  />
                 )
               ))}
             </S.Container>
-            <Name />
           </S.MidContainer>
+          <S.Converter>
+            {[...CLOTHING_DATA, ACCESSORIES_DATA].map((e, i) => (
+              <S.ConverterCell
+                onClick={() => setCurrentPr(i)}
+                selected={currentPr === i}
+                key={i}
+              >
+                {e.hangeul}
+              </S.ConverterCell>
+            ))}
+          </S.Converter>
           <Visualizer
             imageArray={imageArray}
             sl={selectedClothings[currentPr]}
+            slAccessories={selectedAccessories}
             pr={currentPr}
             changeSl={changeSl}
+            changeSlAccessories={changeSlAccessories}
           />
         </S.Content>
       )}

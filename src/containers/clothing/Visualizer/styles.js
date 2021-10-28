@@ -7,24 +7,17 @@ export const Visualizer = styled.div`
     justify-items: center;
     align-items: center;
     overflow-x: auto;
-    margin: 1rem 0;
 `;
 
 export const Expander = styled.div`
     text-align: center;
-    font-size: 1rem;
-    p{
-        margin: .3rem;
-        padding: 0;
-    }
-    p:nth-of-type(1){
-        font-weight: 700;
-        font-size: 1.5rem;
-    }
+    font-size: 1.2rem;
+    color: #707070;
+    font-weight: 300;
 `;
 
 export const ExpandedGrid = styled.div`
-    margin: 2rem 0;
+    margin: 1rem 0;
     display: grid;
     grid-template-columns: repeat(7, ${({ width }) => width}px);
     position: relative;
@@ -47,7 +40,7 @@ export const ImageBubble = styled.img`
 
 export const NarrowFlex = styled.div`
     background: white;
-    margin: 2rem 0;
+    margin: 1rem 0;
     display: flex;
     width: ${({ width }) => width}px;
     overflow-x: scroll;

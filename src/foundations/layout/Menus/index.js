@@ -104,7 +104,7 @@ function Menus({ theme, setMenuIsOpen }) {
           <p>로그인</p>
         </S.SignButton>
       )}
-      <S.CharacterEvent onClick={() => setTransition(true)}>
+      <S.CharacterEvent onClick={() => goToPage('/clothing')}>
         <p>MY</p>
         <p>PAGE</p>
       </S.CharacterEvent>

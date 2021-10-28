@@ -56,3 +56,15 @@ export const Element = styled.img`
     height: auto;
     ${({ zIndexOnTop }) => zIndexOnTop && 'z-index: 1;'}
 `;
+
+export const Converter = styled.div`
+    ${FlexCenterStyle};
+`;
+
+export const ConverterCell = styled.div`
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: .3rem;
+    ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
+`;

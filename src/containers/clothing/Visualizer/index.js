@@ -9,12 +9,11 @@ import { CLOTHING_DATA } from '@C/clothing/data';
 import * as S from './styles';
 
 function Visualizer({
-  theme, imageArray, sl, pr, changeSl,
+  theme, imageArray, sl, slAccessories, pr, changeSl, changeSlAccessories,
 }) {
-  const [current, setCurrent] = useState(sl);
+  const [current, setCurrent] = useState(pr === 8 ? [sl] : slAccessories);
   const thisImageArray = imageArray[pr];
   const [expanded, setExpanded] = useState(false);
-  const [arrangedArray, setArrangedArray] = useState(thisImageArray);
 
   const SINGLE_COLUMN_NUMBER = 7;
   const ALL_COLUMNS_SIZE = useMemo(() => (theme.windowWidth < 768 ? theme.windowWidth : 768), [theme]);
@@ -23,20 +22,39 @@ function Visualizer({
   const narrowRef = useRef();
 
   const handleClick = useCallback((imgIdx) => {
-    setCurrent(imgIdx);
-    changeSl(imgIdx, pr);
+    if (pr !== 8) {
+      setCurrent([imgIdx]);
+      changeSl(imgIdx, pr);
+    } else if (pr === 8) {
+      setCurrent(cur => {
+        if (cur.includes(imgIdx)) {
+          return cur.filter((val) => imgIdx !== val);
+        }
+        return [...cur, imgIdx];
+      });
+    }
   }, [imageArray, sl, pr]);
 
   useEffect(() => {
-    setCurrent(sl);
+    if (pr !== 8) {
+      setCurrent([sl]);
+    } else {
+      setCurrent(slAccessories);
+    }
   }, [pr]);
+
+  useEffect(() => {
+    if (pr === 8) {
+      changeSlAccessories(current);
+    }
+  }, [current, pr]);
 
   useEffect(() => {
     if (narrowRef && narrowRef.current) {
       const indicator = SINGLE_COLUMN_SIZE;
       narrowRef.current.scrollTo({
         top: 0,
-        left: (current - 3) * indicator,
+        left: (current[0] - 3) * indicator,
       });
     }
   }, [current, narrowRef, expanded, sl, pr]);
@@ -44,7 +62,7 @@ function Visualizer({
   const Expanded = () => (
     <S.ExpandedGrid width={SINGLE_COLUMN_SIZE}>
       {thisImageArray.map((img, imgIdx) => (
-        <S.ImageContainer key={imgIdx} selected={imgIdx === current}>
+        <S.ImageContainer key={imgIdx} selected={current.includes(imgIdx)}>
           <S.ImageBubble
             src={img}
             onClick={() => handleClick(imgIdx)}
@@ -60,10 +78,9 @@ function Visualizer({
       elements={SINGLE_COLUMN_NUMBER}
       width={ALL_COLUMNS_SIZE}
       ref={narrowRef}
-      // translateX={theme.windowWidth < 768 ? theme.windowWidth * 0.2 * (current - 1) : 768 * 0.2 * (current - 1)}
     >
       {thisImageArray.map((img, imgIdx) => (
-        <S.ImageContainer key={imgIdx} selected={imgIdx === current}>
+        <S.ImageContainer key={imgIdx} selected={current.includes(imgIdx)}>
           <S.ImageBubble
             src={img}
             onClick={() => handleClick(imgIdx)}
@@ -78,12 +95,8 @@ function Visualizer({
     <S.Visualizer>
       {expanded ? <Expanded /> : <Narrowed />}
       <S.Expander expanded={expanded} onClick={() => setExpanded(exp => !exp)}>
-        <p>
-          {CLOTHING_DATA[pr].hangeul}
-        </p>
-        <p>
-          {expanded ? '접기' : '모두보기'}
-        </p>
+        {expanded ? '접기' : '모두보기'}
+
       </S.Expander>
 
     </S.Visualizer>

@@ -38,9 +38,10 @@ export const ControlUnit = styled.div`
 
 export const Text = styled.div`
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 500;
     text-align: center;
     margin: 1rem 0;
+    color: #5e5e5e;
 `;
 
 export const BackgroundUnit = styled.div`
@@ -54,11 +55,11 @@ export const BackgroundGrid = styled.div`
 `;
 
 export const SingleColor = styled.div`
-    width: 1.2rem;
-    height: 1.2rem;
-    margin: .4rem;
-    border-radius: 50%;
-    box-shadow: 0 0 .5rem .2rem #ddd;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: .3rem;
+    border-radius: .4rem;
+    box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, .16);
     background: ${({ background }) => background};
     ${({ selected }) => selected && 'box-shadow: 0 0 .5rem .2rem #888;'}
 `;
@@ -79,9 +80,9 @@ export const ControlIcon = styled.div`
     font-size: 2rem;
     font-weight: 700;
     margin: .5rem;
-    box-shadow: 0 0 .5rem .2rem #ddd;
+    box-shadow: 0 0 .5rem .2rem rgba(0, 0, 0, .16);
     cursor: pointer;
-    color: black;
+    color: #808080;
 
     ${({ clickable }) => clickable === false && 'color: #aaa;'}
     p{
