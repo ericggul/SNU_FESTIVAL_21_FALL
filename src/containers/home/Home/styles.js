@@ -38,6 +38,6 @@ export const Wrapper = styled.div`
     0%{ opacity: 0; filter: blur(100px);}
     100%{ opacity: 1;}
   }
-  animation: appearHome 1s linear backwards;
-  animation-delay: .3s;
+  animation: appearHome 2.5s linear backwards;
+  animation-delay: 1s;
 `;

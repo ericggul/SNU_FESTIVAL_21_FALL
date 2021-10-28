@@ -16,18 +16,11 @@ import Starring from '@C/performance/common/Starring';
 import Youtube from '@C/performance/common/Youtube';
 import Fade from 'react-reveal/Fade';
 import { withTheme } from 'styled-components';
-import MascotForMission from '@C/performance/common/MascotForMission';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 
-// Mission
-import {
-  Light6,
-} from '@F/Light';
 import withUser from '@U/hoc/withUser';
-import useMission from '@U/hooks/useMission';
-import useModal from '@U/hooks/useModal';
-import LightMissionGuide from '@F/modal/content/LightMissionGuide';
+
 import Image from '@F/images/Image';
 
 import * as S from '../common/styles';
@@ -35,41 +28,6 @@ import * as S from '../common/styles';
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 
 function HitTheStage({ theme, user, isAuthorized }) {
-  /// //////////////////////////
-  const mission = useMission();
-  const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
-  const PAGE_LIGHT_INDICATOR = 8;
-
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
-  const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
-    {
-      pageIndicator: PAGE_LIGHT_INDICATOR,
-    }, onModalChange);
-  useEffect(() => {
-    // Doing Mission and not founded
-    if (isAuthorized && mission.light) {
-      if (!mission.light[PAGE_LIGHT_INDICATOR]) {
-        setLightVisible(true);
-      } else if (sustainLightTemp) {
-        setLightVisible(true);
-      } else {
-        setLightVisible(false);
-      }
-    } else {
-      setLightVisible(true);
-    }
-  }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
-  const lightMissionClick = useCallback(() => {
-    setSustainLightTemp(true);
-    setIsLightModalOpen(true);
-  }, [isAuthorized, mission, lightVisible]);
-
-  /// //////////////////////////
-
   const isMobile = useMemo(() => theme.windowWidth < 1170, [theme.windowWidth]);
 
   const [url, setUrl] = useState('https://www.youtube.com/embed/phnjI5IfelQ');
@@ -113,9 +71,9 @@ function HitTheStage({ theme, user, isAuthorized }) {
   );
   const bubble = <Bubble decoration="심장을 뛰게 하는 관악 최고의 댄스 무대" title="힛더스테이지" speak={speak} />;
   const title = <Title title="힛더스테이지" handleClick={() => setConfettiEnabled(true)} />;
-  const date = <Date date={27} />;
+  const date = <Date date={[5]} />;
   const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
-  const guide = <Guide date="5월 13일" times={['1부 13:30~15:30', '2부 17:30~20:10']} />;
+  const guide = <Guide type="댄스공연 힛 더 스테이지" date="11월 5일(금)" times={['12:30 - 13:00']} />;
   const starring = <Starring data={HitTheStageData} />;
   const image = (
     <S.Image>
@@ -179,8 +137,6 @@ function HitTheStage({ theme, user, isAuthorized }) {
 
         </S.MobileBody>
       )}
-      <Light6 top={200} left={50} handleClick={lightMissionClick} />
-      {lightModalComponent}
     </S.Wrapper>
   );
 }

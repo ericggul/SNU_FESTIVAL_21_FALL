@@ -179,7 +179,6 @@ function Light5({
     for (let i = 0; i < number; i += 1) {
       array.push({
         x: getRandom(0, theme.windowWidth), y: getRandom(0, theme.windowHeight),
-        // size: getRandom(0.5, 1.4),
       });
     }
     return array;
@@ -259,7 +258,7 @@ export function Light7({
     }, 1000);
   }, [animate]);
   return (
-    <S.StyledLight1 animate={animate} onClick={onClick} top={top} left={left} width={width / 5} onClick={onClick}>
+    <S.StyledLight1 animate={animate} onClick={onClick} top={top} left={left} width={width / 5}>
       {randomArray.map((pos, i) => (
         <S.Axis3 top={pos.y} left={pos.x} width={pos.size} rotate={pos.rotate} delay={i * 0.1} key={i} />
       ))}

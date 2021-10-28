@@ -100,3 +100,11 @@ export const AbsoluteImage = styled.img`
   right: 0;
   filter: hue-rotate(${props => props.hue}deg);
 `;
+
+export const Text = styled.div`
+  margin: .4rem;
+  margin-top: .8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+`;

@@ -35,7 +35,7 @@ function Menus({ theme, setMenuIsOpen }) {
     {
       header: { name: '공연', link: '/performance' },
       children: [
-        { name: '씽스틸러', link: '/sing-staler' },
+        { name: '씽스틸러', link: '/sing-stealer' },
         { name: '힛더스테이지', link: '/hit-the-stage' },
         { name: '폰서트 LIVE', link: '/phone-cert' },
         { name: '관악게임토너먼트', link: '/game-tournament' }],
@@ -58,11 +58,11 @@ function Menus({ theme, setMenuIsOpen }) {
       header: { name: '소개', link: '/introduction' },
     },
     {
-      header: { name: `${String.fromCharCode(0x591C)}BTI`, link: '/jabti' },
+      header: { name: '야BTI', link: '/jabti' },
     },
   ];
 
-  const sectorComp = (sector, i) => (
+  const SectorComp = ({ sector, i }) => (
     <S.Sector key={i}>
       <S.LeftSector
         onClick={() => goToPage(sector.header?.link)}
@@ -74,6 +74,7 @@ function Menus({ theme, setMenuIsOpen }) {
         && sector.children.map((child, j) => (
           <>
             <S.RightComp
+              key={j}
               onClick={() => goToPage(`${sector.header.link}${child.link}`)}
             >
               {child.name}
@@ -81,7 +82,7 @@ function Menus({ theme, setMenuIsOpen }) {
 
             {j % 2 === 0
             && j !== sector.children.length - 1
-            && <S.Line>|</S.Line>}
+            && <S.Line key={j + 30}>|</S.Line>}
           </>
         ))}
       </S.RightSector>
@@ -103,12 +104,12 @@ function Menus({ theme, setMenuIsOpen }) {
           <p>로그인</p>
         </S.SignButton>
       )}
-      <S.CharacterEvent onClick={() => setTransition(true)}>
+      <S.CharacterEvent onClick={() => goToPage('/clothing')}>
         <p>MY</p>
         <p>PAGE</p>
       </S.CharacterEvent>
       <S.MenuContainer>
-        {backgroundLoaded && DATA.map((sector, i) => sectorComp(sector, i))}
+        {backgroundLoaded && DATA.map((sector, i) => <SectorComp sector={sector} i={i} key={i} />)}
       </S.MenuContainer>
     </S.StyledMenus>
   );

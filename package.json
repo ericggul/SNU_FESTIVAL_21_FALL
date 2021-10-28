@@ -59,7 +59,7 @@
     "tsparticles": "^1.33.3"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "craco start --host 0.0.0.0",
     "build": "GENERATE_SOURCEMAP=false craco build",
     "winBuild": "set \"GENERATE_SOURCEMAP=false\" && craco build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",

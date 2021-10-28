@@ -173,7 +173,7 @@ export const GlobalStyle = createGlobalStyle`
       display: none; /* Chrome, Safari, Opera*/
     }
 
-    overscroll-behavior-y: none;
+    overscroll-behavior-y: contain;
   }
   
   input, textarea, button {

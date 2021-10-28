@@ -5,9 +5,6 @@ import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useUser } from '@U/hooks/useAuth';
-import { getPasswordFromEmail } from '@U/functions/password';
 import GroupImage from '@I/activity/group/group.jpg';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
@@ -178,7 +175,6 @@ function Group({ theme, user, isAuthorized }) {
             조별 활동: 10.26(화) ~ 10.28(목)
             <br />
             줌 게임: 10.26(화), 10.28(목) 18:30~20:00
-
           </S.Info>
         </S.Contents>
         <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>

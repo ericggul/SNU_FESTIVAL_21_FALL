@@ -5,18 +5,7 @@ import { toast } from 'react-toastify';
 import { transition } from '@C/performance/Performance';
 import * as S from './styles';
 
-function Guide({ date, times }) {
-  // const goToYoutube = useCallback(() => {
-  //   if (youtubeUrl !== null && youtubeUrl.length > 0) {
-  //     EventBehavior('Performance', `Click Youtube Link: ${youtubeUrl}`, `go to ${youtubeUrl} by performance page`);
-  //     window.open(youtubeUrl, '_blank');
-  //   } else if (youtubeUrl !== null && youtubeUrl.length === 0) {
-  //     toast('공연 준비 중입니다😇');
-  //   } else {
-  //     toast('다시 클릭해주세요!');
-  //   }
-  // }, [youtubeUrl]);
-
+function Guide({ type, date, times }) {
   return (
     <S.StyledGuide
       initial={{ opacity: 0 }}
@@ -30,10 +19,10 @@ function Guide({ date, times }) {
       }}
     >
       <S.Texts>
+        <p>{type}</p>
         <p>{date}</p>
         {times.map(time => <p key={time}>{time}</p>)}
       </S.Texts>
-      {/* <S.Button onClick={goToYoutube}>보러가기</S.Button> */}
     </S.StyledGuide>
   );
 }
@@ -46,5 +35,4 @@ Guide.propTypes = {
 };
 
 Guide.defaultProps = {
-  youtubeUrl: null,
 };

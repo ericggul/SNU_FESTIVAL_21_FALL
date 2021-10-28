@@ -13,6 +13,7 @@ import MissionCard from '@C/home/MissionCard';
 import MissionCompleteCard from '@C/home/MissionCompleteCard';
 import Rio from '@C/home/common/Rio';
 
+import LogInRio from '@I/icon/log-in-rio.png';
 import MenuMobile from '@I/layout/menu-mobile.png';
 import LightRio from '@I/home/LightRio.png';
 import PhoneCertIcon from '@I/performance/icon/phone-cert-icon.png';
@@ -102,7 +103,7 @@ function MobileHome({
 
   const onLoad = useCallback(() => {
     setIsLoading(false);
-    [MenuMobile, LightRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+    [MenuMobile, LightRio, LogInRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
       CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
       OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
       ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,

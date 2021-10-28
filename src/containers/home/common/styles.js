@@ -50,18 +50,8 @@ export const Landmark = styled.img`
     100%{filter: brightness(1.5) saturate(140%) drop-shadow(0 0 ${({ width }) => width / 20}px white); 
   }
   }
-
   animation: shine 5s infinite alternate;
   animation-delay: ${props => props.delay - 2}s;
-  &:after{
-    content: '';
-    position: absolute;
-    width: ${({ width }) => width}px;
-    ${props => props.top && css`top: ${props.top}px`};
-    ${props => props.left && css`left: ${props.left}px`};
-    
-    filter: drop-shadow(0 0 30px white);
-  }
 `;
 
 export const Door = styled.img`
@@ -87,7 +77,7 @@ export const Bus = styled.img`
     10%{transform: translateY(0);}
   }
   animation: bus-move 6s infinite;
-  animation-delay: ${props => props.index / 3.7 + 2}s;
+  animation-delay: ${props => props.index / 4 + 2}s;
 `;
 
 export const StandContainer = styled.div`
@@ -116,12 +106,8 @@ export const LightImage = styled.img`
 
   @keyframes occassional{
     0%{ opacity: 0;}
-    1.5%{opacity: 1;}
-    2.25%{opacity: 0.4;}
-    3%{opacity: 0.8;}
-    3.7%{opacity: 0.2;}
-    4.5%{opaicty: 0.4;}
-    6%{opacity: 0;}
+    2%{opacity: 1;}
+    4%{opacity: 0;}
   }
 
   @keyframes fromEventAnimate{

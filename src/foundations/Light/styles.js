@@ -290,6 +290,7 @@ export const Container5 = styled.div`
   top: 0;
   left: 0;
   transform: translate(0, 0);
+  z-index: 50;
 
   ${({ visible }) => !visible && 'pointer-events: none;'}
 `;
@@ -308,14 +309,12 @@ export const Circle5 = styled.div`
      0 0 1rem .2rem white,
      0 0 1.5rem .2rem #8EC1E0,
      0 0 3rem .5rem white;
-    //  0 0 5rem 1rem #A9CADF;
 
   ${appearLight};
-  // animation: appearLight .6s linear alternate infinite backwards;
-  // animation-delay: -${({ delay }) => delay}s;
+  animation: appearLight .6s linear alternate infinite backwards;
+  animation-delay: -${({ delay }) => delay}s;
 
   cursor: pointer;
-
 `;
 
 ///

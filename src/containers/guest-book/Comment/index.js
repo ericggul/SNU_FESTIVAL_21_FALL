@@ -14,10 +14,6 @@ import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import { useUser } from '@U/hooks/useAuth';
-import useMission from '@U/hooks/useMission';
-import { useDispatch } from 'react-redux';
-import GuestBookStamp from '@I/icon/stamp/guest-book-stamp.png';
-import { actions } from '@/redux/mission/state';
 import * as S from './styles';
 
 export function Comment({
@@ -44,17 +40,6 @@ export function Comment({
   const myComments = useMemo(() => (
     comments.filter(comment => comment.author === user.uid)
   ), [comments, user.uid]);
-
-  // 방명록 미션
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (isAuthorized && mission.isLoaded && !mission.guestBook) {
-  //     if (myLikesForComment.length >= 3 && myComments.length >= 1) {
-  //       dispatch(actions.setFirestoreMission(user, 'guestBook', true));
-  //       setIsMissionModalOpen(true);
-  //     }
-  //   }
-  // }, [myLikesForComment, myComments, mission, user, isAuthorized, setIsMissionModalOpen, dispatch]);
 
   const deleteComment = useCallback((commentId) => {
     guestBookCollectionRef.doc(commentId)

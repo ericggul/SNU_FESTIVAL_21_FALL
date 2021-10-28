@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '@F/layout/Header';
 import withMountEvent from '@U/hoc/withMountEvent';
-import JabtiDetailContainer from '@/containers/jabti/detail/JabtiDetail';
 import ResultAchieve from '@I/tarot/result/achieve.png';
 
 import Result1 from '@I/jabti/result/image/1.png';
@@ -38,6 +37,7 @@ import ResultText13 from '@I/jabti/result/text/13.png';
 import ResultText14 from '@I/jabti/result/text/14.png';
 import ResultText15 from '@I/jabti/result/text/15.png';
 import ResultText16 from '@I/jabti/result/text/16.png';
+import JabtiDetailContainer from '@/containers/jabti/detail/JabtiDetail';
 
 function JabtiDetail({
   resultImage, resultTextImage, result, bestResult, worstResult, description, spot, colorCode, colorName, index,
@@ -153,241 +153,289 @@ const colorNames = [
 ];
 
 export const SYBG = () => (
-  <JabtiDetail
-    resultImage={Result1}
-    resultTextImage={ResultText1}
-    result="sybg"
-    bestResult="swgg"
-    worstResult="pwgt"
-    description={descriptions[0]}
-    spot={spots[0]}
-    colorCode={colorCodes[0]}
-    colorName={colorNames[0]}
-    index={0}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result1}
+      resultTextImage={ResultText1}
+      result="sybg"
+      bestResult="swgg"
+      worstResult="pwgt"
+      description={descriptions[0]}
+      spot={spots[0]}
+      colorCode={colorCodes[0]}
+      colorName={colorNames[0]}
+      index={0}
+    />
+  </>
 );
 
 export const SYBT = () => (
-  <JabtiDetail
-    resultImage={Result2}
-    resultTextImage={ResultText2}
-    result="sybt"
-    bestResult="swgt"
-    worstResult="pwgg"
-    description={descriptions[1]}
-    spot={spots[1]}
-    colorCode={colorCodes[1]}
-    colorName={colorNames[1]}
-    index={1}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result2}
+      resultTextImage={ResultText2}
+      result="sybt"
+      bestResult="swgt"
+      worstResult="pwgg"
+      description={descriptions[1]}
+      spot={spots[1]}
+      colorCode={colorCodes[1]}
+      colorName={colorNames[1]}
+      index={1}
+    />
+  </>
 );
 
 export const SYGG = () => (
-  <JabtiDetail
-    resultImage={Result3}
-    resultTextImage={ResultText3}
-    result="sygg"
-    bestResult="swbg"
-    worstResult="pwbt"
-    description={descriptions[2]}
-    spot={spots[2]}
-    colorCode={colorCodes[2]}
-    colorName={colorNames[2]}
-    index={2}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result3}
+      resultTextImage={ResultText3}
+      result="sygg"
+      bestResult="swbg"
+      worstResult="pwbt"
+      description={descriptions[2]}
+      spot={spots[2]}
+      colorCode={colorCodes[2]}
+      colorName={colorNames[2]}
+      index={2}
+    />
+  </>
 );
 
 export const SYGT = () => (
-  <JabtiDetail
-    resultImage={Result4}
-    resultTextImage={ResultText4}
-    result="sygt"
-    bestResult="pwgt"
-    worstResult="pwbg"
-    description={descriptions[3]}
-    spot={spots[3]}
-    colorCode={colorCodes[3]}
-    colorName={colorNames[3]}
-    index={3}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result4}
+      resultTextImage={ResultText4}
+      result="sygt"
+      bestResult="pwgt"
+      worstResult="pwbg"
+      description={descriptions[3]}
+      spot={spots[3]}
+      colorCode={colorCodes[3]}
+      colorName={colorNames[3]}
+      index={3}
+    />
+  </>
 );
 
 export const SWBG = () => (
-  <JabtiDetail
-    resultImage={Result5}
-    resultTextImage={ResultText5}
-    result="swbg"
-    bestResult="sygg"
-    worstResult="pygt"
-    description={descriptions[4]}
-    spot={spots[4]}
-    colorCode={colorCodes[4]}
-    colorName={colorNames[4]}
-    index={4}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result5}
+      resultTextImage={ResultText5}
+      result="swbg"
+      bestResult="sygg"
+      worstResult="pygt"
+      description={descriptions[4]}
+      spot={spots[4]}
+      colorCode={colorCodes[4]}
+      colorName={colorNames[4]}
+      index={4}
+    />
+  </>
 );
 
 export const SWBT = () => (
-  <JabtiDetail
-    resultImage={Result6}
-    resultTextImage={ResultText6}
-    result="swbt"
-    bestResult="sygg"
-    worstResult="pygt"
-    description={descriptions[5]}
-    spot={spots[5]}
-    colorCode={colorCodes[5]}
-    colorName={colorNames[5]}
-    index={5}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result6}
+      resultTextImage={ResultText6}
+      result="swbt"
+      bestResult="sygg"
+      worstResult="pygt"
+      description={descriptions[5]}
+      spot={spots[5]}
+      colorCode={colorCodes[5]}
+      colorName={colorNames[5]}
+      index={5}
+    />
+  </>
 );
 
 export const SWGG = () => (
-  <JabtiDetail
-    resultImage={Result7}
-    resultTextImage={ResultText7}
-    result="swgg"
-    bestResult="sybg"
-    worstResult="pybt"
-    description={descriptions[6]}
-    spot={spots[6]}
-    colorCode={colorCodes[6]}
-    colorName={colorNames[6]}
-    index={6}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result7}
+      resultTextImage={ResultText7}
+      result="swgg"
+      bestResult="sybg"
+      worstResult="pybt"
+      description={descriptions[6]}
+      spot={spots[6]}
+      colorCode={colorCodes[6]}
+      colorName={colorNames[6]}
+      index={6}
+    />
+  </>
 );
 
 export const SWGT = () => (
-  <JabtiDetail
-    resultImage={Result8}
-    resultTextImage={ResultText8}
-    result="swgt"
-    bestResult="sybt"
-    worstResult="pybg"
-    description={descriptions[7]}
-    spot={spots[7]}
-    colorCode={colorCodes[7]}
-    colorName={colorNames[7]}
-    index={7}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result8}
+      resultTextImage={ResultText8}
+      result="swgt"
+      bestResult="sybt"
+      worstResult="pybg"
+      description={descriptions[7]}
+      spot={spots[7]}
+      colorCode={colorCodes[7]}
+      colorName={colorNames[7]}
+      index={7}
+    />
+  </>
 );
 
 export const PYBG = () => (
-  <JabtiDetail
-    resultImage={Result9}
-    resultTextImage={ResultText9}
-    result="pybg"
-    bestResult="pygt"
-    worstResult="swgt"
-    description={descriptions[8]}
-    spot={spots[8]}
-    colorCode={colorCodes[8]}
-    colorName={colorNames[8]}
-    index={8}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result9}
+      resultTextImage={ResultText9}
+      result="pybg"
+      bestResult="pygt"
+      worstResult="swgt"
+      description={descriptions[8]}
+      spot={spots[8]}
+      colorCode={colorCodes[8]}
+      colorName={colorNames[8]}
+      index={8}
+    />
+  </>
 );
 
 export const PYBT = () => (
-  <JabtiDetail
-    resultImage={Result10}
-    resultTextImage={ResultText10}
-    result="pybt"
-    bestResult="pwbt"
-    worstResult="swgg"
-    description={descriptions[9]}
-    spot={spots[9]}
-    colorCode={colorCodes[9]}
-    colorName={colorNames[9]}
-    index={9}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result10}
+      resultTextImage={ResultText10}
+      result="pybt"
+      bestResult="pwbt"
+      worstResult="swgg"
+      description={descriptions[9]}
+      spot={spots[9]}
+      colorCode={colorCodes[9]}
+      colorName={colorNames[9]}
+      index={9}
+    />
+  </>
 );
 
 export const PYGG = () => (
-  <JabtiDetail
-    resultImage={Result11}
-    resultTextImage={ResultText11}
-    result="pygg"
-    bestResult="pybg"
-    worstResult="swbt"
-    description={descriptions[10]}
-    spot={spots[10]}
-    colorCode={colorCodes[10]}
-    colorName={colorNames[10]}
-    index={10}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result11}
+      resultTextImage={ResultText11}
+      result="pygg"
+      bestResult="pybg"
+      worstResult="swbt"
+      description={descriptions[10]}
+      spot={spots[10]}
+      colorCode={colorCodes[10]}
+      colorName={colorNames[10]}
+      index={10}
+    />
+  </>
 );
 
 export const PYGT = () => (
-  <JabtiDetail
-    resultImage={Result12}
-    resultTextImage={ResultText12}
-    result="pygt"
-    bestResult="pybg"
-    worstResult="swbg"
-    description={descriptions[11]}
-    spot={spots[11]}
-    colorCode={colorCodes[11]}
-    colorName={colorNames[11]}
-    index={11}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result12}
+      resultTextImage={ResultText12}
+      result="pygt"
+      bestResult="pybg"
+      worstResult="swbg"
+      description={descriptions[11]}
+      spot={spots[11]}
+      colorCode={colorCodes[11]}
+      colorName={colorNames[11]}
+      index={11}
+    />
+  </>
 );
 
 export const PWBG = () => (
-  <JabtiDetail
-    resultImage={Result13}
-    resultTextImage={ResultText13}
-    result="pwbg"
-    bestResult="pygg"
-    worstResult="sygt"
-    description={descriptions[12]}
-    spot={spots[12]}
-    colorCode={colorCodes[12]}
-    colorName={colorNames[12]}
-    index={12}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result13}
+      resultTextImage={ResultText13}
+      result="pwbg"
+      bestResult="pygg"
+      worstResult="sygt"
+      description={descriptions[12]}
+      spot={spots[12]}
+      colorCode={colorCodes[12]}
+      colorName={colorNames[12]}
+      index={12}
+    />
+  </>
 );
 
 export const PWBT = () => (
-  <JabtiDetail
-    resultImage={Result14}
-    resultTextImage={ResultText14}
-    result="pwbt"
-    bestResult="pybt"
-    worstResult="sygg"
-    description={descriptions[13]}
-    spot={spots[13]}
-    colorCode={colorCodes[13]}
-    colorName={colorNames[13]}
-    index={13}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result14}
+      resultTextImage={ResultText14}
+      result="pwbt"
+      bestResult="pybt"
+      worstResult="sygg"
+      description={descriptions[13]}
+      spot={spots[13]}
+      colorCode={colorCodes[13]}
+      colorName={colorNames[13]}
+      index={13}
+    />
+  </>
 );
 
 export const PWGG = () => (
-  <JabtiDetail
-    resultImage={Result15}
-    resultTextImage={ResultText15}
-    result="pwgg"
-    bestResult="swbt"
-    worstResult="sybt"
-    description={descriptions[14]}
-    spot={spots[14]}
-    colorCode={colorCodes[14]}
-    colorName={colorNames[14]}
-    index={14}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result15}
+      resultTextImage={ResultText15}
+      result="pwgg"
+      bestResult="swbt"
+      worstResult="sybt"
+      description={descriptions[14]}
+      spot={spots[14]}
+      colorCode={colorCodes[14]}
+      colorName={colorNames[14]}
+      index={14}
+    />
+  </>
 );
 
 export const PWGT = () => (
-  <JabtiDetail
-    resultImage={Result16}
-    resultTextImage={ResultText16}
-    result="pwgt"
-    bestResult="sygt"
-    worstResult="sybg"
-    description={descriptions[15]}
-    spot={spots[15]}
-    colorCode={colorCodes[15]}
-    colorName={colorNames[15]}
-    index={15}
-  />
+  <>
+    <Header />
+    <JabtiDetail
+      resultImage={Result16}
+      resultTextImage={ResultText16}
+      result="pwgt"
+      bestResult="sygt"
+      worstResult="sybg"
+      description={descriptions[15]}
+      spot={spots[15]}
+      colorCode={colorCodes[15]}
+      colorName={colorNames[15]}
+      index={15}
+    />
+  </>
 );

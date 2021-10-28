@@ -23,7 +23,7 @@ export const NoticeWrapper = styled.div`
     to{opacity: 1;}
   }
   animation: appear 3s linear backwards;
-  animation-delay: 1.5s;
+  animation-delay: 2s;
 `;
 
 export const Notice = styled.div`

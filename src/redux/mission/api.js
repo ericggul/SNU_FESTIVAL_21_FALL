@@ -10,6 +10,14 @@ export function setLightInFirestore(user, lights) {
   }, { merge: true });
 }
 
+export function setClothingInFirestore(user, clothings, accessories, background) {
+  return missionCollectionRef.doc(user.uid).set({
+    clothing: clothings,
+    accessorie: accessories,
+    background,
+  }, { merge: true });
+}
+
 export function setMissionInFirestore(user, mission, isCompleted) {
   return missionCollectionRef.doc(user.uid).set({
     [mission]: isCompleted,

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
+import { Prompt } from 'react-router';
 import withMountEvent from '@U/hoc/withMountEvent';
 import ClothingContainer from '@C/clothing/Clothing';
 import Header from '@F/layout/Header';
 import ScrollTopButton from '@F/layout/ScrollTopButton';
 
-import { preloadImage } from '@U/functions/preload';
-
-function GuestBook() {
+function Clothing() {
   return (
     <>
       <Header />
@@ -15,4 +14,5 @@ function GuestBook() {
     </>
   );
 }
-export default withMountEvent(GuestBook);
+
+export default withMountEvent(Clothing);

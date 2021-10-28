@@ -16,16 +16,36 @@ export const StyledTitle = styled.div`
 
 `;
 
+export const Container = styled.div`
+  ${FlexCenterStyle};
+  width: 100%;
+  flex-direction: column;
+`;
+
 export const Row = styled.div`
   ${FlexCenterStyle};
   width: 100%;
   flex-direction: row;
+  margin: .3rem 0;
+  ${({ nowStarring }) => nowStarring
+  && 'text-shadow: 0 0 .5rem white;'}
 `;
 
 export const Name = styled.div`
-  margin-right: calc(min(20vw, 180px));
+  width: 40%;
 `;
 
 export const Time = styled.div`
+  width: 40%;
+  text-align: right;
+  font-weight: 300;
+  ${({ nowStarring }) => nowStarring && 'font-weight: 700;'}
+`;
 
+export const Songs = styled.div`
+  width: 80%;
+  font-size: .9rem;
+  font-weight: 300;
+  word-break: keep-all;
+  margin-bottom: .7rem;
 `;

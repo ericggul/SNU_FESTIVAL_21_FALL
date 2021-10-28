@@ -20,23 +20,22 @@ export const confettiRightorWrong = (isMobile, tf) => {
   let rightColors = ['#ffffff', '#bb0000'];
   if (tf) {
     confetti({
-      typeparticleCount: 50,
+      typeparticleCount: 10,
       angle: 60,
-      spread: 55,
+      spread: 15,
       origin: { x: 0 },
       colors: ['#ffffff'],
     });
     confetti({
-      typeparticleCount: 50,
+      typeparticleCount: 10,
       angle: 120,
-      spread: 55,
+      spread: 15,
       origin: { x: 1 },
       colors: ['#ffffff'],
     });
   } else if (isMobile) {
-    console.log('im mobile');
     confetti({
-      typeparticleCount: 2,
+      typeparticleCount: 1,
       angle: -45,
       spread: 4,
 
@@ -44,7 +43,7 @@ export const confettiRightorWrong = (isMobile, tf) => {
       colors: ['#bb0000'],
     });
     confetti({
-      typeparticleCount: 2,
+      typeparticleCount: 1,
       angle: -135,
       spread: 4,
 

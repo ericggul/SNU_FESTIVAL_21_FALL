@@ -1,39 +1,87 @@
 import React, {
   useState, useEffect, useCallback, useMemo, useRef,
 } from 'react';
-import withUser from '@U/hoc/withUser';
+
 import PropTypes from 'prop-types';
 import html2canvas from 'html2canvas';
 
+import { toast } from 'react-toastify';
 import Basic from '@I/clothing/basic.png';
 
-import Kakao from '@C/clothing/Kakao';
+import ControlArea from '@C/clothing/ControlArea';
 import Loading from '@C/clothing/Loading';
 import Visualizer from '@C/clothing/Visualizer';
-import Name from '@C/clothing/Name';
 
 import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 
-import { CLOTHING_DATA } from '@C/clothing/data';
+import { CLOTHING_DATA, ACCESSORIES_DATA, BACKGROUND_PALETTES } from '@C/clothing/data';
+
+import useModal from '@U/hooks/useModal';
+import SignInGuide from '@F/modal/content/SignInGuide';
+
+import withUser from '@U/hoc/withUser';
+import useMission from '@U/hooks/useMission';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { actions } from '@/redux/mission/state';
 
 import * as S from './styles';
 
-function Clothing({ theme }) {
+function Clothing({ theme, user, isAuthorized }) {
+  const mission = useMission();
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const hadPlayed = useMemo(() => isAuthorized && mission.clothing.length !== 0, [isAuthorized, mission]);
+  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+
   // loading state
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
+  // background
+  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 0);
 
-  const BACKGROUND_PALETTES = ['#c5c5c5', '#fadbd7', '#ffe2bd', '#f8c4f2', '#c6d5ff', '#fff4bb', '#eddbf9', '#cef1e4', '#f8ffdb', '#d9d3f0', '#e1ecfc'];
+  const handleBackgroundChange = useCallback((i) => {
+    setSelectedBackground(i);
+  }, []);
 
   // container size adjust state
-  const [containerSizeUnit, setContainerSizeUnit] = useState(0.5);
+  const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
+  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.5, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
+  const [touched, setTouched] = useState(0);
+  const timer = useRef(null);
+  const alterValue = (sign) => {
+    if (!timer.current) {
+      setTouched(sign);
+      timer.current = setInterval(() => {
+        setContainerSizeUnit(unit => unit + sign * 0.001);
+      }, 30);
+    }
+  };
+  const clearAlter = () => {
+    setTouched(0);
+    clearInterval(timer.current);
+    timer.current = null;
+  };
 
   // selected data set state
-  const [selectedClothings, setSelectedClothings] = useState(Array(CLOTHING_DATA.length).fill(0));
+  // Clothings: One selection for each part
+  // Accessories: Multiple accessories possible
+  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+  const [selectedAccessories, setSelectedAccessories] = useState(hadPlayed ? mission.accessorie : []);
   const [imageArray, setImageArray] = useState([]);
+
+  useEffect(() => {
+    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+    setSelectedAccessories(hadPlayed ? mission.accessorie : []);
+  }, [hadPlayed]);
+
+  console.log(hadPlayed, mission.clothing);
+  console.log(selectedClothings);
 
   // loading and calling image
   useEffect(() => {
@@ -47,14 +95,23 @@ function Clothing({ theme }) {
         [newArray].forEach(preloadImage);
         setLoaded(ld => ld + 1);
       });
+      let accArray = [];
+      for (let k = 0; k < ACCESSORIES_DATA.number; k += 1) {
+        accArray.push(`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${k + 1}.png`);
+      }
+      imageArray.push(accArray);
+      [accArray].forEach(preloadImage);
+      setLoaded(ld => ld + 1);
     }
   }, [imageArray]);
 
-  console.log(loaded);
-
   useEffect(() => {
-    if (loaded >= CLOTHING_DATA.length) {
+    if (loaded >= CLOTHING_DATA.length + 1) {
       setIsLoading(false);
+      toast('나만의 캐릭터를 만들고, 웹사이트에 숨어있는 빛을 모아보세요!',
+        {
+          autoClose: 4000, draggable: true,
+        });
     }
   }, [loaded]);
 
@@ -80,6 +137,12 @@ function Clothing({ theme }) {
     setCurrentPr(pr);
   }, [selectedClothings]);
 
+  // adding accessories
+
+  const changeSlAccessories = useCallback((accArray) => {
+    setSelectedAccessories(accArray);
+  }, [selectedClothings]);
+
   // capturing clothings
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
@@ -88,28 +151,45 @@ function Clothing({ theme }) {
     if (characterRef.current) {
       html2canvas(characterRef.current).then(canvas => {
         console.log('hey');
-        setScreenShottedCharacter(canvas.toDataURL());
+        setScreenShottedCharacter(canvas.toDataURL('image/jpg'));
       });
     }
   }, [characterRef, selectedClothings]);
 
-  console.log(selectedClothings.slice(1));
+  const save = useCallback(() => {
+    if (isAuthorized) {
+      dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
+      setTimeout(() => {
+        history.push('/clothing/result');
+      }, 300);
+    } else {
+      setIsSignInModalOpen(true);
+    }
+  }, [selectedClothings, selectedAccessories, selectedBackground, actions, isAuthorized]);
 
   return (
-    <S.StyledClothing>
-      <HeaderContent>옷입히기</HeaderContent>
-
+    <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
+      <HeaderContent>MY CHARACTER</HeaderContent>
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
+          <ControlArea
+            touched={touched}
+            alterValue={alterValue}
+            clearAlter={clearAlter}
+            currentBackground={selectedBackground}
+            onBackgroundClick={handleBackgroundChange}
+            onHairClose={() => setHairOnTop(hr => !hr)}
+          />
+          {/* <S.Text>
+            나만의 캐릭터를 만들고,
+            {' '}
+            <br />
+            {' '}
+            웹사이트에 숨어있는 빛을 모아보세요!
+          </S.Text> */}
           <S.MidContainer ref={characterRef}>
-            <S.Text onClick={() => setHairOnTop(hr => !hr)}>눈썹 가리기</S.Text>
-            <S.ControlUnit>
-              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit + 0.001)}>+</S.ControlIcon>
-              <S.ControlIcon onClick={() => setContainerSizeUnit(unit => unit - 0.001)}>-</S.ControlIcon>
-            </S.ControlUnit>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
-
               <S.Element
                 src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
                 top={convert(CLOTHING_DATA[0].yPos)}
@@ -128,20 +208,43 @@ function Clothing({ theme }) {
                   onClick={() => changePr(sl, pr + 1)}
                 />
               ))}
+              {selectedAccessories.map((sl, i) => (
+                (
+                  <S.Element
+                    src={`https://snufestival.com/images/clothing/${ACCESSORIES_DATA.english}/${sl + 1}.png`}
+                    top={convert(ACCESSORIES_DATA.yPos)}
+                    left={convert(ACCESSORIES_DATA.xPos)}
+                    width={convert(ACCESSORIES_DATA.width)}
+                    key={i}
+                  />
+                )
+              ))}
             </S.Container>
-            <Name />
           </S.MidContainer>
+          <S.Converter>
+            {[...CLOTHING_DATA, ACCESSORIES_DATA].map((e, i) => (
+              <S.ConverterCell
+                onClick={() => setCurrentPr(i)}
+                selected={currentPr === i}
+                key={i}
+              >
+                {e.hangeul}
+              </S.ConverterCell>
+            ))}
+          </S.Converter>
           <Visualizer
-            CLOTHING_DATA={CLOTHING_DATA}
             imageArray={imageArray}
             sl={selectedClothings[currentPr]}
+            slAccessories={selectedAccessories}
             pr={currentPr}
             changeSl={changeSl}
+            changeSlAccessories={changeSlAccessories}
           />
-
+          <S.Save onClick={() => save()}>저장하기</S.Save>
+          {!isAuthorized && <S.SaveText>로그인 후에 저장해 주세요</S.SaveText>}
         </S.Content>
       )}
-      <Kakao onClick={handleKakaoClick} url={screenShottedCharacter} />
+      {signInModalComponent}
     </S.StyledClothing>
   );
 }

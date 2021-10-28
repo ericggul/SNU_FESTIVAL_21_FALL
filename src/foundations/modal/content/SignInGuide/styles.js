@@ -16,6 +16,13 @@ export const SignInGuideBox = styled.div`
 
   ${FlexCenterStyle};
   text-align: center;
+
+  @keyframes show{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+
+  animation: show 1.5s;
 `;
 
 export const Image = styled.img`

@@ -3,9 +3,7 @@ import useInput from '@U/hooks/useInput';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function Name() {
-  const { name, onChangeName } = useInput();
-
+function Name({ name, onChangeName }) {
   const SCRIPTS = ['상의, 하의, 눈, 눈썹, 코, 입 ', '닉네임도 주는거 잊지 말구', '카카오톡으로 공유도 해봐!'];
   const [placeholder, setPlaceholder] = useState('');
   const [dir, setDir] = useState(1);
