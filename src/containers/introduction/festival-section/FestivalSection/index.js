@@ -20,16 +20,20 @@ function FestivalSection({ isMobile, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 4;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -40,6 +44,8 @@ function FestivalSection({ isMobile, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
@@ -59,7 +65,7 @@ function FestivalSection({ isMobile, user, isAuthorized }) {
       <PromotionVideoSection />
       <PublisherSection />
 
-      <Light4 top={400} left={0} handleClick={lightMissionClick} />
+      {lightVisible && <Light4 top={400} left={0} handleClick={lightMissionClick} />}
 
       {lightModalComponent}
     </S.StyledFestivalSection>

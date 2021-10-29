@@ -39,14 +39,13 @@ export const IconDescription = styled.div`
     margin-top: -0.7rem;
     margin-bottom: 1.4rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     height: 1.6rem;
     width: 6.3rem;
     ${FlexCenterStyle};
     background: white;
     color: ${({ theme }) => theme.palette.BLACK_PURPLE};
     border-radius: 0.9rem;
-
 
     box-shadow: 
         0 0 .1rem .1rem white,

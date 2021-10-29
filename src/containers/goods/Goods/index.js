@@ -25,19 +25,23 @@ import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 function Goods({ user, isAuthorized }) {
-  /// //////////////////////////
+  /// /////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 2;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -48,17 +52,17 @@ function Goods({ user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
-
-  /// //////////////////////////
+  /// ////////////////////
 
   const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[1], [user]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
@@ -73,7 +77,7 @@ function Goods({ user, isAuthorized }) {
       </S.Body>
       <ScrollTopButton />
 
-      <Light2 top={150} left={200} handleClick={lightMissionClick} />
+      {lightVisible && <Light2 top={150} left={200} handleClick={lightMissionClick} />}
       {lightModalComponent}
       {signInModalComponent}
     </S.StyledGoods>

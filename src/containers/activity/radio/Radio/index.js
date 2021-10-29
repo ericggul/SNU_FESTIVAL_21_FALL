@@ -24,19 +24,23 @@ import * as S from './styles';
 
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 function Radio({ theme, user, isAuthorized }) {
-  /// //////////////////////////
+  /// //////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 5;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -47,17 +51,17 @@ function Radio({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
-
-  /// //////////////////////////
+  /// ///////////
 
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const [clicked, setClicked] = useState(false);
@@ -118,7 +122,7 @@ function Radio({ theme, user, isAuthorized }) {
           </S.Paragraph>
         </S.Container>
       </S.Contents>
-      <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
+      {lightVisible && <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledRadio>
   );

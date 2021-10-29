@@ -46,6 +46,8 @@ export const LogoImage = styled.img`
   }
   transition: transform .4s;
   ${({ backAnimation }) => backAnimation && 'transform: translateX(-5px);'}
+
+  filter: drop-shadow(0 0 .5rem white);
 `;
 
 export const MenuButton = styled.div`
@@ -56,6 +58,13 @@ export const MenuButton = styled.div`
   width: 32px;
   height: 32px;
   cursor: pointer;
+
+  @keyframes change{
+    0%{opacity: 0;}
+    30%{opacity: 1;}
+  }
+
+  animation: change 4s linear infinite alternate;
 `;
 
 export const MenuButtonBar = styled.div`
@@ -72,6 +81,8 @@ export const MenuButtonBar = styled.div`
   transition: transform, opacity, width, border, background-color, 1s;
   will-change: transform, opacity, width;
 
+  box-shadow: 0 0 .5rem white;
+
   ${props => props.menuIsOpen && css`
     &:first-of-type {
       opacity: 0;
@@ -85,6 +96,19 @@ export const MenuButtonBar = styled.div`
       transform: translateY(-11px) rotate(135deg);
     }
   `};
+
+`;
+
+export const Background = styled.img`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: ${({ theme }) => theme.windowHeight}px;
+  bottom: 0px;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: ${({ theme }) => theme.zIndex.header - 1};
 `;
 
 export const BasicText = styled.div`

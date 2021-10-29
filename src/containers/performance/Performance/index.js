@@ -33,16 +33,20 @@ function Performance({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 0;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -53,11 +57,12 @@ function Performance({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -127,7 +132,7 @@ function Performance({ theme, user, isAuthorized }) {
         {iconGrid}
         {mainPoster}
       </S.StyledContainer>
-      <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />
+      {lightVisible && <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledPerformance>
   );

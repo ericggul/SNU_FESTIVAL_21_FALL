@@ -24,7 +24,6 @@ import * as S from './styles';
 
 function MiniGame({ theme }) {
   const miniGame = useMiniGame();
-  console.log(miniGame);
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const [selected, setSelected] = useState(null);
@@ -67,8 +66,8 @@ function MiniGame({ theme }) {
     <S.IconGrid isMobile={isMobile}>
       {Item('omok', OmokIcon, '오목게임', 0, false)}
       {Item('riddle', RiddleIcon, '미궁게임', 1, miniGame.riddle)}
-      {Item('handwriting', HandwritingIcon, '필기 맞추기', 2, miniGame.handwritingAccomplished)}
-      {Item('place', PlaceIcon, '장소 맞추기', 3, miniGame.placeAccomplished)}
+      {Item('handwriting', HandwritingIcon, '필기 맞히기', 2, miniGame.handwritingAccomplished)}
+      {Item('place', PlaceIcon, '장소 맞히기', 3, miniGame.placeAccomplished)}
     </S.IconGrid>
   );
 

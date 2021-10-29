@@ -6,10 +6,12 @@ export const StyledGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 export const Body = styled.div`
   width: 100%;
+  overflow-x: hidden;
   // max-width: 750px;
   padding: 2rem;
   min-height: ${({ theme }) => theme.windowHeight}px;

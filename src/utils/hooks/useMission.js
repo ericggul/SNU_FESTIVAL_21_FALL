@@ -6,7 +6,6 @@ import { actions } from '@/redux/mission/state';
 const useMission = () => {
   const mission = useSelector(state => state.mission);
 
-  console.log(mission);
   useAuth();
   const { user, isAuthorized } = useUser();
   const dispatch = useDispatch();

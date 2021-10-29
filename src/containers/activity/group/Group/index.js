@@ -56,14 +56,17 @@ function Group({ theme, user, isAuthorized }) {
   const mission = useMission();
   const PAGE_LIGHT_INDICATOR = 7;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
 
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -74,13 +77,13 @@ function Group({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
-    setLighted(true);
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);

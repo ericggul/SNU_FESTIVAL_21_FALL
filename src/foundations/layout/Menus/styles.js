@@ -6,15 +6,6 @@ export const StyledMenus = styled.div`
   height: ${({ theme }) => theme.windowHeight - 65}px;
   position: relative;
   top: 0;
-  opacity: 1;
-
-  @keyframes appear{
-    from{opacity: 0;}
-    to{opacity: 1;}
-  }
-
-  animation: appear 1s;
-  animtaion-delay: .8s;
 `;
 
 export const MenuContainer = styled.div`
@@ -33,13 +24,21 @@ export const Sector = styled.div`
   color: white;
   z-index: ${({ theme }) => theme.zIndex.header};
   text-align: left;
+  opacity: 1;
+
+  @keyframes appear-smooth{
+    from{opacity: 0;}
+    to{opacity: 1;}
+  }
+
+  animation: appear-smooth 2s linear backwards;
 `;
 
 export const LeftSector = styled.div`
   display: flex;
   font-size: 1.8rem;
   width: 5.8rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-right: .5rem;
   margin-bottom: .3rem;
   cursor: pointer;
@@ -50,7 +49,6 @@ export const RightSector = styled.div`
   display: grid;
   grid-template-columns: 8rem 0.1rem 10rem;
   cursor: pointer;
-  font-wieght: 600;
 `;
 
 export const RightComp = styled.div`
@@ -60,7 +58,6 @@ export const RightComp = styled.div`
   margin-left: .8rem;
   font-size: 1.2rem;
   cursor: pointer;
-  font-wieght: 600;
 `;
 
 export const Line = styled.div`
@@ -69,18 +66,6 @@ export const Line = styled.div`
   text-align: center;
   font-size: 1.2rem;
   margin-top: -.15rem;
-`;
-
-export const Background = styled.img`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: ${({ theme }) => theme.windowHeight}px;
-  bottom: 0px;
-  object-fit: cover;
-  object-position: center bottom;
-  z-index: ${({ theme }) => theme.zIndex.header - 1};
 `;
 
 export const SignButton = styled.div`
@@ -120,7 +105,7 @@ export const CharacterEvent = styled.div`
     margin: 0;
     padding: 0;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
     color: white;
   }
 

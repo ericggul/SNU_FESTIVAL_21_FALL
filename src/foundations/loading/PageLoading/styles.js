@@ -14,8 +14,7 @@ export const StyledPageLoading = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  ${({ theme }) => theme.windowWidth > 768 && 'background: #2e1055;'}
-
+  background: #2e1055;
 
 `;
 
