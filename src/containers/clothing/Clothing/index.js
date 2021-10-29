@@ -42,7 +42,7 @@ function Clothing({ theme, user, isAuthorized }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
   // background
-  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 0);
+  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 4);
 
   const handleBackgroundChange = useCallback((i) => {
     setSelectedBackground(i);
@@ -78,7 +78,8 @@ function Clothing({ theme, user, isAuthorized }) {
   useEffect(() => {
     setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
     setSelectedAccessories(hadPlayed ? mission.accessorie : []);
-  }, [hadPlayed]);
+    setSelectedBackground(hadPlayed ? mission.background : 4);
+  }, [hadPlayed, mission.clothing]);
 
   console.log(hadPlayed, mission.clothing);
   console.log(selectedClothings);

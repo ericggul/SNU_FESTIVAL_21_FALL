@@ -15,6 +15,12 @@ export const StyledClothing = styled.div`
 export const Content = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
+
+    @keyframes appear{
+        from{opacity: 0; }
+        to{opacity: 1; }
+    }
+    animation: appear 2s;
 `;
 
 export const MidContainer = styled.div`
@@ -37,6 +43,13 @@ export const Container = styled.div`
     position: relative;
     width: ${({ width }) => width}px;
     height: ${({ width }) => width * 2.174}px;
+
+    @keyframes bigger{
+        from{transform: scale(0) rotate(0);}
+        to{transform: scale(1) rotate(1440deg);}
+    }
+    animation: bigger 2.4s backwards;
+    animation-delay: 1s;
 `;
 
 export const Body = styled.img`

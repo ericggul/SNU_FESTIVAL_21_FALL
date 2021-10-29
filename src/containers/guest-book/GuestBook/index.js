@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import Comments from '@C/guest-book/Comment';
 import WriteBox from '@C/guest-book/WriteBox';
 import Heart from '@C/guest-book/Heart';
@@ -62,6 +63,7 @@ function GuestBook({ user, isAuthorized }) {
   return (
     <S.StyledGuestBook>
       <HeaderContent>방명록</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <S.Body>
         <S.WriteBoxWrapper>
           <WriteBox user={user} />

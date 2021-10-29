@@ -69,7 +69,7 @@ export function Comment({
 
   return (
     <S.StyledComment>
-      <NumberIncrement number={25} />
+      <NumberIncrement number={comments.length} />
       {comments.map((comment, i) => {
         const isMine = user.uid === comment.author;
         const isLiked = myLikesForComment.includes(comment.id);

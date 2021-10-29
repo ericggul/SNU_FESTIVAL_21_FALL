@@ -4,6 +4,7 @@ import React, {
 import { HeaderContent } from '@F/layout/Header';
 import { useHistory } from 'react-router';
 import { withTheme } from 'styled-components';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import CompetitionIcon from '@I/activity/home/competition.png';
 import MiniIcon from '@I/activity/home/mini.png';
 import GroupIcon from '@I/activity/home/group.png';
@@ -129,7 +130,6 @@ function Activity({ theme, user, isAuthorized }) {
           duration={getRandom(2, 5)}
           delay={getRandom(-5, 0)}
         />
-
       </GS.ImageContainer>
       <GS.IconDescription shine={selected === i}>
         {text}
@@ -149,6 +149,7 @@ function Activity({ theme, user, isAuthorized }) {
   return (
     <S.StyledActivity>
       <HeaderContent backgroundColor="transparent">행사</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <S.StyledContainer>
         {/* <S.Description>
           각 행사별 아이콘을 클릭해보세요!

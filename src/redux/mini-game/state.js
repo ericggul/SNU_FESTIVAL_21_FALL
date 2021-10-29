@@ -30,7 +30,6 @@ export const types = {
 
   SET_STAGE: `${PREFIX}/SET_STAGE`,
   SET_FIRESTORE_STAGE: `${PREFIX}/SET_FIRESTORE_STAGE`,
-
 };
 
 /** action */
@@ -74,7 +73,10 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.RESET]: (draft) => {
     draft.isLoaded = false;
     draft.handwriting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    draft.place = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     draft.riddle = false;
+    draft.placeAccomplished = false;
+    draft.handwritingAccomplished = false;
   },
 });
 export default reducer;

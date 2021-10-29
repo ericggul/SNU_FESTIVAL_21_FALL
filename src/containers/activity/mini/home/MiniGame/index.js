@@ -14,6 +14,7 @@ import Wave from '@F/animation/Wave';
 
 import useModal from '@U/hooks/useModal';
 import MiniGameGuide from '@F/modal/content/MiniGameGuide';
+import withUser from '@U/hoc/withUser';
 
 import PropTypes from 'prop-types';
 import { transition } from '@C/activity/Activity';
@@ -23,6 +24,7 @@ import * as S from './styles';
 
 function MiniGame({ theme }) {
   const miniGame = useMiniGame();
+  console.log(miniGame);
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const getRandom = (a, b) => Math.random() * (b - a) + a;
   const [selected, setSelected] = useState(null);
@@ -63,10 +65,9 @@ function MiniGame({ theme }) {
 
   const iconGrid = (
     <S.IconGrid isMobile={isMobile}>
-
       {Item('omok', OmokIcon, '오목게임', 0, false)}
       {Item('riddle', RiddleIcon, '미궁게임', 1, miniGame.riddle)}
-      {Item('handwriting', HandwritingIcon, '필기 맞추기', 2, miniGame.handwritingAccomoplished)}
+      {Item('handwriting', HandwritingIcon, '필기 맞추기', 2, miniGame.handwritingAccomplished)}
       {Item('place', PlaceIcon, '장소 맞추기', 3, miniGame.placeAccomplished)}
     </S.IconGrid>
   );

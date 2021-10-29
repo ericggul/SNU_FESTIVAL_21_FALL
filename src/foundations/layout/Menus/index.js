@@ -20,8 +20,6 @@ function Menus({ theme, setMenuIsOpen }) {
   const { isAuthorized } = useUser();
   const { signIn, signOut } = useAuth();
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
-  const [openedTab, setOpenedTab] = useState(null);
-  const [transition, setTransition] = useState(false);
 
   const goToPage = useCallback((route) => {
     history.push(route);

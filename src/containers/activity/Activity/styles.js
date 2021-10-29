@@ -3,7 +3,6 @@ import { FlexCenterStyle } from '@S/responsive/display';
 import { motion } from 'framer-motion';
 
 export const StyledActivity = styled.div`
-  background: ${({ theme }) => theme.palette.DARK_PURPLE};
   height: ${({ theme }) => theme.windowHeight}px;
   overflow: hidden;
 `;

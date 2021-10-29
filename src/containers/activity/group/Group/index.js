@@ -94,15 +94,6 @@ function Group({ theme, user, isAuthorized }) {
   // 링크
   const [url, setUrl] = useState('https://docs.google.com/forms/d/e/1FAIpQLScyd8QKSfZfJ3RubLhmv0AmqrzGUpQWJYIPZeO8n-pWGmtDbg/viewform');
   const [youtubeUrl, setYoutubeUrl] = useState(null);
-  // useEffect(() => {
-  //   linkCollectionRef.doc('group-game').get()
-  //     .then((doc) => {
-  //       setUrl(doc.data().url);
-  //       setYoutubeUrl(doc.data().youtubeUrl);
-  //     })
-  //     .catch(() => (
-  //       toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-  // }, []);
 
   const today = new Date();
   const date = today.getDate();
@@ -159,7 +150,7 @@ function Group({ theme, user, isAuthorized }) {
           <S.Info>
             **추가 신청은
             {' '}
-            <S.Bold>10월 26일(화) 15:00까지만</S.Bold>
+            <S.Bold>11월 2일(화) 15:00까지만</S.Bold>
             {' '}
             받습니다!!
             {' '}
@@ -170,11 +161,11 @@ function Group({ theme, user, isAuthorized }) {
         <S.Contents>
           <S.Header>일시</S.Header>
           <S.Info>
-            신청: ~ 10.26(화) 15:00
+            신청: ~ 11.2(화) 15:00
             <br />
-            조별 활동: 10.26(화) ~ 10.28(목)
+            조별 활동: 11.2(화) ~ 11.4(목)
             <br />
-            줌 게임: 10.26(화), 10.28(목) 18:30~20:00
+            줌 게임: 11.2(화), 11.4(목) 18:30~20:00
           </S.Info>
         </S.Contents>
         <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>

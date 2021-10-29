@@ -10,6 +10,13 @@ export const Container = styled.div`
     transition: all 1s;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
+
+    @keyframes appear{
+        from{opacity: 0; }
+        to{opacity: 1; }
+    }
+    animation: appear 2s backwards;
+    animation-delay: 2s;
 `;
 
 export const ExpandButton = styled.div`
