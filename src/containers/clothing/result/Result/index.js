@@ -11,7 +11,6 @@ import Basic from '@I/clothing/basic.png';
 import Save from '@I/clothing/save.png';
 import Jump from '@I/clothing/jump.png';
 
-import Kakao from '@C/clothing/Kakao';
 import Name from '@C/clothing/Name';
 
 import { preloadImage } from '@U/functions/preload';

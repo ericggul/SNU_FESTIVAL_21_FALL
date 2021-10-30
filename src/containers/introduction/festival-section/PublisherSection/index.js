@@ -6,14 +6,24 @@ function PublisherSection() {
   return (
     <Fade left distance="30px" delay={200}>
       <S.StyledPublisherSection>
-        <p>관악의 밤 설립자</p>
+        <p>
+          <span>축장</span>
+          <br />
+          <span>개발</span>
+          <br />
+          <span>기획</span>
+          <br />
+          <span>디자인</span>
+        </p>
         <div />
         <p>
-          <span onClick={() => window.open('mailto:geehyun0105@snu.ac.kr')}>축장 권익현 </span>
+          <span>권익현 </span>
           <br />
-          <span onClick={() => window.open('mailto:ericggul@gmail.com')}>개발 최정윤 ericggul@gmail.com</span>
+          <span>최정윤</span>
           <br />
-          <span onClick={() => window.open('mailto:sk990120@snu.ac.kr')}>디자인 김예원 </span>
+          <span>권지현 이예은</span>
+          <br />
+          <span>김예원 송유민 이주은</span>
         </p>
       </S.StyledPublisherSection>
     </Fade>

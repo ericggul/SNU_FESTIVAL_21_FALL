@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ClosingFestival from '@I/jpg/closing-festival.jpg';
 import * as S from './styles';
 
 function LightChange({
-  image, index = 0, backgroundColor = 'black',
+  image, index = 0, backgroundColor = 'black', action = false,
 }) {
+  const [render, setRender] = useState(null);
   useEffect(() => {
-    const render = new App(image, index, backgroundColor);
+    setRender(new App(image, index, backgroundColor));
     return () => {
       render.destroy();
     };
   }, []);
+
+  useEffect(() => {
+    if (render && action) {
+      console.log(action);
+      render.onClick();
+    }
+  }, render, [action]);
   return (
     <div
       className="Wrapper"
@@ -73,6 +81,8 @@ class App {
     window.requestAnimationFrame(this.animate.bind(this));
 
     this.canvas.addEventListener('click', this.onClick.bind(this), false);
+
+    // e.offsetX, e.offsetY
   }
 
   destroy() {
@@ -94,8 +104,8 @@ class App {
     this.tmpCanvas.width = this.stageWidth;
     this.tmpCanvas.height = this.stageHeight;
 
-    this.pixelSize = this.stageWidth < 400 ? 10 : 12;
-    this.radius = this.stageWidth < 400 ? 5 : 5;
+    this.pixelSize = this.stageWidth < 400 ? 8 : 10;
+    this.radius = this.stageWidth < 400 ? 4 : 4;
 
     this.ripple.resize(this.stageWidth, this.stageHeight);
     if (this.isLoaded) {

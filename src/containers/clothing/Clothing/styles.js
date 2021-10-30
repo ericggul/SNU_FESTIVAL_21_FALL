@@ -45,8 +45,8 @@ export const Container = styled.div`
     height: ${({ width }) => width * 2.174}px;
 
     @keyframes bigger{
-        from{transform: scale(0) rotate(0);}
-        to{transform: scale(1) rotate(1440deg);}
+        from{transform: scale(0);}
+        to{transform: scale(1);}
     }
     animation: bigger 2.4s backwards;
     animation-delay: 1s;

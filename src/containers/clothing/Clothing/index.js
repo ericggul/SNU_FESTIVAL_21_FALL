@@ -148,15 +148,6 @@ function Clothing({ theme, user, isAuthorized }) {
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
 
-  const handleKakaoClick = useCallback(() => {
-    if (characterRef.current) {
-      html2canvas(characterRef.current).then(canvas => {
-        console.log('hey');
-        setScreenShottedCharacter(canvas.toDataURL('image/jpg'));
-      });
-    }
-  }, [characterRef, selectedClothings]);
-
   const save = useCallback(() => {
     if (isAuthorized) {
       dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
