@@ -7,20 +7,9 @@ import LightChange1 from '@F/animation/ImageTransition/LightChange1';
 import * as S from './styles';
 
 function GroupPhoto({ theme }) {
-  const [action, setAction] = useState(false);
-  const onScroll = useCallback(() => {
-    if (window.scrollY / theme.windowWidth > 1.5) {
-      setAction(true);
-      console.log('actioned!');
-    }
-  }, []);
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
   return (
     <S.StyledGroupPhoto>
-      <LightChange1 image={Photo} action={action} />
+      <LightChange1 image={Photo} />
     </S.StyledGroupPhoto>
   );
 }

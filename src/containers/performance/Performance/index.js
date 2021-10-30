@@ -85,34 +85,39 @@ function Performance({ theme, user, isAuthorized }) {
   }, [history]);
 
   const iconGrid = (
-    <S.IconGrid>
-      <Item
-        url="phone-cert"
-        src={PhoneCertIcon}
-        text="폰서트 LIVE"
-        i={0}
-        selected={selected}
-        sendFunction={send}
-      />
+    <>
+      <S.IconRowOne>
+        <Item
+          url="phone-cert"
+          src={PhoneCertIcon}
+          text="폰서트 LIVE"
+          i={0}
+          selected={selected}
+          sendFunction={send}
+        />
+        <Item
+          url="sing-stealer"
+          src={SingStealerIcon}
+          text="씽스틸러"
+          i={1}
+          selected={selected}
+          sendFunction={send}
+        />
+      </S.IconRowOne>
+      <S.IconRowTwo>
 
-      <Item
-        url="sing-stealer"
-        src={SingStealerIcon}
-        text="씽스틸러"
-        i={1}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="hit-the-stage"
-        src={HitTheStageIcon}
-        text="힛더스테이지"
-        i={2}
-        selected={selected}
-        sendFunction={send}
-      />
+        <Item
+          url="hit-the-stage"
+          src={HitTheStageIcon}
+          text="힛더스테이지"
+          i={2}
+          selected={selected}
+          sendFunction={send}
+        />
 
-    </S.IconGrid>
+      </S.IconRowTwo>
+    </>
+
   );
 
   return (

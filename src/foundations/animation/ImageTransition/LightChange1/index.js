@@ -4,22 +4,15 @@ import ClosingFestival from '@I/jpg/closing-festival.jpg';
 import * as S from './styles';
 
 function LightChange({
-  image, index = 0, backgroundColor = 'black', action = false,
+  image, index = 0, backgroundColor = 'black',
 }) {
-  const [render, setRender] = useState(null);
   useEffect(() => {
-    setRender(new App(image, index, backgroundColor));
+    const render = new App(image, index, backgroundColor);
     return () => {
       render.destroy();
     };
   }, []);
 
-  useEffect(() => {
-    if (render && action) {
-      console.log(action);
-      render.onClick();
-    }
-  }, render, [action]);
   return (
     <div
       className="Wrapper"
