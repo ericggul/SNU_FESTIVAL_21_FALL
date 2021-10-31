@@ -7,13 +7,13 @@ export const StyledMobileHome = styled.div`
   position: relative;
   width: 100%;
   overscroll-behavior-y: none;
-  // height: ${({ theme }) => theme.windowHeight}px;
 
   @keyframes change-color{
     0%{ background-color: black;}
     100%{ background-color: ${({ theme }) => theme.palette.HOME_PURPLE};}
   }
   animation: change-color 2s linear forwards;
+
 `;
 
 export const Wrapper = styled.div`

@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const Home = lazy(() => import('@/pages/Home'));
+const Home = lazy(() => import('@/pages/home/Home'));
 
 const JabtiRouter = lazy(() => import('@/pages/jabti/JabtiRouter'));
 
@@ -13,6 +13,7 @@ const Introduction = lazy(() => import('@/pages/Introduction'));
 const GuestBook = lazy(() => import('@/pages/GuestBook'));
 const GoodsRouter = lazy(() => import('@/pages/goods/GoodsRouter'));
 const PathMoveRouter = lazy(() => import('@/pages/PathMove'));
+const LightMissionComplete = lazy(() => import('@/pages/home/LightMissionComplete'));
 
 const routes = [
   {
@@ -65,6 +66,11 @@ const routes = [
   {
     path: '/goods',
     component: GoodsRouter,
+  },
+  {
+    path: '/light-mission-completed-yeaaay',
+    component: LightMissionComplete,
+    exact: true,
   },
 ];
 export default routes;

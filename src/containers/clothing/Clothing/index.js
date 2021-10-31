@@ -198,6 +198,7 @@ function Clothing({ theme, user, isAuthorized }) {
                     left={convert(ACCESSORIES_DATA.xPos)}
                     width={convert(ACCESSORIES_DATA.width)}
                     key={i}
+                    zIndexOnTop
                   />
                 )
               ))}

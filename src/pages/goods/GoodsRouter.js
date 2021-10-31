@@ -1,8 +1,8 @@
 import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useLocation, Switch } from 'react-router-dom';
-import NotFound from '@/pages/NotFound';
 import { AnimatePresence } from 'framer-motion';
+import NotFound from '@/pages/NotFound';
 
 function GoodsRouter({ match }) {
   const location = useLocation();
@@ -45,11 +45,14 @@ GoodsRouter.propTypes = {
   }).isRequired,
 };
 
-const Goods = lazy(() => import('@/pages/goods/Goods'));
-const Glass = lazy(() => import('@/pages/goods/GoodsDetail').then(module => ({ default: module.Glass })));
-const SealSticker = lazy(() => import('@/pages/goods/GoodsDetail').then(module => ({ default: module.SealSticker })));
-const Calendar = lazy(() => import('@/pages/goods/GoodsDetail').then(module => ({ default: module.Calendar })));
-const StickerPack = lazy(() => import('@/pages/goods/GoodsDetail').then(module => ({ default: module.StickerPack })));
+const Goods = lazy(() => import('@P/goods/Goods'));
+
+const Memo = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Memo })));
+const Sanitizer = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Sanitizer })));
+const Soju = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Soju })));
+const Keyring = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Keyring })));
+const Sticker = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Sticker })));
+const Sticker4 = lazy(() => import('@P/goods/GoodsDetail').then(module => ({ default: module.Sticker4 })));
 
 const goodsRoutes = [
   {
@@ -57,21 +60,30 @@ const goodsRoutes = [
     component: Goods,
     children: [
       {
-        path: '/glass',
-        component: Glass,
+        path: '/memo',
+        component: Memo,
       },
       {
-        path: '/seal-sticker',
-        component: SealSticker,
+        path: '/sanitizer',
+        component: Sanitizer,
       },
       {
-        path: '/calendar',
-        component: Calendar,
+        path: '/soju',
+        component: Soju,
       },
       {
-        path: '/sticker-pack',
-        component: StickerPack,
+        path: '/keyring',
+        component: Keyring,
       },
+      {
+        path: '/sticker',
+        component: Sticker,
+      },
+      {
+        path: '/sticker4',
+        component: Sticker4,
+      },
+
     ],
   },
 ];

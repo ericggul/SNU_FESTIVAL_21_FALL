@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Route, useLocation, Switch } from 'react-router-dom';
 import HomeContainer from '@C/home/Home';
+import MobileHomeContainer from '@C/home/MobileHome';
 import withMountEvent from '@U/hoc/withMountEvent';
 import Header from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
-import MobileHomeContainer from '@C/home/MobileHome';
+
+import { AnimatePresence } from 'framer-motion';
+import NotFound from '@P/NotFound';
 
 function Home({ theme }) {
   const location = useLocation();

@@ -149,7 +149,7 @@ function MobileHome({
 
   // Scroll when from Light Event
   const scrollTo = useCallback((numbers) => {
-    window.scrollTo({ top: LIGHT_LOC[numbers]?.y, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: LIGHT_LOC[numbers]?.y - 300, left: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -170,6 +170,8 @@ function MobileHome({
     speechSynthesis.speak(utterance);
   });
 
+  const [fadeOut, setFadeOut] = useState(false);
+
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
       setBusMove(true);
@@ -178,20 +180,34 @@ function MobileHome({
       }, 2000);
       setTimeout(() => {
         setGateOn(true);
-      }, 4700);
+      }, 4900);
       setTimeout(() => {
-        setIsMissionCompleteModalOpen(true);
-      }, 6300);
+        toast('빛 찾기 완료!');
+      }, 5500);
+      setTimeout(() => {
+        toast('잠시 후 이동합니다...');
+      }, 7500);
+      setTimeout(() => {
+        history.push('/light-mission-completed-yeaaay');
+      }, 10000);
     }
     if (!isLightPlaying) {
-      toast('졸고있는 리오를 깨워보세요!');
+      toast('꺼진 불을 밝히고 싶으신가요?');
+      setTimeout(() => {
+        toast('졸고있는 리오를 깨워보세요!');
+      }, 2000);
+      if (!isAuthorized) {
+        setTimeout(() => {
+          toast('로그인이 필요합니다.');
+        }, 4000);
+      }
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [missionCleared, isLightPlaying]);
 
   return (
     <>
-      <S.StyledMobileHome>
+      <S.StyledMobileHome fadeOut={fadeOut}>
         <Title />
         <S.Wrapper width={convert(375)} height={convert(1555)}>
           {!isLoading && <Notice />}

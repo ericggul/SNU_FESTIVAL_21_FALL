@@ -7,6 +7,7 @@ export const Visualizer = styled.div`
     justify-items: center;
     align-items: center;
     overflow-x: auto;
+    margin-top: .9rem;
 `;
 
 export const Expander = styled.div`

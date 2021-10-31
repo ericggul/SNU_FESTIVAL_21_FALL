@@ -7,14 +7,13 @@ export const StyledGoodsDetail = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  // background: ${({ theme }) => theme.palette.DARK_PURPLE};
 `;
 
 export const Body = styled.div`
   width: 100%;
   height: 100%;
 
-  max-width: 750px;
+  max-width: 500px;
   color: ${({ theme }) => theme.palette.WHITE};
   padding: 1rem 0;
   box-sizing: border-box;

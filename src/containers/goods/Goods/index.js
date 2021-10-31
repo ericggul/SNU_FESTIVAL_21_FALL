@@ -64,9 +64,6 @@ function Goods({ user, isAuthorized }) {
   }, [isAuthorized, mission, lightVisible]);
   /// ////////////////////
 
-  const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[1], [user]);
-  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
-
   return (
     <S.StyledGoods>
       <HeaderContent>굿즈</HeaderContent>
@@ -79,7 +76,6 @@ function Goods({ user, isAuthorized }) {
 
       {lightVisible && <Light2 top={150} left={200} handleClick={lightMissionClick} />}
       {lightModalComponent}
-      {signInModalComponent}
     </S.StyledGoods>
   );
 }

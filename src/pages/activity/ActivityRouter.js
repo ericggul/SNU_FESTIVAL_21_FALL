@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, Route, Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import NotFound from '@/pages/NotFound';
+import NotFound from '@P/NotFound';
 
 function ActivityRouter({ match }) {
   const location = useLocation();

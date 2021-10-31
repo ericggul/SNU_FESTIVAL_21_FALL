@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import Glass from '@I/goods/glass.jpg';
-import SealSticker from '@I/goods/seal-sticker.png';
-import Calendar from '@I/goods/calendar.png';
-import StickerPack from '@I/goods/sticker-pack.png';
+
+import KeyRingImage from '@I/goods/keyring.png';
+import MemoImage from '@I/goods/memo.png';
+import SanitizerImage from '@I/goods/sanitizer.png';
+import SojuImage from '@I/goods/soju.png';
+import StickerImage from '@I/goods/sticker.png';
+import Sticker4Image from '@I/goods/sticker4.png';
+
 import GoodsBox from '@C/goods/GoodsBox';
 import { useHistory } from 'react-router';
 import { motion, useViewportScroll, useTransform } from 'framer-motion';
@@ -38,10 +42,12 @@ function DisplaySection() {
 
   return (
     <S.StyledDisplaySection>
-      {Item('glass', Glass, '축제이즈백 소주잔', 7000, 0)}
-      {Item('seal-sticker', SealSticker, '씰스티커', 1500, 1)}
-      {Item('calendar', Calendar, '사계절 엽서 세트', 2000, 2)}
-      {Item('sticker-pack', StickerPack, '스티커팩', 1500, 3)}
+      {Item('memo', MemoImage, '리오 떡메모지 2종', 2000, 0)}
+      {Item('sanitizer', SanitizerImage, '리오 손소독제', 7000, 1)}
+      {Item('soju', SojuImage, '헤롱헤롱 리오 소주잔', 6000, 2)}
+      {Item('keyring', KeyRingImage, '리오 유령 키링', 4500, 3)}
+      {Item('sticker', StickerImage, '관악의 밤 리오 씰스티커', 1500, 4)}
+      {Item('sticker4', Sticker4Image, '관악의 밤 리오 4분할 스티커', 1500, 5)}
     </S.StyledDisplaySection>
   );
 }

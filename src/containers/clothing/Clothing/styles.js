@@ -77,13 +77,14 @@ export const ConverterCell = styled.div`
 
 export const Save = styled.div`
     margin: 2rem;
-    margin-bottom: .8rem;
-    padding: .4rem 1.5rem;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    padding: .4rem 2rem;
     border-radius: 3rem;
     border: .2rem solid #707070;
-    color: black;
-    font-size: 1.6rem;
-    font-weight: 700;
+    color: #707070;
+    font-size: 1.5rem;
+    font-weight: 500;
     cursor: pointer;
 `;
 
