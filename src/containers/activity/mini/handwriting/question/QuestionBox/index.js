@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '@U/hooks/useInput';
-import Slider from 'react-slick';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';

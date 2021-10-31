@@ -44,12 +44,6 @@ export const Container = styled.div`
     width: ${({ width }) => width}px;
     height: ${({ width }) => width * 2.174}px;
 
-    @keyframes bigger{
-        from{transform: scale(0);}
-        to{transform: scale(1);}
-    }
-    animation: bigger 2.4s backwards;
-    animation-delay: 1s;
 `;
 
 export const Body = styled.img`

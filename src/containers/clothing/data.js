@@ -6,7 +6,7 @@ export const CLOTHING_DATA = [
     hangeul: '눈', english: 'eyes', number: 31, xPos: 87, yPos: 226, width: 200,
   },
   {
-    hangeul: '눈쎱', english: 'eyebrow', number: 10, xPos: 74.5, yPos: 198, width: 220,
+    hangeul: '눈썹', english: 'eyebrow', number: 10, xPos: 74.5, yPos: 198, width: 220,
   },
   {
     hangeul: '코', english: 'nose', number: 8, xPos: 160, yPos: 257, width: 55,

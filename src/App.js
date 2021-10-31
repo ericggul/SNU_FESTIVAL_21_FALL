@@ -8,7 +8,7 @@ import useResize from '@U/hooks/useResize';
 import LoadingMascot from '@F/loading/LoadingMascot';
 import PageLoading from '@F/loading/PageLoading';
 import { FlexCenterStyle } from '@S/responsive/display';
-import NotFound from '@/pages/NotFound';
+import NotFound from '@P/NotFound';
 import { GA_TRACKING_KEY } from '@/config';
 import GaAnalytics from '@/UserAnalytics';
 import routes from '@/routes';

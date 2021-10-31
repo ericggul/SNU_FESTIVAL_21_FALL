@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
-import Image from '@/foundations/images/Image';
 import GoodsBox from '@C/goods/GoodsBox';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import Lumination2 from '@F/animation/Lumination/Lumination2';
 import { transition } from '@C/goods/DisplaySection';
+import Image from '@F/images/Image';
 import * as S from './styles';
 
 function GoodsDetail({
@@ -13,7 +13,7 @@ function GoodsDetail({
 }) {
   const goToForm = () => {
     EventBehavior('Goods', 'Click Goods Form', 'Click Goods Form');
-    window.open('https://forms.gle/AwDogQChMh9sZN6T7', '_blank');
+    window.open('https://forms.gle/esoTsairojegLvQS6', '_blank');
   };
 
   return (

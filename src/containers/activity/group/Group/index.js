@@ -124,7 +124,7 @@ function Group({ theme, user, isAuthorized }) {
 
   const goToZoom = useCallback(() => {
     if (url !== null && url.length > 0) {
-      EventBehavior('Activity', `Click Youtube Link: ${url}`, `go to ${url} by activity page`);
+      EventBehavior('Activity', 'Click Youtube Link: Group', 'group clicked');
       window.open(url, '_blank');
     } else if (url !== null && url.length === 0) {
       toast('행사 준비 중입니다😇');

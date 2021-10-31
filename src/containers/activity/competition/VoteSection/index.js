@@ -17,6 +17,7 @@ import SignInGuide from '@F/modal/content/SignInGuide';
 import { competitionCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase';
 import LoadingMascot from '@F/loading/LoadingMascot';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 import Image from '@/foundations/images/Image';
 import * as S from './styles';
 
@@ -76,6 +77,7 @@ function VoteSection({
       [myLikesForCompetition]: firebase.firestore.FieldValue.arrayUnion(uid),
     }).then(() => {
       toast('투표에 참여되었습니다.');
+      EventBehavior('Activity', 'Voted: Competition', 'competition voted');
       onVoteForField(field, myLikesForCompetition);
     }).catch(() => {
       toast('인터넷이 불안정합니다. 다시 시도해주세요.');

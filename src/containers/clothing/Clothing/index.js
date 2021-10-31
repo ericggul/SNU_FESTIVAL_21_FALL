@@ -71,12 +71,12 @@ function Clothing({ theme, user, isAuthorized }) {
   // selected data set state
   // Clothings: One selection for each part
   // Accessories: Multiple accessories possible
-  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(-1));
   const [selectedAccessories, setSelectedAccessories] = useState(hadPlayed ? mission.accessorie : []);
   const [imageArray, setImageArray] = useState([]);
 
   useEffect(() => {
-    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(-1));
     setSelectedAccessories(hadPlayed ? mission.accessorie : []);
     setSelectedBackground(hadPlayed ? mission.background : 4);
   }, [hadPlayed, mission.clothing]);
@@ -161,7 +161,7 @@ function Clothing({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
-      <HeaderContent>MY CHARACTER</HeaderContent>
+      <HeaderContent>옷 입히기</HeaderContent>
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
           <ControlArea
@@ -172,27 +172,21 @@ function Clothing({ theme, user, isAuthorized }) {
             onBackgroundClick={handleBackgroundChange}
             onHairClose={() => setHairOnTop(hr => !hr)}
           />
-          {/* <S.Text>
-            나만의 캐릭터를 만들고,
-            {' '}
-            <br />
-            {' '}
-            웹사이트에 숨어있는 빛을 모아보세요!
-          </S.Text> */}
           <S.MidContainer ref={characterRef}>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
               <S.Element
-                src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+                src={selectedClothings[0] !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
                 top={convert(CLOTHING_DATA[0].yPos)}
                 left={convert(CLOTHING_DATA[0].xPos)}
                 width={convert(CLOTHING_DATA[0].width)}
                 onClick={() => changePr(selectedClothings[0], 0)}
                 zIndexOnTop={hairOnTop}
+
               />
               {selectedClothings.slice(1).map((sl, pr) => (
                 <S.Element
-                  src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+                  src={sl !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
                   top={convert(CLOTHING_DATA[pr + 1].yPos)}
                   left={convert(CLOTHING_DATA[pr + 1].xPos)}
                   width={convert(CLOTHING_DATA[pr + 1].width)}

@@ -81,7 +81,7 @@ export const Button = styled.div`
   padding: .5rem 2.5rem;
   background: rgba(255, 255, 255, 0.7);
   border-radius: .8rem;
-  // box-shadow: .4rem .4rem .4rem rgba(255, 255, 255, 0.58);
+  
   cursor: pointer;
   position: relative;
   transition: transform .4s;
