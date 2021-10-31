@@ -106,20 +106,26 @@ function Radio({ theme, user, isAuthorized }) {
         exit={{ opacity: 0.4, filter: 'blur(10px)' }}
         transition={transition}
       >
-        <S.Image src={DummyImage} />
+        {/* <S.Image src={DummyImage} /> */}
         <S.Container>
+          <S.Paragraph>
+            <iframe
+              width={isMobile ? theme.windowWidth : theme.windowWidth * 0.6}
+              height={isMobile ? theme.windowWidth * 0.5625 : theme.windowWidth * 0.3375}
+              src="https://www.youtube.com/embed/wiSVFz7WyBk?autoplay=1"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </S.Paragraph>
           <S.Texts>
             <p>With. 진용진</p>
             <p>이색 샤대생 인터뷰</p>
             <p>진용진에 대해 알려드림</p>
             <p>샤대생과 진용진님의 라이어 게임</p>
+            <p>(10월 26일 라이브 녹화본)</p>
           </S.Texts>
-
-          <S.Button onClick={() => goToYoutube()} clicked={clicked}>지금 보러가기!</S.Button>
-          <S.Paragraph>
-            <p>10월 26일(화) 20:00 - 21:00</p>
-            <p>유튜브 라이브: 위 링크 클릭</p>
-          </S.Paragraph>
         </S.Container>
       </S.Contents>
       {lightVisible && <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}

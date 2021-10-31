@@ -58,7 +58,6 @@ export const IconDescription = styled.div`
         0 0 .1rem .1rem white,
         0 0 .5rem .2rem white,
         0 0 1rem .5rem white;
-        
 `;
 
 export const Accomplished = styled.img`
