@@ -33,8 +33,8 @@ function Performance({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 0;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
   const onModalChange = () => {
     if (lightVisible) {

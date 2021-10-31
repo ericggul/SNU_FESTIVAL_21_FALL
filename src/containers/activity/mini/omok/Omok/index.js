@@ -23,7 +23,6 @@ function Omok({ theme }) {
   });
 
   const createOmok = useCallback((e) => {
-    console.log(e);
     const divider = theme.windowWidth < 768 ? 30 : 50;
     if (mainRef.current) {
       const n = document.createElement('div');

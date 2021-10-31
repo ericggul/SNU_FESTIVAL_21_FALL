@@ -58,7 +58,7 @@ ArchiveSection.propTypes = {
 
 const archives = [
   {
-    time: '2021 봄 축제', name: '페스월드', image: Poster21Spring, description: '당신만의 특별한 모남이, 어디서든 볼 수 있는  매끈한 동그라미보다 더 멋지다는 것을.',
+    time: '2021 봄 축제', name: '페스월드', image: Poster21Spring, description: '소중한 대학생활을 잃어버리지 않도록,  당신을 위한 온라인 축제의 세계.',
   },
   {
     time: '2019 가을 축제', name: '내모난꿈', image: Poster19Fall, description: '당신만의 특별한 모남이, 어디서든 볼 수 있는  매끈한 동그라미보다 더 멋지다는 것을.',

@@ -81,9 +81,6 @@ function Clothing({ theme, user, isAuthorized }) {
     setSelectedBackground(hadPlayed ? mission.background : 4);
   }, [hadPlayed, mission.clothing]);
 
-  console.log(hadPlayed, mission.clothing);
-  console.log(selectedClothings);
-
   // loading and calling image
   useEffect(() => {
     if (loaded === 0 && imageArray.length === 0) {
@@ -117,7 +114,7 @@ function Clothing({ theme, user, isAuthorized }) {
   }, [loaded]);
 
   // eyebrow visible(=== hair on top)
-  const [hairOnTop, setHairOnTop] = useState(false);
+  const [hairOnTop, setHairOnTop] = useState(true);
 
   // size converter
   const convert = useCallback((value) => (containerWidth < 500 ? (containerWidth / 375) * value : (500 / 375) * value), [theme, containerWidth]);
@@ -182,7 +179,6 @@ function Clothing({ theme, user, isAuthorized }) {
                 width={convert(CLOTHING_DATA[0].width)}
                 onClick={() => changePr(selectedClothings[0], 0)}
                 zIndexOnTop={hairOnTop}
-
               />
               {selectedClothings.slice(1).map((sl, pr) => (
                 <S.Element

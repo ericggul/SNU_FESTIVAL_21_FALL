@@ -60,7 +60,6 @@ function Clothing({ theme, user, isAuthorized }) {
   // capturing clothings
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
-  console.log(name);
 
   const handleSaveClick = useCallback(() => {
     if (characterRef.current) {

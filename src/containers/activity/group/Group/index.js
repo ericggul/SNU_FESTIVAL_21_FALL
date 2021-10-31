@@ -25,6 +25,7 @@ function Group({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const [lighted, setLighted] = useState(true);
   const [lightVisible, setLightVisible] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 7;
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
 
   console.log('sustain', sustainLightTemp);
@@ -54,7 +55,6 @@ function Group({ theme, user, isAuthorized }) {
 
   /// //////////////////////////
   const mission = useMission();
-  const PAGE_LIGHT_INDICATOR = 7;
 
   const onModalChange = () => {
     if (lightVisible) {
@@ -77,8 +77,6 @@ function Group({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
-    } else if (!sustainLightTemp) {
-      setLightVisible(false);
     } else {
       setLightVisible(true);
     }

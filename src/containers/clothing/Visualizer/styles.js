@@ -47,6 +47,7 @@ export const NarrowFlex = styled.div`
     position: relative;
     scroll-snap-type: x proximity;
     box-shadow: 0 0 1rem .5rem rgba(0, 0, 0, .16);
+    transition: all .3s;
 
     &::-webkit-scrollbar {
         display: inline; /* Chrome, Safari, Opera*/

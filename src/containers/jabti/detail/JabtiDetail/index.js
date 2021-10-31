@@ -13,10 +13,9 @@ import DetailRecommend from '@C/jabti/detail/DetailRecommend';
 import DetailLink from '@C/jabti/detail/DetailLink';
 import DetailFestivalInfo from '@C/jabti/detail/DetailFestivalInfo';
 
-import Loading from '@/containers/jabti/Loading';
-
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import { jabtiCollectionRef } from '@U/initializer/firebase';
+import Loading from '@/containers/jabti/Loading';
 
 import * as S from './styles';
 
@@ -36,7 +35,6 @@ function JabtiDetail({
   const history = useHistory();
 
   useEffect(() => {
-    console.log(fromQuestion);
     setIsLoading(true);
     jabtiCollectionRef.doc('result-array').get().then((doc) => (
       (Object.entries(doc.data()).forEach(([key, likes]) => {
@@ -45,7 +43,6 @@ function JabtiDetail({
     ));
     if (fromQuestion) {
       setOrigin(true);
-      console.log('from Question confirmed');
     }
     if (location.state && location.state.fromQuestions) {
       const state = { ...history.location.state };

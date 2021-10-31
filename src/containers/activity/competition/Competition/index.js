@@ -36,9 +36,9 @@ import * as S from './styles';
 function Competition({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
-  const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(true);
   const PAGE_LIGHT_INDICATOR = 6;
+  const [lightVisible, setLightVisible] = useState(false);
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
   const onModalChange = () => {
     if (lightVisible) {
@@ -67,6 +67,7 @@ function Competition({ theme, user, isAuthorized }) {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
+
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -106,15 +107,11 @@ function Competition({ theme, user, isAuthorized }) {
 
   // 미션
   const dispatch = useDispatch();
-  const { modalComponent: missionModalComponent, setIsModalOpen: setIsMissionModalOpen } = useModal(MissionGuide, {
-    name: '공모전',
-    stamp: CompetitionStamp,
-  });
+
   useEffect(() => {
     if (isAuthorized && mission.isLoaded && !mission.competition) {
       if (iHaveVoted.length > 0) {
         dispatch(actions.setFirestoreMission(user, 'competition', true));
-        setIsMissionModalOpen(true);
       }
     }
   }, [isAuthorized, mission.isLoaded, mission.competition, iHaveVoted, dispatch]);
@@ -136,7 +133,6 @@ function Competition({ theme, user, isAuthorized }) {
       </S.Body>
       {lightVisible && <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}
       {lightModalComponent}
-      {missionModalComponent}
     </S.StyledCompetition>
   );
 }

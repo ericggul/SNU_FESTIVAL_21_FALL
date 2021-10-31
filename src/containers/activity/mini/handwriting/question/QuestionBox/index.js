@@ -33,7 +33,6 @@ export function QuestionBox({
   const { value, onChange, setValue } = useInput('');
 
   const solvedArrayConverter = useCallback((inputString, totalLength) => {
-    console.log('array converter');
     let array = [];
     let solvedIndexesStorage = [];
     let unSolvedIndexesStorage = [];
@@ -56,12 +55,9 @@ export function QuestionBox({
   const handwritingArray = useSelector(state => state.miniGame.handwriting);
   const dispatch = useDispatch();
   const [solvedIndicatorArray, solvedStorage, unSolvedStorage] = useMemo(() => solvedArrayConverter(handwritingArray[sectorNum].toString(2), CONVERTED_MAJORS[sectorNum].length), [handwritingArray]);
-  console.log('handwriting', handwritingArray);
-  console.log('solved', solvedIndicatorArray, solvedStorage, unSolvedStorage);
 
   // Unsolved problems: indexes --> Currently temporary implementation
   const shuffledIndexes = useMemo(() => shuffleArray(unSolvedStorage), [unSolvedStorage]);
-  console.log('shuffledindex:', shuffledIndexes);
   // Real Location
   const [currentLoc, setCurrentLoc] = useState(shuffledIndexes[0]);
   // Shuffled Location
@@ -101,7 +97,6 @@ export function QuestionBox({
     if (isAuthorized) {
       let newArray = [...handwritingArray];
       newArray[sectorNum] += (2 ** currentLoc);
-      console.log(newArray);
       dispatch(actions.setFirestoreHandwriting(user, newArray));
     } else {
       setIsSignInModalOpen(true);
@@ -115,8 +110,6 @@ export function QuestionBox({
   const handleIndex = (i) => {
     setCurrentLoc(shuffledIndexes[i]);
     setCurrentShuffledLoc(i);
-    console.log(shuffledIndexes[i]);
-    console.log(i);
   };
 
   return (

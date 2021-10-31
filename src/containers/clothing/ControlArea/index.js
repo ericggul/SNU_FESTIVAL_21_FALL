@@ -12,7 +12,7 @@ function ControlArea({
       <S.ExpandButton
         onClick={() => setExpanded(exp => !exp)}
       >
-        <S.Text>{expanded ? '>' : '<'}</S.Text>
+        <S.ExpandText>{expanded ? '>' : '<'}</S.ExpandText>
       </S.ExpandButton>
       <S.ControlUnit expanded={expanded}>
         <S.BackgroundUnit>

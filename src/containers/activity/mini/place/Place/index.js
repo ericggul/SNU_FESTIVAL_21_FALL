@@ -30,7 +30,6 @@ function Place({ theme, user, isAuthorized }) {
   const handleClick = useCallback((i) => {
     setSectorNum(i);
   }, []);
-  console.log(sectorNum);
   return (
     <S.StyledPlace>
       <HeaderContent backgroundColor={theme.palette.PLACE_HEADER}>

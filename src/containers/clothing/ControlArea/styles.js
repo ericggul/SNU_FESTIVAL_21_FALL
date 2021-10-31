@@ -10,18 +10,11 @@ export const Container = styled.div`
     transition: all 1s;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
-
-    @keyframes appear{
-        from{opacity: 0; }
-        to{opacity: 1; }
-    }
-    animation: appear 2s backwards;
-    animation-delay: 2s;
 `;
 
 export const ExpandButton = styled.div`
-    width: 1.3rem;
-    height: 4rem;
+    width: 1.8rem;
+    height: 6rem;
     ${FlexCenterStyle};
     background: white;
     border-radius: 1rem 0 0 1rem;
@@ -41,6 +34,15 @@ export const ControlUnit = styled.div`
     overflow-y: hidden;
     background: white;
     border-radius: 1rem 0 0 1rem;
+`;
+
+export const ExpandText = styled.div`
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0;
+    color: black;
+    cursor: pinter;
 `;
 
 export const Text = styled.div`
