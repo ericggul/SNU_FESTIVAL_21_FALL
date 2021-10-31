@@ -9,6 +9,13 @@ export const GridItem = styled(motion.div)`
     margin: 2.5vw;
     position: relative;
     cursor: pointer;
+
+    @keyframes rotate-inv{
+        from{transform: rotate(0);}
+        to{transform: rotate(-360deg);}
+    }
+
+    ${({ isMobile }) => isMobile && 'animation: rotate-inv 90s infinite linear;'}
 `;
 
 export const ImageContainer = styled.div`

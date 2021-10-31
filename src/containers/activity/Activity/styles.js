@@ -32,6 +32,14 @@ export const IconGrid = styled.div`
   grid-template-columns: ${({ isMobile }) => (isMobile
     ? 'repeat(2, calc(min(46vw, 40vh)));'
     : 'repeat(4, calc(min(23vw, 350px)));')};
+
+
+  @keyframes rotate-360{
+    from{transform: rotate(0deg);}
+    to{transform: rotate(360deg);}
+  }
+
+  ${({ isMobile }) => isMobile && 'animation: rotate-360 90s infinite linear;'}
 `;
 
 export const ConstellationConatiner = styled.div`

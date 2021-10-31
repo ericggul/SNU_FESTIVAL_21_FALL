@@ -48,12 +48,12 @@ function LightGuide({
     '시작이 반이다.', // 9
     '이정도야 쉽지', // 8
     'EZPZ', // 7
-    '', // 6
-    '벌써 반이야', // 5
-    '', // 4
-    'et', // 3
-    'et', // 2
-    '', // 1
+    '잘찾네!!', // 6
+    '진짜 반쯤 왔어', // 5
+    '요기있지롱', // 4
+    '세개만 더 찾자', // 3
+    '힘드니까 인생이다', // 2
+    '조금만 더!!', // 1
     '축하합니다!', // 0
   ];
 
@@ -122,7 +122,7 @@ function LightGuide({
         </S.CloseButton>
         <S.Contents>
           <S.Header>
-            빛 찾기 이벤트
+            {foundState <= 10 ? '빛 찾기 이벤트' : HEADERS[foundState]}
           </S.Header>
           {
             TEXTS.map((text, i) => (

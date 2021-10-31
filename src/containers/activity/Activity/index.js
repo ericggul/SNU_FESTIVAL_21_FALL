@@ -85,12 +85,12 @@ function Activity({ theme, user, isAuthorized }) {
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (500 / 375) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const convertY = useCallback((value) => {
     const result = (theme.windowHeight / 812) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const POS = [
     { x: 67, y: 61, w: 107 },
