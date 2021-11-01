@@ -1,4 +1,6 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, {
+  useMemo, useState, useEffect, useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
@@ -14,7 +16,7 @@ import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 export function QuestionBox({
-  textImg, answerColor, questions, answers, user, isAuthorized, hints, isNotCompleted,
+  textImg, answerColor, questions, answers, user, isAuthorized, hints, changeTheme,
 }) {
   const [step, setStep] = useState(0);
   const { value, onChange, setValue } = useInput('');
@@ -53,13 +55,17 @@ export function QuestionBox({
   };
 
   const submit = () => {
+    console.log(step);
     if (sha256(value.toLowerCase()) === answers[step]) {
-      if (step !== 2) {
+      if (step !== 2 && step !== 4) {
         toast('정답입니다🎉');
         goToNextStep();
-      } else {
+      } else if (step === 2) {
         clear();
         goToNextStep();
+      } else if (step === 4) {
+        toast('완료했습니다!');
+        changeTheme();
       }
     } else {
       toast('오답입니다😅');
@@ -69,7 +75,11 @@ export function QuestionBox({
   useEffect(() => {
     const today = new Date();
     if (today.getDate() === 4 || today.getDate() === 5) {
-      setTimeout(() => { toast(hints[step]); }, 1000);
+      setTimeout(() => {
+        toast(hints[step], {
+          autoClose: 4500, draggable: true,
+        });
+      }, 1000);
     }
   }, [step]);
 

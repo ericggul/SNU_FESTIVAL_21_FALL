@@ -14,6 +14,7 @@ import MissionCard from '@C/home/MissionCard';
 import Rio from '@C/home/common/Rio';
 
 import { preloadImage } from '@U/functions/preload';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 import LogInRio from '@I/icon/log-in-rio.png';
 import MenuDesktop from '@I/layout/menu-desktop.png';
@@ -87,6 +88,7 @@ function Home({
   const [busMove, setBusMove] = useState(false);
   const [gateOn, setGateOn] = useState(false);
 
+  const [loadedNumber, setLoadedNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -102,14 +104,21 @@ function Home({
     history.push(route);
   }, [history]);
 
-  const onLoad = useCallback(() => {
-    setIsLoading(false);
-    [MenuDesktop, LightRio, LogInRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
-      CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
-      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
-      ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
-    ].forEach(preloadImage);
-  }, []);
+  console.log(isLoading);
+  useEffect(() => {
+    if (loadedNumber >= 8) {
+      setIsLoading(false);
+    }
+  }, [loadedNumber]);
+  useEffect(() => {
+    if (!isLoading) {
+      [MenuDesktop, LightRio, LogInRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+        CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
+        OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
+        ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
+      ].forEach(preloadImage);
+    }
+  }, [isLoading]);
 
   const Stand = ({
     lightOn, top, left, fromEvent,
@@ -166,6 +175,7 @@ function Home({
 
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
+      EventBehavior('Light', 'Main Gate Clicked', 'Main Gate Clicked');
       setBusMove(true);
       setTimeout(() => {
         window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
@@ -205,9 +215,15 @@ function Home({
       <S.StyledHome fadeOut={fadeOut}>
         <Title />
         <Notice />
-        <S.Wrapper width={convert(1920)} height={convert(2506)}>
+        <S.Wrapper width={convert(1920)} height={convert(2506)} isLoading={isLoading}>
 
-          <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} onLoad={onLoad} />
+          <CS.Background
+            src={BackgroundBottom}
+            top={convert(0.001)}
+            left={convert(0)}
+            width={convert(1920)}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
 
           {busMove && <CustomPath isMobile={false} busWidth={convert(180)} />}
           {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="버스" top={convert(442)} left={convert(1364)} width={convert(160)} />}
@@ -215,13 +231,63 @@ function Home({
           {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="버스" top={convert(1290)} left={convert(974)} width={convert(166)} />}
           {!busMove && <CS.Bus index={3} src={BusFour} onClick={mainGateClick} alt="버스" top={convert(1940)} left={convert(1066)} width={convert(172)} />}
 
-          <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(200)} left={convert(0)} width={convert(1920)} />
-
-          <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
-          <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
-          <CS.Landmark delay={4} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
-          <CS.Landmark delay={8} src={MiniGame} alt="미니게임" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/activity/mini')} />
-          <CS.Landmark delay={6} src={Clothing} alt="옷 입히기" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/clothing')} />
+          <CS.BackgroundMiddle
+            src={BackgroundMiddle}
+            top={convert(200)}
+            left={convert(0)}
+            width={convert(1920)}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={0}
+            src={Performance}
+            alt="공연"
+            top={convert(165)}
+            left={convert(229)}
+            width={convert(978)}
+            onClick={() => goToPage('/performance')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={2}
+            src={Activity}
+            alt="행사"
+            top={convert(695)}
+            left={convert(568)}
+            width={convert(734)}
+            onClick={() => goToPage('/activity')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={4}
+            src={Goods}
+            alt="굿즈"
+            top={convert(1083)}
+            left={convert(73)}
+            width={convert(556)}
+            onClick={() => goToPage('/goods')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={8}
+            src={MiniGame}
+            alt="미니게임"
+            top={convert(1461)}
+            left={convert(919)}
+            width={convert(558)}
+            onClick={() => goToPage('/activity/mini')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={6}
+            src={Clothing}
+            alt="옷 입히기"
+            top={convert(924)}
+            left={convert(1272)}
+            width={convert(546)}
+            onClick={() => goToPage('/clothing')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
 
           {LIGHT_LOC.map((pos, i) => (
             <Stand
@@ -237,7 +303,13 @@ function Home({
 
           <CS.Door onClick={mainGateClick} src={gateOn ? MainGateOn : MainGateOff} alt="정문" top={convert(1775)} left={convert(351)} width={convert(649)} />
 
-          <CS.BackgroundFront src={BackgroundTop} top={convert(0.001)} left={convert(0)} width={convert(1920)} />
+          <CS.BackgroundFront
+            src={BackgroundTop}
+            top={convert(0.001)}
+            left={convert(0)}
+            width={convert(1920)}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
           {missionComponent}
           {missionCompleteComponent}
           {isLoading && <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} alt="" />}

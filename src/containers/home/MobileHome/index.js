@@ -35,6 +35,7 @@ import ConstellationFour from '@I/activity/home/constellation4.png';
 import ConstellationFive from '@I/activity/home/constellation5.png';
 
 import { preloadImage } from '@U/functions/preload';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 import BackgroundTop from '@I/home/mobile/background-top.png';
 import BackgroundMiddle from '@I/home/mobile/background-middle.png';
@@ -72,6 +73,7 @@ function MobileHome({
 }) {
   const convert = useCallback((value) => (theme.windowWidth / 375) * value, [theme]);
 
+  const [loadedNumber, setLoadedNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   // Light Event Related
@@ -101,14 +103,20 @@ function MobileHome({
     history.push(route);
   }, [history]);
 
-  const onLoad = useCallback(() => {
-    setIsLoading(false);
-    [MenuMobile, LightRio, LogInRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
-      CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
-      OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
-      ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
-    ].forEach(preloadImage);
-  }, []);
+  useEffect(() => {
+    if (loadedNumber >= 8) {
+      setIsLoading(false);
+    }
+  }, [loadedNumber]);
+  useEffect(() => {
+    if (!isLoading) {
+      [MenuMobile, LightRio, LogInRio, PhoneCertIcon, HitTheStageIcon, SingStealerIcon, GameTournamentIcon,
+        CompetitionIcon, MiniIcon, GroupIcon, RadioIcon,
+        OmokIcon, RiddleIcon, HandwritingIcon, PlaceIcon, MainGateOn, MainGateOff,
+        ConstellationOne, ConstellationTwo, ConstellationThree, ConstellationFour, ConstellationFive,
+      ].forEach(preloadImage);
+    }
+  }, [isLoading]);
 
   const Stand = ({
     lightOn, top, left, fromEvent,
@@ -170,10 +178,11 @@ function MobileHome({
     speechSynthesis.speak(utterance);
   });
 
-  const [fadeOut, setFadeOut] = useState(false);
+  console.log(isLoading);
 
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
+      EventBehavior('Light', 'Main Gate Clicked', 'Main Gate Clicked');
       setBusMove(true);
       setTimeout(() => {
         window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });
@@ -207,11 +216,17 @@ function MobileHome({
 
   return (
     <>
-      <S.StyledMobileHome fadeOut={fadeOut}>
+      <S.StyledMobileHome>
         <Title />
-        <S.Wrapper width={convert(375)} height={convert(1555)}>
+        <S.Wrapper width={convert(375)} height={convert(1555)} isLoading={isLoading}>
           {!isLoading && <Notice />}
-          <CS.Background src={BackgroundBottom} top={convert(112)} left={0} width={convert(374)} onLoad={onLoad} />
+          <CS.Background
+            src={BackgroundBottom}
+            top={convert(112)}
+            left={0}
+            width={convert(374)}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
 
           {busMove && <CustomPath isMobile busWidth={convert(67)} />}
           {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
@@ -219,11 +234,56 @@ function MobileHome({
           {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
 
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
-          <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(244)} left={convert(34)} width={convert(263)} onClick={() => goToPage('/performance')} />
-          <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(446)} left={convert(153)} width={convert(222)} onClick={() => goToPage('/activity')} />
-          <CS.Landmark delay={4} src={Goods} alt="굿즈" top={convert(703)} left={convert(7)} width={convert(193)} onClick={() => goToPage('/goods')} />
-          <CS.Landmark delay={8} src={MiniGame} alt="미니게임" top={convert(1112)} left={convert(4)} width={convert(182)} onClick={() => goToPage('/activity/mini')} />
-          <CS.Landmark delay={6} src={Clothing} alt="옷 입히기" top={convert(886)} left={convert(173)} width={convert(201)} onClick={() => goToPage('/clothing')} />
+          <CS.Landmark
+            delay={0}
+            src={Performance}
+            alt="공연"
+            top={convert(244)}
+            left={convert(34)}
+            width={convert(263)}
+            onClick={() => goToPage('/performance')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={2}
+            src={Activity}
+            alt="행사"
+            top={convert(446)}
+            left={convert(153)}
+            width={convert(222)}
+            onClick={() => goToPage('/activity')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={4}
+            src={Goods}
+            alt="굿즈"
+            top={convert(703)}
+            left={convert(7)}
+            width={convert(193)}
+            onClick={() => goToPage('/goods')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={8}
+            src={MiniGame}
+            alt="미니게임"
+            top={convert(1112)}
+            left={convert(4)}
+            width={convert(182)}
+            onClick={() => goToPage('/activity/mini')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          <CS.Landmark
+            delay={6}
+            src={Clothing}
+            alt="옷 입히기"
+            top={convert(886)}
+            left={convert(173)}
+            width={convert(201)}
+            onClick={() => goToPage('/clothing')}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
 
           {LIGHT_LOC.map((pos, i) => (
             <Stand
@@ -239,11 +299,26 @@ function MobileHome({
 
           <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={mainGateClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
 
-          <CS.BackgroundFront src={BackgroundTop} top={convert(117)} left={convert(1)} width={convert(373)} />
+          <CS.BackgroundFront
+            src={BackgroundTop}
+            top={convert(117)}
+            left={convert(1)}
+            width={convert(373)}
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
           <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>
           {missionComponent}
           {missionCompleteComponent}
-          {isLoading && <CS.Background src={Loading} top={convert(112)} left={0} width={convert(374)} alt="" />}
+          {isLoading && (
+          <CS.Background
+            src={Loading}
+            top={convert(112)}
+            left={0}
+            width={convert(374)}
+            alt=""
+            onLoad={() => setLoadedNumber(no => no + 1)}
+          />
+          )}
         </S.Wrapper>
       </S.StyledMobileHome>
     </>

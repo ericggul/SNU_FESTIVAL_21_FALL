@@ -23,7 +23,7 @@ function Character({ jump, containerWidth }) {
     >
       <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
       <S.Element
-        src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+        src={selectedClothings[0] !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
         top={convert(CLOTHING_DATA[0].yPos)}
         left={convert(CLOTHING_DATA[0].xPos)}
         width={convert(CLOTHING_DATA[0].width)}
@@ -31,7 +31,7 @@ function Character({ jump, containerWidth }) {
       />
       {selectedClothings.slice(1).map((sl, pr) => (
         <S.Element
-          src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+          src={sl !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
           top={convert(CLOTHING_DATA[pr + 1].yPos)}
           left={convert(CLOTHING_DATA[pr + 1].xPos)}
           width={convert(CLOTHING_DATA[pr + 1].width)}

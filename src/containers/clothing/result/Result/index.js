@@ -40,7 +40,7 @@ function Clothing({ theme, user, isAuthorized }) {
   const selectedAccessories = useSelector(state => state.mission.accessorie);
 
   const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
-  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.7, maxWidth));
+  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.6, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
 
   // eyebrow visible(=== hair on top)
@@ -62,11 +62,11 @@ function Clothing({ theme, user, isAuthorized }) {
   const handleSaveClick = useCallback(() => {
     if (characterRef.current) {
       html2canvas(characterRef.current).then(canvas => {
-        const url = canvas.toDataURL('image/jpg');
+        const url = canvas.toDataURL();
         let link = document.createElement('a');
         document.body.appendChild(link);
         link.href = url;
-        link.download = '캐릭터.jpg';
+        link.download = '캐릭터.png';
         link.click();
         document.body.removeChild(link);
       });
@@ -87,7 +87,6 @@ function Clothing({ theme, user, isAuthorized }) {
           background={BACKGROUND_PALETTES[selectedBackground]}
         >
           <Character containerWidth={containerWidth} jump={jump} />
-
         </S.MidContainer>
         <Name name={name} onChangeName={onChangeName} />
       </S.Content>

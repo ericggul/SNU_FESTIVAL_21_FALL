@@ -15,7 +15,7 @@ function Carousel({
   const [animateDir, setAnimateDir] = useState(0);
   const length = useMemo(() => indexes.length, [indexes]);
 
-  const PATH = `https://snufestival-e9a04.web.app/images/handwriting/writings/${sectorNum}`;
+  const PATH = `https://snufestival.com/images/handwriting/writings/${sectorNum}`;
 
   useEffect(() => {
     if (shouldChangeLoc) {

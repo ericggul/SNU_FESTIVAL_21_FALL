@@ -85,3 +85,14 @@ cursor: pointer;
   background: ${({ theme }) => theme.palette.SOFTPASTEL_PURPLE};
   box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
 `;
+
+export const Rio = styled.img`
+
+  width: 80%;
+  height: auto;
+  margin: auto;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  margin-bottom: 4rem;
+`;

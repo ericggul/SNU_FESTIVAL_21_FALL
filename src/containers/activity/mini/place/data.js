@@ -1,17 +1,5 @@
-export const PLACES = [
-  '걷고 싶은 길',
-  '관정관',
-  '더랩',
-  '버들골',
-  '붉은 광장',
-  '예술계 식당',
-  '자하연',
-  '정문',
-  '학생회관',
-];
-
 export const DIGITS = [
-  7, 3, 2, 3, 5, 6, 3, 2, 4,
+  7, 3, 2, 3, 5, 5, 3, 2, 4,
 ];
 
 export const CONVERTED_PLACES = [
@@ -20,7 +8,7 @@ export const CONVERTED_PLACES = [
   '946b6c972b49e9d806082a0a9d99a88062a21b61ef98a05d3f02258feb49092b',
   'd9d20de585a2f04a8a48abc794283c4558c314e65f46ba2b46745ef7bf093b2f',
   '241a0cce02530a58bc67e762432db2625e5db000b9239763bd4777138dc81206',
-  'c62b5e3479a21cec333dc1e087763583047627c6a8783e157baadd2c1d87d672',
+  'ea5af7c2f756f20c189c389c752096e2410425509b95cd4fedbce2f1c227204d',
   '89a613d7a55b873627c2412b528c2d8d34537a5597700a04c7f42cac8208c15b',
   'b1a8d97a43deb04f23954db90bc1b026e05565ce4a2a019fe3642a385da55366',
   '7ec64f9c14bbe2243b5920f67bb5c92cae923bf0c3c63d5f9c27f03db8ce4fe6',

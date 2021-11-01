@@ -68,7 +68,7 @@ function Riddle({ theme }) {
         onCloseFullScreen={() => handleClick(null)}
         backgroundColor={theme.palette.RIDDLE_WHITE}
       >
-        <WhiteTheme />
+        <WhiteTheme changeTheme={() => handleClick(null)} />
       </FullScreen>
 
       <FullScreen
@@ -76,7 +76,7 @@ function Riddle({ theme }) {
         onCloseFullScreen={() => handleClick(null)}
         backgroundColor={theme.palette.RIDDLE_BLACK}
       >
-        <BlackTheme />
+        <BlackTheme changeTheme={() => handleClick(null)} />
       </FullScreen>
     </S.StyledRiddle>
   );

@@ -3,11 +3,14 @@ import { motion } from 'framer-motion';
 import { FlexCenterStyle } from '@S/responsive/display';
 
 export const StyledRadio = styled.div`
-  ${FlexCenterStyle};
+  display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
-  height: ${({ theme }) => theme.windowHeight}px;
+  overflow-y: hidden;
+  min-height: ${({ theme }) => theme.windowHeight}px;
+  position: absolute;
+  top: 0;
 `;
 
 export const Background = styled.img`
@@ -21,17 +24,19 @@ export const Background = styled.img`
 `;
 
 export const Contents = styled(motion.div)`
-  ${FlexCenterStyle};
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
+  display: flex;
+
+  top: 65px;
+  height: ${({ theme }) => theme.windowHeight - 65}px;
+  flex-direction: row;
+  // height: 100%;
   text-align: center;
   color: white;
-  margin-top: 10rem;
-  margin-bottom: 15rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  // justify-content: space-between;
   ${({ theme }) => theme.windowWidth > 500 && 'margin-bottom: 5rem;'}
-  ${({ theme }) => theme.windowWidth > 768 && 'flex-direction: row;'}
-  ${({ theme }) => theme.windowWidth > 768 && 'justify-content: space-between;'}
+  // ${({ theme }) => theme.windowWidth > 768 && 'justify-content: space-between;'}
 `;
 
 export const Container = styled.div`
@@ -55,10 +60,15 @@ export const Texts = styled.div`
   p{
     margin: 0;
   }
-  p:nth-of-type(1){
-    font-size: 1.4rem;
-    font-weight: 700;
-    opacity: 1;
+`;
+
+export const Date = styled.div`
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weigth: 400;
+  opacity: .8;
+  p{
+    margin: 0;
   }
 `;
 

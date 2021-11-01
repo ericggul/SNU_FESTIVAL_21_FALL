@@ -14,6 +14,7 @@ import PopupModal from '@F/modal/PopupModal';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
+import ImageModal from '@C/activity/competition/ImageModal';
 import { competitionCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase';
 import LoadingMascot from '@F/loading/LoadingMascot';
@@ -26,15 +27,13 @@ function VoteSection({
   shuffled, theme, isAuthorized, user,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
+  const [selectedSrc, setSelectedSrc] = useState('https://snufestival.com/images/competition/0.jpg');
   const { modalComponent: signInModalComponent, setIsModalOpen: setSignInModalComponent } = useModal(SignInGuide);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { modalComponent: imageModalComponent, setIsModalOpen: setImageModalComponent } = useModal(ImageModal, true, false, {
+    src: selectedSrc,
+  });
 
-  // clickedItem
-  const [clickedItem, setClickedItem] = useState(null);
-  const onClickItem = useCallback((item) => {
-    setClickedItem(item);
-    setIsModalOpen(true);
-  }, []);
+  console.log(selectedSrc);
 
   // likes
   const [myLikesForCompetition, setMyLikesForCompetition] = useState([]);
@@ -80,15 +79,20 @@ function VoteSection({
     }
   }, [isAuthorized, myLikesForCompetition]);
 
-  const Item = ({ i }) => (
+  const handleImageClick = useCallback((idx) => {
+    console.log(shuffled[idx]);
+    setSelectedSrc(`https://snufestival.com/images/competition/${shuffled[idx]}.jpg`);
+    setImageModalComponent(true);
+  }, [selectedSrc, shuffled]);
+
+  const Item = ({ i, handleClick }) => (
     <S.Item key={LIST[shuffled[i]]}>
       <S.ImageWrapper>
-        <MapInteractionCSS>
-          <S.Image
-            src={`https://snufestival.com/images/competition/${shuffled[i]}.jpg`}
-            alt="작품"
-          />
-        </MapInteractionCSS>
+        <S.Image
+          src={`https://snufestival.com/images/competition/${shuffled[i]}.jpg`}
+          alt="작품"
+          onClick={() => handleClick(i)}
+        />
       </S.ImageWrapper>
       <S.InfoSection>
         <p>
@@ -105,10 +109,11 @@ function VoteSection({
     <S.StyledVoteSection>
       <S.ItemSection>
         {shuffled.map((item, i) => (
-          <Item i={i} key={i} />
+          <Item i={i} key={i} handleClick={handleImageClick} />
         ))}
       </S.ItemSection>
       {signInModalComponent}
+      {imageModalComponent}
     </S.StyledVoteSection>
   );
 }

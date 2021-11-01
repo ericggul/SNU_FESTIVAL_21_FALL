@@ -104,14 +104,11 @@ export const CharacterEvent = styled.div`
   p {
     margin: 0;
     padding: 0;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 600;
     color: white;
   }
 
-  p:nth-of-type(1){
-    font-size: 2rem;
-  }
   z-index: ${({ theme }) => theme.zIndex.header};
 `;
 

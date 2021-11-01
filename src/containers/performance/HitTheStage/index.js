@@ -72,7 +72,14 @@ function HitTheStage({ theme, user, isAuthorized }) {
   const bubble = <Bubble decoration="심장을 뛰게 하는 관악 최고의 댄스 무대" title="힛더스테이지" speak={speak} />;
   const title = <Title title="힛더스테이지" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[5]} />;
-  const youTube = url.length > 0 && <Youtube src={url} />;
+
+  // TN2AUknb64A
+  const youTube = url.length > 0 && (url.includes('TN2AUknb64A') ? (
+    <>
+      <Youtube src={url} />
+      <S.Text>공연 시작 전입니다.</S.Text>
+    </>
+  ) : <Youtube src={url} />);
   const guide = <Guide type="댄스공연 힛 더 스테이지" date="11월 5일(금)" times={['12:30 - 13:00']} />;
   const starring = <Starring data={HitTheStageData} />;
   const image = (
@@ -91,9 +98,8 @@ function HitTheStage({ theme, user, isAuthorized }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 2,
+            duration: 1,
             ease: [0.43, 0.13, 0.23, 0.96],
-            delay: 1,
           }}
         >
           <S.IconBubble>

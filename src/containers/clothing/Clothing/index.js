@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 
 import PropTypes from 'prop-types';
-import html2canvas from 'html2canvas';
 
 import { toast } from 'react-toastify';
 import Basic from '@I/clothing/basic.png';
@@ -15,6 +14,8 @@ import Visualizer from '@C/clothing/Visualizer';
 import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
+
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 import { CLOTHING_DATA, ACCESSORIES_DATA, BACKGROUND_PALETTES } from '@C/clothing/data';
 
@@ -49,7 +50,7 @@ function Clothing({ theme, user, isAuthorized }) {
   }, []);
 
   // container size adjust state
-  const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
+  const maxWidth = useMemo(() => 300 / theme.windowWidth, [theme]);
   const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.5, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
   const [touched, setTouched] = useState(0);
@@ -147,6 +148,7 @@ function Clothing({ theme, user, isAuthorized }) {
 
   const save = useCallback(() => {
     if (isAuthorized) {
+      EventBehavior('Clothing', 'Saved', 'saved');
       dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
       setTimeout(() => {
         history.push('/clothing/result');
@@ -155,6 +157,12 @@ function Clothing({ theme, user, isAuthorized }) {
       setIsSignInModalOpen(true);
     }
   }, [selectedClothings, selectedAccessories, selectedBackground, actions, isAuthorized]);
+
+  const reset = useCallback(() => {
+    setSelectedClothings(Array(CLOTHING_DATA.length).fill(-1));
+    setSelectedAccessories([]);
+    setSelectedBackground(4);
+  }, []);
 
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
@@ -172,23 +180,31 @@ function Clothing({ theme, user, isAuthorized }) {
           <S.MidContainer ref={characterRef}>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
-              <S.Element
-                src={selectedClothings[0] !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
-                top={convert(CLOTHING_DATA[0].yPos)}
-                left={convert(CLOTHING_DATA[0].xPos)}
-                width={convert(CLOTHING_DATA[0].width)}
-                onClick={() => changePr(selectedClothings[0], 0)}
-                zIndexOnTop={hairOnTop}
-              />
-              {selectedClothings.slice(1).map((sl, pr) => (
+              {
+                selectedClothings[0] !== -1
+                && (
                 <S.Element
-                  src={sl !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
-                  top={convert(CLOTHING_DATA[pr + 1].yPos)}
-                  left={convert(CLOTHING_DATA[pr + 1].xPos)}
-                  width={convert(CLOTHING_DATA[pr + 1].width)}
-                  key={pr + 1}
-                  onClick={() => changePr(sl, pr + 1)}
+                  src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+                  top={convert(CLOTHING_DATA[0].yPos)}
+                  left={convert(CLOTHING_DATA[0].xPos)}
+                  width={convert(CLOTHING_DATA[0].width)}
+                  onClick={() => changePr(selectedClothings[0], 0)}
+                  zIndexOnTop={hairOnTop}
                 />
+                )
+              }
+              {selectedClothings.slice(1).map((sl, pr) => (
+                sl !== -1
+                  ? (
+                    <S.Element
+                      src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+                      top={convert(CLOTHING_DATA[pr + 1].yPos)}
+                      left={convert(CLOTHING_DATA[pr + 1].xPos)}
+                      width={convert(CLOTHING_DATA[pr + 1].width)}
+                      key={pr + 1}
+                      onClick={() => changePr(sl, pr + 1)}
+                    />
+                  ) : null
               ))}
               {selectedAccessories.map((sl, i) => (
                 (
@@ -204,7 +220,7 @@ function Clothing({ theme, user, isAuthorized }) {
               ))}
             </S.Container>
           </S.MidContainer>
-          <S.Converter>
+          <S.Converter selectedBackground={selectedBackground}>
             {[...CLOTHING_DATA, ACCESSORIES_DATA].map((e, i) => (
               <S.ConverterCell
                 onClick={() => setCurrentPr(i)}
@@ -223,8 +239,9 @@ function Clothing({ theme, user, isAuthorized }) {
             changeSl={changeSl}
             changeSlAccessories={changeSlAccessories}
           />
-          <S.Save onClick={() => save()}>저장하기</S.Save>
+          <S.Save onClick={save}>저장하기</S.Save>
           {!isAuthorized && <S.SaveText>로그인 후에 저장해 주세요</S.SaveText>}
+          <S.ResetText onClick={reset}>초기화</S.ResetText>
         </S.Content>
       )}
       {signInModalComponent}

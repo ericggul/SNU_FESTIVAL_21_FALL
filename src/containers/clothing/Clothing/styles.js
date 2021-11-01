@@ -21,6 +21,7 @@ export const Content = styled.div`
         to{opacity: 1; }
     }
     animation: appear 2s;
+    margin-bottom: 4rem;
 `;
 
 export const MidContainer = styled.div`
@@ -65,14 +66,20 @@ export const Element = styled.img`
 
 export const Converter = styled.div`
     ${FlexCenterStyle};
+
+    //1, 2, 7, 8, 10
+    color: rgba(255, 255, 255, 0.8);
+    transition: color .5s;
+    ${({ selectedBackground }) => [1, 2, 5, 7, 8, 10].includes(selectedBackground) && 'color: rgba(200,200, 200, 0.8)'}
 `;
 
 export const ConverterCell = styled.div`
-    color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
-    font-weight: 600;
     margin: .3rem;
+    cursor: pointer;
+    transition: color .5s;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
+    ${({ selected }) => selected && 'font-weight: 800;'}
 `;
 
 export const Save = styled.div`
@@ -89,7 +96,15 @@ export const Save = styled.div`
 `;
 
 export const SaveText = styled.div`
+
     color: #707070;
     font-weight: 500;
     margin-bottom: 3rem;
+`;
+
+export const ResetText = styled.div`
+    margin: 4rem 0;
+    color: #707070;
+    font-weight: 500;
+    cursor: pointer;
 `;

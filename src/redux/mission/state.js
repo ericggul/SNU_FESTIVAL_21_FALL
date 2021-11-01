@@ -9,9 +9,9 @@ const INITIAL_STATE = {
   isLoaded: false,
   // if null or not: is playing or not
   light: null,
-  clothing: Array(8).fill(0),
+  clothing: Array(8).fill(-1),
   accessorie: [],
-  background: 0,
+  background: 4,
 
 };
 
@@ -76,7 +76,7 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.SET_MISSION]: (draft, action) => { draft[action.mission] = action.isCompleted; },
   [types.RESET]: (draft) => {
     draft.light = null;
-    draft.clothing = Array(8).fill(0); draft.accessorie = []; draft.background = 0;
+    draft.clothing = Array(8).fill(-1); draft.accessorie = []; draft.background = 4;
     draft.isLoaded = false;
   },
 });

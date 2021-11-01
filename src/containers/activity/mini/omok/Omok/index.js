@@ -71,9 +71,12 @@ function Omok({ theme }) {
     const today = new Date();
     const date = today.getDate();
     const hours = today.getHours();
-    if (date >= 2 && date <= 5 && hours >= 11 && hours <= 17) {
+    if (date >= 1 && date <= 5 && hours >= 11 && hours <= 17) {
       EventBehavior('Activity', 'Click Omok', 'omok clicked');
-      window.open(url, '_blank');
+      toast('링크 불러오는중...');
+      setTimeout(() => {
+        window.open(url, '_blank');
+      }, 900);
     } else {
       toast('11시에 다시오세요!');
       setTimeout(() => {

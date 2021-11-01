@@ -6,6 +6,7 @@ export const Name = styled.div`
     justify-content: center;
     margin-top: 1rem;
     z-index: 15;
+    margin-bottom: 4rem;
 `;
 
 export const Input = styled.input`

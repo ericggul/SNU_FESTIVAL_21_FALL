@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
 import LoadingDesktop from '@I/layout/loading-desktop.png';
@@ -20,16 +21,17 @@ function LightMissionComplete({
   message, theme, user, isAuthorized,
 }) {
   const contentRef = useRef();
+  const history = useHistory();
   const isMobile = useMemo(() => theme.windowWidth < 500, [theme]);
 
   const handleSaveClick = useCallback(() => {
     if (contentRef.current) {
       html2canvas(contentRef.current).then(canvas => {
-        const url = canvas.toDataURL('image/jpg');
+        const url = canvas.toDataURL();
         let link = document.createElement('a');
         document.body.appendChild(link);
         link.href = url;
-        link.download = '관악의_밤.jpg';
+        link.download = '관악의_밤.png';
         link.click();
         document.body.removeChild(link);
       });
@@ -65,7 +67,11 @@ function LightMissionComplete({
             <Character containerWidth={theme.windowWidth < 768 ? theme.windowWidth * 0.3 : 230.4} jump={false} />
             <S.SmallText src={LightFinishedText} />
           </S.Contents>
-          <S.Save onClick={handleSaveClick}>사진 저장하기</S.Save>
+          <S.SaveContainer>
+            <S.Save onClick={() => history.push('/clothing')}>옷 입히기</S.Save>
+            <S.Save onClick={handleSaveClick}>사진 저장하기</S.Save>
+          </S.SaveContainer>
+
         </S.Body>
       </S.StyledPageLoading>
     </>

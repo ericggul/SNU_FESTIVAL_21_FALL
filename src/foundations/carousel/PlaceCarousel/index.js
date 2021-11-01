@@ -12,7 +12,7 @@ function Carousel({
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
   const [animateDir, setAnimateDir] = useState(0);
-  const [date, setDate] = useState(4);
+  const [date, setDate] = useState(new Date().getDate() - 1);
   const length = useMemo(() => indexes.length, [indexes]);
 
   const handleClick = useCallback((direction) => {
@@ -28,7 +28,7 @@ function Carousel({
 
   useEffect(() => {
     const today = new Date();
-    if (today.getDate() === 2) {
+    if (today.getDate() === 2 || today.getDate() === 1) {
       setDate(1);
     } else if (today.getDate() === 3) {
       setDate(2);
@@ -39,6 +39,20 @@ function Carousel({
     }
   }, []);
 
+  const LOADING_TEXT = ['LOADING...', 'ur internet so SLOW'];
+  const [loadingTextNumber, setLoadingTextNumber] = useState(0);
+
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setLoadingTextNumber(ltx => (ltx + 1) % LOADING_TEXT.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    } if (!isLoading) {
+      setLoadingTextNumber(0);
+    }
+  }, [isLoading, loadingTextNumber]);
+
   return (
     <S.Wrapper width={width}>
       <S.ArrowButton animate={animateDir === -1} onClick={() => handleClick(-1)}>{'<'}</S.ArrowButton>
@@ -46,13 +60,13 @@ function Carousel({
         {indexes.map((index, i) => (
           index === indexes[currentLoc] && (
           <S.Box itemWidth={width * 0.7} key={i}>
-            {isLoading && <S.Skeleton>LOADING...</S.Skeleton>}
+            {isLoading && <S.Skeleton>{LOADING_TEXT[loadingTextNumber]}</S.Skeleton>}
             {/* <MapInteractionCSS> */}
 
             <S.Image
               isLoading={isLoading}
               onLoad={() => setIsLoading(false)}
-              src={`https://snufestival-e9a04.web.app/images/places/${sectorNum}${date}${index}.jpg`}
+              src={`https://snufestival.com/images/places/${sectorNum}${date}${index}.jpg`}
             />
 
             {/* </MapInteractionCSS> */}

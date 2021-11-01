@@ -36,7 +36,7 @@ export function QuestionBox({
       {
         autoClose: 3500, draggable: true,
       });
-    toast('장소 이름은 글자수에 맞게!',
+    toast('공백 포함 글자수에 맞게!',
       {
         autoClose: 3800, draggable: true,
       });
@@ -53,7 +53,7 @@ export function QuestionBox({
 
   const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
 
-  const wrongToastArray = ['땡', '이것도 못풀어? 🤣', '리오가 울어요 😭', '학교 와본거 맞아? 🤔'];
+  const wrongToastArray = ['땡', '리오가 울어요 😭', '학교 와본거 맞아?'];
   let wrongTextArray = [];
   for (let i = 0; i < 100; i += 1) {
     const repeated = '다시 '.repeat(i);
@@ -98,9 +98,9 @@ export function QuestionBox({
             // emitCurrentIndex={handleIndex}
           />
         </S.SliderContent>
-        <S.Description>{lastAttemptRight === 1 ? '정답입니다!' : (lastAttemptRight === 0 ? '어디일까요?' : wrongTextArray[wrongAttempt])}</S.Description>
+        <S.Description>{lastAttemptRight === 1 ? '정답입니다!' : (lastAttemptRight === 0 ? `어디일까요? (공백 포함 ${DIGITS[sectorNum]}글자)` : wrongTextArray[wrongAttempt])}</S.Description>
         <S.Answer width={isMobile ? theme.windowWidth : 750}>
-          <S.InputBox placeholder={`백퍼 총장잔디 아님? (${DIGITS[sectorNum]}글자)`} value={value} onChange={onChange} />
+          <S.InputBox placeholder="백퍼 총장잔디 아님?" value={value} onChange={onChange} />
           {/* <S.Button onKeyPress={handleKeyPress} onClick={submit}>제출</S.Button> */}
           <S.Image
             src={lastAttemptRight === 1 ? RightRio : (lastAttemptRight === 0 ? NeutralRio : WrongRio)}

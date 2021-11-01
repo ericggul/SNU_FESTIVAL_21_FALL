@@ -27,6 +27,7 @@ function LightGuide({
 
   useEffect(() => {
     if (isAuthorized && mission.light && mission.light[pageIndicator] === 0) {
+      EventBehavior('Light', `${pageIndicator}th Light founded`, 'Light founded');
       const currentLight = mission.light;
       let newArray = [...currentLight];
       newArray[pageIndicator] = 1;
@@ -95,13 +96,14 @@ function LightGuide({
 
   useEffect(() => {
     if (foundedLightNumbers === 10) {
+      EventBehavior('Light', 'All Light Discovered', 'Light Mission End');
       setFoundState(10);
       setTimeout(() => {
         history.push({
           pathname: '/',
           state: { fromLightEvent: true },
         });
-      }, 3000);
+      }, 5000);
     }
   }, [foundedLightNumbers]);
 
@@ -121,6 +123,7 @@ function LightGuide({
           <S.CloseIcon />
         </S.CloseButton>
         <S.Contents>
+          {pageIndicator === 7 && <S.Rio src={LightRio} />}
           <S.Header>
             {foundState > 10 ? '빛 찾기 이벤트' : HEADERS[foundedLightNumbers >= 1 ? foundedLightNumbers - 1 : 0]}
           </S.Header>

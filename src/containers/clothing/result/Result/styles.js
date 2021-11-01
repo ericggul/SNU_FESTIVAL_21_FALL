@@ -88,21 +88,3 @@ export const ConverterCell = styled.div`
     margin: .3rem;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
 `;
-
-export const Save = styled.div`
-    margin: 2rem;
-    margin-bottom: .8rem;
-    padding: .4rem 1rem;
-    border-radius: 3rem;
-    border: .2rem solid #707070;
-    color: black;
-    font-size: 1.7rem;
-    font-weight: 500;
-    cursor: pointer;
-`;
-
-export const SaveText = styled.div`
-    color: #707070;
-    font-size: 1.2rem;
-    font-weight: 500;
-`;

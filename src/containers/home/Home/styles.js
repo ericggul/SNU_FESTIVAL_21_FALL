@@ -27,6 +27,7 @@ export const StyledHome = styled.div`
     100%{ background-color: ${({ theme }) => theme.palette.HOME_PURPLE};}
   }
   animation: change-color 2s linear forwards;
+  transition: opacity 1s;
 `;
 
 export const Wrapper = styled.div`
@@ -43,6 +44,11 @@ export const Wrapper = styled.div`
     0%{ opacity: 0; filter: blur(100px);}
     100%{ opacity: 1;}
   }
-  animation: appearHome 2.5s linear backwards;
-  animation-delay: 1s;
+
+  ${({ isLoading }) => !isLoading && 'animation: appearHome 1.5s linear backwards;'}
+
+  opacity: 0;
+  filter: blur(100px);
+  transition: opacity filter 1s;
+  ${({ isLoading }) => !isLoading && 'opacity: 1; filter: blur(0);'}
 `;

@@ -37,7 +37,7 @@ const questions = [
   BlackFive,
 ];
 
-function BlackTheme({ theme }) {
+function BlackTheme({ theme, changeTheme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   useEffect(() => {
     [BlackOne, BlackTwo].forEach(preloadImage);
@@ -49,7 +49,13 @@ function BlackTheme({ theme }) {
         ? <S.Background src={BlackBackgroundMobile} alt="백야 배경" />
         : <S.Background src={BlackBackgroundDesktop} alt="백야 배경" />}
 
-      <QuestionBox textImg={BlackOpeningFont} questions={questions} answers={answers} hints={hints} />
+      <QuestionBox
+        textImg={BlackOpeningFont}
+        questions={questions}
+        answers={answers}
+        hints={hints}
+        changeTheme={changeTheme}
+      />
     </S.StyledBlackTheme>
   );
 }

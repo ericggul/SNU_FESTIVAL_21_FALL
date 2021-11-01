@@ -7,7 +7,7 @@ export const StyledOmokGuide = styled.div`
 `;
 export const OmokBox = styled(motion.div)`
   width: 75vw;
-  height: 90vw;
+  height: min(90vw, 80vh);
   position: relative;
   max-width: 400px;
   max-height: 50rem;
