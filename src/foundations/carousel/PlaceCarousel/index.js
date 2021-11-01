@@ -12,7 +12,7 @@ function Carousel({
   const [isLoading, setIsLoading] = useState(true);
   const [currentLoc, setCurrentLoc] = useState(0);
   const [animateDir, setAnimateDir] = useState(0);
-  const [date, setDate] = useState(4);
+  const [date, setDate] = useState(new Date().getDate() - 1);
   const length = useMemo(() => indexes.length, [indexes]);
 
   const handleClick = useCallback((direction) => {

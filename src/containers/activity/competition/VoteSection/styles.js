@@ -43,7 +43,7 @@ export const Skeleton = styled.img`
 export const Image = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 1.4rem;
+  border-radius: .5rem;
   box-shadow: 0 0 .4rem rgba(0, 0, 0, .16);
   transition: opacity 2s;
   // opacity: 0;
@@ -63,7 +63,6 @@ export const InfoSection = styled.div`
     margin: 0.2rem 0.3rem;
     margin-right: 2.2rem;
     line-height: 1.3;
-    word-break: keep-all;
     max-width: 80%;
   }
   p:nth-of-type(1) {

@@ -90,5 +90,14 @@ export const Save = styled.div`
   color: white;
   background: black;
   border: 1px solid rgba(255, 255, 255, .5);
+  cursor: pointer;
   
+`;
+
+export const Expl = styled.div`
+  ${FlexCenterStyle};
+  color: white;
+  cursor: pointer;
+  font-weight: 300;
+
 `;

@@ -26,7 +26,11 @@ function MissionCard({ setIsModalOpen, user, isAuthorized }) {
       setPlayingState(0);
       dispatch(actions.initializeLight());
     } else if (isPlaying && foundedLightNumbers !== 0) {
-      setPlayingState(1);
+      if (foundedLightNumbers === 10) {
+        setPlayingState(3);
+      } else {
+        setPlayingState(1);
+      }
     } else if (!isAuthorized) {
       setPlayingState(2);
       setTimeout(() => {
@@ -46,10 +50,11 @@ function MissionCard({ setIsModalOpen, user, isAuthorized }) {
     '- 관악의 밤 곳곳으로 사라져버린 빛들을 찾아주세요!',
     '- 로그인 후 이벤트 플레이 가능합니다',
   ], [
-    '- 밝게 빛나는 ',
+    '- 축하합니다! 관악의 밤을 밝게 빛내주셨습니다.',
+    '- 스크롤을 내려 정문을 눌러보세요',
   ]];
 
-  const BUTTON_TEXTS = ['시작하기', '더 찾기', '로그인'];
+  const BUTTON_TEXTS = ['시작하기', '더 찾기', '로그인', '정문으로 가기'];
 
   const buttonClick = useCallback(() => {
     if (playingState === 2) {

@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
 import LoadingDesktop from '@I/layout/loading-desktop.png';
@@ -20,6 +21,7 @@ function LightMissionComplete({
   message, theme, user, isAuthorized,
 }) {
   const contentRef = useRef();
+  const history = useHistory();
   const isMobile = useMemo(() => theme.windowWidth < 500, [theme]);
 
   const handleSaveClick = useCallback(() => {
@@ -65,6 +67,7 @@ function LightMissionComplete({
             <Character containerWidth={theme.windowWidth < 768 ? theme.windowWidth * 0.3 : 230.4} jump={false} />
             <S.SmallText src={LightFinishedText} />
           </S.Contents>
+          <S.Expl onClick={() => history.push('/clothing')}>사진 속 캐릭터는 옷 입히기에서 완성 가능합니다.</S.Expl>
           <S.Save onClick={handleSaveClick}>사진 저장하기</S.Save>
         </S.Body>
       </S.StyledPageLoading>

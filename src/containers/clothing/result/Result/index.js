@@ -87,7 +87,6 @@ function Clothing({ theme, user, isAuthorized }) {
           background={BACKGROUND_PALETTES[selectedBackground]}
         >
           <Character containerWidth={containerWidth} jump={jump} />
-
         </S.MidContainer>
         <Name name={name} onChangeName={onChangeName} />
       </S.Content>
