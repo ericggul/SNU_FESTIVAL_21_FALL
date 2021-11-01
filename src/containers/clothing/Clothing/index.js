@@ -164,6 +164,7 @@ function Clothing({ theme, user, isAuthorized }) {
     setSelectedAccessories([]);
     setSelectedBackground(4);
   }, []);
+
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>옷 입히기</HeaderContent>
@@ -180,23 +181,31 @@ function Clothing({ theme, user, isAuthorized }) {
           <S.MidContainer ref={characterRef}>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
-              <S.Element
-                src={selectedClothings[0] !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
-                top={convert(CLOTHING_DATA[0].yPos)}
-                left={convert(CLOTHING_DATA[0].xPos)}
-                width={convert(CLOTHING_DATA[0].width)}
-                onClick={() => changePr(selectedClothings[0], 0)}
-                zIndexOnTop={hairOnTop}
-              />
-              {selectedClothings.slice(1).map((sl, pr) => (
+              {
+                selectedClothings[0] !== -1
+                && (
                 <S.Element
-                  src={sl !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
-                  top={convert(CLOTHING_DATA[pr + 1].yPos)}
-                  left={convert(CLOTHING_DATA[pr + 1].xPos)}
-                  width={convert(CLOTHING_DATA[pr + 1].width)}
-                  key={pr + 1}
-                  onClick={() => changePr(sl, pr + 1)}
+                  src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+                  top={convert(CLOTHING_DATA[0].yPos)}
+                  left={convert(CLOTHING_DATA[0].xPos)}
+                  width={convert(CLOTHING_DATA[0].width)}
+                  onClick={() => changePr(selectedClothings[0], 0)}
+                  zIndexOnTop={hairOnTop}
                 />
+                )
+              }
+              {selectedClothings.slice(1).map((sl, pr) => (
+                sl !== -1
+                  ? (
+                    <S.Element
+                      src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+                      top={convert(CLOTHING_DATA[pr + 1].yPos)}
+                      left={convert(CLOTHING_DATA[pr + 1].xPos)}
+                      width={convert(CLOTHING_DATA[pr + 1].width)}
+                      key={pr + 1}
+                      onClick={() => changePr(sl, pr + 1)}
+                    />
+                  ) : null
               ))}
               {selectedAccessories.map((sl, i) => (
                 (

@@ -72,6 +72,7 @@ export const ConverterCell = styled.div`
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
     margin: .3rem;
+    cursor: pointer;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
 `;
 

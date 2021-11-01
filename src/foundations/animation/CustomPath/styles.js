@@ -12,7 +12,7 @@ export const Element = styled.div`
     height: 60px;
     width: ${({ width }) => width}px;
     position: absolute;
-    offset-path:  path('${({ path }) => path}');
+    offset-path: path('${({ path }) => path}');
     @keyframes travel{
         0%{
             offset-distance: 0%;
