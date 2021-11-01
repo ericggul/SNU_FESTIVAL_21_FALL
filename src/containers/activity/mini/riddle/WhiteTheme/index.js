@@ -37,7 +37,7 @@ const questions = [
   WhiteFive,
 ];
 
-function WhiteTheme({ theme }) {
+function WhiteTheme({ theme, changeTheme }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   useEffect(() => {
     [WhiteOne, WhiteTwo, WhiteThree].forEach(preloadImage);
@@ -48,7 +48,7 @@ function WhiteTheme({ theme }) {
       {isMobile
         ? <S.Background src={WhiteBackgroundMobile} alt="백야 배경" />
         : <S.Background src={WhiteBackgroundDesktop} alt="백야 배경" />}
-      <QuestionBox textImg={WhiteOpeningFont} questions={questions} answers={answers} hints={hints} />
+      <QuestionBox textImg={WhiteOpeningFont} questions={questions} answers={answers} hints={hints} changeTheme={changeTheme} />
     </S.StyledWhiteTheme>
   );
 }

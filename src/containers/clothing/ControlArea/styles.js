@@ -10,6 +10,7 @@ export const Container = styled.div`
     transition: all 1s;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
+    z-index: 100;
 `;
 
 export const ExpandButton = styled.div`

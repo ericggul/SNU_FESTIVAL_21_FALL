@@ -62,11 +62,11 @@ function Clothing({ theme, user, isAuthorized }) {
   const handleSaveClick = useCallback(() => {
     if (characterRef.current) {
       html2canvas(characterRef.current).then(canvas => {
-        const url = canvas.toDataURL('image/jpg');
+        const url = canvas.toDataURL();
         let link = document.createElement('a');
         document.body.appendChild(link);
         link.href = url;
-        link.download = '캐릭터.jpg';
+        link.download = '캐릭터.png';
         link.click();
         document.body.removeChild(link);
       });

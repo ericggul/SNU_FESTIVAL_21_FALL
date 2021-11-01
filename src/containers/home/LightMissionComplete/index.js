@@ -27,11 +27,11 @@ function LightMissionComplete({
   const handleSaveClick = useCallback(() => {
     if (contentRef.current) {
       html2canvas(contentRef.current).then(canvas => {
-        const url = canvas.toDataURL('image/jpg');
+        const url = canvas.toDataURL();
         let link = document.createElement('a');
         document.body.appendChild(link);
         link.href = url;
-        link.download = '관악의_밤.jpg';
+        link.download = '관악의_밤.png';
         link.click();
         document.body.removeChild(link);
       });

@@ -104,6 +104,7 @@ function Home({
     history.push(route);
   }, [history]);
 
+  console.log(isLoading);
   useEffect(() => {
     if (loadedNumber >= 8) {
       setIsLoading(false);

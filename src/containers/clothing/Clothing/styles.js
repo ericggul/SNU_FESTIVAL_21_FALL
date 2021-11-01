@@ -70,7 +70,7 @@ export const Converter = styled.div`
     //1, 2, 7, 8, 10
     color: rgba(255, 255, 255, 0.8);
     transition: color .5s;
-    ${({ selectedBackground }) => [1, 2, 7, 8, 10].includes(selectedBackground) && 'color: rgba(200,200, 200, 0.8)'}
+    ${({ selectedBackground }) => [1, 2, 5, 7, 8, 10].includes(selectedBackground) && 'color: rgba(200,200, 200, 0.8)'}
 `;
 
 export const ConverterCell = styled.div`

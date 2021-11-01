@@ -67,10 +67,11 @@ function Radio({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledRadio>
-      <HeaderContent backgroundColor="transparent">토크쇼 with 진용진</HeaderContent>
       {isMobile
         ? <S.Background src={BackMobile} alt="백야 배경" />
         : <S.Background src={BackDesktop} alt="백야 배경" />}
+      <HeaderContent backgroundColor="transparent">토크쇼 with 진용진</HeaderContent>
+
       <S.Contents
         initial={{ opacity: 0.4, filter: 'blur(10px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -78,23 +79,24 @@ function Radio({ theme, user, isAuthorized }) {
         transition={transition}
       >
         <S.Container>
-          <S.Texts>
-            <p>이색 샤대생 인터뷰 // 진용진에 대해 알려드림</p>
-          </S.Texts>
+
           <S.Paragraph>
             <iframe
               width={isMobile ? theme.windowWidth : theme.windowWidth * 0.6}
               height={isMobile ? theme.windowWidth * 0.5625 : theme.windowWidth * 0.3375}
-              src="https://www.youtube.com/embed/wiSVFz7WyBk?autoplay=1"
+              src="https://www.youtube.com/embed/wiSVFz7WyBk?start=2380?autoplay=1"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </S.Paragraph>
-          <S.Date>
+          <S.Texts>
+            <p>이색 샤대생 인터뷰 // 진용진에 대해 알려드림</p>
+            <p>23분 00초 부터 시작</p>
+            <br />
             <p>(10월 26일 라이브 녹화본)</p>
-          </S.Date>
+          </S.Texts>
         </S.Container>
       </S.Contents>
       {lightVisible && <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}

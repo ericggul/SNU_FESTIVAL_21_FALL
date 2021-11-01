@@ -178,7 +178,7 @@ function MobileHome({
     speechSynthesis.speak(utterance);
   });
 
-  const [fadeOut, setFadeOut] = useState(false);
+  console.log(isLoading);
 
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
@@ -216,7 +216,7 @@ function MobileHome({
 
   return (
     <>
-      <S.StyledMobileHome fadeOut={fadeOut}>
+      <S.StyledMobileHome>
         <Title />
         <S.Wrapper width={convert(375)} height={convert(1555)} isLoading={isLoading}>
           {!isLoading && <Notice />}

@@ -44,12 +44,11 @@ export const Wrapper = styled.div`
     0%{ opacity: 0; filter: blur(100px);}
     100%{ opacity: 1;}
   }
-  a
 
-  ${({ isLoading }) => !isLoading && 'nimation: appearHome 2s linear backwards;'}
+  ${({ isLoading }) => !isLoading && 'animation: appearHome 1.5s linear backwards;'}
 
   opacity: 0;
   filter: blur(100px);
-  transition: opacity filter 2s;
+  transition: opacity filter 1s;
   ${({ isLoading }) => !isLoading && 'opacity: 1; filter: blur(0);'}
 `;

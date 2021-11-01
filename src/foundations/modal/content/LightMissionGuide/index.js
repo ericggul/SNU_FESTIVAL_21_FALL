@@ -123,6 +123,7 @@ function LightGuide({
           <S.CloseIcon />
         </S.CloseButton>
         <S.Contents>
+          {pageIndicator === 7 && <S.Rio src={LightRio} />}
           <S.Header>
             {foundState > 10 ? '빛 찾기 이벤트' : HEADERS[foundedLightNumbers >= 1 ? foundedLightNumbers - 1 : 0]}
           </S.Header>
