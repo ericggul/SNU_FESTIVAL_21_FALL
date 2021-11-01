@@ -40,7 +40,7 @@ function Clothing({ theme, user, isAuthorized }) {
   const selectedAccessories = useSelector(state => state.mission.accessorie);
 
   const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
-  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.7, maxWidth));
+  const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.6, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
 
   // eyebrow visible(=== hair on top)

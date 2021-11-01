@@ -156,6 +156,11 @@ function Clothing({ theme, user, isAuthorized }) {
     }
   }, [selectedClothings, selectedAccessories, selectedBackground, actions, isAuthorized]);
 
+  const reset = useCallback(() => {
+    setSelectedClothings(Array(CLOTHING_DATA.length).fill(-1));
+    setSelectedAccessories([]);
+    setSelectedBackground(4);
+  }, []);
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>옷 입히기</HeaderContent>
@@ -223,8 +228,9 @@ function Clothing({ theme, user, isAuthorized }) {
             changeSl={changeSl}
             changeSlAccessories={changeSlAccessories}
           />
-          <S.Save onClick={() => save()}>저장하기</S.Save>
+          <S.Save onClick={save}>저장하기</S.Save>
           {!isAuthorized && <S.SaveText>로그인 후에 저장해 주세요</S.SaveText>}
+          <S.ResetText onClick={reset}>초기화</S.ResetText>
         </S.Content>
       )}
       {signInModalComponent}

@@ -21,6 +21,7 @@ export const Content = styled.div`
         to{opacity: 1; }
     }
     animation: appear 2s;
+    margin-bottom: 4rem;
 `;
 
 export const MidContainer = styled.div`
@@ -70,7 +71,6 @@ export const Converter = styled.div`
 export const ConverterCell = styled.div`
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
-    font-weight: 600;
     margin: .3rem;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
 `;
@@ -89,7 +89,15 @@ export const Save = styled.div`
 `;
 
 export const SaveText = styled.div`
+
     color: #707070;
     font-weight: 500;
     margin-bottom: 3rem;
+`;
+
+export const ResetText = styled.div`
+    margin: 4rem 0;
+    color: #707070;
+    font-weight: 500;
+    cursor: pointer;
 `;
