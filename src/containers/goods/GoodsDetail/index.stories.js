@@ -1,5 +1,5 @@
 import React from 'react';
-import Window from '@I/goods/window.png';
+import Window from '@I/goods/keyring.png';
 import GoodsDetail from './index';
 
 export default {
