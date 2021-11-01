@@ -8,14 +8,15 @@ import useResize from '@U/hooks/useResize';
 import LoadingMascot from '@F/loading/LoadingMascot';
 import PageLoading from '@F/loading/PageLoading';
 import { FlexCenterStyle } from '@S/responsive/display';
-import NotFound from '@/pages/NotFound';
+import NotFound from '@P/NotFound';
 import { GA_TRACKING_KEY } from '@/config';
 import GaAnalytics from '@/UserAnalytics';
 import routes from '@/routes';
 
 function App() {
   useEffect(() => {
-    console.log('또 열어봤네!!❣ 실례가 안 된다면 콘솔 닫고 방명록 하나만 남겨주십시오😇');
+    console.log('이번 학기도 또 열어봤다구?');
+    console.log('다음 학기에는 축하사 해야겠네!!');
   }, []);
 
   const [windowWidth, windowHeight] = useResize();

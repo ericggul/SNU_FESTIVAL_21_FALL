@@ -163,17 +163,14 @@ export function Light4({
 function Light5({
   size = 1, handleClick, theme, visible,
 }) {
-  const width = useMemo(() => size * 70, [size]);
   const [animate, setAnimate] = useState(false);
   const onClick = useCallback(() => {
     setAnimate(true);
     handleClick();
   }, [animate]);
 
-  console.log('animate', animate);
-
   const getRandom = useCallback((a, b) => Math.random() * (b - a) + a, []);
-  const number = 50;
+  const number = 100;
   const randomArray = useMemo(() => {
     const array = [];
     for (let i = 0; i < number; i += 1) {

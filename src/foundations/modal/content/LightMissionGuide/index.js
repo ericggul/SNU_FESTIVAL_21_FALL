@@ -42,18 +42,18 @@ function LightGuide({
   //   ''
   // ]
 
-  console.log(foundState);
+  console.log(foundState, foundedLightNumbers);
 
   const HEADERS = [
     '시작이 반이다.', // 9
     '이정도야 쉽지', // 8
     'EZPZ', // 7
-    '', // 6
-    '벌써 반이야', // 5
-    '', // 4
-    'et', // 3
-    'et', // 2
-    '', // 1
+    '잘찾네!!', // 6
+    '진짜 반쯤 왔어', // 5
+    '요기있지롱', // 4
+    '세개만 더 찾자', // 3
+    '두개 남았네', // 2
+    '하나만 더!!', // 1
     '축하합니다!', // 0
   ];
 
@@ -64,17 +64,17 @@ function LightGuide({
 
   const START_EVENT_TEXTS = [
     '- 빛 찾기 이벤트를 시작하고 싶으세요?',
-    '- 메인 화면에서 잠자고 있는 리오를 깨워보세요!',
+    '- 홈 화면에서 잠자고 있는 리오를 깨워보세요!',
   ];
 
-  const REDUNDANT_TEXTS = [
-    `- ${foundedLightNumbers}번째 빛을 찾았습니다!`,
-    `- 홈으로 가서 남은 ${10 - foundedLightNumbers}개를 찾아보세요!`,
-  ];
+  const REDUNDANT_TEXTS = useMemo(() => [
+    `- ${foundedLightNumbers + 1}번째 빛을 찾았습니다!`,
+    `- 홈으로 가서 남은 ${9 - foundedLightNumbers}개를 찾아보세요!`,
+  ], [foundedLightNumbers]);
 
   const END_TEXTS = [
     '축하합니다! 10개의 빛 모두 찾으셨습니다!',
-    '잠시후 메인으로 이동합니다.',
+    '홈 화면에서 서울대 정문을 클릭해보세요!!',
   ];
 
   const TEXTS = useMemo(() => (foundState === 15 ? LOGIN_TEXTS : (foundState === 11 ? START_EVENT_TEXTS : (foundState === 10 ? END_TEXTS : REDUNDANT_TEXTS))), [foundState]);
@@ -122,7 +122,7 @@ function LightGuide({
         </S.CloseButton>
         <S.Contents>
           <S.Header>
-            빛 찾기 이벤트
+            {foundState > 10 ? '빛 찾기 이벤트' : HEADERS[foundedLightNumbers >= 1 ? foundedLightNumbers - 1 : 0]}
           </S.Header>
           {
             TEXTS.map((text, i) => (

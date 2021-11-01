@@ -32,6 +32,16 @@ export const IconGrid = styled.div`
   margin-bottom: 5rem;
 `;
 
+export const IconRowOne = styled.div`
+  ${FlexCenterStyle};
+  margin: 5rem 0;
+`;
+
+export const IconRowTwo = styled.div`
+  ${FlexCenterStyle}
+  margin-bottom: 5rem;
+`;
+
 export const PosterWrapper = styled.div`
   position: relative;
   width: ${({ theme }) => theme.windowWidth}px;

@@ -13,7 +13,7 @@ export const PhoneCertData = [
 ];
 
 export const HitTheStageData = [
-  ['Kill Hit', '12:30-12:43', '1. Blackpink REMIX(MINIZIZE choreography) 2. Buttons Remix(Pussycat Dolls) 3. River(Bishop Briggs)'],
+  // ['Kill Hit', '12:30-12:43', '1. Blackpink REMIX(MINIZIZE choreography) 2. Buttons Remix(Pussycat Dolls) 3. River(Bishop Briggs)'],
   ['DDED', '12:45-12:48', 'AESPA - SAVAGE'],
 ];
 

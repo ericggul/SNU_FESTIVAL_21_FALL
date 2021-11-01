@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 
-import RandomTextShuffle from '@F/animation/text-animation/random-text-shuffle/RandomTextShuffle';
-
-import MenuDestkop from '@I/layout/menu-desktop.png';
-import MenuMobile from '@I/layout/menu-mobile.png';
 import SignIn from '@I/icon/sign-in.svg';
 import SignOut from '@I/icon/sign-out.svg';
 import Stamp from '@I/icon/stamp.svg';
@@ -19,9 +15,6 @@ function Menus({ theme, setMenuIsOpen }) {
   const history = useHistory();
   const { isAuthorized } = useUser();
   const { signIn, signOut } = useAuth();
-  const [backgroundLoaded, setBackgroundLoaded] = useState(false);
-  const [openedTab, setOpenedTab] = useState(null);
-  const [transition, setTransition] = useState(false);
 
   const goToPage = useCallback((route) => {
     history.push(route);
@@ -36,9 +29,9 @@ function Menus({ theme, setMenuIsOpen }) {
       header: { name: '공연', link: '/performance' },
       children: [
         { name: '씽스틸러', link: '/sing-stealer' },
-        { name: '힛더스테이지', link: '/hit-the-stage' },
         { name: '폰서트 LIVE', link: '/phone-cert' },
-        { name: '관악게임토너먼트', link: '/game-tournament' }],
+        { name: '힛더스테이지', link: '/hit-the-stage' },
+      ],
     },
     {
       header: { name: '행사', link: '/activity' },
@@ -91,7 +84,6 @@ function Menus({ theme, setMenuIsOpen }) {
 
   return (
     <S.StyledMenus>
-      <S.Background src={isMobile ? MenuMobile : MenuDestkop} onLoad={() => setBackgroundLoaded(true)} />
       { isAuthorized && (
         <S.SignButton onClick={signOut}>
           <S.SignImage src={SignOut} alt="signOut" />
@@ -109,7 +101,7 @@ function Menus({ theme, setMenuIsOpen }) {
         <p>PAGE</p>
       </S.CharacterEvent>
       <S.MenuContainer>
-        {backgroundLoaded && DATA.map((sector, i) => <SectorComp sector={sector} i={i} key={i} />)}
+        {DATA.map((sector, i) => <SectorComp sector={sector} i={i} key={i} />)}
       </S.MenuContainer>
     </S.StyledMenus>
   );

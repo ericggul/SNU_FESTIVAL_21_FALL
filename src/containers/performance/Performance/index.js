@@ -33,16 +33,20 @@ function Performance({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 0;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -53,11 +57,12 @@ function Performance({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -80,34 +85,39 @@ function Performance({ theme, user, isAuthorized }) {
   }, [history]);
 
   const iconGrid = (
-    <S.IconGrid>
-      <Item
-        url="phone-cert"
-        src={PhoneCertIcon}
-        text="폰서트 LIVE"
-        i={0}
-        selected={selected}
-        sendFunction={send}
-      />
+    <>
+      <S.IconRowOne>
+        <Item
+          url="phone-cert"
+          src={PhoneCertIcon}
+          text="폰서트 LIVE"
+          i={0}
+          selected={selected}
+          sendFunction={send}
+        />
+        <Item
+          url="sing-stealer"
+          src={SingStealerIcon}
+          text="씽스틸러"
+          i={1}
+          selected={selected}
+          sendFunction={send}
+        />
+      </S.IconRowOne>
+      <S.IconRowTwo>
 
-      <Item
-        url="sing-stealer"
-        src={SingStealerIcon}
-        text="씽스틸러"
-        i={1}
-        selected={selected}
-        sendFunction={send}
-      />
-      <Item
-        url="hit-the-stage"
-        src={HitTheStageIcon}
-        text="힛더스테이지"
-        i={2}
-        selected={selected}
-        sendFunction={send}
-      />
+        <Item
+          url="hit-the-stage"
+          src={HitTheStageIcon}
+          text="힛더스테이지"
+          i={2}
+          selected={selected}
+          sendFunction={send}
+        />
 
-    </S.IconGrid>
+      </S.IconRowTwo>
+    </>
+
   );
 
   return (
@@ -127,7 +137,7 @@ function Performance({ theme, user, isAuthorized }) {
         {iconGrid}
         {mainPoster}
       </S.StyledContainer>
-      <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />
+      {lightVisible && <LightSimple top={theme.windowHeight * 0.9} left={theme.windowWidth * 0.5} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledPerformance>
   );

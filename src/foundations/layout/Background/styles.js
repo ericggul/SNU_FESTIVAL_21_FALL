@@ -7,4 +7,5 @@ export const Background = styled.img`
   width: ${({ theme }) => theme.windowWidth * 1.2}px;
   height: ${({ theme }) => theme.windowHeight * 1.2}px;
   object-fit: cover;
+  background: transparent;
 `;

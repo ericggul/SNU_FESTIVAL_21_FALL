@@ -16,9 +16,14 @@ export const StyledPublisherSection = styled.div`
     line-height: 1.8;
     align-self: flex-start;
   }
+
+  p:nth-of-type(1){
+    align-self: flex-end;
+    text-align: right;
+  }
   
   & > div {
-    margin: 0 1rem;
+    margin: 0 2rem;
     border-left: 1px solid white;
     height: 5rem;
   }

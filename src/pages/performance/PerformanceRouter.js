@@ -26,7 +26,6 @@ function PerformanceRouter({ match }) {
                   component={childRoute.component}
                 />
               ))}
-              <Route component={NotFound} />
             </Switch>
           </AnimatePresence>
         </React.Fragment>

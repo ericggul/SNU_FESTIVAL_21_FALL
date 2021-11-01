@@ -7,9 +7,13 @@ import useModal from '@U/hooks/useModal';
 import OmokGuide from '@F/modal/content/OmokGuide';
 import PropTypes from 'prop-types';
 
+import { toast } from 'react-toastify';
 import Board from '@I/activity/omok/board.png';
 import Black from '@I/activity/omok/black.png';
 import White from '@I/activity/omok/white.png';
+
+import { linkCollectionRef } from '@U/initializer/firebase';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 import * as S from './styles';
 
 function Omok({ theme }) {
@@ -20,7 +24,6 @@ function Omok({ theme }) {
   });
 
   const createOmok = useCallback((e) => {
-    console.log(e);
     const divider = theme.windowWidth < 768 ? 30 : 50;
     if (mainRef.current) {
       const n = document.createElement('div');
@@ -52,7 +55,33 @@ function Omok({ theme }) {
     setIsOmokModalOpen(true);
   }, [mode, setIsOmokModalOpen]);
 
-  console.log(mode);
+  const [clicked, setClicked] = useState(false);
+  const [url, setUrl] = useState('');
+  useEffect(() => {
+    linkCollectionRef.doc('omok').get()
+      .then((doc) => {
+        setUrl(doc.data().url);
+      })
+      .catch(() => (
+        toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+  }, []);
+
+  const goToOmok = useCallback(() => {
+    setClicked(true);
+    const today = new Date();
+    const date = today.getDate();
+    const hours = today.getHours();
+    if (date >= 2 && date <= 5 && hours >= 11 && hours <= 17) {
+      EventBehavior('Activity', 'Click Omok', 'omok clicked');
+      window.open(url, '_blank');
+    } else {
+      toast('11시에 다시오세요!');
+      setTimeout(() => {
+        setClicked(false);
+      }, 400);
+    }
+  }, [url]);
+
   return (
     <S.StyledOmok>
       <HeaderContent backgroundColor={theme.palette.OMOK_PURPLE}>
@@ -64,8 +93,8 @@ function Omok({ theme }) {
 
           <S.Info>
             <p>진행일시</p>
-            <p>10월 26일(화) - 10월 29일(금)</p>
-            <p>11:00 - 17:00</p>
+            <p>11월 2일(화) - 11월 5일(금)</p>
+            <p>11:00 - 17:00(ZOOM)</p>
           </S.Info>
         </S.Sector>
         <S.Sector>
@@ -84,7 +113,7 @@ function Omok({ theme }) {
               <S.Text>참여 방법</S.Text>
             </S.SingleLink>
           </S.Links>
-          <S.Button>줌 링크 바로 가기</S.Button>
+          <S.Button onClick={goToOmok} clicked={clicked}>줌 링크 바로 가기</S.Button>
         </S.Sector>
       </S.Container>
       {omokModalComponent}

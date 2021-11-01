@@ -18,7 +18,7 @@ import useMiniGame from '@U/hooks/useMiniGame';
 
 // Mission
 import {
-  Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightLetter, LightSimple, LightSimple2,
+  Light7,
 } from '@F/Light';
 import useMission from '@U/hooks/useMission';
 import LightMissionGuide from '@F/modal/content/LightMissionGuide';
@@ -32,16 +32,20 @@ function Handwriting({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 9;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -52,11 +56,12 @@ function Handwriting({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -126,7 +131,7 @@ function Handwriting({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledHandwriting>
-      <HeaderContent backgroundColor="transparent">미니게임</HeaderContent>
+      <HeaderContent backgroundColor="transparent">서울대 필기 맞히기</HeaderContent>
       <S.Container>
         <S.Description>
           <S.EmphText>이 필기, 어느 과 친구가 쓴 걸까?</S.EmphText>
@@ -140,7 +145,7 @@ function Handwriting({ theme, user, isAuthorized }) {
           <br />
           <br />
           <S.EmphText>
-            이벤트: 10개 단과대, 82개 과, 30개 이상 맞추기!
+            이벤트: 10개 단과대, 82개 과, 30개 이상 맞히기!
             {' '}
             <br />
             (현재
@@ -166,7 +171,7 @@ function Handwriting({ theme, user, isAuthorized }) {
       >
         <QuestionSector sectorNum={sectorNum} goBackToMain={() => setSectorNum(-1)} />
       </FullScreen>
-      <Light7 top={theme.windowHeight * 0.8} left={theme.windowWidth * 0.3} handleClick={lightMissionClick} />
+      {lightVisible && <Light7 top={theme.windowHeight * 0.8} left={theme.windowWidth * 0.3} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledHandwriting>
   );

@@ -15,6 +15,7 @@ export const ItemSection = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 50%);
   margin: 1rem 0;
+  margin-bottom: 5rem;
 `;
 
 export const Item = styled.div`
@@ -22,6 +23,7 @@ export const Item = styled.div`
   padding: 1rem;
   position: relative;
   box-sizing: border-box;
+  background: transparent;
 `;
 
 export const ImageWrapper = styled.div`
@@ -31,7 +33,11 @@ export const ImageWrapper = styled.div`
   img {
     width: 100%;
     height: 100%;
-  }
+  };
+`;
+
+export const Skeleton = styled.img`
+  ${FlexCenterStyle};
 `;
 
 export const Image = styled.img`
@@ -39,6 +45,9 @@ export const Image = styled.img`
   height: auto;
   border-radius: 1.4rem;
   box-shadow: 0 0 .4rem rgba(0, 0, 0, .16);
+  transition: opacity 2s;
+  // opacity: 0;
+  // ${({ loaded }) => loaded && 'opacity: 1;'}
 `;
 
 export const InfoSection = styled.div`
@@ -55,15 +64,11 @@ export const InfoSection = styled.div`
     margin-right: 2.2rem;
     line-height: 1.3;
     word-break: keep-all;
+    max-width: 80%;
   }
   p:nth-of-type(1) {
     margin-top: 0.6rem;
     color: ${({ theme }) => theme.palette.HIGHLIGHT_RED};
-  }
-  p:last-of-type {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: ${({ theme }) => theme.palette.TEXT_GRAY};
   }
 `;
 
@@ -88,6 +93,11 @@ export const LikeButton = styled.div`
 
 export const SubmitSection = styled.div`
   ${FlexCenterStyle};
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
   flex-direction: column;
   & p {
     margin: .7rem;

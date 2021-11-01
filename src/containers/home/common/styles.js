@@ -55,6 +55,7 @@ export const Landmark = styled.img`
 `;
 
 export const Door = styled.img`
+  cursor: pointer;
   position: absolute;
   width: ${({ width }) => width}px;
   height: auto;

@@ -20,7 +20,6 @@ import Fade from 'react-reveal/Fade';
 import CloudTemplar from '@I/performance/cloud-templar.png';
 import CloudTemplarSmall from '@I/performance/cloud-templar-small.png';
 
-import MascotForMission from '@C/performance/common/MascotForMission';
 import { linkCollectionRef } from '@U/initializer/firebase';
 import { toast } from 'react-toastify';
 import Image from '@/foundations/images/Image';
@@ -155,10 +154,7 @@ function GameTournament({ theme }) {
 
         </S.MobileBody>
       )}
-      {/* <Bubble theme={theme} /> */}
-      <MascotForMission
-        performance="gameTournament"
-      />
+
     </S.Wrapper>
   );
 }

@@ -80,7 +80,7 @@ export function QuestionBox({
     if (isAuthorized) {
       let newPlaces = [...places];
       newPlaces[sectorNum] = 1;
-      console.log('place', newPlaces);
+
       dispatch(actions.setFirestorePlace(user, newPlaces));
     } else {
       setIsSignInModalOpen(true);

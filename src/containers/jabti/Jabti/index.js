@@ -5,9 +5,9 @@ import Intro from '@C/jabti/Intro';
 import Questions from '@C/jabti/Questions';
 import Background from '@C/jabti/Background';
 import useAudio from '@U/hooks/useAudio';
-import JabtiBackground from '@/static/audio/jabti_background.mp3';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
+import JabtiBackground from '@/static/audio/jabti_background.mp3';
 import * as S from './styles';
 
 function Jabti() {
@@ -19,16 +19,15 @@ function Jabti() {
 
   const history = useHistory();
   const goToResult = () => {
-
     const answertoResult = (answer) => {
-      let result = "";
+      let result = '';
       result += (answer[0] === 0 ? 's' : 'p');
       result += (answer[1] === 0 ? 'y' : 'w');
       result += (answer[2] === 0 ? 'b' : 'g');
       result += (answer[3] === 0 ? 'g' : 't');
 
       return result;
-    }
+    };
     history.push(
       {
         pathname: `/jabti/${answertoResult(answerArray)}`,
@@ -39,21 +38,20 @@ function Jabti() {
 
   useEffect(() => {
     if (resultReady) {
-      setTimeout(()=>{
+      setTimeout(() => {
         goToResult();
-      }, 2000)
+      }, 2000);
     }
   }, [resultReady]);
 
-  useEffect(()=>{
-    if(displayIndex === 1){
-      console.log('hey');
+  useEffect(() => {
+    if (displayIndex === 1) {
       playAudio();
     }
-  }, [displayIndex])
+  }, [displayIndex]);
 
   const handleClick = (questionIndex, answerIndex) => {
-    if(questionIndex > 0){
+    if (questionIndex > 0) {
       setAnswerArray(answerArray => [...answerArray, answerIndex]);
     }
 
@@ -68,9 +66,9 @@ function Jabti() {
     <>
       <Background index={displayIndex} resultReady={resultReady} />
       <S.StyledJabti>
-        {displayIndex === 0 ? 
-        <Intro handleClick={handleClick}/> : 
-        <Questions index={displayIndex} handleClick={handleClick} />}
+        {displayIndex === 0
+          ? <Intro handleClick={handleClick} />
+          : <Questions index={displayIndex} handleClick={handleClick} />}
       </S.StyledJabti>
     </>
   );

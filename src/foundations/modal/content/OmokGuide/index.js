@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as S from './styles';
 
 function OmokGuide({ setIsModalOpen, version }) {
-  console.log(version);
   return (
     <S.StyledOmokGuide>
       <S.OmokBox

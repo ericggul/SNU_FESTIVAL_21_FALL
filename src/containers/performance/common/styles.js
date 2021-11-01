@@ -85,9 +85,7 @@ export const Image = styled.div`
   width: 100%;
   height: 100%;
   margin: 1rem 0;
-
-  display: grid;
-  grid-template-columns: repeat(3, 33.333vw);
+  ${FlexCenterStyle};
   margin-top: ${({ theme }) => theme.windowHeight * 0.3}px;
 `;
 
@@ -98,7 +96,6 @@ export const AbsoluteImage = styled.img`
   margin: auto;
   left: 0;
   right: 0;
-  filter: hue-rotate(${props => props.hue}deg);
 `;
 
 export const Text = styled.div`

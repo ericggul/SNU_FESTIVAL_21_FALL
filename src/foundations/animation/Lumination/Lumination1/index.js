@@ -145,7 +145,6 @@ class StarSet {
       ctx.beginPath();
       this.star_list[i].update();
       const currentStar = this.star_list[i];
-      console.log(currentStar.x, currentStar.y, currentStar.radius);
       ctx.arc(currentStar.x, currentStar.y, currentStar.radius, 0, Math.PI * 2, false);
       ctx.fillStyle = this.color;
       ctx.fill();

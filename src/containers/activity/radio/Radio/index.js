@@ -24,19 +24,23 @@ import * as S from './styles';
 
 export const transition = { duration: 0.9, ease: [0.43, 0.13, 0.23, 0.96] };
 function Radio({ theme, user, isAuthorized }) {
-  /// //////////////////////////
+  /// //////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 5;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -47,48 +51,19 @@ function Radio({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
-
-  /// //////////////////////////
+  /// ///////////
 
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-  const [clicked, setClicked] = useState(false);
-
-  const [url, setUrl] = useState(null);
-  useEffect(() => {
-    linkCollectionRef.doc('radio').get()
-      .then((doc) => {
-        setUrl(doc.data().url);
-      })
-      .catch(() => (
-        toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-  }, []);
-
-  const goToYoutube = useCallback(() => {
-    setClicked(true);
-    if (url !== null && url.length > 0) {
-      EventBehavior('Activity', `Click Youtube Link: ${url}`, `go to ${url} by activity page`);
-      window.open(url, '_blank');
-    } else if (url !== null && url.length === 0) {
-      toast('행사 준비 중입니다😇');
-      setTimeout(() => {
-        setClicked(false);
-      }, 400);
-    } else {
-      toast('다시 클릭해주세요!');
-      setTimeout(() => {
-        setClicked(false);
-      }, 400);
-    }
-  }, [url]);
 
   return (
     <S.StyledRadio>
@@ -102,23 +77,29 @@ function Radio({ theme, user, isAuthorized }) {
         exit={{ opacity: 0.4, filter: 'blur(10px)' }}
         transition={transition}
       >
-        <S.Image src={DummyImage} />
+        {/* <S.Image src={DummyImage} /> */}
         <S.Container>
+          <S.Paragraph>
+            <iframe
+              width={isMobile ? theme.windowWidth : theme.windowWidth * 0.6}
+              height={isMobile ? theme.windowWidth * 0.5625 : theme.windowWidth * 0.3375}
+              src="https://www.youtube.com/embed/wiSVFz7WyBk?autoplay=1"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </S.Paragraph>
           <S.Texts>
             <p>With. 진용진</p>
             <p>이색 샤대생 인터뷰</p>
             <p>진용진에 대해 알려드림</p>
             <p>샤대생과 진용진님의 라이어 게임</p>
+            <p>(10월 26일 라이브 녹화본)</p>
           </S.Texts>
-
-          <S.Button onClick={() => goToYoutube()} clicked={clicked}>지금 보러가기!</S.Button>
-          <S.Paragraph>
-            <p>10월 26일(화) 20:00 - 21:00</p>
-            <p>유튜브 라이브: 위 링크 클릭</p>
-          </S.Paragraph>
         </S.Container>
       </S.Contents>
-      <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />
+      {lightVisible && <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledRadio>
   );

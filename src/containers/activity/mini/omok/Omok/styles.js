@@ -87,8 +87,24 @@ export const Button = styled.div`
   background: ${({ theme }) => theme.palette.OMOK_PURPLE};
   padding: .8rem 4rem;
   border-radius: 1.7rem;
-  box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .16);
+
   margin-bottom: 3rem;
+  position: relative;
+  transition: transform .4s;
+  ${props => props.clicked && 'transform: translate(.4rem, .4rem);'}
+
+  &:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1.7rem;
+    box-shadow: .4rem .4rem .6rem rgba(0, 0, 0, .16);
+    transition: box-shadow .4s;
+    ${props => props.clicked && 'box-shadow: 0 0 .6rem rgba(0, 0, 0, .16);'}
+  }
 `;
 
 export const BlackDot = styled.div`

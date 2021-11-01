@@ -42,7 +42,7 @@ function Clothing({ theme, user, isAuthorized }) {
   const [isLoading, setIsLoading] = useState(true);
   const [loaded, setLoaded] = useState(0);
   // background
-  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 0);
+  const [selectedBackground, setSelectedBackground] = useState(hadPlayed ? mission.background : 4);
 
   const handleBackgroundChange = useCallback((i) => {
     setSelectedBackground(i);
@@ -71,17 +71,15 @@ function Clothing({ theme, user, isAuthorized }) {
   // selected data set state
   // Clothings: One selection for each part
   // Accessories: Multiple accessories possible
-  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+  const [selectedClothings, setSelectedClothings] = useState(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(-1));
   const [selectedAccessories, setSelectedAccessories] = useState(hadPlayed ? mission.accessorie : []);
   const [imageArray, setImageArray] = useState([]);
 
   useEffect(() => {
-    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(0));
+    setSelectedClothings(hadPlayed ? mission.clothing : Array(CLOTHING_DATA.length).fill(-1));
     setSelectedAccessories(hadPlayed ? mission.accessorie : []);
-  }, [hadPlayed]);
-
-  console.log(hadPlayed, mission.clothing);
-  console.log(selectedClothings);
+    setSelectedBackground(hadPlayed ? mission.background : 4);
+  }, [hadPlayed, mission.clothing]);
 
   // loading and calling image
   useEffect(() => {
@@ -116,7 +114,7 @@ function Clothing({ theme, user, isAuthorized }) {
   }, [loaded]);
 
   // eyebrow visible(=== hair on top)
-  const [hairOnTop, setHairOnTop] = useState(false);
+  const [hairOnTop, setHairOnTop] = useState(true);
 
   // size converter
   const convert = useCallback((value) => (containerWidth < 500 ? (containerWidth / 375) * value : (500 / 375) * value), [theme, containerWidth]);
@@ -147,15 +145,6 @@ function Clothing({ theme, user, isAuthorized }) {
   const characterRef = useRef();
   const [screenShottedCharacter, setScreenShottedCharacter] = useState('');
 
-  const handleKakaoClick = useCallback(() => {
-    if (characterRef.current) {
-      html2canvas(characterRef.current).then(canvas => {
-        console.log('hey');
-        setScreenShottedCharacter(canvas.toDataURL('image/jpg'));
-      });
-    }
-  }, [characterRef, selectedClothings]);
-
   const save = useCallback(() => {
     if (isAuthorized) {
       dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
@@ -169,7 +158,7 @@ function Clothing({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
-      <HeaderContent>MY CHARACTER</HeaderContent>
+      <HeaderContent>옷 입히기</HeaderContent>
       {isLoading ? <Loading loaded={loaded} /> : (
         <S.Content>
           <ControlArea
@@ -180,18 +169,11 @@ function Clothing({ theme, user, isAuthorized }) {
             onBackgroundClick={handleBackgroundChange}
             onHairClose={() => setHairOnTop(hr => !hr)}
           />
-          {/* <S.Text>
-            나만의 캐릭터를 만들고,
-            {' '}
-            <br />
-            {' '}
-            웹사이트에 숨어있는 빛을 모아보세요!
-          </S.Text> */}
           <S.MidContainer ref={characterRef}>
             <S.Container width={Math.min(containerWidth, 500)}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
               <S.Element
-                src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
+                src={selectedClothings[0] !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[0].english}/${selectedClothings[0] + 1}.png`}
                 top={convert(CLOTHING_DATA[0].yPos)}
                 left={convert(CLOTHING_DATA[0].xPos)}
                 width={convert(CLOTHING_DATA[0].width)}
@@ -200,7 +182,7 @@ function Clothing({ theme, user, isAuthorized }) {
               />
               {selectedClothings.slice(1).map((sl, pr) => (
                 <S.Element
-                  src={`https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
+                  src={sl !== -1 && `https://snufestival.com/images/clothing/${CLOTHING_DATA[pr + 1].english}/${sl + 1}.png`}
                   top={convert(CLOTHING_DATA[pr + 1].yPos)}
                   left={convert(CLOTHING_DATA[pr + 1].xPos)}
                   width={convert(CLOTHING_DATA[pr + 1].width)}
@@ -216,6 +198,7 @@ function Clothing({ theme, user, isAuthorized }) {
                     left={convert(ACCESSORIES_DATA.xPos)}
                     width={convert(ACCESSORIES_DATA.width)}
                     key={i}
+                    zIndexOnTop
                   />
                 )
               ))}

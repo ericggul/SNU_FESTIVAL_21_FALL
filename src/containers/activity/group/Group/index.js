@@ -25,6 +25,7 @@ function Group({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const [lighted, setLighted] = useState(true);
   const [lightVisible, setLightVisible] = useState(false);
+  const PAGE_LIGHT_INDICATOR = 7;
   const [sustainLightTemp, setSustainLightTemp] = useState(false);
 
   console.log('sustain', sustainLightTemp);
@@ -54,16 +55,18 @@ function Group({ theme, user, isAuthorized }) {
 
   /// //////////////////////////
   const mission = useMission();
-  const PAGE_LIGHT_INDICATOR = 7;
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
 
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -78,9 +81,7 @@ function Group({ theme, user, isAuthorized }) {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
-    setLighted(true);
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
@@ -93,35 +94,23 @@ function Group({ theme, user, isAuthorized }) {
 
   // 링크
   const [url, setUrl] = useState('https://docs.google.com/forms/d/e/1FAIpQLScyd8QKSfZfJ3RubLhmv0AmqrzGUpQWJYIPZeO8n-pWGmtDbg/viewform');
-  const [youtubeUrl, setYoutubeUrl] = useState(null);
-  // useEffect(() => {
-  //   linkCollectionRef.doc('group-game').get()
-  //     .then((doc) => {
-  //       setUrl(doc.data().url);
-  //       setYoutubeUrl(doc.data().youtubeUrl);
-  //     })
-  //     .catch(() => (
-  //       toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-  // }, []);
 
   const today = new Date();
   const date = today.getDate();
   const hours = today.getHours();
 
   useEffect(() => {
-    if (date > 27) {
+    if (date > 3) {
       linkCollectionRef.doc('group-game').get()
         .then((doc) => {
           setUrl(doc.data().url);
-          setYoutubeUrl(doc.data().youtubeUrl);
         })
         .catch(() => (
           toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-    } else if (date === 26 && hours > 15) {
+    } else if (date === 3 && hours > 15) {
       linkCollectionRef.doc('group-game').get()
         .then((doc) => {
           setUrl(doc.data().url);
-          setYoutubeUrl(doc.data().youtubeUrl);
         })
         .catch(() => (
           toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
@@ -130,7 +119,7 @@ function Group({ theme, user, isAuthorized }) {
 
   const goToZoom = useCallback(() => {
     if (url !== null && url.length > 0) {
-      EventBehavior('Activity', `Click Youtube Link: ${url}`, `go to ${url} by activity page`);
+      EventBehavior('Activity', 'Click Youtube Link: Group', 'group clicked');
       window.open(url, '_blank');
     } else if (url !== null && url.length === 0) {
       toast('행사 준비 중입니다😇');
@@ -159,7 +148,7 @@ function Group({ theme, user, isAuthorized }) {
           <S.Info>
             **추가 신청은
             {' '}
-            <S.Bold>10월 26일(화) 15:00까지만</S.Bold>
+            <S.Bold>11월 2일(화) 15:00까지만</S.Bold>
             {' '}
             받습니다!!
             {' '}
@@ -170,11 +159,11 @@ function Group({ theme, user, isAuthorized }) {
         <S.Contents>
           <S.Header>일시</S.Header>
           <S.Info>
-            신청: ~ 10.26(화) 15:00
+            신청: ~ 11.2(화) 15:00
             <br />
-            조별 활동: 10.26(화) ~ 10.28(목)
+            조별 활동: 11.2(화) ~ 11.4(목)
             <br />
-            줌 게임: 10.26(화), 10.28(목) 18:30~20:00
+            줌 게임: 11.2(화), 11.4(목) 18:30~20:00
           </S.Info>
         </S.Contents>
         <S.Button lighted={lighted} onClick={goToZoom}>{url.includes('docs') ? '신청하러 가기' : '줌 링크 바로가기'}</S.Button>

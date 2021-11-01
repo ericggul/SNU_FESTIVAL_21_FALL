@@ -12,7 +12,6 @@ const INITIAL_STATE = {
   riddle: false,
   placeAccomplished: false,
   handwritingAccomplished: false,
-  treasureHunt: null, // NOTE: null 이 아닌 배열이면 보물찾기 진행 중
 };
 
 /** type */
@@ -31,9 +30,6 @@ export const types = {
 
   SET_STAGE: `${PREFIX}/SET_STAGE`,
   SET_FIRESTORE_STAGE: `${PREFIX}/SET_FIRESTORE_STAGE`,
-  START_TREASURE_HUNT: `${PREFIX}/START_TREASURE_HUNT`,
-  END_TREASURE_HUNT: `${PREFIX}/END_TREASURE_HUNT`,
-  PUSH_TREASURE_HUNT: `${PREFIX}/PUSH_TREASURE_HUNT`,
 };
 
 /** action */
@@ -58,9 +54,7 @@ export const actions = {
   setFirestoreStage: (user, stage, isCompleted) => ({
     type: types.SET_FIRESTORE_STAGE, user, stage, isCompleted,
   }),
-  startTreasureHunt: () => ({ type: types.START_TREASURE_HUNT }),
-  endTreasureHunt: () => ({ type: types.END_TREASURE_HUNT }),
-  pushTreasureHunt: (treasure) => ({ type: types.PUSH_TREASURE_HUNT, treasure }),
+
 };
 
 /** reducer */
@@ -75,18 +69,14 @@ const reducer = createReducer(INITIAL_STATE, {
   [types.SET_PLACE]: (draft, action) => { draft.place = action.places; },
   [types.SET_HANDWRITING]: (draft, action) => { draft.handwriting = action.handwritings; },
   [types.SET_STAGE]: (draft, action) => { draft[action.stage] = action.isCompleted; },
-  [types.START_TREASURE_HUNT]: (draft) => { draft.treasureHunt = []; },
-  [types.END_TREASURE_HUNT]: (draft) => { draft.treasureHunt = null; },
-  [types.PUSH_TREASURE_HUNT]: (draft, action) => {
-    if (draft.treasureHunt !== null) {
-      draft.treasureHunt = [...draft.treasureHunt, action.treasure];
-    }
-  },
+
   [types.RESET]: (draft) => {
     draft.isLoaded = false;
     draft.handwriting = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    draft.place = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     draft.riddle = false;
-    draft.treasureHunt = null;
+    draft.placeAccomplished = false;
+    draft.handwritingAccomplished = false;
   },
 });
 export default reducer;

@@ -35,6 +35,7 @@ export const Image = styled.img`
 export const MidContainer = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
+    width: 100vw;
     background: ${({ background }) => background};
 `;
 
@@ -49,6 +50,8 @@ export const Container = styled.div`
     height: ${({ width }) => width * 2.18}px;
 
     pointer-events: none;
+
+    transition: all .5s;
     
     @keyframes jumping{
         from{transform: translateY(0);}

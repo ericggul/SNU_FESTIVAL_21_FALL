@@ -112,7 +112,6 @@ class StarSet {
   }
 
   reset() {
-    console.log('reset called');
     this.time = 0;
     this.x = getRandom(0, this.stageWidth * (1 - this.sizeIndex));
     this.y = getRandom(0, this.stageHeight * (1 - this.sizeIndex));
@@ -149,7 +148,6 @@ class StarSet {
       ctx.closePath();
     }
     if (this.time > this.startTimeRange[1] + this.intervalTimeRange[1]) {
-      console.log('calling reset');
       this.reset();
     }
   }

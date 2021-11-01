@@ -9,6 +9,13 @@ export const GridItem = styled(motion.div)`
     margin: 2.5vw;
     position: relative;
     cursor: pointer;
+
+    @keyframes rotate-inv{
+        from{transform: rotate(0);}
+        to{transform: rotate(-360deg);}
+    }
+
+    ${({ isMobile }) => isMobile && 'animation: rotate-inv 90s infinite linear;'}
 `;
 
 export const ImageContainer = styled.div`
@@ -39,7 +46,7 @@ export const IconDescription = styled.div`
     margin-top: -0.7rem;
     margin-bottom: 1.4rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     height: 1.6rem;
     width: 6.3rem;
     ${FlexCenterStyle};
@@ -47,12 +54,10 @@ export const IconDescription = styled.div`
     color: ${({ theme }) => theme.palette.BLACK_PURPLE};
     border-radius: 0.9rem;
 
-
     box-shadow: 
         0 0 .1rem .1rem white,
         0 0 .5rem .2rem white,
         0 0 1rem .5rem white;
-        
 `;
 
 export const Accomplished = styled.img`

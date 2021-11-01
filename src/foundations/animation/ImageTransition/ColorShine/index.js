@@ -119,7 +119,6 @@ class App {
     );
 
     this.imageData = this.tmpCtx?.getImageData(0, 0, this.stageWidth, this.stageHeight);
-    console.log(this.imageData);
     this.drawDots();
   }
 

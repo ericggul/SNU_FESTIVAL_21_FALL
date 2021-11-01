@@ -25,19 +25,23 @@ import { actions } from '@/redux/mini-game/state';
 import * as S from './styles';
 
 function Goods({ user, isAuthorized }) {
-  /// //////////////////////////
+  /// /////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 2;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -48,27 +52,17 @@ function Goods({ user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
   }, [isAuthorized, mission, lightVisible]);
-
-  /// //////////////////////////
-
-  // TODO: 코드 중복
-  const treasureHunt = useSelector(state => state.miniGame.treasureHunt);
-  const dispatch = useDispatch();
-  const isPlaying = useMemo(() => (
-    treasureHunt !== null && !treasureHunt.includes(2)
-  ), []);
-
-  const password = useMemo(() => getPasswordFromEmail(user.email, 2, 3)[1], [user]);
-  const { modalComponent: signInModalComponent, setIsModalOpen: setIsSignInModalOpen } = useModal(SignInGuide);
+  /// ////////////////////
 
   return (
     <S.StyledGoods>
@@ -78,13 +72,10 @@ function Goods({ user, isAuthorized }) {
         <TextSection />
         <DisplaySection />
       </S.Body>
-      {!isPlaying && (
-        <ScrollTopButton />
-      )}
+      <ScrollTopButton />
 
-      <Light2 top={150} left={200} handleClick={lightMissionClick} />
+      {lightVisible && <Light2 top={150} left={200} handleClick={lightMissionClick} />}
       {lightModalComponent}
-      {signInModalComponent}
     </S.StyledGoods>
   );
 }

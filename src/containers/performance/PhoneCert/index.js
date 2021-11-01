@@ -36,16 +36,20 @@ function PhoneCert({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 8;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -56,11 +60,12 @@ function PhoneCert({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -112,14 +117,14 @@ function PhoneCert({ theme, user, isAuthorized }) {
   const bubble = <Bubble decoration="관악의 밴드 실력자들과 함께하는" title="폰서트 LIVE" speak={speak} />;
   const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[4, 5]} />;
-  const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
+  const youTube = url.length > 0 && <Youtube src={url} />;
   const guide = <Guide type="밴드공연 폰서트" date="11월 4일 - 5일 (목, 금)" times={['1부 목: 17:45~21:40', '2부 금: 18:00~20:00']} />;
   const starring = (
     <StarringDouble DATA={[PhoneCertDataOne, PhoneCertDataTwo]} />
   );
   const image = (
     <S.Image>
-      {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={PhoneCertImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
+      <S.AbsoluteImage src={PhoneCertImage} alt="hit-the-stage" />
     </S.Image>
   );
 
@@ -179,7 +184,7 @@ function PhoneCert({ theme, user, isAuthorized }) {
 
         </S.MobileBody>
       )}
-      <Light6 top={200} left={50} handleClick={lightMissionClick} />
+      {lightVisible && <Light6 top={200} left={50} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.Wrapper>
   );

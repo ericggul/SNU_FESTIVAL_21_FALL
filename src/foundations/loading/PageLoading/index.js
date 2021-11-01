@@ -14,7 +14,7 @@ import ConstellationFive from '@I/layout/Constellation5.png';
 import * as S from './styles';
 
 function PageLoading({ message, theme }) {
-  const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
+  const isMobile = useMemo(() => theme.windowWidth < 500, [theme]);
 
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (500 / 375) * value;

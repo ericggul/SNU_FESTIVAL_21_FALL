@@ -4,6 +4,7 @@ import React, {
 import { HeaderContent } from '@F/layout/Header';
 import { useHistory } from 'react-router';
 import { withTheme } from 'styled-components';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import CompetitionIcon from '@I/activity/home/competition.png';
 import MiniIcon from '@I/activity/home/mini.png';
 import GroupIcon from '@I/activity/home/group.png';
@@ -35,17 +36,20 @@ function Activity({ theme, user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 1;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
 
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -56,11 +60,12 @@ function Activity({ theme, user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -80,12 +85,12 @@ function Activity({ theme, user, isAuthorized }) {
   const convert = useCallback((value) => {
     const result = isMobile ? (theme.windowWidth / 375) * value : (500 / 375) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const convertY = useCallback((value) => {
     const result = (theme.windowHeight / 812) * value;
     return result;
-  }, []);
+  }, [theme]);
 
   const POS = [
     { x: 67, y: 61, w: 107 },
@@ -129,7 +134,6 @@ function Activity({ theme, user, isAuthorized }) {
           duration={getRandom(2, 5)}
           delay={getRandom(-5, 0)}
         />
-
       </GS.ImageContainer>
       <GS.IconDescription shine={selected === i}>
         {text}
@@ -149,6 +153,7 @@ function Activity({ theme, user, isAuthorized }) {
   return (
     <S.StyledActivity>
       <HeaderContent backgroundColor="transparent">행사</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <S.StyledContainer>
         {/* <S.Description>
           각 행사별 아이콘을 클릭해보세요!

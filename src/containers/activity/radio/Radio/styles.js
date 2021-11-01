@@ -25,7 +25,6 @@ export const Contents = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  width: 80%;
   text-align: center;
   color: white;
   margin-top: 10rem;
@@ -38,7 +37,6 @@ export const Contents = styled(motion.div)`
 export const Container = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
-  margin: 5vw 0;
 `;
 
 export const Image = styled.img`
@@ -50,7 +48,7 @@ export const Image = styled.img`
 
 export const Texts = styled.div`
   margin: 2rem 0;
-  margin-bottom: 0;
+  margin-bottom: 4rem;
   font-size: 1rem;
   font-weigth: 400;
   opacity: .8;
@@ -66,37 +64,8 @@ export const Texts = styled.div`
 
 export const Paragraph = styled.div`
   font-size: 1rem;
+  margin: 2rem 0;
   opacity: .8;
   font-weigth: 300;
-  p{
-    margin: 0;
-  }
-`;
 
-export const Button = styled.div`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: black;
-  margin: 2.5rem 0;
-  padding: .5rem 2.5rem;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: .8rem;
-  // box-shadow: .4rem .4rem .4rem rgba(255, 255, 255, 0.58);
-  cursor: pointer;
-  position: relative;
-  transition: transform .4s;
-  ${props => props.clicked && 'transform: translate(.4rem, .4rem);'}
-
-  &:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: .8rem;
-    box-shadow: .4rem .4rem .4rem rgba(255, 255, 255, 0.58);
-    transition: box-shadow .4s;
-    ${props => props.clicked && 'box-shadow: 0 0 .4rem rgba(255, 255, 255, 0.58);'}
-  }
 `;

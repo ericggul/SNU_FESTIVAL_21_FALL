@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import Lumination2 from '@F/animation/Lumination/Lumination2';
 import Comments from '@C/guest-book/Comment';
 import WriteBox from '@C/guest-book/WriteBox';
 import Heart from '@C/guest-book/Heart';
@@ -20,16 +21,20 @@ function GuestBook({ user, isAuthorized }) {
   /// //////////////////////////
   const mission = useMission();
   const [lightVisible, setLightVisible] = useState(false);
-  const [sustainLightTemp, setSustainLightTemp] = useState(false);
   const PAGE_LIGHT_INDICATOR = 3;
+  const [sustainLightTemp, setSustainLightTemp] = useState(!mission.light || !mission.light[PAGE_LIGHT_INDICATOR]);
 
-  const onModalChange = useCallback(() => {
-    setSustainLightTemp(false);
-  }, []);
+  const onModalChange = () => {
+    if (lightVisible) {
+      setSustainLightTemp(false);
+    }
+  };
+
   const { modalComponent: lightModalComponent, setIsModalOpen: setIsLightModalOpen } = useModal(LightMissionGuide, false, true,
     {
       pageIndicator: PAGE_LIGHT_INDICATOR,
     }, onModalChange);
+
   useEffect(() => {
     // Doing Mission and not founded
     if (isAuthorized && mission.light) {
@@ -40,11 +45,12 @@ function GuestBook({ user, isAuthorized }) {
       } else {
         setLightVisible(false);
       }
+    } else if (!sustainLightTemp) {
+      setLightVisible(false);
     } else {
       setLightVisible(true);
     }
   }, [isAuthorized, mission, setIsLightModalOpen, sustainLightTemp]);
-
   const lightMissionClick = useCallback(() => {
     setSustainLightTemp(true);
     setIsLightModalOpen(true);
@@ -62,6 +68,7 @@ function GuestBook({ user, isAuthorized }) {
   return (
     <S.StyledGuestBook>
       <HeaderContent>방명록</HeaderContent>
+      <Lumination2 width="100%" height="calc(100% + 1.5rem)" />
       <S.Body>
         <S.WriteBoxWrapper>
           <WriteBox user={user} />
@@ -72,7 +79,7 @@ function GuestBook({ user, isAuthorized }) {
       </S.Body>
       <Heart heartAnimate={heartAnimate} />
 
-      <Light3 top={120} left={250} handleClick={lightMissionClick} />
+      {lightVisible && <Light3 top={120} left={250} handleClick={lightMissionClick} />}
       {lightModalComponent}
     </S.StyledGuestBook>
   );

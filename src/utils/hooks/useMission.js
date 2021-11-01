@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useUser } from '@U/hooks/useAuth';
+import useAuth, { useUser } from '@U/hooks/useAuth';
 import { actions } from '@/redux/mission/state';
 
 const useMission = () => {
   const mission = useSelector(state => state.mission);
-  const { user, isAuthorized } = useUser();
 
+  useAuth();
+  const { user, isAuthorized } = useUser();
   const dispatch = useDispatch();
   useEffect(() => {
     if (isAuthorized && !mission.isLoaded) {

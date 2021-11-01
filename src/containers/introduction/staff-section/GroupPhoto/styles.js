@@ -5,11 +5,11 @@ export const StyledGroupPhoto = styled.div`
   justify-content: center;
   position: relative;
   width: calc(80vw );
-  height: calc((80vw ) * 0.5625);
+  height: calc((80vw ) * 0.75);
 
   @media (min-width: 1000px){
     width: 800px;
-    height: 450px;
+    height: 600px;
   }
 `;
 

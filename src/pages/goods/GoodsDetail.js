@@ -1,15 +1,22 @@
 import React from 'react';
 import withMountEvent from '@U/hoc/withMountEvent';
 import PropTypes from 'prop-types';
-import GlassImage from '@I/goods/glass.jpg';
-import GlassDetail from '@I/goods/glass-detail.png';
-import SealStickerImage from '@I/goods/seal-sticker.png';
-import SealStickerDetail from '@I/goods/seal-sticker-detail.png';
-import CalendarImage from '@I/goods/calendar.png';
-import CalendarDetail from '@I/goods/calendar-detail.png';
-import StickerPackImage from '@I/goods/sticker-pack.png';
-import StickerPackDetail from '@I/goods/sticker-pack-detail.png';
+
 import GoodsDetailContainer from '@C/goods/GoodsDetail';
+
+import KeyRingImage from '@I/goods/keyring.png';
+import KeyRingDetail from '@I/goods/keyring-detail.png';
+import MemoImage from '@I/goods/memo.png';
+import MemoDetail from '@I/goods/memo-detail.png';
+import SanitizerImage from '@I/goods/sanitizer.png';
+import SanitizerDetail from '@I/goods/sanitizer-detail.png';
+import SojuImage from '@I/goods/soju.png';
+import SojuDetail from '@I/goods/soju-detail.png';
+import StickerImage from '@I/goods/sticker.png';
+import StickerDetail from '@I/goods/sticker-detail.png';
+import Sticker4Image from '@I/goods/sticker4.png';
+import Sticker4Detail from '@I/goods/sticker4-detail.png';
+
 import Header from '@F/layout/Header';
 
 function GoodsDetail({
@@ -37,34 +44,50 @@ GoodsDetail.propTypes = {
   longImage: PropTypes.string.isRequired,
 };
 
-export const Glass = withMountEvent(() => (
+export const Keyring = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '축제이즈백 소주잔', price: 7000, index: 0 }}
-    image={GlassImage}
-    longImage={GlassDetail}
+    information={{ name: '리오 유령 키링', price: 4500, index: 0 }}
+    image={KeyRingImage}
+    longImage={KeyRingDetail}
   />
 ));
 
-export const SealSticker = withMountEvent(() => (
+export const Memo = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '씰스티커', price: 1500, index: 1 }}
-    image={SealStickerImage}
-    longImage={SealStickerDetail}
+    information={{ name: '리오 떡메모지 2종', price: 2000, index: 1 }}
+    image={MemoImage}
+    longImage={MemoDetail}
   />
 ));
 
-export const Calendar = withMountEvent(() => (
+export const Sanitizer = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '사계절 엽서 세트', price: 2000, index: 2 }}
-    image={CalendarImage}
-    longImage={CalendarDetail}
+    information={{ name: '리오 손소독제', price: 7000, index: 2 }}
+    image={SanitizerImage}
+    longImage={SanitizerDetail}
   />
 ));
 
-export const StickerPack = withMountEvent(() => (
+export const Soju = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '스티커팩', price: 1500, index: 3 }}
-    image={StickerPackImage}
-    longImage={StickerPackDetail}
+    information={{ name: '헤롱헤롱 리오 소주잔', price: 6000, index: 3 }}
+    image={SojuImage}
+    longImage={SojuDetail}
+  />
+));
+
+export const Sticker = withMountEvent(() => (
+  <GoodsDetail
+    information={{ name: '관악의 밤 리오 씰스티커', price: 2000, index: 4 }}
+    image={StickerImage}
+    longImage={StickerDetail}
+  />
+));
+
+export const Sticker4 = withMountEvent(() => (
+  <GoodsDetail
+    information={{ name: '관악의 밤 리오 4분할 스티커', price: 1500, index: 5 }}
+    image={Sticker4Image}
+    longImage={Sticker4Detail}
   />
 ));

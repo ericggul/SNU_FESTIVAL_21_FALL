@@ -45,8 +45,8 @@ import BackgroundBottom from '@I/home/desktop/background-bottom-light.png';
 import Performance from '@I/home/desktop/performance.png';
 import Activity from '@I/home/desktop/activity.png';
 import Goods from '@I/home/desktop/goods.png';
-import GuestBook from '@I/home/desktop/guest-book.png';
-import Introduction from '@I/home/desktop/introduction.png';
+import MiniGame from '@I/home/desktop/mini-game.png';
+import Clothing from '@I/home/desktop/clothing.png';
 
 import BusOne from '@I/home/desktop/bus1.png';
 import BusTwo from '@I/home/desktop/bus2.png';
@@ -150,7 +150,7 @@ function Home({
 
   // Scroll when from Light Event
   const scrollTo = useCallback((numbers) => {
-    window.scrollTo({ top: LIGHT_LOC[numbers]?.y, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: LIGHT_LOC[numbers]?.y - 300, left: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -162,6 +162,8 @@ function Home({
     }
   }, [fromLightEvent, brightenLights]);
 
+  const [fadeOut, setFadeOut] = useState(false);
+
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
       setBusMove(true);
@@ -170,13 +172,28 @@ function Home({
       }, 2000);
       setTimeout(() => {
         setGateOn(true);
-      }, 4700);
+      }, 4900);
       setTimeout(() => {
-        setIsMissionCompleteModalOpen(true);
-      }, 6300);
+        toast('빛 찾기 완료!');
+      }, 5500);
+      setTimeout(() => {
+        toast('잠시 후 이동합니다...');
+      }, 7500);
+      setTimeout(() => {
+        history.push('/light-mission-completed-yeaaay');
+      }, 10000);
     }
     if (!isLightPlaying) {
-      toast('졸고있는 리오를 깨워보세요!');
+      toast('꺼진 불을 밝히고 싶으신가요?');
+      setTimeout(() => {
+        toast('졸고있는 리오를 깨워보세요!');
+      }, 2000);
+      if (!isAuthorized) {
+        setTimeout(() => {
+          toast('로그인이 필요합니다.');
+        }, 4000);
+      }
+
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   }, [missionCleared, isLightPlaying]);
@@ -185,8 +202,7 @@ function Home({
 
   return (
     <>
-
-      <S.StyledHome>
+      <S.StyledHome fadeOut={fadeOut}>
         <Title />
         <Notice />
         <S.Wrapper width={convert(1920)} height={convert(2506)}>
@@ -204,8 +220,8 @@ function Home({
           <CS.Landmark delay={0} src={Performance} alt="공연" top={convert(165)} left={convert(229)} width={convert(978)} onClick={() => goToPage('/performance')} />
           <CS.Landmark delay={2} src={Activity} alt="행사" top={convert(695)} left={convert(568)} width={convert(734)} onClick={() => goToPage('/activity')} />
           <CS.Landmark delay={4} src={Goods} alt="굿즈" top={convert(1083)} left={convert(73)} width={convert(556)} onClick={() => goToPage('/goods')} />
-          <CS.Landmark delay={8} src={Introduction} alt="소개" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/introduction')} />
-          <CS.Landmark delay={6} src={GuestBook} alt="방명록" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/guest-book')} />
+          <CS.Landmark delay={8} src={MiniGame} alt="미니게임" top={convert(1461)} left={convert(919)} width={convert(558)} onClick={() => goToPage('/activity/mini')} />
+          <CS.Landmark delay={6} src={Clothing} alt="옷 입히기" top={convert(924)} left={convert(1272)} width={convert(546)} onClick={() => goToPage('/clothing')} />
 
           {LIGHT_LOC.map((pos, i) => (
             <Stand

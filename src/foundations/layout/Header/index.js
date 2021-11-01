@@ -1,14 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import MascotInFolder from '@I/svg/mascot/mascot-in-folder.svg';
+import styled, { withTheme, css } from 'styled-components';
+import MenuDestkop from '@I/layout/menu-desktop.png';
+import MenuMobile from '@I/layout/menu-mobile.png';
 import Back from '@I/svg/back.svg';
 import Fade from 'react-reveal/Fade';
 import Menus from '@F/layout/Menus';
-import styled, { css } from 'styled-components';
 import * as S from './styles';
 
-function Header({ hamburgerColor, backVisible = true }) {
+function Header({ theme, hamburgerColor, backVisible = true }) {
+  const isMobile = useMemo(() => theme.windowWidth < 768, [theme]);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [backAnimation, setBackAnimation] = useState(false);
   const history = useHistory();
@@ -61,11 +64,12 @@ function Header({ hamburgerColor, backVisible = true }) {
   return (
     <S.StyledHeader id="Header">
       {HeaderBar}
+      {menuIsOpen && <S.Background src={isMobile ? MenuMobile : MenuDestkop} />}
       {menuIsOpen && openedMenu}
     </S.StyledHeader>
   );
 }
-export default Header;
+export default withTheme(Header);
 
 Header.propTypes = {
   hamburgerColor: PropTypes.string,
