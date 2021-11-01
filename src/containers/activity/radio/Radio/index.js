@@ -80,6 +80,9 @@ function Radio({ theme, user, isAuthorized }) {
       >
         <S.Container>
 
+          <S.Date>
+            <p>이색 샤대생 인터뷰 // 진용진에 대해 알려드림</p>
+          </S.Date>
           <S.Paragraph>
             <iframe
               width={isMobile ? theme.windowWidth : theme.windowWidth * 0.6}
@@ -92,9 +95,7 @@ function Radio({ theme, user, isAuthorized }) {
             />
           </S.Paragraph>
           <S.Texts>
-            <p>이색 샤대생 인터뷰 // 진용진에 대해 알려드림</p>
             <p>23분 00초 부터 시작</p>
-            <br />
             <p>(10월 26일 라이브 녹화본)</p>
           </S.Texts>
         </S.Container>

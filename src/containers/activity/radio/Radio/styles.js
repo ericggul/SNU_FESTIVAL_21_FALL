@@ -8,6 +8,7 @@ export const StyledRadio = styled.div`
   align-items: center;
   overflow-x: hidden;
   overflow-y: hidden;
+  width: 100%;
   min-height: ${({ theme }) => theme.windowHeight}px;
   position: absolute;
   top: 0;
@@ -28,20 +29,18 @@ export const Contents = styled(motion.div)`
 
   top: 65px;
   height: ${({ theme }) => theme.windowHeight - 65}px;
-  flex-direction: row;
-  // height: 100%;
+  flex-direction: column;
   text-align: center;
   color: white;
-  margin-top: 1.2rem;
-  margin-bottom: 1.2rem;
+  margin: .5rem;
   // justify-content: space-between;
-  ${({ theme }) => theme.windowWidth > 500 && 'margin-bottom: 5rem;'}
-  // ${({ theme }) => theme.windowWidth > 768 && 'justify-content: space-between;'}
+
 `;
 
 export const Container = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
+  margin-top: 5rem;
 `;
 
 export const Image = styled.img`
