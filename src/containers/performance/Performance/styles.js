@@ -49,7 +49,6 @@ export const PosterWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 33.333vw);
   margin-top: ${({ theme }) => theme.windowHeight * 1.3}px;
-  margin-bottom: ${({ theme }) => theme.windowHeight * 2}px;
 `;
 
 export const AbsoluteImage = styled.img`

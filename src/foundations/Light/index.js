@@ -182,10 +182,13 @@ function Light5({
   }, []);
 
   return (
-    <S.Container5 animate={animate} visible={visible}>
+    <S.Container5
+      onClick={onClick}
+      animate={animate}
+      visible={visible}
+    >
       {randomArray.map((pos, i) => (
         <S.Circle5
-          onClick={onClick}
           animate={animate}
           key={i}
           width={1}

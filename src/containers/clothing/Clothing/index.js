@@ -50,7 +50,7 @@ function Clothing({ theme, user, isAuthorized }) {
   }, []);
 
   // container size adjust state
-  const maxWidth = useMemo(() => 500 / theme.windowWidth, [theme]);
+  const maxWidth = useMemo(() => 300 / theme.windowWidth, [theme]);
   const [containerSizeUnit, setContainerSizeUnit] = useState(Math.min(0.5, maxWidth));
   const containerWidth = useMemo(() => theme.windowWidth * containerSizeUnit, [containerSizeUnit, theme]);
   const [touched, setTouched] = useState(0);

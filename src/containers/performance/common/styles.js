@@ -86,7 +86,6 @@ export const Image = styled.div`
   height: 100%;
   margin: 1rem 0;
   ${FlexCenterStyle};
-  margin-top: ${({ theme }) => theme.windowHeight * 0.3}px;
 `;
 
 export const AbsoluteImage = styled.img`

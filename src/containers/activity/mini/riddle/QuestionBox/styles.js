@@ -88,7 +88,7 @@ export const InputBox = styled.input`
   background-color: white;
 
   color: ${props => props.theme.palette.HANDWRITING_INPUT};
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
 

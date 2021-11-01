@@ -80,13 +80,21 @@ export const SmallText = styled.img`
 
 `;
 
+export const SaveContainer = styled.div`
+  ${FlexCenterStyle};
+
+
+`;
+
 export const Save = styled.div`
   ${FlexCenterStyle};
+  margin: 0 1rem;
   margin-top: 4rem;
   margin-bottom: 3rem;
-  padding: .8rem 2rem;
+  padding: .8rem 1rem;
   font-size: 1.3rem;
   border-radius: .5rem;
+  width: 8rem;
   color: white;
   background: black;
   border: 1px solid rgba(255, 255, 255, .5);

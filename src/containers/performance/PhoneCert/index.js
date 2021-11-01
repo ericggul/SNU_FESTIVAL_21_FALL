@@ -117,7 +117,12 @@ function PhoneCert({ theme, user, isAuthorized }) {
   const bubble = <Bubble decoration="관악의 밴드 실력자들과 함께하는" title="폰서트 LIVE" speak={speak} />;
   const title = <Title title="폰서트 LIVE" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[4, 5]} />;
-  const youTube = url.length > 0 && <Youtube src={url} />;
+  const youTube = url.length > 0 && (url.includes('TN2AUknb64A') ? (
+    <>
+      <Youtube src={url} />
+      <S.Text>공연 시작 전입니다.</S.Text>
+    </>
+  ) : <Youtube src={url} />);
   const guide = <Guide type="밴드공연 폰서트" date="11월 4일 - 5일 (목, 금)" times={['1부 목: 17:45~21:40', '2부 금: 18:00~20:00']} />;
   const starring = (
     <StarringDouble DATA={[PhoneCertDataOne, PhoneCertDataTwo]} />
@@ -138,9 +143,8 @@ function PhoneCert({ theme, user, isAuthorized }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 2,
+            duration: 1,
             ease: [0.43, 0.13, 0.23, 0.96],
-            delay: 1,
           }}
         >
           <S.IconBubble>

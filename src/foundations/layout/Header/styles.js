@@ -59,12 +59,7 @@ export const MenuButton = styled.div`
   height: 32px;
   cursor: pointer;
 
-  @keyframes change{
-    0%{opacity: 0;}
-    30%{opacity: 1;}
-  }
 
-  animation: change 4s linear infinite alternate;
 `;
 
 export const MenuButtonBar = styled.div`

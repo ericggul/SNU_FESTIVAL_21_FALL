@@ -24,7 +24,7 @@ function ArchiveSection({ isMobile, theme }) {
           fullHeight={isMobile ? 340 : theme.windowHeight / 1.5}
           fullWidth={isMobile ? 340 : theme.windowHeight / 1.5}
           items={[Poster21Spring, Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring, Poster17Fall,
-            Poster17Spring, Poster16Fall, Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring,
+            Poster17Spring, Poster16Fall, Poster21Spring, Poster19Fall, Poster19Spring, Poster18Fall, Poster18Spring,
             Poster17Fall, Poster17Spring, Poster16Fall].map(image => (
               <S.Poster><img src={image} alt="포스터" /></S.Poster>
           ))}

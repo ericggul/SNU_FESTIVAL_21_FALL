@@ -22,6 +22,7 @@ export const Background = styled.img`
 
 export const Contents = styled(motion.div)`
   ${FlexCenterStyle};
+  height: ${({ theme }) => theme.windowHeight - 65}px;
   flex-direction: column;
   align-items: center;
   height: 100%;
@@ -55,10 +56,15 @@ export const Texts = styled.div`
   p{
     margin: 0;
   }
-  p:nth-of-type(1){
-    font-size: 1.4rem;
-    font-weight: 700;
-    opacity: 1;
+`;
+
+export const Date = styled.div`
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weigth: 400;
+  opacity: .8;
+  p{
+    margin: 0;
   }
 `;
 

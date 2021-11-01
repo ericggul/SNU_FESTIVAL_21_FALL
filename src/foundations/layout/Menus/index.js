@@ -97,8 +97,7 @@ function Menus({ theme, setMenuIsOpen }) {
         </S.SignButton>
       )}
       <S.CharacterEvent onClick={() => goToPage('/clothing')}>
-        <p>옷</p>
-        <p>입히기</p>
+        <p>옷 입히기</p>
       </S.CharacterEvent>
       <S.MenuContainer>
         {DATA.map((sector, i) => <SectorComp sector={sector} i={i} key={i} />)}

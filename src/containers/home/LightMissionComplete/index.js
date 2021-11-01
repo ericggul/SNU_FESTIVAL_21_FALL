@@ -67,8 +67,11 @@ function LightMissionComplete({
             <Character containerWidth={theme.windowWidth < 768 ? theme.windowWidth * 0.3 : 230.4} jump={false} />
             <S.SmallText src={LightFinishedText} />
           </S.Contents>
-          <S.Expl onClick={() => history.push('/clothing')}>사진 속 캐릭터는 옷 입히기에서 완성 가능합니다.</S.Expl>
-          <S.Save onClick={handleSaveClick}>사진 저장하기</S.Save>
+          <S.SaveContainer>
+            <S.Save onClick={() => history.push('/clothing')}>옷 입히기</S.Save>
+            <S.Save onClick={handleSaveClick}>사진 저장하기</S.Save>
+          </S.SaveContainer>
+
         </S.Body>
       </S.StyledPageLoading>
     </>

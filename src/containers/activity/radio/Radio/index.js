@@ -67,7 +67,7 @@ function Radio({ theme, user, isAuthorized }) {
 
   return (
     <S.StyledRadio>
-      <HeaderContent backgroundColor="transparent">토크쇼</HeaderContent>
+      <HeaderContent backgroundColor="transparent">토크쇼 with 진용진</HeaderContent>
       {isMobile
         ? <S.Background src={BackMobile} alt="백야 배경" />
         : <S.Background src={BackDesktop} alt="백야 배경" />}
@@ -77,8 +77,10 @@ function Radio({ theme, user, isAuthorized }) {
         exit={{ opacity: 0.4, filter: 'blur(10px)' }}
         transition={transition}
       >
-        {/* <S.Image src={DummyImage} /> */}
         <S.Container>
+          <S.Texts>
+            <p>이색 샤대생 인터뷰 // 진용진에 대해 알려드림</p>
+          </S.Texts>
           <S.Paragraph>
             <iframe
               width={isMobile ? theme.windowWidth : theme.windowWidth * 0.6}
@@ -90,13 +92,9 @@ function Radio({ theme, user, isAuthorized }) {
               allowFullScreen
             />
           </S.Paragraph>
-          <S.Texts>
-            <p>With. 진용진</p>
-            <p>이색 샤대생 인터뷰</p>
-            <p>진용진에 대해 알려드림</p>
-            <p>샤대생과 진용진님의 라이어 게임</p>
+          <S.Date>
             <p>(10월 26일 라이브 녹화본)</p>
-          </S.Texts>
+          </S.Date>
         </S.Container>
       </S.Contents>
       {lightVisible && <LightSimple2 top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}

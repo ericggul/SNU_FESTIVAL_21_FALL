@@ -15,6 +15,7 @@ export const Background = styled.img`
   ${props => props.left && css`left: ${props.left}px`};
 
   pointer-events: none;
+
 `;
 
 export const BackgroundMiddle = styled.img`
@@ -25,6 +26,7 @@ export const BackgroundMiddle = styled.img`
   ${props => props.left && css`left: ${props.left}px`};
   filter: drop-shadow(0 0 2px #aaa);
   pointer-events: none;
+
 `;
 
 export const BackgroundFront = styled.img`
@@ -35,6 +37,7 @@ export const BackgroundFront = styled.img`
   ${props => props.left && css`left: ${props.left}px`};
   pointer-events: none;
   filter: drop-shadow(0 0 10px white);
+
 `;
 
 export const Landmark = styled.img`
@@ -52,6 +55,7 @@ export const Landmark = styled.img`
   }
   animation: shine 5s infinite alternate;
   animation-delay: ${props => props.delay - 2}s;
+
 `;
 
 export const Door = styled.img`

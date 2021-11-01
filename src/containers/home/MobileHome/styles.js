@@ -13,7 +13,7 @@ export const StyledMobileHome = styled.div`
     100%{ background-color: ${({ theme }) => theme.palette.HOME_PURPLE};}
   }
   animation: change-color 2s linear forwards;
-
+  transition: opacity 1s;
 `;
 
 export const Wrapper = styled.div`
@@ -24,11 +24,14 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.HOME_PURPLE};
   overflow: hidden;
 
+  opacity: 0; filter: blur(50px);
   @keyframes appearMobileHome{
-
     0%{ opacity: 0; filter: blur(50px);}
     100%{ opacity: 1;}
   }
-  animation: appearMobileHome 2.5s linear backwards;
-  animation-delay: .5s;
+  // animation: appearMobileHome 2s linear backwards;
+  ${({ isLoading }) => !isLoading && 'animation: appearMobileHome 2s linear backwards;'}
+ 
+  transition: opacity filter 2s;
+  ${({ isLoading }) => !isLoading && 'opacity: 1; filter: blur(0);'}
 `;

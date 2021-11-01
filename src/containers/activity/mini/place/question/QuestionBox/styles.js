@@ -49,8 +49,8 @@ export const InputBox = styled.input`
   background-color: white;
   box-shadow: 0 0.3rem 0.6rem 0 rgba(0, 0, 0, 0.16);
 
-  color: black
-  font-size: 1rem;
+  color: black;
+  font-size: 16px;
   font-weight: normal;
   text-align: center;
   
