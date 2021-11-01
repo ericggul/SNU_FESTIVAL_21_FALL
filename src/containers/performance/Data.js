@@ -152,7 +152,7 @@ export const SingStealerData = [
   ],
   [
     '정수경',
-    '17:50-17:98',
+    '17:50-17:58',
     'Popular (Kristin Chenoweth)',
   ],
   [
@@ -232,7 +232,7 @@ export const PhoneCertDataTwo = [
   ],
   [
     '밴드.jpg',
-    '18:20-18:40',
+    '18:40-19:00',
     "Surl - 9지하철//너드커넥션 - 좋은 밤 좋은 꿈//My Chemical Romance - I don't love you",
   ],
   [

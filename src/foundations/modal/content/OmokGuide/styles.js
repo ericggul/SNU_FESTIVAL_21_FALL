@@ -6,32 +6,35 @@ export const StyledOmokGuide = styled.div`
 
 `;
 export const OmokBox = styled(motion.div)`
-  width: 75vw;
-  height: min(90vw, 80vh);
   position: relative;
+  width: min(50vw, 300px);
   max-width: 400px;
-  max-height: 50rem;
+  max-height: 80vh;
   ${FlexCenterStyle};
   flex-direction: column;
   background: white;
   border-radius: 2.4rem;
   padding: 2rem;
-  justify-content: space-between;
-  ${({ theme }) => theme.windowWidth < 450 && 'height: 40vh'}
+
 `;
 
 export const Description = styled.div`
+  ${FlexCenterStyle};
   color: ${({ theme }) => theme.palette.TEXT_GRAY};
   font-size: .9rem;
   font-weight: 500;
   word-break: keep-all;
   top: 0;
   text-align: left;
+  margin-bottom: 4rem;
+
 `;
 
 export const Button = styled.div`
-  bottom: 0;
-  margin-bottom: -1rem;
+  position: absolute;
+  bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
   padding: .5rem 1.8rem;
   border-radius: 2rem;
   font-size: 1.3rem;
