@@ -62,15 +62,16 @@ function SingStealer({ theme }) {
       <Image src={SingStealerIcon} alt="" objectFit="scale-down" />
     </S.Icon>
   );
+
   const bubble = <Bubble decoration="매력적인 목소리들로 채워가는~" title="씽스틸러!" speak={speak} />;
   const title = <Title title="씽스틸러" handleClick={() => setConfettiEnabled(true)} />;
   const date = <Date date={[2]} />;
-  const youTube = <Youtube src="https://www.youtube.com/embed/phnjI5IfelQ" />;
+  const youTube = url.length > 0 && <Youtube src={url} />;
   const guide = <Guide type="보컬/힙합공연 씽스틸러" date="11월 2일(화)" times={['15:00 - 18:10']} />;
   const starring = <Starring data={SingStealerData} />;
   const image = (
     <S.Image>
-      {new Array(15).fill(0).map((e, i) => <S.AbsoluteImage key={i} src={SingStealerImage} alt="hit-the-stage" hue={-30 + i * 5} />)}
+      <S.AbsoluteImage src={SingStealerImage} alt="hit-the-stage" />
     </S.Image>
   );
 

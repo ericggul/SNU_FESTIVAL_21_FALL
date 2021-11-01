@@ -12,6 +12,7 @@ import Board from '@I/activity/omok/board.png';
 import Black from '@I/activity/omok/black.png';
 import White from '@I/activity/omok/white.png';
 
+import { linkCollectionRef } from '@U/initializer/firebase';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
 import * as S from './styles';
 
@@ -55,20 +56,31 @@ function Omok({ theme }) {
   }, [mode, setIsOmokModalOpen]);
 
   const [clicked, setClicked] = useState(false);
+  const [url, setUrl] = useState('');
+  useEffect(() => {
+    linkCollectionRef.doc('omok').get()
+      .then((doc) => {
+        setUrl(doc.data().url);
+      })
+      .catch(() => (
+        toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
+  }, []);
 
   const goToOmok = useCallback(() => {
     setClicked(true);
     const today = new Date();
+    const date = today.getDate();
     const hours = today.getHours();
-    if (today >= 2 && today <= 5 && hours >= 11 && hours <= 17) {
+    if (date >= 2 && date <= 5 && hours >= 11 && hours <= 17) {
       EventBehavior('Activity', 'Click Omok', 'omok clicked');
+      window.open(url, '_blank');
     } else {
       toast('11시에 다시오세요!');
       setTimeout(() => {
         setClicked(false);
       }, 400);
     }
-  }, []);
+  }, [url]);
 
   return (
     <S.StyledOmok>

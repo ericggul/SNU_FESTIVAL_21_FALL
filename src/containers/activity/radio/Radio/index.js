@@ -64,35 +64,6 @@ function Radio({ theme, user, isAuthorized }) {
   /// ///////////
 
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
-  const [clicked, setClicked] = useState(false);
-
-  const [url, setUrl] = useState(null);
-  useEffect(() => {
-    linkCollectionRef.doc('radio').get()
-      .then((doc) => {
-        setUrl(doc.data().url);
-      })
-      .catch(() => (
-        toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-  }, []);
-
-  const goToYoutube = useCallback(() => {
-    setClicked(true);
-    if (url !== null && url.length > 0) {
-      EventBehavior('Activity', `Click Youtube Link: ${url}`, `go to ${url} by activity page`);
-      window.open(url, '_blank');
-    } else if (url !== null && url.length === 0) {
-      toast('행사 준비 중입니다😇');
-      setTimeout(() => {
-        setClicked(false);
-      }, 400);
-    } else {
-      toast('다시 클릭해주세요!');
-      setTimeout(() => {
-        setClicked(false);
-      }, 400);
-    }
-  }, [url]);
 
   return (
     <S.StyledRadio>

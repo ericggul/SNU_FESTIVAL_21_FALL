@@ -94,26 +94,23 @@ function Group({ theme, user, isAuthorized }) {
 
   // 링크
   const [url, setUrl] = useState('https://docs.google.com/forms/d/e/1FAIpQLScyd8QKSfZfJ3RubLhmv0AmqrzGUpQWJYIPZeO8n-pWGmtDbg/viewform');
-  const [youtubeUrl, setYoutubeUrl] = useState(null);
 
   const today = new Date();
   const date = today.getDate();
   const hours = today.getHours();
 
   useEffect(() => {
-    if (date > 27) {
+    if (date > 3) {
       linkCollectionRef.doc('group-game').get()
         .then((doc) => {
           setUrl(doc.data().url);
-          setYoutubeUrl(doc.data().youtubeUrl);
         })
         .catch(() => (
           toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
-    } else if (date === 26 && hours > 15) {
+    } else if (date === 3 && hours > 15) {
       linkCollectionRef.doc('group-game').get()
         .then((doc) => {
           setUrl(doc.data().url);
-          setYoutubeUrl(doc.data().youtubeUrl);
         })
         .catch(() => (
           toast('인터넷이 불안정합니다. 다시 시도해주세요.')));
