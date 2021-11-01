@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 
 import PropTypes from 'prop-types';
-import html2canvas from 'html2canvas';
 
 import { toast } from 'react-toastify';
 import Basic from '@I/clothing/basic.png';
@@ -221,7 +220,7 @@ function Clothing({ theme, user, isAuthorized }) {
               ))}
             </S.Container>
           </S.MidContainer>
-          <S.Converter>
+          <S.Converter selectedBackground={selectedBackground}>
             {[...CLOTHING_DATA, ACCESSORIES_DATA].map((e, i) => (
               <S.ConverterCell
                 onClick={() => setCurrentPr(i)}

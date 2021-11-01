@@ -66,14 +66,20 @@ export const Element = styled.img`
 
 export const Converter = styled.div`
     ${FlexCenterStyle};
+
+    //1, 2, 7, 8, 10
+    color: rgba(255, 255, 255, 0.8);
+    transition: color .5s;
+    ${({ selectedBackground }) => [1, 2, 7, 8, 10].includes(selectedBackground) && 'color: rgba(200,200, 200, 0.8)'}
 `;
 
 export const ConverterCell = styled.div`
-    color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
     margin: .3rem;
     cursor: pointer;
+    transition: color .5s;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
+    ${({ selected }) => selected && 'font-weight: 800;'}
 `;
 
 export const Save = styled.div`

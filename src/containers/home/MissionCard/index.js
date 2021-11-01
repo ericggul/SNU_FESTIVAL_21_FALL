@@ -36,7 +36,7 @@ function MissionCard({ setIsModalOpen, user, isAuthorized }) {
       setPlayingState(2);
       setTimeout(() => {
         setSignInModalComponent(true);
-      }, 1100);
+      }, 4500);
     }
   }, [isAuthorized, isPlaying]);
 

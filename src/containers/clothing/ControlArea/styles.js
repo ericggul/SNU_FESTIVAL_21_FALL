@@ -18,6 +18,7 @@ export const ExpandButton = styled.div`
     ${FlexCenterStyle};
     background: white;
     border-radius: 1rem 0 0 1rem;
+    cursor: pointer;
 `;
 
 export const ControlUnit = styled.div`
