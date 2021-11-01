@@ -16,6 +16,8 @@ import { preloadImage } from '@U/functions/preload';
 import { HeaderContent } from '@F/layout/Header';
 import { withTheme } from 'styled-components';
 
+import { EventBehavior } from '@U/initializer/googleAnalytics';
+
 import { CLOTHING_DATA, ACCESSORIES_DATA, BACKGROUND_PALETTES } from '@C/clothing/data';
 
 import useModal from '@U/hooks/useModal';
@@ -147,6 +149,7 @@ function Clothing({ theme, user, isAuthorized }) {
 
   const save = useCallback(() => {
     if (isAuthorized) {
+      EventBehavior('Clothing', 'Saved', 'saved');
       dispatch(actions.setFirestoreClothing(user, selectedClothings, selectedAccessories, selectedBackground));
       setTimeout(() => {
         history.push('/clothing/result');

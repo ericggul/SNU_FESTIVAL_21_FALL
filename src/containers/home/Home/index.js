@@ -14,6 +14,7 @@ import MissionCard from '@C/home/MissionCard';
 import Rio from '@C/home/common/Rio';
 
 import { preloadImage } from '@U/functions/preload';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 import LogInRio from '@I/icon/log-in-rio.png';
 import MenuDesktop from '@I/layout/menu-desktop.png';
@@ -166,6 +167,7 @@ function Home({
 
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
+      EventBehavior('Light', 'Main Gate Clicked', 'Main Gate Clicked');
       setBusMove(true);
       setTimeout(() => {
         window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });

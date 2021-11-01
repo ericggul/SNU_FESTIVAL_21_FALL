@@ -5,7 +5,7 @@ import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 import { HeaderContent } from '@F/layout/Header';
 
-import GroupImage from '@I/activity/group/group.jpg';
+import GroupImage from '@I/activity/group/group.jpeg';
 import useModal from '@U/hooks/useModal';
 import SignInGuide from '@F/modal/content/SignInGuide';
 import withUser from '@U/hoc/withUser';

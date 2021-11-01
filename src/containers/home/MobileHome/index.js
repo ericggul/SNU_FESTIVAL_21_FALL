@@ -35,6 +35,7 @@ import ConstellationFour from '@I/activity/home/constellation4.png';
 import ConstellationFive from '@I/activity/home/constellation5.png';
 
 import { preloadImage } from '@U/functions/preload';
+import { EventBehavior } from '@U/initializer/googleAnalytics';
 
 import BackgroundTop from '@I/home/mobile/background-top.png';
 import BackgroundMiddle from '@I/home/mobile/background-middle.png';
@@ -174,6 +175,7 @@ function MobileHome({
 
   const mainGateClick = useCallback(() => {
     if (missionCleared) {
+      EventBehavior('Light', 'Main Gate Clicked', 'Main Gate Clicked');
       setBusMove(true);
       setTimeout(() => {
         window.scrollTo({ top: convert(1344), left: 0, behavior: 'smooth' });

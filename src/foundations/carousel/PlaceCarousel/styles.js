@@ -65,10 +65,11 @@ export const Skeleton = styled.div`
   right: 0;
   left: 0;
   top: 0;
-  color: white;
+  color: #aaa;
   font-weight: 600;
   font-size: 1.3rem;
   ${FlexCenterStyle};
+  text-shadow: 0 0 1rem white;
 `;
 
 export const Image = styled.img`

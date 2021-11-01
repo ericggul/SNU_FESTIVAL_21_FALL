@@ -69,7 +69,11 @@ export function QuestionBox({
   useEffect(() => {
     const today = new Date();
     if (today.getDate() === 4 || today.getDate() === 5) {
-      setTimeout(() => { toast(hints[step]); }, 1000);
+      setTimeout(() => {
+        toast(hints[step], {
+          autoClose: 4500, draggable: true,
+        });
+      }, 1000);
     }
   }, [step]);
 

@@ -23,6 +23,7 @@ function MissionCard({ setIsModalOpen, user, isAuthorized }) {
 
   useEffect(() => {
     if (isAuthorized && !isPlaying) {
+      EventBehavior('Light', 'Light Started', 'Light Started');
       setPlayingState(0);
       dispatch(actions.initializeLight());
     } else if (isPlaying && foundedLightNumbers !== 0) {
