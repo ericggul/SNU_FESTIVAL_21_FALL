@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { withTheme } from 'styled-components';
 import PropTypes from 'prop-types';
-import { pdfjs, Document, Page } from 'react-pdf';
-import {
-  CARTOON, FIELDS_IN_ENGLISH, LITERATURE, REVERSED_FIELDS, VIDEO,
-} from '@C/activity/competition/variables';
 
+import {
+  LIST,
+} from '@C/activity/competition/variables';
+import { MapInteractionCSS } from 'react-map-interaction';
 import HeartClicked from '@I/activity/competition/heart-clicked.png';
 import HeartDefault from '@I/activity/competition/heart.png';
 import PopupModal from '@F/modal/PopupModal';
@@ -18,11 +18,12 @@ import { competitionCollectionRef } from '@U/initializer/firebase';
 import firebase from 'firebase';
 import LoadingMascot from '@F/loading/LoadingMascot';
 import { EventBehavior } from '@U/initializer/googleAnalytics';
+import Skeleton from '@I/skeleton/skeleton.png';
 import Image from '@/foundations/images/Image';
 import * as S from './styles';
 
 function VoteSection({
-  field = 0, items, isLoaded, listIHaveVoted, theme, isAuthorized, user, onVoteForField,
+  shuffled, theme, isAuthorized, user,
 }) {
   const isMobile = useMemo(() => theme.windowWidth < 768, [theme.windowWidth]);
   const { modalComponent: signInModalComponent, setIsModalOpen: setSignInModalComponent } = useModal(SignInGuide);
@@ -33,121 +34,80 @@ function VoteSection({
   const onClickItem = useCallback((item) => {
     setClickedItem(item);
     setIsModalOpen(true);
-    setPageNumber(1);
   }, []);
 
   // likes
   const [myLikesForCompetition, setMyLikesForCompetition] = useState([]);
   useEffect(() => {
-    setMyLikesForCompetition(listIHaveVoted);
-  }, [listIHaveVoted]);
-  useEffect(() => {
     if (!isAuthorized) setMyLikesForCompetition([]);
+    if (isAuthorized) {
+      competitionCollectionRef.doc('likes').get().then((doc) => {
+        Object.entries(doc.data()).forEach(([key, likes]) => {
+          if (likes.includes(user.uid)) {
+            setMyLikesForCompetition(comp => [...comp, key]);
+          }
+        });
+      });
+    }
   }, [isAuthorized]);
-  const onClickLikeButton = (competitionId) => {
+
+  console.log(myLikesForCompetition);
+  const onClickLikeButton = useCallback((competitionId) => {
     if (!isAuthorized) {
       setSignInModalComponent(true);
       return;
     }
-    if (listIHaveVoted.length > 0) {
-      toast('이미 투표에 참여했습니다.');
-    } else if (myLikesForCompetition.includes(competitionId)) {
-      setMyLikesForCompetition([]);
-    } else if (myLikesForCompetition.length > 1) {
-      toast('최대 두 작품에만 투표할 수 있습니다.');
+    let isLiked = false;
+
+    if (myLikesForCompetition.length >= 5 && !myLikesForCompetition.includes(competitionId.toString())) {
+      toast('최대 다섯 작품에만 투표할 수 있습니다.');
     } else {
-      setMyLikesForCompetition(array => [...array, competitionId]);
+      if (myLikesForCompetition.includes(competitionId.toString())) {
+        setMyLikesForCompetition(comp => comp.filter(item => item !== competitionId.toString()));
+        isLiked = true;
+      } else {
+        setMyLikesForCompetition(comp => [...comp, competitionId.toString()]);
+      }
+
+      competitionCollectionRef.doc('likes').update({
+        [competitionId]: isLiked
+          ? firebase.firestore.FieldValue.arrayRemove(user.uid) : firebase.firestore.FieldValue.arrayUnion(user.uid),
+      }).then(() => (isLiked
+        ? toast(`좋아요 취소(${myLikesForCompetition.length - 1}/5)`)
+        : toast(`좋아요!(${myLikesForCompetition.length + 1}/5)`))).catch(() => {
+        toast('인터넷이 불안정합니다. 다시 시도해주세요.');
+      });
     }
-  };
+  }, [isAuthorized, myLikesForCompetition]);
 
-  // vote
-  const isDisableToVote = useMemo(() => (
-    !isAuthorized || listIHaveVoted.length > 0 || !isLoaded
-  ), [isAuthorized, listIHaveVoted, isLoaded]);
-  const submit = () => {
-    const { uid, email } = user;
-    if (myLikesForCompetition.length === 0) {
-      toast('하트를 눌러 투표를 진행해 주세요.');
-      return;
-    }
-
-    console.log(field, FIELDS_IN_ENGLISH);
-    console.log(FIELDS_IN_ENGLISH[field]);
-    competitionCollectionRef.doc(FIELDS_IN_ENGLISH[field]).update({
-      [myLikesForCompetition]: firebase.firestore.FieldValue.arrayUnion(uid),
-    }).then(() => {
-      toast('투표에 참여되었습니다.');
-      EventBehavior('Activity', 'Voted: Competition', 'competition voted');
-      onVoteForField(field, myLikesForCompetition);
-    }).catch(() => {
-      toast('인터넷이 불안정합니다. 다시 시도해주세요.');
-    });
-  };
-
-  // PDF
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const onDocumentLoadSuccess = useCallback(({ numPages: newPages }) => {
-    setNumPages(newPages);
-  }, []);
-  useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-  }, []);
+  const Item = ({ i }) => (
+    <S.Item key={LIST[shuffled[i]]}>
+      <S.ImageWrapper>
+        <MapInteractionCSS>
+          <S.Image
+            src={`https://snufestival.com/images/competition/${shuffled[i]}.jpg`}
+            alt="작품"
+          />
+        </MapInteractionCSS>
+      </S.ImageWrapper>
+      <S.InfoSection>
+        <p>
+          {LIST[shuffled[i]]}
+        </p>
+        <S.LikeButton onClick={() => onClickLikeButton(shuffled[i])}>
+          <img src={myLikesForCompetition.includes(shuffled[i].toString()) ? HeartClicked : HeartDefault} alt="like" />
+        </S.LikeButton>
+      </S.InfoSection>
+    </S.Item>
+  );
 
   return (
     <S.StyledVoteSection>
       <S.ItemSection>
-        {items.map(item => (
-          <S.Item key={item.title}>
-            <S.ImageWrapper onClick={() => onClickItem(item)}>
-              <S.Image src={item.thumbnail} alt="작품" />
-            </S.ImageWrapper>
-            <S.InfoSection>
-              <p>
-                {item.title}
-                /
-                {item.author}
-              </p>
-              <p>{item.description}</p>
-              <S.LikeButton onClick={() => onClickLikeButton(item.competitionId)}>
-                <img src={myLikesForCompetition.includes(item.competitionId) ? HeartClicked : HeartDefault} alt="like" />
-              </S.LikeButton>
-            </S.InfoSection>
-
-          </S.Item>
+        {shuffled.map((item, i) => (
+          <Item i={i} key={i} />
         ))}
       </S.ItemSection>
-
-      <PopupModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        closeOnDocumentClick
-        width={`${isMobile ? theme.windowWidth : theme.windowWidth * (2 / 3)}px`}
-      >
-        <>
-          { clickedItem?.type === 'pdf' && (
-          <Document
-            file={clickedItem?.file}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={<LoadingMascot />}
-          >
-            <Page pageNumber={pageNumber} scale={(isMobile ? 0.5 : 1) * clickedItem?.scale} />
-            <S.Pagination>
-              <span onClick={() => (pageNumber > 1 ? setPageNumber(pageNumber - 1) : null)}>&lt;</span>
-              <span>{`Page ${pageNumber} of ${numPages}`}</span>
-              <span onClick={() => (pageNumber < numPages ? setPageNumber(pageNumber + 1) : null)}>&gt;</span>
-            </S.Pagination>
-          </Document>
-        )}
-
-        </>
-      </PopupModal>
-
-      <S.SubmitSection>
-        <S.SubmitButton isDisabled={isDisableToVote} onClick={!isDisableToVote ? submit : null}>제출하기</S.SubmitButton>
-        <p>버튼을 누른 이후에는 수정이 불가합니다!</p>
-      </S.SubmitSection>
-
       {signInModalComponent}
     </S.StyledVoteSection>
   );
@@ -155,10 +115,6 @@ function VoteSection({
 export default withTheme(VoteSection);
 
 VoteSection.propTypes = {
-  field: PropTypes.oneOf([CARTOON, LITERATURE, VIDEO]).isRequired,
-  items: PropTypes.arrayOf(PropTypes.any).isRequired,
-  isLoaded: PropTypes.bool.isRequired,
-  listIHaveVoted: PropTypes.arrayOf(PropTypes.number).isRequired,
   theme: PropTypes.shape({
     windowWidth: PropTypes.number,
   }).isRequired,
@@ -168,5 +124,4 @@ VoteSection.propTypes = {
     email: PropTypes.string,
   }).isRequired,
   isAuthorized: PropTypes.bool.isRequired,
-  onVoteForField: PropTypes.func.isRequired,
 };

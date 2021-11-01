@@ -95,7 +95,7 @@ function Map({ theme, handleClick, solvedRates }) {
         {currentSolved.map((e, i) => (
           <S.Building
             key={i}
-            src={`https://snufestival-e9a04.web.app/images/handwriting/buildings/${CORRESPONDENCE[i][0] + 1}-${e}.png`}
+            src={`https://snufestival.com/images/handwriting/buildings/${CORRESPONDENCE[i][0] + 1}-${e}.png`}
             left={convert(POS_DATA[CORRESPONDENCE[i][0]].x)}
             top={convert(POS_DATA[CORRESPONDENCE[i][0]].y)}
             width={convert(150)}

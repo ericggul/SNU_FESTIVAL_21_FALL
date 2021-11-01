@@ -26,10 +26,8 @@ function TextSection() {
         <br />
         2.
         {' '}
-        <S.EmphText>최대 2개</S.EmphText>
+        <S.EmphText>최대 5개</S.EmphText>
         의 작품에 투표 가능합니다.
-        <br />
-        3. 제출하기를 누르면 선택된 작품에 대해 투표가 완료됩니다.
       </S.Notice>
       <S.Evaluation>
         * 사진을 누르면 해당 작품을 볼 수 있습니다.

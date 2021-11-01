@@ -78,7 +78,7 @@ export const Soju = withMountEvent(() => (
 
 export const Sticker = withMountEvent(() => (
   <GoodsDetail
-    information={{ name: '관악의 밤 리오 씰스티커', price: 1500, index: 4 }}
+    information={{ name: '관악의 밤 리오 씰스티커', price: 2000, index: 4 }}
     image={StickerImage}
     longImage={StickerDetail}
   />

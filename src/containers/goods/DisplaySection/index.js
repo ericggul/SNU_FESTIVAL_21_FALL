@@ -46,7 +46,7 @@ function DisplaySection() {
       {Item('sanitizer', SanitizerImage, '리오 손소독제', 7000, 1)}
       {Item('soju', SojuImage, '헤롱헤롱 리오 소주잔', 6000, 2)}
       {Item('keyring', KeyRingImage, '리오 유령 키링', 4500, 3)}
-      {Item('sticker', StickerImage, '관악의 밤 리오 씰스티커', 1500, 4)}
+      {Item('sticker', StickerImage, '관악의 밤 리오 씰스티커', 2000, 4)}
       {Item('sticker4', Sticker4Image, '관악의 밤 리오 4분할 스티커', 1500, 5)}
     </S.StyledDisplaySection>
   );

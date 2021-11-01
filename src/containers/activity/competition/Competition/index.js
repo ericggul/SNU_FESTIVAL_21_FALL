@@ -8,12 +8,6 @@ import TextSection from '@C/activity/competition/TextSection';
 import VoteSection from '@C/activity/competition/VoteSection';
 import {
   LIST,
-  CARTOON,
-  CARTOON_LIST,
-  FIELDS,
-  LITERATURE,
-  LITERATURE_LIST,
-  VIDEO_LIST,
 } from '@C/activity/competition/variables';
 import { shuffleArray } from '@U/functions/array';
 import PropTypes from 'prop-types';
@@ -77,58 +71,27 @@ function Competition({ theme, user, isAuthorized }) {
 
   // firestore 불러오기
 
-  const [iHaveVoted, setIHaveVoted] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  let indexes = [];
+  const [shuffledIndexes, setShuffledIndexes] = useState([]);
   useEffect(() => {
-    if (isAuthorized) {
-      const { uid } = user;
-      competitionCollectionRef.doc('cartoon').get().then((doc) => {
-        const newListIHaveVoted = [];
-        Object.entries(doc.data()).forEach(([key, likes]) => {
-          if (likes.includes(uid)) {
-            newListIHaveVoted.push(Number(key));
-          }
-        });
-        setIHaveVoted(newListIHaveVoted);
-        setIsLoaded(true);
-      });
+    for (let i = 0; i < LIST.length; i += 1) {
+      indexes.push(i);
     }
-  }, [isAuthorized]); // NOTE: dependency 로 firestore 호출량 조절
-
-  // current 값
-  const [currentField, setCurrentField] = useState(CARTOON);
-  const currentItems = useMemo(() => shuffleArray(LIST), [currentField]);
-
-  // 새로 투표했을 때
-  const setHaveVotedForNewVote = useCallback((field, newLikes) => {
-    setIHaveVoted(list => [...list, newLikes]);
+    setShuffledIndexes(shuffleArray(indexes));
   }, []);
-
-  // 미션
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isAuthorized && mission.isLoaded && !mission.competition) {
-      if (iHaveVoted.length > 0) {
-        dispatch(actions.setFirestoreMission(user, 'competition', true));
-      }
-    }
-  }, [isAuthorized, mission.isLoaded, mission.competition, iHaveVoted, dispatch]);
 
   return (
     <S.StyledCompetition>
       <HeaderContent backgroundColor="#e694a2">공모전</HeaderContent>
       <S.Body>
         <TextSection />
-
         <VoteSection
-          items={currentItems}
+          items={LIST}
+          shuffled={shuffledIndexes}
           isLoaded={isLoaded}
-          listIHaveVoted={iHaveVoted}
           isAuthorized={isAuthorized}
           user={user}
-          onVoteForField={setHaveVotedForNewVote}
         />
       </S.Body>
       {lightVisible && <LightLetter top={150} left={theme.windowWidth / 2} handleClick={lightMissionClick} />}
