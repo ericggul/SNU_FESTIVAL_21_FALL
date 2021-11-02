@@ -72,7 +72,7 @@ function SingStealer({ theme }) {
       <S.Text>공연 시작 전입니다.</S.Text>
     </>
   ) : <Youtube src={url} />);
-  const guide = <Guide type="보컬/힙합공연 씽스틸러" date="11월 2일(화)" times={['15:00 - 18:10']} />;
+  const guide = <Guide type="보컬/힙합공연 씽스틸러" date="11월 2일(화)" times={['15:30 - 18:10']} />;
   const starring = <Starring data={SingStealerData} />;
   const image = (
     <S.Image>
