@@ -87,8 +87,9 @@ function Clothing({ theme, user, isAuthorized }) {
           background={BACKGROUND_PALETTES[selectedBackground]}
         >
           <Character containerWidth={containerWidth} jump={jump} />
+          <Name name={name} onChangeName={onChangeName} background={BACKGROUND_PALETTES[selectedBackground]} />
         </S.MidContainer>
-        <Name name={name} onChangeName={onChangeName} />
+        <S.SmallText>캡쳐후 인스타그램으로 닮은친구 태그 고공</S.SmallText>
       </S.Content>
     </S.StyledClothing>
   );

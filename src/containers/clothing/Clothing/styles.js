@@ -45,6 +45,7 @@ export const Container = styled.div`
     position: relative;
     width: ${({ width }) => width}px;
     height: ${({ width }) => width * 2.174}px;
+    background: ${({ background }) => background};
 
 `;
 

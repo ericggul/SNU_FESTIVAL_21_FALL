@@ -5,9 +5,10 @@ export const Name = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 1rem;
+    margin-top: -2rem;
     z-index: 15;
     margin-bottom: 4rem;
+    z-index: 40;
 `;
 
 export const SmallText = styled.div`
@@ -24,8 +25,8 @@ export const Input = styled.input`
     text-align: center;
     outline: 0;
     font-weight: 700;
-    font-size: 1.8rem;
-    padding-bottom: .5rem;
+    font-size: 1.5rem;
+    padding-bottom: .4rem;
     height: 3rem;
     background: transparent;
     transition: border-color 0.2s;

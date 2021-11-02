@@ -88,3 +88,12 @@ export const ConverterCell = styled.div`
     margin: .3rem;
     ${({ selected }) => selected && 'color: rgba(0, 0, 0, .46);'}
 `;
+
+export const SmallText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #707070;
+    margin-bottom: 4rem;
+`;
