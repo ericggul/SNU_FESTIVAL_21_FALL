@@ -27,6 +27,7 @@ export const Content = styled.div`
 export const MidContainer = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
+    background: ${({ background }) => background};
 `;
 
 export const Text = styled.div`
@@ -83,20 +84,25 @@ export const ConverterCell = styled.div`
 `;
 
 export const Save = styled.div`
-    margin: 2rem;
+    margin: 1rem;
     margin-top: 4rem;
     margin-bottom: 1rem;
-    padding: .4rem 2rem;
+    padding: .4rem 1rem;
     border-radius: 3rem;
     border: .2rem solid #707070;
     color: #707070;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
+    width: 8rem;
+    text-align: center;
+`;
+
+export const SaveContainer = styled.div`
+    ${FlexCenterStyle};
 `;
 
 export const SaveText = styled.div`
-
     color: #707070;
     font-weight: 500;
     margin-bottom: 3rem;

@@ -1,12 +1,11 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router';
 import KakaoIcon from '@I/icon/kakao.svg';
 import StartAgain from '@I/icon/start-again.svg';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function DetailLink({result}) {
-
+function DetailLink({ result }) {
   const history = useHistory();
   const shareThroughKakao = useCallback(() => {
     window.Kakao.Link.sendCustom({
@@ -26,15 +25,15 @@ function DetailLink({result}) {
 
   return (
     <S.LinkSection>
-              <S.Links>
-              <p>결과 공유하기</p>
-                <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
-              </S.Links>
-              <S.Links>
-              <p>테스트 다시하기</p>
-                <img src={StartAgain} alt="타로 다시보기" onClick={goToJabti} />
-              </S.Links>
-            </S.LinkSection>
+      <S.Links>
+        <p>결과 공유하기</p>
+        <img src={KakaoIcon} alt="카카오 공유" onClick={shareThroughKakao} />
+      </S.Links>
+      <S.Links>
+        <p>테스트 다시하기</p>
+        <img src={StartAgain} alt="타로 다시보기" onClick={goToJabti} />
+      </S.Links>
+    </S.LinkSection>
   );
 }
 export default DetailLink;

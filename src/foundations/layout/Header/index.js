@@ -23,12 +23,14 @@ function Header({ theme, hamburgerColor, backVisible = true }) {
 
   const backClick = useCallback(() => {
     setBackAnimation(true);
+    console.log(history.action);
     history.goBack();
   }, []);
 
   const Logo = (
     <S.Logo>
-      {backVisible && <S.LogoImage onClick={backClick} src={Back} backAnimation={backAnimation} />}
+      {backVisible
+       && <S.LogoImage onClick={backClick} src={Back} backAnimation={backAnimation} />}
       { menuIsOpen && (
         <Fade duration={800}>
           <S.BasicText onClick={() => history.push('/')}>

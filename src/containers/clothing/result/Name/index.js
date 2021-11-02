@@ -32,9 +32,13 @@ function Name({ name, onChangeName }) {
   }, [index, scriptIndex]);
 
   return (
-    <S.Name>
-      <S.Input onChange={onChangeName} placeholder="닉네임">{name}</S.Input>
-    </S.Name>
+    <>
+      <S.Name>
+        <S.Input onChange={onChangeName} placeholder="@snufestival">{name}</S.Input>
+        <S.SmallText>캡쳐후 인스타그램으로 닮은친구 태그 고공</S.SmallText>
+      </S.Name>
+
+    </>
   );
 }
 export default Name;

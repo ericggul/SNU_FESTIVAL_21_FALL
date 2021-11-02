@@ -4,11 +4,20 @@ export const Name = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin-top: 1rem;
     z-index: 15;
     margin-bottom: 4rem;
 `;
 
+export const SmallText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #707070;
+`;
 export const Input = styled.input`
     border: 0;
     border-bottom: 2px solid transparent;

@@ -29,7 +29,7 @@ export const Answer = styled.div`
   align-items: center;
   width: ${props => props.width}px;
   height: 2.3rem;
-  margin: 2rem;
+  margin: 1.3rem;
   ${({ theme }) => theme.windowWidth > 768 && 'margin: 1rem;'}
   z-index:${({ theme }) => theme.zIndex.fullScreen};
 `;
@@ -71,12 +71,58 @@ export const Button = styled.div`
 `;
 
 export const Rules = styled.div`
-  ${FlexCenterStyle};
   align-items: center;
   text-align: center;
-  font-size: 1rem;
+  font-size: .8rem;
   opacity: .8;
-  margin-top: .5rem;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: 0;
+  margin-right: 1.5rem;
   color: white;
   z-index:${({ theme }) => theme.zIndex.fullScreen};
+`;
+
+export const TempContainer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+`;
+
+export const RulesContainer = styled.div`
+  ${FlexCenterStyle};
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: .8rem;
+  opacity: .8;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: 0;
+  margin-right: 1.5rem;
+  color: white;
+  z-index:${({ theme }) => theme.zIndex.fullScreen};
+`;
+
+export const AskContainer = styled.div`
+  ${FlexCenterStyle};
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: .8rem;
+  opacity: .8;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  color: white;
+`;
+
+export const Kakao = styled.img`
+  ${FlexCenterStyle};
+  height: 3rem;
+  width: auto;
+  margin-bottom: .5rem;
+`;
+
+export const AskText = styled.div`
+  ${FlexCenterStyle};
 `;
