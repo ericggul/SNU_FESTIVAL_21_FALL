@@ -28,6 +28,7 @@ export const MidContainer = styled.div`
     ${FlexCenterStyle};
     flex-direction: column;
     background: ${({ background }) => background};
+    transition: background 1s;
 `;
 
 export const Text = styled.div`
@@ -46,6 +47,7 @@ export const Container = styled.div`
     width: ${({ width }) => width}px;
     height: ${({ width }) => width * 2.174}px;
     background: ${({ background }) => background};
+    transition: background 1s;
 
 `;
 

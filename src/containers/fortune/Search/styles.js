@@ -130,3 +130,29 @@ export const Image = styled.img`
   bottom: 0;
   margin-top: 2rem;
 `;
+
+export const JiminContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const JiminWhole = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const JiminComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`;
+
+export const Img1 = styled.img`
+  width: 100%;
+`;
+
+export const Img2 = styled.img`
+  width: 50%;
+`;

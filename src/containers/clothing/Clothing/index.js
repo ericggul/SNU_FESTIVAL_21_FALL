@@ -169,6 +169,7 @@ function Clothing({ theme, user, isAuthorized }) {
 
   const [img, setImg] = useState('');
   const handleInstaClick = useCallback(async () => {
+    toast('카톡 여는 중...');
     if (characterRef.current) {
       await html2canvas(characterRef.current).then(canvas => {
         const url = canvas.toDataURL();

@@ -113,7 +113,9 @@ export function QuestionBox({
     setCurrentShuffledLoc(i);
   };
 
-  const kakaoClick = useCallback(() => {
+  const kakaoClick = useCallback(async () => {
+    toast('카톡 여는 중...');
+
     console.log(`https://snufestival.com/images/handwriting/writings/${sectorNum}${currentLoc.toString(16)}.png`);
     window.Kakao.Link.sendCustom({
       templateId: 64563,

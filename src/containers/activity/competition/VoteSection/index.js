@@ -33,8 +33,6 @@ function VoteSection({
     src: selectedSrc,
   });
 
-  console.log(selectedSrc);
-
   // likes
   const [myLikesForCompetition, setMyLikesForCompetition] = useState([]);
   useEffect(() => {
@@ -50,7 +48,17 @@ function VoteSection({
     }
   }, [isAuthorized]);
 
-  console.log(myLikesForCompetition);
+  useEffect(() => {
+    competitionCollectionRef.doc('likes').get().then((doc) => {
+      console.log(doc.data());
+      let array = [];
+      for (const [object, key] of Object.entries(doc.data())) {
+        array.push({ [object]: key.length });
+      }
+      console.log(array);
+    });
+  }, []);
+
   const onClickLikeButton = useCallback((competitionId) => {
     if (!isAuthorized) {
       setSignInModalComponent(true);
@@ -80,7 +88,6 @@ function VoteSection({
   }, [isAuthorized, myLikesForCompetition]);
 
   const handleImageClick = useCallback((idx) => {
-    console.log(shuffled[idx]);
     setSelectedSrc(`https://snufestival.com/images/competition/${shuffled[idx]}.jpg`);
     setImageModalComponent(true);
   }, [selectedSrc, shuffled]);
