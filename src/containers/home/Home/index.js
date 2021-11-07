@@ -310,6 +310,16 @@ function Home({
             width={convert(1920)}
             onLoad={() => setLoadedNumber(no => no + 1)}
           />
+
+          <CS.Invisible>서울대학교 가을 축제</CS.Invisible>
+          <CS.Invisible>서울대학교 축제하는사람들 공식 가을축제 웹사이트</CS.Invisible>
+          <CS.Invisible>관악의 밤의 정취를 느껴보세요. 축제 웹사이트</CS.Invisible>
+          <CS.Invisible>서울대학교 관악의 밤</CS.Invisible>
+          <CS.Invisible>대학가 온라인 축제 비대면 축제</CS.Invisible>
+          <CS.Invisible>서울대학교 위드 코로나</CS.Invisible>
+          <CS.Invisible>대학가 위드 코로나 축제</CS.Invisible>
+          <CS.Invisible>위드 코로나 축제 사례</CS.Invisible>
+          <CS.Invisible>관악의 밤</CS.Invisible>
           {missionComponent}
           {missionCompleteComponent}
           {isLoading && <CS.Background src={BackgroundBottom} top={convert(0.001)} left={convert(0)} width={convert(1920)} alt="" />}

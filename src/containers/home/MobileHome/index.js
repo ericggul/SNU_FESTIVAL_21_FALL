@@ -229,15 +229,15 @@ function MobileHome({
           />
 
           {busMove && <CustomPath isMobile busWidth={convert(67)} />}
-          {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
-          {!busMove && <CS.Bus index={1} src={BusTwo} onClick={mainGateClick} alt="버스" top={convert(653)} left={convert(154)} width={convert(67)} />}
-          {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
+          {!busMove && <CS.Bus index={0} src={BusOne} onClick={mainGateClick} alt="서울대학교 축제 버스" top={convert(323)} left={convert(238)} width={convert(69)} />}
+          {!busMove && <CS.Bus index={1} src={BusTwo} onClick={mainGateClick} alt="서울대학교 축제 버스" top={convert(653)} left={convert(154)} width={convert(67)} />}
+          {!busMove && <CS.Bus index={2} src={BusThree} onClick={mainGateClick} alt="서울대학교 축제 버스" top={convert(995)} left={convert(84)} width={convert(67)} />}
 
           <CS.BackgroundMiddle src={BackgroundMiddle} top={convert(249)} left={convert(1)} width={convert(374)} />
           <CS.Landmark
             delay={0}
             src={Performance}
-            alt="공연"
+            alt="서울대학교 축제 공연"
             top={convert(244)}
             left={convert(34)}
             width={convert(263)}
@@ -247,7 +247,7 @@ function MobileHome({
           <CS.Landmark
             delay={2}
             src={Activity}
-            alt="행사"
+            alt="서울대학교 축제 행사"
             top={convert(446)}
             left={convert(153)}
             width={convert(222)}
@@ -257,7 +257,7 @@ function MobileHome({
           <CS.Landmark
             delay={4}
             src={Goods}
-            alt="굿즈"
+            alt="서울대학교 축제 굿즈"
             top={convert(703)}
             left={convert(7)}
             width={convert(193)}
@@ -267,7 +267,7 @@ function MobileHome({
           <CS.Landmark
             delay={8}
             src={MiniGame}
-            alt="미니게임"
+            alt="서울대학교 축제 미니게임"
             top={convert(1112)}
             left={convert(4)}
             width={convert(182)}
@@ -277,7 +277,7 @@ function MobileHome({
           <CS.Landmark
             delay={6}
             src={Clothing}
-            alt="옷 입히기"
+            alt="서울대학교 축제 옷 입히기"
             top={convert(886)}
             left={convert(173)}
             width={convert(201)}
@@ -297,7 +297,7 @@ function MobileHome({
           <Rio waked={rioWaked} top={convert(167)} left={convert(261)} width={convert(85)} clickRio={clickRio} />
           <Rio waked={rioWaked} top={convert(1140)} left={convert(273)} width={convert(45)} clickRio={clickRio} withText={false} />
 
-          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="정문" onClick={mainGateClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
+          <CS.Door src={gateOn ? MainGateOn : MainGateOff} alt="서울대학교 정문" onClick={mainGateClick} top={convert(1344)} left={convert(35)} width={convert(215)} />
 
           <CS.BackgroundFront
             src={BackgroundTop}
@@ -307,6 +307,15 @@ function MobileHome({
             onLoad={() => setLoadedNumber(no => no + 1)}
           />
           <CS.Text top={convert(1514)}>VERITAS LUX MEA</CS.Text>
+          <CS.Invisible>서울대학교 가을 축제</CS.Invisible>
+          <CS.Invisible>서울대학교 축제하는사람들 공식 가을축제 웹사이트</CS.Invisible>
+          <CS.Invisible>관악의 밤의 정취를 느껴보세요. 축제 웹사이트</CS.Invisible>
+          <CS.Invisible>서울대학교 관악의 밤</CS.Invisible>
+          <CS.Invisible>대학가 온라인 축제 비대면 축제</CS.Invisible>
+          <CS.Invisible>서울대학교 위드 코로나</CS.Invisible>
+          <CS.Invisible>대학가 위드 코로나 축제</CS.Invisible>
+          <CS.Invisible>위드 코로나 축제 사례</CS.Invisible>
+          <CS.Invisible>관악의 밤</CS.Invisible>
           {missionComponent}
           {missionCompleteComponent}
           {isLoading && (

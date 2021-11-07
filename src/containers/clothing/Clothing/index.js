@@ -4,8 +4,10 @@ import React, {
 
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import Basic from '@I/clothing/basic.png';
+import html2canvas from 'html2canvas';
 
 import ControlArea from '@C/clothing/ControlArea';
 import Loading from '@C/clothing/Loading';
@@ -30,6 +32,7 @@ import { actions } from '@/redux/mission/state';
 
 import * as S from './styles';
 
+const CLIENT_ID = '720aa705557ed64';
 function Clothing({ theme, user, isAuthorized }) {
   const mission = useMission();
 
@@ -164,6 +167,45 @@ function Clothing({ theme, user, isAuthorized }) {
     setSelectedBackground(4);
   }, []);
 
+  const [img, setImg] = useState('');
+  const handleInstaClick = useCallback(async () => {
+    toast('카톡 여는 중...');
+    if (characterRef.current) {
+      await html2canvas(characterRef.current).then(canvas => {
+        const url = canvas.toDataURL();
+        let link = document.createElement('a');
+        document.body.appendChild(link);
+        link.href = url;
+        link.download = '캐릭터.png';
+        // link.click();
+        // document.body.removeChild(link);
+
+        console.log(url, typeof url);
+        const apiBase = 'https://api.imgur.com/3/image';
+        axios.post(apiBase, {
+          image: url.split(',')[1],
+          type: 'base64',
+        }, {
+          headers: {
+            Authorization: `Client-ID ${CLIENT_ID}`,
+          },
+        }).then(res => {
+          console.log(res);
+          setImg(res.data.data.link);
+          window.Kakao.Link.sendCustom({
+            templateId: 64100,
+            templateArgs: {
+              imageUrl: res.data.data.link,
+            },
+          });
+        }).catch(e => {
+          console.log(e);
+        });
+      });
+      // await toast('다운된 이미지를 공유하세요!');
+    }
+  }, [characterRef, selectedClothings]);
+
   return (
     <S.StyledClothing background={BACKGROUND_PALETTES[selectedBackground]}>
       <HeaderContent>옷 입히기</HeaderContent>
@@ -177,8 +219,8 @@ function Clothing({ theme, user, isAuthorized }) {
             onBackgroundClick={handleBackgroundChange}
             onHairClose={() => setHairOnTop(hr => !hr)}
           />
-          <S.MidContainer ref={characterRef}>
-            <S.Container width={Math.min(containerWidth, 500)}>
+          <S.MidContainer>
+            <S.Container width={Math.min(containerWidth, 500)} ref={characterRef} background={BACKGROUND_PALETTES[selectedBackground]}>
               <S.Body src={Basic} top={convert(-12)} left={convert(0)} width={convert(375)} />
               {
                 selectedClothings[0] !== -1
@@ -239,7 +281,10 @@ function Clothing({ theme, user, isAuthorized }) {
             changeSl={changeSl}
             changeSlAccessories={changeSlAccessories}
           />
-          <S.Save onClick={save}>저장하기</S.Save>
+          <S.SaveContainer>
+            <S.Save onClick={handleInstaClick}>@너 닮았어</S.Save>
+            <S.Save onClick={save}>저장하기</S.Save>
+          </S.SaveContainer>
           {!isAuthorized && <S.SaveText>로그인 후에 저장해 주세요</S.SaveText>}
           <S.ResetText onClick={reset}>초기화</S.ResetText>
         </S.Content>

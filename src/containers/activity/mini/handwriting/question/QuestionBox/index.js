@@ -6,10 +6,11 @@ import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
 import { toast } from 'react-toastify';
 import useModal from '@U/hooks/useModal';
-
+import KakaoIcon from '@I/icon/kakao.svg';
 import { shuffleArray } from '@U/functions/array';
 import { MapInteractionCSS } from 'react-map-interaction';
 import { COLLEGES, CONVERTED_MAJORS } from '@C/activity/mini/handwriting/data.js';
+import SleepRio from '@I/home/mobile/sleep-rio.png';
 
 import { withTheme } from 'styled-components';
 
@@ -112,6 +113,18 @@ export function QuestionBox({
     setCurrentShuffledLoc(i);
   };
 
+  const kakaoClick = useCallback(async () => {
+    toast('카톡 여는 중...');
+
+    console.log(`https://snufestival.com/images/handwriting/writings/${sectorNum}${currentLoc.toString(16)}.png`);
+    window.Kakao.Link.sendCustom({
+      templateId: 64563,
+      templateArgs: {
+        imageUrl: `https://snufestival.com/images/handwriting/writings/${sectorNum}${currentLoc.toString(16)}.png`,
+      },
+    });
+  }, [sectorNum, currentLoc]);
+
   return (
     <>
       <S.Content>
@@ -132,7 +145,17 @@ export function QuestionBox({
           <S.InputBox value={value} onChange={onChange} />
           <S.Button onClick={submit}>제출</S.Button>
         </S.Answer>
-        <S.Rules onClick={() => setIsRulesModalOpen(true)}>규칙 설명 보기</S.Rules>
+        <S.TempContainer>
+          <S.RulesContainer onClick={() => setIsRulesModalOpen(true)}>
+            <S.Kakao src={SleepRio} />
+            <S.AskText>규칙 설명 보기</S.AskText>
+          </S.RulesContainer>
+
+          <S.AskContainer onClick={kakaoClick}>
+            <S.Kakao src={KakaoIcon} />
+            <S.AskText>친구한테 물어 보기</S.AskText>
+          </S.AskContainer>
+        </S.TempContainer>
       </S.Content>
       {rulesModalComponent}
       {signInModalComponent}

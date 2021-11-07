@@ -3,7 +3,7 @@ import useInput from '@U/hooks/useInput';
 import PropTypes from 'prop-types';
 import * as S from './styles';
 
-function Name({ name, onChangeName }) {
+function Name({ name, onChangeName, background }) {
   const SCRIPTS = ['상의, 하의, 눈, 눈썹, 코, 입 ', '닉네임도 주는거 잊지 말구', '카카오톡으로 공유도 해봐!'];
   const [placeholder, setPlaceholder] = useState('');
   const [dir, setDir] = useState(1);
@@ -32,9 +32,12 @@ function Name({ name, onChangeName }) {
   }, [index, scriptIndex]);
 
   return (
-    <S.Name>
-      <S.Input onChange={onChangeName} placeholder="닉네임">{name}</S.Input>
-    </S.Name>
+    <>
+      <S.Name>
+        <S.Input onChange={onChangeName} placeholder="@snufestival">{name}</S.Input>
+      </S.Name>
+
+    </>
   );
 }
 export default Name;

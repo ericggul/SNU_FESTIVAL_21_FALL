@@ -206,3 +206,15 @@ export const Text = styled.div`
   opacity: 0.5;
   color: #3B2B66;
 `;
+
+export const Invisible = styled.h1`
+  position: absolute;
+  height: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+  font-size: 2rem;
+  opacity: 0.5;
+  color: transparent;
+`;

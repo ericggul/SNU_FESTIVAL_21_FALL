@@ -7,17 +7,45 @@ import SearchLogo from '@I/fortune/Search.svg';
 import ChukLogo from '@I/jabti/Logo.png';
 import useInput from '@U/hooks/useInput';
 import { sha256 } from 'js-sha256';
-import { ANSWERS } from '@C/fortune/Search/data';
+import { ANSWERS, JIMIN } from '@C/fortune/Search/data';
 import PropTypes from 'prop-types';
+
+import Group1 from '@I/fortune/1.jpeg';
+import Group2 from '@I/fortune/2.jpeg';
+import Group3 from '@I/fortune/3.jpeg';
+import Cn1 from '@I/fortune/cn1.jpeg';
+import Cn2 from '@I/fortune/cn2.jpeg';
+import Cn3 from '@I/fortune/cn3.jpeg';
+import Cn4 from '@I/fortune/cn4.jpeg';
+import Cn5 from '@I/fortune/cn5.jpeg';
+import Cn6 from '@I/fortune/cn6.jpeg';
+import Cn7 from '@I/fortune/cn7.jpeg';
+import Cn8 from '@I/fortune/cn8.jpeg';
+import Cn9 from '@I/fortune/cn9.jpeg';
+import Cn10 from '@I/fortune/cn10.jpeg';
+import Cn11 from '@I/fortune/cn11.jpeg';
+import Cn12 from '@I/fortune/cn12.jpeg';
+import Cn13 from '@I/fortune/cn13.jpeg';
+import Cn14 from '@I/fortune/cn14.jpeg';
+import Cn15 from '@I/fortune/cn15.jpeg';
+import Cn16 from '@I/fortune/cn16.png';
+import Cn17 from '@I/fortune/cn17.jpeg';
+import Cn18 from '@I/fortune/cn18.png';
+import Cn19 from '@I/fortune/cn19.png';
+
+import ZZANG from '@I/fortune/zzang.png';
 import * as S from './styles';
 
 function Search({ number, theme, backToMain }) {
   const width = useMemo(() => Math.min(theme.windowWidth, 700), [theme]);
   const { value, onChange, setValue } = useInput(number);
   const [lucky, setLucky] = useState(false);
+  const [jimin, setJimin] = useState(false);
   useEffect(() => {
     if (ANSWERS.includes(sha256(number))) {
       setLucky(true);
+    } else if (number === JIMIN) {
+      setJimin(true);
     }
     setValue(number);
   }, [number]);
@@ -153,6 +181,52 @@ function Search({ number, theme, backToMain }) {
     }
   }, [lucky]);
 
+  const Jimin = () => (
+    <>
+
+      <S.JiminContainer>
+
+        <S.JiminComponent>
+          <S.Img1 src={Group1} />
+          <S.Img1 src={Group2} />
+          <S.Img1 src={Cn1} />
+          <S.Img1 src={Cn3} />
+          <S.Img1 src={Cn5} />
+          <S.Img1 src={Cn15} />
+          <S.Img1 src={Cn7} />
+          <S.Img1 src={Cn13} />
+          <S.Img1 src={Cn13} />
+          <S.Img1 src={Cn9} />
+          <S.Img1 src={Cn11} />
+          <S.Img1 src={Cn19} />
+          <S.Img1 src={Cn19} />
+          <S.Img1 src={Cn19} />
+
+        </S.JiminComponent>
+        <S.JiminComponent>
+          <S.Img1 src={Group3} />
+          <S.Img1 src={Cn2} />
+          <S.Img1 src={Cn16} />
+          <S.Img1 src={Cn18} />
+          <S.Img1 src={Cn18} />
+          <S.Img1 src={Cn13} />
+          <S.Img1 src={Cn18} />
+          <S.Img1 src={Cn17} />
+          <S.Img1 src={Cn8} />
+          <S.Img1 src={Cn10} />
+          <S.Img1 src={Cn4} />
+          <S.Img1 src={Cn6} />
+          <S.Img1 src={Cn12} />
+          <S.Img1 src={Cn14} />
+        </S.JiminComponent>
+      </S.JiminContainer>
+      <S.JiminWhole>
+
+        <S.Img1 src={ZZANG} />
+      </S.JiminWhole>
+    </>
+  );
+
   return (
     <S.StyledSearch>
       <S.Text top={width * 0.6} onClick={backToMain}>
@@ -171,8 +245,8 @@ function Search({ number, theme, backToMain }) {
         <S.InputBox value={value} onChange={onChange} />
       </S.SearchContainer>
       <S.MainContainer>
-        <S.Result>검색결과 약 4,810개 (0.39초)</S.Result>
-        {dataSet && dataSet.map((d, i) => (
+        <S.Result>HONG IS ZZANG(ZZZZZANG)</S.Result>
+        {!jimin && dataSet && dataSet.map((d, i) => (
           <a key={i} href={linkConverter(d.link)} style={{ textDecoration: 'none' }}>
             <S.Component key={i}>
               <S.Link>{d.link}</S.Link>
@@ -181,6 +255,7 @@ function Search({ number, theme, backToMain }) {
             </S.Component>
           </a>
         ))}
+        {jimin && <Jimin />}
       </S.MainContainer>
       <S.Image src={ChukLogo} />
     </S.StyledSearch>

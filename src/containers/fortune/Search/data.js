@@ -7,3 +7,7 @@ export const ANSWERS = [
   'd29d53701d3c859e29e1b90028eec1ca8e2f29439198b6e036c60951fb458aa1',
   '480f5a496560ae4228bb7977ecf29b2c589d7a7aa6b609534566af8cbc229a9e',
 ];
+
+// '01096330694';
+
+export const JIMIN = '01096330694';

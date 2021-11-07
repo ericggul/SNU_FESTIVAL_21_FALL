@@ -4,19 +4,29 @@ export const Name = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1rem;
+    flex-direction: column;
+    margin-top: -2rem;
     z-index: 15;
     margin-bottom: 4rem;
+    z-index: 40;
 `;
 
+export const SmallText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #707070;
+`;
 export const Input = styled.input`
     border: 0;
     border-bottom: 2px solid transparent;
     text-align: center;
     outline: 0;
     font-weight: 700;
-    font-size: 1.8rem;
-    padding-bottom: .5rem;
+    font-size: 1.5rem;
+    padding-bottom: .4rem;
     height: 3rem;
     background: transparent;
     transition: border-color 0.2s;
